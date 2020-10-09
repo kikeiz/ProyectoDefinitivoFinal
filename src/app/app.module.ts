@@ -18,6 +18,8 @@ import { MensajeriaPadresComponent } from './pages/mensajeria-padres/mensajeria-
 import { MensajeriaProfesorComponent } from './pages/mensajeria-profesor/mensajeria-profesor.component';
 import { AniadirClaseComponent } from './pages/aniadir-clase/aniadir-clase.component';
 import { AniadirAlumnoComponent } from './pages/aniadir-alumno/aniadir-alumno.component';
+import { HeaderComponent } from './pages/header/header.component';
+import { FooterComponent } from './pages/footer/footer.component';
 
 
 @NgModule({
@@ -38,6 +40,8 @@ import { AniadirAlumnoComponent } from './pages/aniadir-alumno/aniadir-alumno.co
     MensajeriaProfesorComponent,
     AniadirClaseComponent,
     AniadirAlumnoComponent,
+    HeaderComponent,
+    FooterComponent,
     
   ],
   imports: [
