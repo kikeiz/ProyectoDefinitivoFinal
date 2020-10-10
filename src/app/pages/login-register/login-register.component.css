@@ -1,0 +1,160 @@
+* {
+    margin: 0;
+    padding: 0;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+body {
+    
+    background-size: cover;
+    background-attachment: fixed;
+    font-family: Roboto;
+}
+.sec {
+ position: relative;
+ width: 100%;
+ height: 100vh;
+ overflow: hidden;
+ }
+ .uno{
+    background-image: url(https://wrmx00.epimg.net/radio/imagenes/2019/04/28/en_fin/1556471650_774468_1556472061_noticia_normal.jpg);
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+ }
+.secuno{
+    position: absolute;  
+    bottom: 0;
+    left: 0;
+    border-width: 50vh 0 0 100vw;
+    border-style: solid;
+    border-color: transparent transparent transparent #fff;
+    
+} 
+nav{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 10%;
+    
+    
+}
+nav h1{
+    color: rgb(22, 20, 20);
+    font-size: 80px;
+
+}
+
+.contenedor-form {
+    background: rgba(22, 28, 29, 0.7);
+    max-width: 500px;
+    width: 100%;
+    margin: 48px auto;
+    margin-top: -400px;
+    border-radius: 5px;
+    color: rgb(245, 238, 238);
+    position: relative;
+    padding: 40px;
+
+}
+ /* contenedor crear */
+.contenedor-form .toggle {
+    position: absolute;
+    top: 7px;
+    right: 7px;
+    width: 100px;
+    height: 30px;
+    font-size: 12px;
+    line-height: 25px;
+    text-align: center;
+    border-top: 2px solid ;
+    border-bottom: 2px solid ;
+    cursor: pointer;
+    transition: all .5s ease;
+}
+
+.contenedor-form .toggle:hover {
+    border-top: 2px solid rgb(64, 137, 201, 0.7);
+    border-bottom: 2px solid rgb(64, 137, 201, 0.7);
+}
+
+.contenedor-form .toggle span {
+    letter-spacing: 1px;
+}
+
+.contenedor-form h2 {
+    margin: 0 0 28px 0;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 1;
+}
+.contenedor-form input[type="text"],
+.contenedor-form input[type="password"],
+.contenedor-form input[type="email"] {
+    outline: none;
+    display: block;
+    width: 100%;
+    padding: 10px 15px;
+    margin: 0 0 20px 0;
+    background: rgba(0,0,0,.5);
+    color: #fff;
+    border: none;
+    border-radius: 2px;
+    border-bottom: 4px solid white;
+    box-sizing: border-box;
+    font-family: Roboto;
+    font-size: 14px;
+    font-weight:normal;
+    transition: all .5s ease;
+}
+
+.contenedor-form input[type="text"]:focus,
+.contenedor-form input[type="password"]:focus,
+.contenedor-form input[type="email"]:focus {
+    border-bottom: 4px solid rgb(130, 151, 151);
+}
+
+.contenedor-form input[type="submit"] {
+    background: #8f94aa; ;
+    color: #FFF;
+    width: 100%;
+    border: none;
+    padding: 10px 0;
+    font-size: 16px;
+    font-weight: normal;
+    font-family: Roboto;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: all .5s ease;
+}
+
+.contenedor-form input[type="submit"]:hover {
+    background: rgb(20, 29, 29)
+}
+
+.contenedor-form .reset-password {
+    background: rgba(64, 137, 201, 0.7);
+    width: 100%;
+    padding: 15px 0;
+    text-align: center;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+.contenedor-form .reset-password a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+.contenedor-form .formulario {
+    display: none;
+    padding: 40px;
+}
+
+.contenedor-form .formulario:nth-child(2) {
+    display: block;
+}

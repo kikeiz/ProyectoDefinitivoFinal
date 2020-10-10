@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component,ViewChild,TemplateRef, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-login-register',
@@ -10,6 +10,8 @@ export class LoginRegisterComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+
   }
 
+  crearCuenta:boolean = true;
 }

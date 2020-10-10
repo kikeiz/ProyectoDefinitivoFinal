@@ -20,6 +20,8 @@ import { AniadirClaseComponent } from './pages/aniadir-clase/aniadir-clase.compo
 import { AniadirAlumnoComponent } from './pages/aniadir-alumno/aniadir-alumno.component';
 import { HeaderComponent } from './pages/header/header.component';
 import { FooterComponent } from './pages/footer/footer.component';
+import { HomePadreComponent } from './pages/home-padre/home-padre.component';
+import { HomeProfesorComponent } from './pages/home-profesor/home-profesor.component';
 
 
 @NgModule({
@@ -42,6 +44,8 @@ import { FooterComponent } from './pages/footer/footer.component';
     AniadirAlumnoComponent,
     HeaderComponent,
     FooterComponent,
+    HomePadreComponent,
+    HomeProfesorComponent,
     
   ],
   imports: [
