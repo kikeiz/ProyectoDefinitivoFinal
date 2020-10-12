@@ -78,6 +78,10 @@ label{
     padding: 10px;
 }
 
+.margin{
+    margin-top: 10px;
+}
+
 #insertar{
     border-style: solid;
     border-color: black;

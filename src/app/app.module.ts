@@ -21,6 +21,7 @@ import { AniadirAlumnoComponent } from './pages/aniadir-alumno/aniadir-alumno.co
 import { HeaderComponent } from './pages/header/header.component';
 import { FooterComponent } from './pages/footer/footer.component';
 import { ChartsModule } from 'ng2-charts';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -48,7 +49,8 @@ import { ChartsModule } from 'ng2-charts';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    ChartsModule 
+    ChartsModule, 
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

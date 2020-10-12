@@ -10,11 +10,13 @@ export class NotasProfesorComponent implements OnInit {
   public mostrarF2: boolean
   public mostrarF3: boolean
   public mostrarF4: boolean
+  public mostrarF5: boolean
   constructor() { 
     this.mostrarF1 = false
     this.mostrarF2 = false
     this.mostrarF3 = false
     this.mostrarF4 = false
+    this.mostrarF5 = false
   }
 
   ngOnInit(): void {
@@ -23,7 +25,7 @@ export class NotasProfesorComponent implements OnInit {
     this.mostrarF1 = true
   }
 
-  insertarNotas(){
+  insertarNotas(datos:any){
     this.mostrarF2 = true
   }
 
@@ -48,5 +50,19 @@ export class NotasProfesorComponent implements OnInit {
 
   modificar(){
     this.mostrarF4 = false
+  }
+
+  opciones(){
+    this.mostrarF5 = true
+  }
+
+  filter(datos:any){
+    this.mostrarF5 = false
+    //como comparar fechas
+    let fecha = new Date()   
+    // let fecha2 = new Date(datos.fecha) 
+    // console.log(fecha2);
+    console.log(datos.estadoNota);
+    
   }
 }

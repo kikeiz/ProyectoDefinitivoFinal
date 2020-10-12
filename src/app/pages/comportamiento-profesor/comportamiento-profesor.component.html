@@ -1,6 +1,25 @@
 <div class="body"> 
 <div id="imagenes" class="container">
 
+    <div *ngIf="tablaResumen==false">
+    <div class="row">
+        <div class="col-2"></div>
+        <div class="col-8">
+            <div class="form-group">
+                <label for="exampleSelect2"><b>Alumno</b></label>
+                <select class="form-control" id="exampleSelect2">
+                    <option value="">Pedro</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="example-date-input"><b>Fecha</b></label>
+                <input class="form-control" type="date" id="example-date-input">
+            </div>
+        </div>
+        <div class="col-2"></div>
+    </div>
+    </div>
+
     <div *ngIf="tablaResumen==false" class="row">
         <div class="col-1"></div>
         <div class="col-5">
@@ -15,7 +34,7 @@
             <label for="homework">Deberes</label>
             <div *ngIf="deberes == false" id="homework" class="negro"><i (click)="resaltar(2)" class="far fa-address-card fa-6x fila"></i></div>
             <div *ngIf="deberes == true" id="address" class="negro"><i class="fas fa-address-card fa-6x"></i></div>
-            <label for="comportamiento">Comportamiento</label>
+            <label for="comportamiento">Participacion</label>
             <div *ngIf="comportamiento == false" id="comportamiento" class="negro"><i (click)="resaltar(3)" class="far fa-comments fa-6x fila"></i></div>
             <div *ngIf="comportamiento==true" id="comportamiento" class="negro"><i class="fas fa-comments fa-6x"></i></div>
         </div>
