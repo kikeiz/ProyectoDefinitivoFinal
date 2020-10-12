@@ -6,12 +6,16 @@ export class Comunications {
     public tipo: string;
     public fecha: string;
     public positivo:boolean
+    public asignatura:string
+    public alumno: string
 
-    constructor(icono?, mensaje?:string, tipo?:string, fecha?:string, positivo?:boolean){
+    constructor(icono?, mensaje?:string, tipo?:string, fecha?:string, positivo?:boolean, asignatura?:string, alumno?:string){
         this.icono = icono;
         this.mensaje = mensaje
         this.tipo = tipo
         this.fecha = fecha
         this.positivo = positivo
+        this.asignatura = asignatura
+        this.alumno = alumno
     }
 }
