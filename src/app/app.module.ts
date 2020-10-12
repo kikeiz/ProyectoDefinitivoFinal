@@ -20,6 +20,7 @@ import { AniadirClaseComponent } from './pages/aniadir-clase/aniadir-clase.compo
 import { AniadirAlumnoComponent } from './pages/aniadir-alumno/aniadir-alumno.component';
 import { HeaderComponent } from './pages/header/header.component';
 import { FooterComponent } from './pages/footer/footer.component';
+import { ChartsModule } from 'ng2-charts';
 
 
 @NgModule({
@@ -46,7 +47,8 @@ import { FooterComponent } from './pages/footer/footer.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ChartsModule 
   ],
   providers: [],
   bootstrap: [AppComponent]
