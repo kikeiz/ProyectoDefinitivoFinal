@@ -1,0 +1,86 @@
+.body{
+    background-color: #d7dfee;
+}
+#boton{
+    height: 40px;
+    width: 100px;
+    margin-top: 50px;
+    background-color: white;
+    font-size: 14px;
+    border-style: solid;
+    border-color: black;
+    border-width: 1px;
+    transition-duration: 0.4s;
+}
+
+#boton2{
+    position: relative;
+    left: 15px;
+}
+.container{
+    width: 100%;
+    display:block;
+    position:relative;
+    text-align: center;
+    height: auto;
+}
+
+#boton:hover{
+    background-color: #008CBA;
+}
+
+table{
+    margin-top: 10px;
+}
+#boton2{
+    transition-duration: 0.4s;
+    margin-left: auto;
+    margin-right: auto;
+}
+#boton2:hover{
+    background-color: rgb(143, 142, 142);
+}
+
+#titulo{
+    background-color: rgb(97, 174, 219);
+}
+input{
+    background-color: rgb(174, 201, 243);
+}
+
+#botonx{
+    margin-top: 50px;
+    width: 200px;
+}
+
+label{
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-size: small;
+    position: relative;
+    top: 7px;
+}
+
+.form-control{
+    background-color: rgb(171, 196, 236);
+}
+
+#fila{
+    cursor: pointer;
+}
+
+#boton3{
+    border-style: solid;
+    border: black;
+    border-width: 1px;
+}
+
+#boton5{
+    padding: 10px;
+}
+
+#insertar{
+    border-style: solid;
+    border-color: black;
+    border-width: 1px;
+    width: 50px;
+}

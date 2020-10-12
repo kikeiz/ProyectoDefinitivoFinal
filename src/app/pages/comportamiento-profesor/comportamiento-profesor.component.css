@@ -1,0 +1,49 @@
+.body{
+    background-color: #d7dfee;
+}
+.rojo{
+    color: red;
+}
+
+.verde{
+    color: green;
+}
+
+#size{
+    width: 500px;
+    height: 500px;
+}
+
+#imagenes{
+    margin-top: 50px;
+   
+}
+.container{
+    width: 100%;
+    display:block;
+    position:relative;
+    text-align: center;
+    height: auto;
+}
+label{
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-size: small;
+    position: relative;
+    top: 7px;
+}
+
+#valor{
+    margin-top: 10px;
+}
+
+.fila{
+    cursor: pointer;
+}
+
+#insertar{
+    border-style: solid;
+    border-color: black;
+    border-width: 1px;
+    width: 50px;
+}
+
