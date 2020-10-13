@@ -9,7 +9,7 @@
         <table class="table">
             <tbody></tbody>
             <!-- <tr *ngFor="let mensaje of mensajes" [ngStyle]="(mensaje.tipo) == 'Puntualidad' ? {'background-color': '#ff000'} : (mensaje.tipo) == 'Atencion' ? {'background-color': '#FFFF99'} :(mensaje.tipo) == 'Asistencia' ? {'background-color': '#C0C0C0'}:(mensaje.tipo) == 'Participacion' ? {'background-color': '#FFCC99'} :(mensaje.tipo) == 'Nota' ? {'background-color': '#99FFFF'} : {'background-color': '#FFCCCC'}"> -->
-            <tr *ngFor="let mensaje of mensajes; let i = index" (click)="mostrarMensaje(i)" [ngStyle]="(mensaje.positivo) == true ? {'background-color': '#99CC33'} : {'background-color': '#e34040'}" >
+            <tr *ngFor="let mensaje of mensajes; let i = index" (click)="mostrarMensaje(i)" [ngStyle]="(mensaje.positivo) == true ? {'background-color': '#99FF99'} : {'background-color': '#FF9999'}" >
                 <td *ngIf="mostrar==false"><img src="{{mensaje.icono}}"></td>
                 <td *ngIf="mostrar==false"><b>{{mensaje.tipo}}</b></td>
                 <td *ngIf="mostrar==false"><b>{{mensaje.fecha}}</b></td>
