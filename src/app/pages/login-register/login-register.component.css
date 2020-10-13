@@ -156,3 +156,33 @@ a{color:inherit;text-decoration:none}
 	margin-bottom: 10px;
 }
 
+.container{
+    width: 100%;
+    display:block;
+    position:relative;
+    text-align: center;
+    height: auto;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+select{
+	border-style: solid;
+	border-color: black;
+	border-width: 1px;
+	background-color: rgb(170, 170, 228);
+}
+
+#user{
+	position: relative;
+	right: 20px;
+}
+#user2{
+	position: relative;
+	right: 20px;
+}
+
+#email{
+	position: relative;
+	right: 20px;
+}
