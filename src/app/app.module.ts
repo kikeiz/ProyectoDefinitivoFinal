@@ -4,8 +4,6 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginRegisterComponent } from './pages/login-register/login-register.component';
-import { MenuPadreComponent } from './pages/menu-padre/menu-padre.component';
-import { MenuProfesorComponent } from './pages/menu-profesor/menu-profesor.component';
 import { NotasProfesorComponent } from './pages/notas-profesor/notas-profesor.component';
 import { NotasPadreComponent } from './pages/notas-padre/notas-padre.component';
 import { AsistenciaProfesorComponent } from './pages/asistencia-profesor/asistencia-profesor.component';
@@ -28,8 +26,6 @@ import { HomeProfesorComponent } from './pages/home-profesor/home-profesor.compo
   declarations: [
     AppComponent,
     LoginRegisterComponent,
-    MenuPadreComponent,
-    MenuProfesorComponent,
     NotasProfesorComponent,
     NotasPadreComponent,
     AsistenciaProfesorComponent,
