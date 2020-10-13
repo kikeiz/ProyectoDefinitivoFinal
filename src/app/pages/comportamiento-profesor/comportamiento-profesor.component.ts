@@ -15,6 +15,7 @@ export class ComportamientoProfesorComponent implements OnInit {
   public tablaResumen:boolean
   public nombre:string
   public mostrarF4:boolean
+  public mensaje:boolean
   constructor(){
     this.puntualidad = false
     this.deberes = false
@@ -24,6 +25,7 @@ export class ComportamientoProfesorComponent implements OnInit {
     this.verde = false
     this.tablaResumen = false
     this.mostrarF4 = false
+    this.mensaje = false
    }
 
   ngOnInit(): void {
@@ -70,6 +72,8 @@ export class ComportamientoProfesorComponent implements OnInit {
     this.atencion = false
     this.deberes = false
     this.puntualidad = false
+    this.mensaje = false
+    
   }
 
   mostrar(tipo:string){
@@ -86,5 +90,13 @@ export class ComportamientoProfesorComponent implements OnInit {
 
    terminar(){
      this.tablaResumen = false
+   }
+
+   envimes(){
+     if(this.mensaje == false){
+      this.mensaje = true
+     }else{
+       this.mensaje = false
+     }
    }
 }

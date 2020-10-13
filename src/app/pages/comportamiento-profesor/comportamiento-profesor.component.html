@@ -59,11 +59,40 @@
         <div class="col-8">
             <form>
                 <div class="container" id="valor"><input id="nota" type="number" required name="price" min="0" placeholder="Introduce valor" step="0.1"></div>
+                <div><i (click)="envimes()" class="far fa-envelope fila"><b><i> Añadir mensaje ?</i></b></i></div>
+                <!-- mensaje -->
+                <div *ngIf="mensaje == true">
+                    <div class="row">
+                        <div class="col-2"></div>
+                        <div class="col-8">
+                            <label for="selemens"><b>Mensaje Predeterminado: </b></label><br>
+                            <select id="selemens">
+                                <option value="ninguno">Ninguno</option>
+                                <option value="asistencia">Asistencia</option>
+                                <option value="atencion">Atencion</option>
+                            </select>
+                        </div>
+                        <div class="col-2"></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-2"></div>
+                        <div class="col-8">
+                            <div class="container">
+                                <label for="msg"><b>Editar mensaje: </b></label><br>
+                                <input  id="msg" type="text">
+                            </div>
+                        </div>
+                        <div class="col-2"></div>
+                    </div>
+                </div>
+                <!-- mensaje -->
                 <div class="container" id="valor"><button (click)="actualizar()" type="reset" class="btn btn-outline-primary">Actualizar</button></div>
             </form>
         </div>
         <div class="col-2"></div>
     </div>
+
+    
 
     <div *ngIf="tablaResumen==false" class="row">
         <div class="col-1"></div>
