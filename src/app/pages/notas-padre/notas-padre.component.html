@@ -55,7 +55,7 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr *ngFor="let nota of notas" [ngStyle]="(nota.nota) >= 5 ? {'background-color': '#99FF99'} : {'background-color': '#FF9999'}">
+                  <tr id="fila" *ngFor="let nota of notas" [ngStyle]="(nota.nota) >= 5 ? {'background-color': '#99FF99'} : {'background-color': '#FF9999'}">
                     <td><b>{{nota.asignatura}}</b></td>
                     <td><b>{{nota.fecha}}</b></td>
                     <td><b>{{nota.nota}}</b></td>
