@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { MenuPadreComponent } from './menu-padre.component';
+import { HomePadreComponent } from './home-padre.component';
 
-describe('MenuPadreComponent', () => {
-  let component: MenuPadreComponent;
-  let fixture: ComponentFixture<MenuPadreComponent>;
+describe('HomePadreComponent', () => {
+  let component: HomePadreComponent;
+  let fixture: ComponentFixture<HomePadreComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ MenuPadreComponent ]
+      declarations: [ HomePadreComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(MenuPadreComponent);
+    fixture = TestBed.createComponent(HomePadreComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

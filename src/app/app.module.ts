@@ -4,8 +4,6 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginRegisterComponent } from './pages/login-register/login-register.component';
-import { MenuPadreComponent } from './pages/menu-padre/menu-padre.component';
-import { MenuProfesorComponent } from './pages/menu-profesor/menu-profesor.component';
 import { NotasProfesorComponent } from './pages/notas-profesor/notas-profesor.component';
 import { NotasPadreComponent } from './pages/notas-padre/notas-padre.component';
 import { AsistenciaProfesorComponent } from './pages/asistencia-profesor/asistencia-profesor.component';
@@ -22,14 +20,14 @@ import { HeaderComponent } from './pages/header/header.component';
 import { FooterComponent } from './pages/footer/footer.component';
 import { ChartsModule } from 'ng2-charts';
 import { FormsModule } from '@angular/forms';
+import { HomePadreComponent } from './pages/home-padre/home-padre.component';
+import { HomeProfesorComponent } from './pages/home-profesor/home-profesor.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginRegisterComponent,
-    MenuPadreComponent,
-    MenuProfesorComponent,
     NotasProfesorComponent,
     NotasPadreComponent,
     AsistenciaProfesorComponent,
@@ -44,6 +42,8 @@ import { FormsModule } from '@angular/forms';
     AniadirAlumnoComponent,
     HeaderComponent,
     FooterComponent,
+    HomePadreComponent,
+    HomeProfesorComponent,
     
   ],
   imports: [
