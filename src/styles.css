@@ -1,4 +1,7 @@
 body {
-    background: #1f253d;
+    background-image: url(http://il2.picdn.net/shutterstock/videos/17464699/thumb/6.jpg);
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-attachment: fixed;
 }
 

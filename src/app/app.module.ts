@@ -20,6 +20,7 @@ import { ChartsModule } from 'ng2-charts';
 import { FormsModule } from '@angular/forms';
 import { HomePadreComponent } from './pages/home-padre/home-padre.component';
 import { HomeProfesorComponent } from './pages/home-profesor/home-profesor.component';
+import { PerfilComponent } from './pages/perfil/perfil.component';
 
 
 @NgModule({
@@ -40,6 +41,7 @@ import { HomeProfesorComponent } from './pages/home-profesor/home-profesor.compo
     FooterComponent,
     HomePadreComponent,
     HomeProfesorComponent,
+    PerfilComponent,
     
   ],
   imports: [

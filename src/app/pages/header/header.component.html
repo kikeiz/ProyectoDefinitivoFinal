@@ -1,4 +1,4 @@
-<div *ngIf ="service.navPadres == false" class="margin">
+<!-- <div *ngIf ="service.navPadres == false" class="margin">
   <ul class="nav nav-tabs azul">
     <li class="nav-item blanco">
       <a class="nav-link" routerLink="/mainProfe">Home</a>
@@ -14,6 +14,9 @@
     </li>
     <li class="nav-item blanco">
       <a class="nav-link" routerLink="/mensajesProfe">Comunicacion</a>
+    </li>
+    <li class="nav-item blanco margen">
+      <i  routerLink="/perfil" class="fas fa-user-cog fa-2x cursor"></i>
     </li>
   </ul>
 </div>
@@ -35,5 +38,80 @@
       <li class="nav-item blanco">
         <a class="nav-link" routerLink="/mensajesPadre">Comunicacion</a>
       </li>
+      <li class="nav-item blanco margen">
+        <i  routerLink="/perfil" class="fas fa-user-cog fa-2x cursor"></i>
+      </li>
     </ul>
+  </div> -->
+
+  <div *ngIf ="service.navPadres == true">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" routerLink="/mainPadre">StudentView</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" routerLink="/mainNotasPadre">Calificaciones<span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/asistenciaPadre">Asistencia</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/comportamientoPadre">Comportamiento</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Estudiante
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="#">Pedro Martinez</a>
+            <a class="dropdown-item" href="#">Paula Gomez</a>
+          </div>
+        </li>
+      </ul>
+      <div class="form-inline my-2 my-lg-0">
+        <i routerLink="/mensajesPadre" class="far fa-envelope fa-3x cursor margenes"></i>
+        <i class="far fa-user-circle fa-3x cursor"></i>
+      </div>
+    </div>
+  </nav>
   </div>
+
+  <div class="hola" *ngIf ="service.navPadres == false">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" routerLink="/mainProfe">StudentView</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" routerLink="/mainNotasProfesor">Calificaciones<span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/asistenciaProfesor">Asistencia</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/comportamientoProfesor">Comportamiento</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Estudiante
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="#">Pedro Martinez</a>
+              <a class="dropdown-item" href="#">Paula Gomez</a>
+            </div>
+          </li>
+        </ul>
+        <div class="form-inline my-2 my-lg-0">
+          <i routerLink="/mensajesProfe" class="far fa-envelope fa-3x cursor margenes"></i>
+          <i class="far fa-user-circle fa-3x cursor"></i>
+        </div>
+      </div>
+    </nav>
+    </div>

@@ -10,6 +10,7 @@ import { MensajeriaPadresComponent } from './pages/mensajeria-padres/mensajeria-
 import { MensajeriaProfesorComponent } from './pages/mensajeria-profesor/mensajeria-profesor.component';
 import { NotasPadreComponent } from './pages/notas-padre/notas-padre.component';
 import { NotasProfesorComponent } from './pages/notas-profesor/notas-profesor.component';
+import { PerfilComponent } from './pages/perfil/perfil.component';
 
 const routes: Routes = [
   {path: "mainPadre", component:HomePadreComponent},
@@ -21,7 +22,8 @@ const routes: Routes = [
   {path:"mensajesPadre", component:MensajeriaPadresComponent},
   {path:"mensajesProfe", component:MensajeriaProfesorComponent},
   {path:"asistenciaPadre", component:AsistenciaPadreComponent},
-  {path:"asistenciaProfesor", component:AsistenciaProfesorComponent}
+  {path:"asistenciaProfesor", component:AsistenciaProfesorComponent},
+  {path:"perfil", component:PerfilComponent}
 ];
 
 @NgModule({
