@@ -1,1 +1,53 @@
-<p>header works!</p>
+<div *ngIf ="service.navPadres == true">
+    <nav>
+        <input type="checkbox" id="check">
+        <label for="check" class="checkbtn">
+        <i class="fas fa-bars"></i>
+        </label>
+        <label class="logo">StudentView</label>
+        <ul class="nav">
+            <li class="nav-item">
+                <a class="active" routerLink="/mainPadre">Home</a>
+            </li>
+            <li class="nav-item">
+                <a routerLink="/mainNotasPadre">Notas</a>
+            </li>
+            <li class="nav-item">
+                <a routerLink="/asistenciaPadre">Asistencia</a>
+            </li>
+            <li class="nav-item">
+                <a routerLink="/comportamientoPadre">Comportamiento</a>
+            </li>
+            <li class="nav-item">
+                <a routerLink="/mensajesPadre">Comunicacion</a>
+            </li>
+        </ul>
+    </nav>
+</div>
+
+<div *ngIf ="service.navPadres == false">
+    <nav>
+        <input type="checkbox" id="check">
+        <label for="check" class="checkbtn">
+        <i class="fas fa-bars"></i>
+        </label>
+        <label class="logo">StudentView</label>
+        <ul class="nav">
+            <li class="nav-item">
+                <a class="active" routerLink="/mainProfe">Home</a>
+            </li>
+            <li class="nav-item">
+                <a routerLink="/mainNotasProfesor">Notas</a>
+            </li>
+            <li class="nav-item">
+                <a routerLink="/asistenciaProfesor">Asistencia</a>
+            </li>
+            <li class="nav-item">
+                <a routerLink="/comportamientoProfesor">Comportamiento</a>
+            </li>
+            <li class="nav-item">
+                <a routerLink="/mensajesProfe">Comunicacion</a>
+            </li>
+        </ul>
+    </nav>
+</div>

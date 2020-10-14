@@ -1,4 +1,3 @@
- 
  <div class="login-wrap">
 	<div class="login-html">
 		<input id="tab-1" type="radio" name="tab" class="sign-in" checked><label for="tab-1" class="tab">Sign In</label>
@@ -16,16 +15,19 @@
 					<input id="pass1" type="password" class="input" data-type="password">
 				</div>
 				<div class="group">
-					<select name="tipoDeUsuario">
-						<option value="profesor">Profesor</option>
-						<option value="padres">Padres</option>
+					<select  #entrar (change)="cambiar(entrar.value)" id="selectEntrar" name="tipoDeUsuario">
+						<option value="profesor">Entrar como profesor</option>
+						<option value="padres">Entrar como padre</option>
 					</select>
 					<br><br>
 					<input id="check" type="checkbox" class="check" checked>
 					<label for="check"><span class="icon"></span> Recuerdame</label>
 				</div>
-				<div class="group">
-					<button type="submit" class="button">Entrar</button>
+				<div *ngIf="profesor == false" class="group">
+					<button type="button" class="button" (click) = "login()" routerLink ="/mainPadre">Entrar</button>
+				</div>
+				<div class="group" *ngIf="profesor == true">
+					<button type="button" class="button" (click) = "login()" routerLink ="/mainProfe">Entrar</button>
 				</div>
 				<div class="hr"></div>
 				<div class="foot-lnk">
@@ -52,13 +54,14 @@
 					<input id="email" type="text" class="input">
 				</div>
 				<div class="margen">
-				<select name="tipoDeUsuario">
-					<option value="profesor">Profesor</option>
-					<option value="padres">Padres</option>
+				<select #registro (change)="cambiar(registro.value)" id="selectRegister" name="tipoDeUsuario">
+					<option value="profesor">Entrar como profesor</option>
+					<option value="padres">Entrar como padre</option>
 				</select></div> 
 				<br>
 				<div class="group">
-					<button type="submit" class="button">Registrate</button>
+					<div *ngIf="profesor == false"><button type="button" class="button" (click) = "registrarse()" routerLink ="/mainPadre">Registrate</button></div>
+					<div *ngIf="profesor == true"><button type="button" class="button" (click) = "registrarse()" routerLink ="/mainProfe">Registrate</button></div>
 				</div>
 				</div>
 				<div class="hr"></div>

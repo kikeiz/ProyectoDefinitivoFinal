@@ -1,10 +1,13 @@
-<!-- <app-header></app-header> -->
+<app-header *ngIf = "service.login == true"></app-header>
 <!-- <app-notas-profesor></app-notas-profesor> -->
 <!-- <app-comportamiento-profesor></app-comportamiento-profesor> -->
-<!-- <app-footer></app-footer> -->
 <!-- <app-comportamiento-padre></app-comportamiento-padre> -->
 <!-- <app-mensajeria-padres></app-mensajeria-padres> -->
 <!-- <app-mensajeria-profesor></app-mensajeria-profesor> -->
 <!-- <app-aniadir-alumno></app-aniadir-alumno> -->
 <!-- <app-aniadir-clase></app-aniadir-clase> -->
-<app-notas-padre></app-notas-padre>
+<!-- <app-notas-padre></app-notas-padre> -->
+<app-login-register *ngIf = "service.login == false"></app-login-register>
+<router-outlet *ngIf = "service.login == true"></router-outlet>
+<app-footer *ngIf = "service.login == true"></app-footer>
+
