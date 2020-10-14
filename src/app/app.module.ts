@@ -10,14 +10,14 @@ import { AsistenciaProfesorComponent } from './pages/asistencia-profesor/asisten
 import { AsistenciaPadreComponent } from './pages/asistencia-padre/asistencia-padre.component';
 import { ComportamientoPadreComponent } from './pages/comportamiento-padre/comportamiento-padre.component';
 import { ComportamientoProfesorComponent } from './pages/comportamiento-profesor/comportamiento-profesor.component';
-import { InformacionPadreComponent } from './pages/informacion-padre/informacion-padre.component';
-import { InformacionProfesorComponent } from './pages/informacion-profesor/informacion-profesor.component';
 import { MensajeriaPadresComponent } from './pages/mensajeria-padres/mensajeria-padres.component';
 import { MensajeriaProfesorComponent } from './pages/mensajeria-profesor/mensajeria-profesor.component';
 import { AniadirClaseComponent } from './pages/aniadir-clase/aniadir-clase.component';
 import { AniadirAlumnoComponent } from './pages/aniadir-alumno/aniadir-alumno.component';
 import { HeaderComponent } from './pages/header/header.component';
 import { FooterComponent } from './pages/footer/footer.component';
+import { ChartsModule } from 'ng2-charts';
+import { FormsModule } from '@angular/forms';
 import { HomePadreComponent } from './pages/home-padre/home-padre.component';
 import { HomeProfesorComponent } from './pages/home-profesor/home-profesor.component';
 
@@ -32,8 +32,6 @@ import { HomeProfesorComponent } from './pages/home-profesor/home-profesor.compo
     AsistenciaPadreComponent,
     ComportamientoPadreComponent,
     ComportamientoProfesorComponent,
-    InformacionPadreComponent,
-    InformacionProfesorComponent,
     MensajeriaPadresComponent,
     MensajeriaProfesorComponent,
     AniadirClaseComponent,
@@ -46,7 +44,9 @@ import { HomeProfesorComponent } from './pages/home-profesor/home-profesor.compo
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ChartsModule, 
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

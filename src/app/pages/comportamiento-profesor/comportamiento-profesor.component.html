@@ -1,1 +1,156 @@
-<p>comportamiento-profesor works!</p>
+<body class="body"> 
+<div id="imagenes" class="container">
+    <div *ngIf="tablaResumen==false">
+    <div class="row">
+        <div class="col-2"></div>
+        <div class="col-8">
+            <div class="form-group">
+                <label for="exampleSelect2"><b>Alumno</b></label>
+                <select class="form-control" id="exampleSelect2">
+                    <option value="">Pedro</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="example-date-input"><b>Fecha</b></label>
+                <input class="form-control" type="date" id="example-date-input">
+            </div>
+        </div>
+        <div class="col-2"></div>
+    </div>
+    </div>
+
+    <div *ngIf="tablaResumen==false" class="row">
+        <div class="col-1"></div>
+        <div class="col-5">
+            <label for="puntualidad">Puntualidad</label>
+            <div *ngIf="puntualidad == false"  id="puntualidad" class="negro"><i (click)="resaltar(0)" class="far fa-clock fa-6x fila"></i></div>
+            <div *ngIf="puntualidad == true" id="puntualidad" class="negro"><i class="fas fa-clock fa-6x"></i></div>
+            <label for="atencion">Atencion</label>
+            <div *ngIf="atencion == false" id="atencion" class="negro"><i (click)="resaltar(1)" class="far fa-eye fa-6x fila"></i></div>
+            <div *ngIf="atencion==true" class="negro"><i class="fas fa-eye fa-6x"></i></div>
+        </div>
+        <div class="col-5">
+            <label for="homework">Deberes</label>
+            <div *ngIf="deberes == false" id="homework" class="negro"><i (click)="resaltar(2)" class="far fa-address-card fa-6x fila"></i></div>
+            <div *ngIf="deberes == true" id="address" class="negro"><i class="fas fa-address-card fa-6x"></i></div>
+            <label for="comportamiento">Participacion</label>
+            <div *ngIf="comportamiento == false" id="comportamiento" class="negro"><i (click)="resaltar(3)" class="far fa-comments fa-6x fila"></i></div>
+            <div *ngIf="comportamiento==true" id="comportamiento" class="negro"><i class="fas fa-comments fa-6x"></i></div>
+        </div>
+        <div class="col-1"></div>
+    </div>
+
+    <div *ngIf="tablaResumen==false" class="row">
+        <div class="col-4"></div>
+        <div class="col-2">
+            <div *ngIf="rojo==true" class="rojo"><i class="fas fa-minus-square fa-3x"></i></div>
+            <div *ngIf="rojo==false" class="rojo"><i (click)=color(0) class="far fa-minus-square fa-3x fila"></i></div>
+        </div>
+        <div class="col-2">
+            <div *ngIf="verde==true" class="verde"><i class="fas fa-plus-square fa-3x fila"></i></div>
+            <div *ngIf="verde==false" class="verde"><i (click)=color(1) class="far fa-plus-square fa-3x fila"></i></div>
+        </div>
+        <div class="col-4"></div>
+    </div>
+
+    <div *ngIf="tablaResumen==false" class="row">
+        <div class="col-2"></div>
+        <div class="col-8">
+            <form>
+                <div class="container" id="valor"><input id="nota" type="number" required name="price" min="0" placeholder="Introduce valor" step="0.1"></div>
+                <div><i (click)="envimes()" class="far fa-envelope fila"><b><i> Añadir mensaje ?</i></b></i></div>
+                <!-- mensaje -->
+                <div *ngIf="mensaje == true">
+                    <div class="row">
+                        <div class="col-2"></div>
+                        <div class="col-8">
+                            <label for="selemens"><b>Mensaje Predeterminado: </b></label><br>
+                            <select id="selemens">
+                                <option value="ninguno">Ninguno</option>
+                                <option value="asistencia">Asistencia</option>
+                                <option value="atencion">Atencion</option>
+                            </select>
+                        </div>
+                        <div class="col-2"></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-2"></div>
+                        <div class="col-8">
+                            <div class="container">
+                                <label for="msg"><b>Editar mensaje: </b></label><br>
+                                <input  id="msg" type="text">
+                            </div>
+                        </div>
+                        <div class="col-2"></div>
+                    </div>
+                </div>
+                <!-- mensaje -->
+                <div class="container" id="valor"><button (click)="actualizar()" type="reset" class="btn btn-outline-primary">Actualizar</button></div>
+            </form>
+        </div>
+        <div class="col-2"></div>
+    </div>
+
+    
+
+    <div *ngIf="tablaResumen==false" class="row">
+        <div class="col-1"></div>
+        <div class="col-10">
+            <table id="valor" class="table">
+                <thead class="thead-dark">
+                  <tr>
+                    <th scope="col">Actitud</th>
+                    <th scope="col">Nota Media</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="fila" (click)="mostrar('Deberes')">
+                    <td>Deberes</td>
+                    <td>7.5</td>
+                  </tr>
+                  <tr class="fila" (click)="mostrar('Comportamiento')">
+                    <td>Comportamiento</td>
+                    <td>6.4</td>
+                  </tr>
+                  <tr class="fila" (click)="mostrar('Atencion')">
+                    <td>Atencion</td>
+                    <td>5.9</td>
+                  </tr>
+                  <tr class="fila" (click)="mostrar('Puntualidad')">
+                    <td>Puntualidad</td>
+                    <td>9</td>
+                  </tr>
+                </tbody>
+              </table>
+        </div>
+        <div class="col-1"></div>
+    </div>
+
+    <div *ngIf="tablaResumen == true" class="row">
+    <div class="col-1"></div>
+        <div class="col-10">
+            <table class="table">
+                <thead class="thead-dark">
+                <tr id="titulo">
+                    <th scope="col">Apellidos</th>
+                    <th scope="col">{{nombre}}</th>
+                    <th scope="col">Actualizar</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>García Agudo</td>
+                    <td *ngIf="mostrarF4 == false" id="nota">7.4</td>
+                    <td *ngIf="mostrarF4 == true"><input id="insertar" type="number" step="0.1"></td>
+                    <td *ngIf="mostrarF4 == false" id="boton4"><button (click)="cambiar()" id="boton3" type="button" class="btn btn-warning">Editar</button></td>
+                    <td *ngIf="mostrarF4 == true" id="boton5"><button (click)="modificar()" id="boton3" type="button" class="btn btn-success">Cambiar</button></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-1"></div>
+        <div class="container"><button (click)="terminar()" type="button" class="btn btn-outline-dark">Terminar</button></div>
+    </div>    
+</div>
+</body>
+

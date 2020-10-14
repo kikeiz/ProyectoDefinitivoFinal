@@ -1,2 +1,163 @@
 
-<p>Hola</p>
+<body class="body">
+<div id="1" *ngIf="mostrarF1 == false && mostrarF2 == false && mostrarF3 == false">
+    <div class="row">
+        <div class="container"><button (click)="anadirNota()" id="botonx" type="button" class="btn btn-outline-primary">Nueva calificacion</button></div>
+    </div>
+</div>
+
+<div id="2" *ngIf="mostrarF1 == true && mostrarF2 == false && mostrarF3 == false" >
+    <div class="row">
+        <div class="col-2"></div>
+        <div class="col-8">
+            <form #formInsert="ngForm" (ngSubmit)="insertarNotas(formInsert.value)">
+            <div class="form-group">
+                <label for="exampleSelect1"><b>Tipo de nota</b></label>
+                <select class="form-control" id="exampleSelect1" name="tipoDeCalificacion" required ngModel>
+                <option value="examen">Examen</option>
+                <option value="trabajo">Trabajo</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="example-date-input"><b>Fecha</b></label>
+                <input class="form-control" type="date" id="example-date-input" name="fecha" required ngModel>
+            </div>
+            <div class="form-group">
+                <label for="exampleSelect2"><b>Asignatura</b></label>
+                <select class="form-control" id="exampleSelect2" name="asignatura" required ngModel>
+                <option value="biologia">Biologia</option>
+                <option value="matematicas">Matematicas</option>
+                <option value="lengua">Lengua</option>
+                <option value="latin">Latin</option>
+                <option value="griego">Griego</option>
+                </select>
+            </div>
+            <div class="container"><button [disabled]="!formInsert.valid" type="submit" class="btn btn-outline-dark">Insertar notas</button></div>
+            </form>
+        </div>
+        <div class="col-2"></div>
+    </div>
+</div>
+
+<div id="3" *ngIf="mostrarF2 == true">
+    <div class="row">
+        <div class="col-1"></div>
+        <div class="col-10">
+            <table class="table">
+                <thead class="thead-dark">
+                <tr id="titulo">
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Apellidos</th>
+                    <th scope="col">Nota</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>Pedro</td>
+                    <td>García Agudo</td>
+                    <td><input type="number" min="0" max="10" id="nota" step="0.1"></td>
+                </tr>
+                <tr>
+                    <td>Jaime</td>
+                    <td>Lorenzo Vasco</td>
+                    <td><input type="number" min="0" max="10" id="nota" step="0.1"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-1"></div>
+        <div class="container"><button (click)="actualizar()" type="button" class="btn btn-outline-dark">Actualizar</button></div>
+    </div>    
+</div>
+
+<div id="4" *ngIf="mostrarF1 == false && mostrarF2 == false && mostrarF3 == false">
+    <div class="row">
+        <div class="container margin"><i id="fila" (click)="opciones()" class="fas fa-filter fa-3x"></i></div>
+    </div>
+    <div class="row">
+        <div class="col-2"></div>
+        <div class="col-8">
+            <div class="container margin" *ngIf="mostrarF5 == true"><form #formFilter="ngForm" (ngSubmit)="filter(formFilter.value)">
+                <div class="form-group">
+                    <label for="tipo"><b>Tipo de nota</b></label><br>
+                    <select id="tipo" ngModel name="tipoDeCalificacion" ngModel>
+                        <option value="todos">Todos</option>
+                        <option value="trabajo">Trabajo</option>
+                        <option value="examen">Examen</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="prevision"><b>Estado</b></label><br>
+                    <select id="prevision" name="prevision" ngModel>
+                        <option value="todos">Todos</option>
+                        <option value="previsto">Previsto</option>
+                        <option value="realizado">Realizado</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="tipo"><b>Nota Media</b></label><br>
+                    <select id="tipo" name="estadoNota" ngModel>
+                        <option value="todos">Todos</option>
+                        <option value="aprobado">Aprobado</option>
+                        <option value="suspenso">Suspenso</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-danger">Filtrar</button>
+            </form></div>
+        </div>
+        <div class="col-2"></div>
+    </div>
+</div>
+<div id="5" *ngIf="mostrarF1 == false && mostrarF2 == false && mostrarF3 == false">
+    <div class="row">
+        <div class="col-1"></div>
+        <div class="col-10">
+            <table class="table table-hover">
+                <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Tipo de nota</th>
+                    <th scope="col">Fecha</th>
+                    <th scope="col">Nota media</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr id="fila" (click)="editar()">
+                    <td>Examen</td>
+                    <td>09/05/1996</td>
+                    <td>7,6</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-1"></div>
+    </div>
+</div>
+<div id="6" *ngIf="mostrarF3 == true">
+    <div class="row">
+        <div class="col-1"></div>
+        <div class="col-10">
+            <table class="table">
+                <thead class="thead-dark">
+                <tr id="titulo">
+                    <th scope="col">Apellidos</th>
+                    <th scope="col">Nota</th>
+                    <th scope="col">Modificar</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>García Agudo</td>
+                    <td *ngIf="mostrarF4 == false" id="nota">7.4</td>
+                    <td *ngIf="mostrarF4 == true"><input id="insertar" type="number" step="0.1"></td>
+                    <td *ngIf="mostrarF4 == false" id="boton4"><button (click)="cambiar()" id="boton3" type="button" class="btn btn-warning">Editar</button></td>
+                    <td *ngIf="mostrarF4 == true" id="boton5"><button (click)="modificar()" id="boton3" type="button" class="btn btn-success">Cambiar</button></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-1"></div>
+        <div class="container"><button (click)="cerrar()" type="button" class="btn btn-outline-dark">Cerrar</button></div>
+    </div>    
+</div>
+</body>
+    

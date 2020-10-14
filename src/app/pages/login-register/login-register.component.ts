@@ -1,4 +1,5 @@
 import { Component,ViewChild,TemplateRef, OnInit } from '@angular/core';
+import { LoginService } from 'src/app/shared/login.service';
 
 @Component({
   selector: 'app-login-register',
@@ -6,12 +7,31 @@ import { Component,ViewChild,TemplateRef, OnInit } from '@angular/core';
   styleUrls: ['./login-register.component.css']
 })
 export class LoginRegisterComponent implements OnInit {
-
-  constructor() { }
+  public profesor:boolean
+  constructor(public service:LoginService) {
+    this.profesor = true
+   }
 
   ngOnInit(): void {
 
   }
 
-  crearCuenta:boolean = true;
+  login(){
+    this.service.entrar()
+  }
+
+  registrarse(){
+    this.service.entrar()
+ 
+  }
+
+  cambiar(data:string){
+    if(data == 'padres'){
+      this.profesor = false  
+    }else{
+      this.profesor = true
+    }
+    this.service.navbar(data)
+  }
+
 }

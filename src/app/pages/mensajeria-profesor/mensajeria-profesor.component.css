@@ -1,0 +1,19 @@
+.container{
+    width: 100%;
+    display:block;
+    position:relative;
+    text-align: center;
+    height: auto;
+}
+
+#tamaño{
+    height: 80px;
+    width: 200px;
+    border-color: black;
+    border-width: 2px;
+    border-style: solid;
+}
+
+tr{
+    cursor: pointer;
+}

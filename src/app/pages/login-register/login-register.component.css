@@ -4,8 +4,8 @@ body{
 	background:#332929;
 	font:600 16px/18px 'Open Sans',sans-serif;
 	flex-wrap: wrap;
-
 }
+
 *,:after,:before{box-sizing:border-box}
 .clearfix:after,.clearfix:before{content:'';display:table}
 .clearfix:after{clear:both;display:block}
@@ -173,16 +173,3 @@ select{
 	background-color: rgb(170, 170, 228);
 }
 
-#user{
-	position: relative;
-	right: 20px;
-}
-#user2{
-	position: relative;
-	right: 20px;
-}
-
-#email{
-	position: relative;
-	right: 20px;
-}

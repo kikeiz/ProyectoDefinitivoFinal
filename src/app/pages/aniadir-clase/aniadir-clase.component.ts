@@ -6,10 +6,20 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./aniadir-clase.component.css']
 })
 export class AniadirClaseComponent implements OnInit {
+  public insertar:boolean
 
-  constructor() { }
+  constructor() {
+    this.insertar = false
+   }
 
   ngOnInit(): void {
   }
 
+  insertarAlumnos(){
+    this.insertar = true
+  }
+
+  crearClase(data:any){
+    this.insertar = false
+  }
 }

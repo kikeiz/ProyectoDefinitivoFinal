@@ -1,16 +1,54 @@
-<header class="block">
-  <ul class="header-menu horizontal-list">
-      <li>
-          <a class="header-menu-tab" href="#1"><span class="icon entypo-cog scnd-font-color"></span>Ajustes</a>
-      </li>
-      <li>
-          <a class="header-menu-tab" href="#2"><span class="icon fontawesome-user scnd-font-color"></span>Cuenta</a>
-      </li>
-  </ul>
-  <div class="profile-menu">
-      <p>Cambiar Perfil <a href="#26"><span class="entypo-down-open scnd-font-color"></span></a></p>
-      <div class="profile-picture small-profile-picture">
-          <img width="40px"  src="https://image.freepik.com/foto-gratis/vista-frontal-adorable-nino-sonriendo_23-2148244888.jpg">
-      </div>
-  </div>
-</header>
+<div *ngIf ="service.navPadres == true">
+    <nav>
+        <input type="checkbox" id="check">
+        <label for="check" class="checkbtn">
+        <i class="fas fa-bars"></i>
+        </label>
+        <label class="logo">StudentView</label>
+        <ul class="nav">
+            <li class="nav-item">
+                <a class="active" routerLink="/mainPadre">Home</a>
+            </li>
+            <li class="nav-item">
+                <a routerLink="/mainNotasPadre">Notas</a>
+            </li>
+            <li class="nav-item">
+                <a routerLink="/asistenciaPadre">Asistencia</a>
+            </li>
+            <li class="nav-item">
+                <a routerLink="/comportamientoPadre">Comportamiento</a>
+            </li>
+            <li class="nav-item">
+                <a routerLink="/mensajesPadre">Comunicacion</a>
+            </li>
+        </ul>
+    </nav>
+</div>
+
+<div *ngIf ="service.navPadres == false">
+    <nav>
+        <input type="checkbox" id="check">
+        <label for="check" class="checkbtn">
+        <i class="fas fa-bars"></i>
+        </label>
+        <label class="logo">StudentView</label>
+        <ul class="nav">
+            <li class="nav-item">
+                <a class="active" routerLink="/mainProfe">Home</a>
+            </li>
+            <li class="nav-item">
+                <a routerLink="/mainNotasProfesor">Notas</a>
+            </li>
+            <li class="nav-item">
+                <a routerLink="/asistenciaProfesor">Asistencia</a>
+            </li>
+            <li class="nav-item">
+                <a routerLink="/comportamientoProfesor">Comportamiento</a>
+            </li>
+            <li class="nav-item">
+                <a routerLink="/mensajesProfe">Comunicacion</a>
+            </li>
+        </ul>
+    </nav>
+</div>
+>>>>>>> kike
