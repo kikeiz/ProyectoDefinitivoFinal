@@ -1,5 +1,9 @@
 .body{
     background-color: #d7dfee;
+    width: 80%;
+    display:block;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .container{
@@ -23,4 +27,8 @@ select{
 
 #fila{
     cursor: pointer;
+}
+
+.marginbottom{
+    margin-bottom:20px;
 }

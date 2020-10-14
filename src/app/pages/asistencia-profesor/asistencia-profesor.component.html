@@ -1,43 +1,105 @@
-<h1><span class="yellow"> Lista de Asistencia</span></h1>
-<h2> Angel Miguel Delgado</h2>     
-<table class="container">
-    <thead>
-        <tr>
-            <th><option><h1>Nombres</h1></option></th>
-            <th><option><h1>Asignatura</h1></option></th>
-                <th>Pasar Lista</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <input type="checkbox">   <td>Maria Angeles</td>
-            <td>Matematica</td>
-            
-        </tr>
-        <tr>
-            <input type="checkbox"> <td>Pedro Perez</td>
-            <td>Matematica</td>
-            
-        </tr>
-        <tr>
-            <input type="checkbox"><td>Jose Luis Chong</td>
-            <td>Matematica</td>
-            
-        </tr>
-    <tr>
-        <input type="checkbox"> <td>Ana Carolina Suarez</td>
-        <input type="checkbox"><td>Matematica</td>
-           
-        </tr>
-    <tr>
-        <input type="checkbox">  <td>Ivan Silverio</td>
-            <td>Matematica</td>
-          
-        </tr>
-    <tr>
-        <input type="checkbox">  <td>Enrique Garcia</td>
-            <td>Matematica</td>
-          
-        </tr>
-    </tbody>
-</table> 
+<div class="body">
+    <div *ngIf="asiste == false && mostrar == false" class="container margen">
+            <button type="button" class="btn btn-success" (click)="pasarLista()"><b>Pasar lista</b></button>
+    </div>
+    <div *ngIf="asiste == false && mostrar == false" class="container margen1">
+        <div class="row">
+            <!-- <div class="col-1"></div> -->
+            <div class="col-12">
+                <table class="table table-hover">
+                    <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">Fecha</th>
+                        <th scope="col">Asignatura</th>
+                        <th scope="col">% Asistencia</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr (click)="mostrarAsistencia()" class="fila">
+                        <td>19-08-1996</td>
+                        <td>Biologia</td>
+                        <td>79%</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!-- <div class="col-1"></div> -->
+        </div>
+    </div>
+
+    <div *ngIf="asiste == true" class="container margen">
+        <div>
+        <div class="row">
+            <div class="col-1"></div>
+            <div class="col-10">
+                <div class="form-group">
+                    <label for="exampleSelect2"><b>Asignatura</b></label>
+                    <select class="form-control" id="exampleSelect2">
+                        <option value="">Biologia</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="example-date-input"><b>Fecha</b></label>
+                    <input class="form-control" type="date" id="example-date-input">
+                </div>
+            </div>
+            <div class="col-1"></div>
+        </div>
+    </div>
+    <div *ngIf="asiste == true" class="container margen">
+        <div class="row">
+            <div class="col-1"></div>
+            <div class="col-10">
+                <table class="table">
+                    <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Apellidos</th>
+                        <th scope="col">Asistencia</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>Enrique</td>
+                        <td>Izquierdo</td>
+                        <td><input type="checkbox"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-1"></div>
+        </div>
+    </div>
+
+    <div *ngIf="asiste == true" class="container margen1" id="boton">
+        <button type="button" class="btn btn-danger" (click)="enviar()"><b>Terminar</b></button>
+    </div>
+    </div>
+
+    <div *ngIf="mostrar == true">
+        <div class="row">
+            <div class="col-1"></div>
+            <div class="col-10">
+                <table class="table">
+                    <thead class="thead-dark">
+                      <tr>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Apellidos</th>
+                        <th scope="col">Asistencia</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let asistencia of asistencias">
+                        <td>{{asistencia.nombre}}</td>
+                        <td>{{asistencia.apellido}}</td>
+                        <td [ngStyle]="(asistencia.asistencia == true) ? {'background-color': '#99FF99'} : {'background-color': '#FF9999'}"></td>
+                      </tr>
+                    </tbody>
+                  </table>
+            </div>
+            <div class="col-1"></div>
+        </div>
+        <div class="container">
+            <button type="button" class="btn btn-dark" (click)="cerrar()">Cerrar</button>
+        </div>
+    </div>

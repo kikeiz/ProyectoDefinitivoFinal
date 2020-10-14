@@ -17,3 +17,15 @@
 tr{
     cursor: pointer;
 }
+
+#final{
+    background-color: white;
+}
+
+.body{
+    background-color: #d7dfee;
+    width: 80%;
+    display:block;
+    margin-left: auto;
+    margin-right: auto;
+}

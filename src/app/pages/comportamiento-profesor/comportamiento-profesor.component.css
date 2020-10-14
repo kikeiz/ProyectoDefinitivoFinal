@@ -1,5 +1,9 @@
 .body{
     background-color: #d7dfee;
+    width: 80%;
+    display:block;
+    margin-left: auto;
+    margin-right: auto;
 }
 .rojo{
     color: red;
@@ -13,7 +17,6 @@
     width: 500px;
     height: 500px;
 }
-
 
 .container{
     width: 100%;

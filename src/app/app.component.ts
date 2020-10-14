@@ -11,6 +11,5 @@ export class AppComponent {
   title = 'ProyectoFinal';
 
   constructor(public service:LoginService){
-    
   }
 }

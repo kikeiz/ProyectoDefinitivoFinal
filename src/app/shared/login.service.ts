@@ -13,6 +13,7 @@ export class LoginService {
 
   entrar(){
     this.login = true
+    console.log(this.login)
   }
 
   navbar(data:string){

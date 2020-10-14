@@ -2,7 +2,7 @@
     <form #formInsert="ngForm" (ngSubmit)="crearClase(formInsert.value)"  class="container" id="añadir">
         <div *ngIf="insertar == false" class="form-group">
             <label for="NIF"><b>Introduzca NIF</b></label><br>
-            <input id="NIF" type="text" placeholder="Introduzca NIF" name="nif" required ngModel>
+            <input type="text" placeholder="Introduce DNI">
         </div>
         <div *ngIf="insertar == false" class="form-group">
             <label for="colegio"><b>Seleccione escuela</b></label><br>
