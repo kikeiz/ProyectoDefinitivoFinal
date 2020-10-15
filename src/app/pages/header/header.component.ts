@@ -16,4 +16,9 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  colapsar(){
+    this.isCollapsed = false
+  }
+
 }
+
