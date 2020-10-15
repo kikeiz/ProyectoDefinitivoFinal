@@ -1,9 +1,12 @@
 .body{
-    background-color: #d7dfee;
+    background: rgba(169, 181, 196, 0.8);
     width: 80%;
     display:block;
+    margin-top: 10%;
     margin-left: auto;
     margin-right: auto;
+    border-radius: 2%;
+    border-width: 1px;
 }
 
 .container{
