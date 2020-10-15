@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { AniadirAlumnoComponent } from './pages/aniadir-alumno/aniadir-alumno.component';
+import { AniadirClaseComponent } from './pages/aniadir-clase/aniadir-clase.component';
 import { AsistenciaPadreComponent } from './pages/asistencia-padre/asistencia-padre.component';
 import { AsistenciaProfesorComponent } from './pages/asistencia-profesor/asistencia-profesor.component';
 import { ComportamientoPadreComponent } from './pages/comportamiento-padre/comportamiento-padre.component';
@@ -23,7 +25,9 @@ const routes: Routes = [
   {path:"mensajesProfe", component:MensajeriaProfesorComponent},
   {path:"asistenciaPadre", component:AsistenciaPadreComponent},
   {path:"asistenciaProfesor", component:AsistenciaProfesorComponent},
-  {path:"perfil", component:PerfilComponent}
+  {path:"perfil", component:PerfilComponent},
+  {path:"aniadirClase", component:AniadirClaseComponent},
+  {path:"aniadirAlumno", component:AniadirAlumnoComponent}
 ];
 
 @NgModule({
