@@ -21,6 +21,7 @@ import { FormsModule } from '@angular/forms';
 import { HomePadreComponent } from './pages/home-padre/home-padre.component';
 import { HomeProfesorComponent } from './pages/home-profesor/home-profesor.component';
 import { PerfilComponent } from './pages/perfil/perfil.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap'
 
 
 @NgModule({
@@ -48,7 +49,8 @@ import { PerfilComponent } from './pages/perfil/perfil.component';
     BrowserModule,
     AppRoutingModule,
     ChartsModule, 
-    FormsModule
+    FormsModule,
+    NgbModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
