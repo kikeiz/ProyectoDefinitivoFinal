@@ -1,1 +1,89 @@
 <p>perfil works!</p>
+<div *ngIf="service.navPadres == true && mostrar == false" class="card container" style="width: 18rem;">
+  <img class="card-img-top" src="https://www.okchicas.com/wp-content/uploads/2017/05/17127092_262868214166082_5502871855238742016_n.jpg" alt="Card image cap">
+  <div class="card-body">
+    <div class="container pointer"><i (click)="editar()" class="fas fa-user-edit"></i></div>
+    <h5 class="card-title">Julian Muñoz Medina</h5>
+    <p class="card-text">Trabajo en la construccion desde hace 18 años. Mis aficiones son el surf y la vela.</p>
+  </div>
+      <ul class="list-group list-group-flush margin" >
+      <li class="list-group-item color"><b>Telefono:</b> 6589996574</li>
+      <li class="list-group-item color"><b>Email:</b> juanito@gmail.com</li>
+      <li class="list-group-item color margin">Contactar a partir de las 17:00 horas</li>
+      </ul>
+</div>
+
+<div *ngIf="service.navPadres == false && mostrar == false" class="card container" style="width: 18rem;">
+  <img class="card-img-top" src="http://1.bp.blogspot.com/-Rxx95yskmYs/UXSXhRNGppI/AAAAAAAABpY/7zyCGao7cxg/s1600/fotos+de+mujeres+eslovacas+zuzana+1.jpg" alt="Card image cap">
+  <div class="card-body">
+    <div class="container pointer"><i (click)="editar()" class="fas fa-user-edit"></i></div>
+    <h5 class="card-title">María Luengo</h5>
+    <p class="card-text">Profesora en la escuela publica desde los 18 años, me gusta leer y escribir</p>
+  </div>
+  <ul class="list-group list-group-flush margin">
+    <li class="list-group-item color"><b>Asignaturas:</b><br> Lengua y Filosofia</li>
+    <li class="list-group-item color margin"><b>Email:</b> marialuego@gmail.com</li>
+  </ul>
+</div>
+
+<div *ngIf="service.navPadres == true && mostrar == true" class="card container" style="width: 18rem;">
+  <img class="card-img-top" src="https://www.okchicas.com/wp-content/uploads/2017/05/17127092_262868214166082_5502871855238742016_n.jpg" alt="Card image cap">
+  <div class="card-body">
+      <form>
+          <div class="form-group">
+            <label for="exampleInputEmail1">Nombre</label>
+            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Nombre">
+          </div>
+          <div class="form-group">
+            <label for="exampleInputPassword1">Apellidos</label>
+            <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Apellidos">
+          </div>
+          <div class="form-group">
+              <label for="exampleInputPassword1">Descripcion</label>
+              <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Descripcion">
+          </div>
+          <div class="form-group">
+              <label for="exampleInputPassword1">Telefono</label>
+              <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Telefono">
+          </div>
+          <div class="form-group">
+              <label for="exampleInputPassword1">Email</label>
+              <input type="email" class="form-control" id="exampleInputPassword1" placeholder="Email">
+          </div>
+        </form>
+  </div>
+  <div>
+      <button type="button" (click)="ocultar()" class="btn btn-warning container">Terminar</button>
+  </div>
+</div>
+
+<div *ngIf="service.navPadres == false && mostrar == true" class="card container" style="width: 18rem;">
+  <img class="card-img-top" src="http://1.bp.blogspot.com/-Rxx95yskmYs/UXSXhRNGppI/AAAAAAAABpY/7zyCGao7cxg/s1600/fotos+de+mujeres+eslovacas+zuzana+1.jpg" alt="Card image cap">
+  <div class="card-body">
+      <form>
+          <div class="form-group">
+            <label for="exampleInputEmail1">Nombre</label>
+            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Nombre">
+          </div>
+          <div class="form-group">
+            <label for="exampleInputPassword1">Apellidos</label>
+            <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Apellidos">
+          </div>
+          <div class="form-group">
+              <label for="exampleInputPassword1">Descripcion</label>
+              <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Descripcion">
+          </div>
+          <div class="form-group">
+              <label for="exampleInputPassword1">Asignaturas</label>
+              <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Asignaturas">
+          </div>
+          <div class="form-group">
+              <label for="exampleInputPassword1">Email</label>
+              <input type="email" class="form-control" id="exampleInputPassword1" placeholder="Email">
+          </div>
+        </form>
+  </div>
+  <div>
+      <button type="button" (click)="ocultar()" class="btn btn-warning container">Terminar</button>
+  </div>
+</div>
