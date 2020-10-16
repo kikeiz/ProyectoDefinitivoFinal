@@ -1,3 +1,13 @@
+.title{
+    margin-top: 1%;
+    position: relative;
+    text-align: center;
+    font-family: 'Noto Sans', sans-serif;
+    font-size: 50%;
+     margin-bottom: 3%;
+  }
+
+
 .body{
     background: rgba(169, 181, 196, 0.8);
     width: 90%;
