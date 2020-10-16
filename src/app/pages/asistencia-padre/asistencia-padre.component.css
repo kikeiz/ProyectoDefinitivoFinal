@@ -1,3 +1,11 @@
+/* :host .my-app-class {
+	background-image:url(http://il2.picdn.net/shutterstock/videos/17464699/thumb/6.jpg);
+	background-repeat: no-repeat;
+    background-size: 100%;
+    background-attachment: fixed;
+    background-size: cover;
+} */
+
 .title{
     margin-top: 1%;
     position: relative;

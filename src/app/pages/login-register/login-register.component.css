@@ -1,10 +1,16 @@
-body{
+/* body{
 	margin:0;
 	color:#6a6f8c;
 	font:600 16px/18px 'Open Sans',sans-serif;
 	flex-wrap: wrap;
+} */
+:host .my-app-class {
+	background-image:url(http://il2.picdn.net/shutterstock/videos/17464699/thumb/6.jpg);
+	background-repeat: no-repeat;
+    background-size: 100%;
+    background-attachment: fixed;
+    background-size: cover;
 }
-
 *,:after,:before{box-sizing:border-box}
 .clearfix:after,.clearfix:before{content:'';display:table}
 .clearfix:after{clear:both;display:block}

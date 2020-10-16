@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginRegisterComponent } from './pages/login-register/login-register.component';
-import { NotasProfesorComponent } from './pages/notas-profesor/notas-profesor.component';
+import { NotasProfesorComponent} from './pages/notas-profesor/notas-profesor.component';
 import { NotasPadreComponent } from './pages/notas-padre/notas-padre.component';
 import { AsistenciaProfesorComponent } from './pages/asistencia-profesor/asistencia-profesor.component';
 import { AsistenciaPadreComponent } from './pages/asistencia-padre/asistencia-padre.component';
