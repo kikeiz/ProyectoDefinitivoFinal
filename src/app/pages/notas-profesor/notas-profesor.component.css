@@ -6,6 +6,13 @@
    font-size: 50%;
    margin-bottom: 3%;
 }
+:host .my-app-class {
+	background-image:url(https://images.unsplash.com/photo-1502086223501-7ea6ecd79368?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80);
+	background-repeat: no-repeat;
+    background-size: 100%;
+    background-attachment: fixed;
+    background-size: cover;
+}
 
 .body{
     background: rgba(169, 181, 196, 0.8);
