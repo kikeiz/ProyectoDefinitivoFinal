@@ -2,6 +2,26 @@
     background-color:  #3e4870;
 }
 
-.margin{
+.hola{
     margin-bottom: 20px;
+}
+
+.margen{
+    position: relative;
+    top: 2px;
+    float: right;
+    position: relative;
+    left: 500px;
+}
+
+.cursor{
+    cursor: pointer;
+}
+
+li a:hover{
+    color: #0275d8;
+}
+
+.margenes{
+    margin-right: 10px;
 }

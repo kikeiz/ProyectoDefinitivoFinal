@@ -1,0 +1,35 @@
+
+  .card{
+    background-color: rgb(126, 186, 255);
+    border-color: black;
+    border-width: 2px;
+    border-style: solid;
+  }
+  img{
+    margin-top: 5px;
+  }
+
+
+  .margin{
+    margin-bottom: 10px;
+  }
+
+  .container{
+    width: 100%;
+    display:block;
+    position:relative;
+    text-align: center;
+    height: auto;
+  }
+  .color{
+    border-radius: 5px;
+    border-color: black;
+    border-width: 1px;
+    border-style: solid;
+    background-color: rgb(106, 158, 218);
+    margin-top: 5px;
+  }
+
+  .pointer{
+    cursor: pointer;
+  }

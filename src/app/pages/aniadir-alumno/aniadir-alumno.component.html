@@ -1,1 +1,25 @@
-
+<div class="body container">
+    <div class="texto1">
+        <label for="NIF"><b>Introduzca NIF</b></label><br>
+        <input id="NIF" type="text" placeholder="Introduzca NIF" name="nif" required ngModel>
+    </div>
+    <div class="texto1">
+        <label for="nombre"><b>Nombre</b></label><br>
+        <input id="nombre" type="text" placeholder="Nombre" name="nif" required ngModel>
+    </div>
+    <div class="texto1">
+        <label for="apellidos"><b>Apellidos</b></label><br>
+        <input id="apellidos" type="text" placeholder="Apellidos" name="nif" required ngModel>
+    </div>
+    <div class="texto1">
+        <label for="colegio"><b>Selecciona colegio</b></label><br>
+        <select id="colegio" name="colegio" required ngModel>
+            <option value="">Ninguno</option>
+            <option value="Montserrat">Las rosas</option>
+            <option value="Brains">Nazaret</option>
+        </select>
+    </div>
+    <div class="boton container">
+        <button type="submit" class="btn btn-secondary">Añadir</button>
+    </div>
+</div> 

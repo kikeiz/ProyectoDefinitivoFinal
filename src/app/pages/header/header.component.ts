@@ -7,10 +7,18 @@ import { LoginService } from 'src/app/shared/login.service';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
+  public isCollapsed:boolean
 
-  constructor(public service: LoginService) { }
+  constructor(public service: LoginService) { 
+    this.isCollapsed = true
+  }
 
   ngOnInit(): void {
   }
 
+  colapsar(){
+    this.isCollapsed = false
+  }
+
 }
+

@@ -1,11 +1,12 @@
 .container{
+    background: rgba(169, 181, 196, 0.8);
     width: 100%;
     display:block;
-    position:relative;
-    text-align: center;
-    height: auto;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 2%;
+    border-width: 1px;
 }
-
 #tamaño{
     height: 80px;
     width: 200px;
@@ -13,7 +14,6 @@
     border-width: 2px;
     border-style: solid;
 }
-
 tr{
     cursor: pointer;
 }
@@ -23,9 +23,10 @@ tr{
 }
 
 .body{
-    background-color: #d7dfee;
-    width: 80%;
     display:block;
     margin-left: auto;
     margin-right: auto;
+    background: rgba(169, 181, 196, 0.8);
+    width: 80%;
+    border-radius: 2%;
 }

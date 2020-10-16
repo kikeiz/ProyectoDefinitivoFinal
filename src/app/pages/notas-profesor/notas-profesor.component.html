@@ -1,5 +1,5 @@
 
-<body class="body">
+<div class="body">
 <div id="1" *ngIf="mostrarF1 == false && mostrarF2 == false && mostrarF3 == false">
     <div class="row">
         <div class="container"><button (click)="anadirNota()" id="botonx" type="button" class="btn btn-outline-primary">Nueva calificacion</button></div>
@@ -32,7 +32,7 @@
                 <option value="griego">Griego</option>
                 </select>
             </div>
-            <div class="container"><button [disabled]="!formInsert.valid" type="submit" class="btn btn-outline-dark">Insertar notas</button></div>
+            <div class="container"><button [disabled]="!formInsert.valid" type="submit" class="btn btn-outline-primary">Insertar notas</button></div>
             </form>
         </div>
         <div class="col-2"></div>
@@ -66,7 +66,7 @@
             </table>
         </div>
         <div class="col-1"></div>
-        <div class="container"><button (click)="actualizar()" type="button" class="btn btn-outline-dark">Actualizar</button></div>
+        <div class="container"><button (click)="actualizar()" type="button" class="btn btn-outline-primary">Actualizar</button></div>
     </div>    
 </div>
 
@@ -102,7 +102,7 @@
                         <option value="suspenso">Suspenso</option>
                     </select>
                 </div>
-                <button type="submit" class="btn btn-danger">Filtrar</button>
+                <button type="submit" class="btn btn-primary">Filtrar</button>
             </form></div>
         </div>
         <div class="col-2"></div>
@@ -156,8 +156,8 @@
             </table>
         </div>
         <div class="col-1"></div>
-        <div class="container"><button (click)="cerrar()" type="button" class="btn btn-outline-dark">Cerrar</button></div>
+        <div class="container"><button (click)="cerrar()" type="button" class="btn btn-outline-primary">Cerrar</button></div>
     </div>    
 </div>
-</body>
+</div>
     
