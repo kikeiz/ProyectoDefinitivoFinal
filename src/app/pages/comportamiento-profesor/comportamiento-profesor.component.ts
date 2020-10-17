@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ChartDataSets, ChartOptions, ChartType } from 'chart.js';
+import { Label } from 'ng2-charts';
 
 @Component({
   selector: 'app-comportamiento-profesor',
@@ -16,6 +18,30 @@ export class ComportamientoProfesorComponent implements OnInit {
   public nombre:string
   public mostrarF4:boolean
   public mensaje:boolean
+  public barChartOptions: ChartOptions = {
+    responsive: true,
+    scales: { 
+    xAxes: [{}], 
+    yAxes: [{ 
+      id: 'y-axis-10',
+    position: 'left'}] 
+    },
+    plugins: {
+      datalabels: {
+        anchor: 'end',
+        align: 'end',
+      }
+    }
+  };
+  public barChartLabels: Label[] = ['Participacion', 'Atencion', 'Deberes', 'Puntualidad'];
+  public barChartType: ChartType = 'bar';
+  public barChartLegend = true;
+ 
+
+  public barChartData: ChartDataSets[] = [
+    { data: [7, 8, 9, 6], label: 'Enrique Izquierdo' },
+    { data: [5, 9, 5, 10], label: 'Clase' }
+  ];
   constructor(){
     this.puntualidad = false
     this.deberes = false
@@ -76,9 +102,8 @@ export class ComportamientoProfesorComponent implements OnInit {
     
   }
 
-  mostrar(tipo:string){
+  mostrar(){
     this.tablaResumen = true
-    this.nombre = tipo
   }
   cambiar(){
     this.mostrarF4 = true
@@ -99,4 +124,12 @@ export class ComportamientoProfesorComponent implements OnInit {
        this.mensaje = false
      }
    }
+   public chartClicked({ event, active }: { event: MouseEvent, active: {}[] }): void {
+    console.log(event, active);
+  }
+
+  public chartHovered({ event, active }: { event: MouseEvent, active: {}[] }): void {
+    console.log(event, active);
+  }
+  
 }

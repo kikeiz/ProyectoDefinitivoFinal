@@ -1,12 +1,31 @@
 <div class="body">
+    <div *ngIf="insertar == true">
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Apellidos</th>
+                    <th scope="col">Seleccionar</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Marcos</td>
+                    <td>Alonso Martinez</td>
+                    <td><input type="checkbox"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
     <form #formInsert="ngForm" (ngSubmit)="crearClase(formInsert.value)"  class="container" id="añadir">
         <div *ngIf="insertar == false" class="form-group">
             <label for="NIF"><b>Introduzca NIF</b></label><br>
-            <input type="text" placeholder="Introduce DNI">
+            <input class="form-control" type="text" placeholder="Introduce DNI">
         </div>
         <div *ngIf="insertar == false" class="form-group">
             <label for="colegio"><b>Seleccione escuela</b></label><br>
-            <select id="colegio" name="colegio" required ngModel>
+            <select class="form-control" id="colegio" name="colegio" required ngModel>
                 <option value="">Ninguno</option>
                 <option value="Montserrat">Montserrat</option>
                 <option value="Brains">Brains</option>
@@ -14,7 +33,7 @@
         </div>
         <div *ngIf="insertar == false" class="form-group">
             <label for="curso"><b>Seleccione curso</b></label><br>
-            <select id="curso" name="curso" required ngModel>
+            <select class="form-control" id="curso" name="curso" required ngModel>
                 <option value="">Ninguno</option>
                 <option value="1p">1ºPrimaria</option>
                 <option value="2p">2ºPrimaria</option>
@@ -35,35 +54,8 @@
             </div>
             <div class="col-2"></div>
         </div>
-        <!-- añadiralumnos -->
-        <div class="container" *ngIf="insertar == true">
-            <div class="row">
-                <div class="col-2"></div>
-                <div class="col-8">
-                    <table class="table">
-                        <thead class="thead-dark">
-                          <tr>
-                            <th scope="col">Nombre</th>
-                            <th scope="col">Apellidos</th>
-                            <th scope="col">Seleccionar</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr>
-                            <td>Marcos</td>
-                            <td>Alonso Martinez</td>
-                            <td><input type="checkbox"></td>
-                          </tr>
-                        </tbody>
-                      </table>
-                </div>
-                <div class="col-2"></div>
-            </div>
-        </div>
-        <!-- añadiralumnos -->
         <div class="row">
-            <div class="container"><button [disabled]="!formInsert.valid" type="submit" class="btn btn-dark">Añadir</button></div>
+            <div class="container"><button [disabled]="!formInsert.valid" type="submit"  class="btn btn-dark">Añadir</button></div>
         </div>
     </form>
-    
 </div>
