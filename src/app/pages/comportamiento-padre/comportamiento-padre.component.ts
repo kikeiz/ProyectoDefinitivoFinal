@@ -11,7 +11,7 @@ export class ComportamientoPadreComponent implements OnInit {
   //Gráfico de lineas
   public semana:boolean
   public lineChartData: ChartDataSets[] = [
-    { data: [6.5, 5.9, 8, 8.1, 5.6, 5.5, 4, 5, 8, 10], label: 'Comportamiento' },
+    { data: [6.5, 5.9, 8, 8.1, 5.6, 5.5, 4, 5, 8, 10], label: 'Participacion' },
     { data: [2.8, 4.8, 4, 1.9, 8.6, 2.7, 9, 5, 1.5, 10], label: 'Deberes' },
     { data: [1.8, 4.8, 7.7, 9, 10, 2.7, 4, 6, 10, 5], label: 'Atencion'},
     { data: [1.8, 6.8, 7, 9.9, 5.6, 4.7, 5, 2.7, 9, 8], label: 'Puntualidad'}
@@ -58,9 +58,9 @@ export class ComportamientoPadreComponent implements OnInit {
     },
   };
   public lineChartColors: Color[] = [
-    { // grey
-      backgroundColor: 'rgba(148,159,177,0.2)',
-      borderColor: 'rgba(148,159,177,1)',
+    { // green
+      backgroundColor: 'rgba(173,255,47,0.2)',
+      borderColor: 'green',
       pointBackgroundColor: 'rgba(148,159,177,1)',
       pointBorderColor: '#fff',
       pointHoverBackgroundColor: '#fff',
@@ -83,7 +83,7 @@ export class ComportamientoPadreComponent implements OnInit {
       pointHoverBorderColor: 'rgba(148,159,177,0.8)'
     },
     {
-      backgroundColor: 'rgba(255,50,40,0.3)',
+      backgroundColor: 'rgba(65,105,225,0.3)',
       borderColor: 'blue',
       pointBackgroundColor: 'rgba(148,100,177,1)',
       pointBorderColor: '#fff',
