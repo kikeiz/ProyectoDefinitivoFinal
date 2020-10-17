@@ -25,3 +25,9 @@ li a:hover{
 .margenes{
     margin-right: 10px;
 }
+
+.sticky{
+    position: fixed;
+    position: static;
+    position: -webkit-sticky;
+}
