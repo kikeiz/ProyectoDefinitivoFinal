@@ -21,6 +21,11 @@ body{
     border-width: 1px;
 }
 
+.tabla{
+    margin-left: auto;
+    margin-right: auto;
+}
+
 .container{
     width: 100%;
     display:block;
@@ -35,6 +40,11 @@ body{
 	position: relative;
     top: 10px;
 }
+.margin{
+	position: relative;
+    top: 7px;
+    right: 2px;
+}
 
 .margen1{
     margin-top: 20px;
@@ -48,4 +58,20 @@ body{
 
 .fila{
     cursor: pointer;
+}
+
+.tamaño{
+    width: 40px;
+    height: 40px;
+}
+
+
+#size{
+    width: 50px;
+}
+
+.boder{
+    border-style: solid;
+    border-color: black;
+    border-width: 1px;
 }

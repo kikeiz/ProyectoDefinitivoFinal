@@ -34,19 +34,7 @@ label{
     top: 7px;
 }
 
-select{
-    border-color: black;
-    border-width: 1px;
-    border-style: solid;
-    width: 50%;
-}
 
-input{
-    border-color: black;
-    border-width: 1px;
-    border-style: solid;
-    width: 50%;
-}
 
 .cursor{
     cursor: pointer;

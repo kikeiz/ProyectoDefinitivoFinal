@@ -25,18 +25,7 @@ label{
     position: relative;
     top: 7px;
 }
-input{
-    border-color: black;
-    border-width: 1px;
-    border-style: solid;
-    width: 50%;
-}
-select{
-    border-color: black;
-    border-width: 1px;
-    border-style: solid;
-    width: 50%;
-}
+
 .texto1{
     text-align: center;
 }

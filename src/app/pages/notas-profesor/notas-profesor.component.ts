@@ -53,7 +53,11 @@ export class NotasProfesorComponent implements OnInit {
   }
 
   opciones(){
-    this.mostrarF5 = true
+    if(this.mostrarF5 == true){
+      this.mostrarF5 = false
+    }else{
+      this.mostrarF5 = true
+    }
   }
 
   filter(datos:any){
