@@ -27,17 +27,6 @@
                 <label for="example-date-input"><b>Fecha</b></label>
                 <input class="form-control" type="date" id="example-date-input" name="fecha" required ngModel>
             </div>
-
-            <div class="form-group">
-                <label for="exampleSelect2"><b>Asignatura</b></label>
-                <select class="form-control" id="exampleSelect2" name="asignatura" required ngModel>
-                <option value="biologia">Biologia</option>
-                <option value="matematicas">Matematicas</option>
-                <option value="lengua">Lengua</option>
-                <option value="latin">Latin</option>
-                <option value="griego">Griego</option>
-                </select>
-            </div>
             <div class="container"><button [disabled]="!formInsert.valid" type="submit" class="btn btn-outline-primary">Insertar notas</button>
             </div>
             </form>
