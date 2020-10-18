@@ -110,11 +110,10 @@ label{
     width: 50px;
 }
 
-.select{
-    border-style: solid;
-    border-color: #d5e0ea;
-    border-width: 1px;
-    width: 50%;
+#exampleSelect1{
+    background-color: white;
 }
 
-
+#example-date-input{
+    background-color: white;
+}
