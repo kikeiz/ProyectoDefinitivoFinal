@@ -23,8 +23,12 @@
 
     <form #formInsert="ngForm" (ngSubmit)="crearClase(formInsert.value)"  class="container" id="añadir">
         <div *ngIf="insertar == false" class="form-group">
-            <label for="NIF"><b>Introduzca NIF</b></label><br>
-            <input class="form-control" type="text" placeholder="Introduce DNI">
+            <label for="asignatura"><b>Asignatura</b></label><br>
+            <select class="form-control" id="asignatura" name="asignatura" required ngModel>
+                <option value="">Ninguno</option>
+                <option value="Montserrat">Biologia</option>
+                <option value="Brains">Matematicas</option>
+            </select>
         </div>
         <div *ngIf="insertar == false" class="form-group">
             <label for="colegio"><b>Seleccione escuela</b></label><br>
@@ -48,6 +52,18 @@
                 <option value="2e">2ºE.S.O</option>
                 <option value="3e">3ºE.S.O</option>
                 <option value="4e">4ºE.S.O</option>
+            </select>
+        </div>
+        <div *ngIf="insertar == false" class="form-group">
+            <label for="letra"><b>Seleccione escuela</b></label><br>
+            <select class="form-control" id="letra" name="colegio" required ngModel>
+                <option value="">Ninguno</option>
+                <option value="Montserrat">A</option>
+                <option value="Brains">B</option>
+                <option value="Montserrat">C</option>
+                <option value="Brains">D</option>
+                <option value="Montserrat">E</option>
+                <option value="Brains">F</option>
             </select>
         </div>
         <div *ngIf="insertar == false" class="row">

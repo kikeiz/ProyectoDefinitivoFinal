@@ -5,6 +5,7 @@
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
    font-size: 50%;
    margin-bottom: 3%;
+
 }
 :host .my-app-class {
 	background-image:url(https://images.unsplash.com/photo-1502086223501-7ea6ecd79368?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80);
@@ -15,6 +16,7 @@
 }
 
 .body{
+
     background: rgba(249,247,249, 0.6);
     width: 80%;
     display:block;
@@ -67,9 +69,7 @@ table{
 #titulo{
     background-color: rgb(97, 174, 219);
 }
-input{
-    background-color: rgb(174, 201, 243);
-}
+
 
 #botonx{
     margin-top: 50px;
@@ -112,11 +112,10 @@ label{
     width: 50px;
 }
 
-.select{
-    border-style: solid;
-    border-color: #d5e0ea;
-    border-width: 1px;
-    width: 50%;
+#exampleSelect1{
+    background-color: white;
 }
 
-
+#example-date-input{
+    background-color: white;
+}
