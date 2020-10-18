@@ -9,7 +9,7 @@
   }
 
 .body{
-    background: rgba(169, 181, 196, 0.8);
+    background: rgba(255, 255, 255, 0.8);
     width: 80%;
     display:block;
     margin-left: auto;
@@ -77,4 +77,14 @@ label{
 
 #msg{
     height: 100px;
+}
+
+
+input{
+    background-color: rgb(174, 201, 243);
+}
+
+
+select{
+    background-color: rgb(174, 201, 243);
 }

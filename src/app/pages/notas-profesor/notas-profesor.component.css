@@ -3,8 +3,8 @@
     position: relative;
     text-align: center;
     font-family: 'Noto Sans', sans-serif;
-   font-size: 50%;
-   margin-bottom: 3%;
+    font-size: 50%;
+    margin-bottom: 3%;
 }
 :host .my-app-class {
 	background-image:url(https://images.unsplash.com/photo-1502086223501-7ea6ecd79368?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80);
@@ -15,7 +15,7 @@
 }
 
 .body{
-    background: rgba(169, 181, 196, 0.8);
+    background: rgba(250, 250, 250, 0.8);
     width: 80%;
     display:block;
     margin-left: auto;
@@ -67,9 +67,7 @@ table{
 #titulo{
     background-color: rgb(97, 174, 219);
 }
-input{
-    background-color: rgb(174, 201, 243);
-}
+
 
 #botonx{
     margin-top: 50px;
