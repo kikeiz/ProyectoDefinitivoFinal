@@ -23,6 +23,9 @@ app.use(bodyparser.json());
 let cors = require('cors')
 app.use(cors())
 
+
+// LOGIN Y REGISTER
+
 app.post('/login/profesor', (req,rep)=>{
     let params = [req.body.username, req.body.password]
     sql = "SELECT * FROM profesor WHERE username = ? AND password = ?"
@@ -106,10 +109,11 @@ app.post('/register/padre', (req,rep)=>{
     })
 });
 
+// AÑADIR CLASE Y ALUMNO
 
-app.get("/asignaturas",
-   function (req,res) {
-    let sql="SELECT *FROM asignaturas";
+
+app.get("/asignaturas",function (req,res) {
+    let sql="SELECT * FROM asignaturas";
     connection.query(sql,function(err,result) {
         if (err){
             console.log(err);
@@ -119,9 +123,8 @@ app.get("/asignaturas",
     });
 });
 
-app.get("/colegio",
-   function (req,res) {
-    let sql="SELECT *FROM colegio";
+app.get("/colegio", function (req,res) {
+    let sql="SELECT * FROM colegio";
     connection.query(sql,function(err,result) {
         if (err){
             console.log(err);
@@ -154,5 +157,22 @@ app.post('/aniadirclase', (req,rep)=>{
          }
     });
 });
+
+app.post('/aniadiralumno', (req,rep)=>{
+    let params = new Array (req.body.nombre, req.body.apellidos, req.body.id_padre, req.body.id_colegio,req.body.id_curso)
+    sql = "INSERT INTO alumnos (nombre, apellidos, id_padre, id_colegio, id_curso) VALUE (?,?,?,?,?)"
+    connection.query(sql, params, function(err,res){
+        if(err){
+            console.log(err)
+        }else{ 
+            rep.send(res)
+         }
+    });
+});
+
+
+
+
+
           
 app.listen(3019);

@@ -2,27 +2,31 @@
     <h1>Añadir Alumno</h1>
   </nav>
 <div class="body container">
-    <div class="texto1">
-        <label for="NIF"><b>Introduzca NIF</b></label><br>
-        <input class="form-control" id="NIF" type="text" placeholder="Introduzca NIF" name="nif" required ngModel>
-    </div>
-    <div class="texto1">
-        <label for="nombre"><b>Nombre</b></label><br>
-        <input class="form-control" id="nombre" type="text" placeholder="Nombre" name="nif" required ngModel>
-    </div>
-    <div class="texto1">
-        <label for="apellidos"><b>Apellidos</b></label><br>
-        <input class="form-control" id="apellidos" type="text" placeholder="Apellidos" name="nif" required ngModel>
-    </div>
-    <div class="texto1">
-        <label for="colegio"><b>Selecciona colegio</b></label><br>
-        <select class="form-control" id="colegio" name="colegio" required ngModel>
-            <option value="">Ninguno</option>
-            <option value="Montserrat">Las rosas</option>
-            <option value="Brains">Nazaret</option>
-        </select>
-    </div>
-    <div class="boton container">
-        <button type="submit" class="btn btn-secondary">Añadir</button>
-    </div>
+    <form #formAniadir="ngForm" (ngSubmit)="aniadirAlumno(formAniadir.value)">
+        <div class="texto1">
+            <label for="nombre"><b>Nombre</b></label><br>
+            <input class="form-control" id="nombre" type="text" placeholder="Nombre" name="nombre" required ngModel>
+        </div>
+        <div class="texto1">
+            <label for="apellidos"><b>Apellidos</b></label><br>
+            <input class="form-control" id="apellidos" type="text" placeholder="Apellidos" name="apellidos" required ngModel>
+        </div>
+        <div class="texto1">
+            <label for="colegio"><b>Selecciona colegio</b></label><br>
+            <select  class="form-control" id="colegio" name="colegio" required ngModel>
+                <option value="">Ninguno</option>
+                <option *ngFor="let colegio of colegios" value="{{colegio.id_colegio}}">{{colegio.nombre}}</option>
+            </select>
+        </div>
+        <div class="texto1">
+            <label for="curso"><b>Selecciona curso</b></label><br>
+            <select  class="form-control" id="curso" name="curso" required ngModel>
+                <option value="">Ninguno</option>
+                <option *ngFor="let curso of cursos" value="{{curso.id_curso}}">{{curso.nombre}}</option>
+            </select>
+        </div>
+        <div class="boton container">
+            <button type="submit" class="btn btn-secondary">Añadir</button>
+        </div>
+    </form>
 </div> 

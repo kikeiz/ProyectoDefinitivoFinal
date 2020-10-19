@@ -31,8 +31,10 @@ export class AniadirClaseComponent implements OnInit {
   }
 
   public crearClase(data:any){
+    console.log(this.cursos);
+    
     this.insertar = false
-    let clase = new Clase(data.nombre, this.createClase.id_profesor, data.asignatura, data.curso)
+    let clase = new Clase(data.nombre, this.createClase.id_profesor, Number(data.asignatura), Number(data.curso))
     this.createClase.aniadirClases(clase).subscribe((data=>{
       console.log(data);
     }))

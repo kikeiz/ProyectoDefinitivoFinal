@@ -42,7 +42,7 @@
         </div>
         <div *ngIf="insertar == false" class="form-group">
             <label for="curso"><b>Seleccione curso</b></label><br>
-            <select class="form-control" id="curso" name="curso" required ngModel>
+            <select class="form-control" id="curso" name="curso" ngModel>
                 <option value="">Ninguno</option>
                 <option *ngFor="let curso of cursos" value="{{curso.id_curso}}">{{curso.nombre}}</option>
             </select>

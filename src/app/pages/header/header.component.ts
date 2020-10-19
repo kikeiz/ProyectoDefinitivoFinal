@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { from } from 'rxjs';
+import { Colegios } from 'src/app/models/colegios';
+import { Cursos } from 'src/app/models/cursos';
+import { AñadirAlumnoService } from 'src/app/shared/añadir-alumno.service';
 import { LoginService } from 'src/app/shared/login.service';
 import { AñadirClaseService } from 'src/app/shared/añadir-clase.service'; 
 import { Clase} from 'src/app/models/clase'
-import { Colegios } from 'src/app/models/colegios'
 import { Asignaturas } from 'src/app/models/asignaturas';
-import { Cursos } from 'src/app/models/cursos';
+
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -15,7 +16,7 @@ export class HeaderComponent implements OnInit {
   public isCollapsed:boolean
   public clase:Clase[] =[];
 
-  constructor(public service: LoginService, public obtenerClase: AñadirClaseService) { 
+  constructor(public service: LoginService, public serviceAñadirAlumno:AñadirAlumnoService, public serviceAñadirClase:AñadirClaseService) { 
     this.isCollapsed = true
   }
 
@@ -26,34 +27,55 @@ export class HeaderComponent implements OnInit {
     this.isCollapsed = false
   }
 
-  removeMain(valor:boolean){
-    if (valor==true){
-      this.service.home(null)
-      }else{
-      this.service.home(null)
-      this.obtenerClase.obtenerColegio().subscribe((data => {
+  removeMain(){
+    this.service.home = null
+  }
+
+  aniadirClase(){
+      this.service.home = null
+
+      this.serviceAñadirClase.obtenerColegio().subscribe((data => {
       console.log(data);
       let array:any=data
-      for (let i=0; i<array.length;i++){
-        this.obtenerClase.colegio.push(new Colegios(array[i].id_colegio, array[i].nombre, array[i].ciudad))
-      }
-      }))
-      this.obtenerClase.obtenerAsignaturas().subscribe((data =>{
-        console.log(data);
-        let array:any=data
         for (let i=0; i<array.length;i++){
-        this.obtenerClase.asignaturas.push(new Asignaturas(array[i].id_asignatura,array[i].nombre))   
+          this.serviceAñadirClase.colegio.push(new Colegios(array[i].id_colegio, array[i].nombre, array[i].ciudad))
         }
       }))
-      }
-      this.obtenerClase.obtenerCursos().subscribe((data =>{
+
+      this.serviceAñadirClase.obtenerAsignaturas().subscribe((data =>{
         console.log(data);
         let array:any=data
         for (let i=0; i<array.length;i++){
-          this.obtenerClase.cursos.push(new Cursos(array[i].id_curso, array[i].nombre))
+        this.serviceAñadirClase.asignaturas.push(new Asignaturas(array[i].id_asignatura,array[i].nombre))   
+        }
+      }))
+      
+      this.serviceAñadirAlumno.obtenerCursos().subscribe((data =>{
+        console.log(data);
+        let array:any=data
+        for (let i=0; i<array.length;i++){
+          this.serviceAñadirClase.cursos.push(new Cursos(array[i].id_curso, array[i].nombre))
         }
       }))
     
-  
-    }
+  }
+
+  aniadirAlumno(){
+      this.service.home(null)
+      this.serviceAñadirAlumno.obtenerColegios().subscribe((data =>{
+        let array:any = data
+        for(let i=0; i<array.length;i++){
+          this.serviceAñadirAlumno.colegios.push(new Colegios(array[i].id_colegio, array[i].nombre, array[i].ciudad))
+        }
+      }))
+
+      this.serviceAñadirAlumno.obtenerCursos().subscribe((data=>{
+        let array:any = data
+        for(let i=0; i<array.length;i++){
+          this.serviceAñadirAlumno.cursos.push(new Cursos(array[i].id_curso,array[i].nombre))
+        }
+      }))
+    
+  }
 }
+
