@@ -22,6 +22,7 @@ export class LoginRegisterComponent implements OnInit {
   login(data:any){
     let usuario = new User(data.username, data.password)
     this.service.loginPadre(usuario).subscribe((datapadre:any)=>{
+      console.log(datapadre);
       if(datapadre.status == "padreexiste"){
           this.serviceAñadirClase.id(datapadre.id_padre)
           this.service.home(true)
@@ -30,6 +31,7 @@ export class LoginRegisterComponent implements OnInit {
       }else{
           console.log("El padre no existe");
           this.service.loginProfesor(usuario).subscribe((dataprofe:any)=>{
+            console.log(dataprofe);
             if(dataprofe.status == "profeexiste"){
               this.serviceAñadirAlumno.id(dataprofe.id_profesor)
               console.log(dataprofe.id_profesor);
