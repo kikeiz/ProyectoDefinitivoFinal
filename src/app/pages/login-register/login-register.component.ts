@@ -26,24 +26,19 @@ export class LoginRegisterComponent implements OnInit {
           this.service.navbar('padres')
           this.service.entrar()
       }else{
-        console.log(datapadre);
-          console.log("El usuario no existe");
+          console.log("El padre no existe");
+          this.service.loginProfesor(usuario).subscribe((dataprofe:any)=>{
+            if(dataprofe.status == "profeexiste"){
+              console.log(dataprofe);
+              this.service.home(false)
+              this.service.navbar('profes')
+              this.service.entrar()
+            }else{
+              console.log("El profesor no existe");
+            }
+          })
       }
-    }, function(){
-      this.service.loginProfesor(usuario).subscribe((dataprofe:any)=>{
-        if(dataprofe.status == "profeexiste"){
-          this.service.home(false)
-          this.service.navbar('profes')
-          this.service.entrar()
-        }else{
-          console.log(dataprofe);
-          console.log("El usuario no existe");
-        }
-      })
     })
-
-
-    
   }
 
   registrarse(data:any){

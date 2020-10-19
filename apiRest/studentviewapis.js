@@ -75,7 +75,7 @@ app.post('/register/profesor', (req,rep)=>{
                     if(err){
                         console.log(err)
                     }else{ 
-                        rep.send(rer)
+                        rep.send({"id_profesor":rer.insertId})
                     }
                 })
             }
@@ -100,7 +100,7 @@ app.post('/register/padre', (req,rep)=>{
                     if(err){
                         console.log(err)
                     }else{ 
-                        rep.send(rer)
+                        rep.send({"id_padre":rer.insertId})
                     }
                 })
             }
