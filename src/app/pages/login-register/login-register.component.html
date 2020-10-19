@@ -5,49 +5,46 @@
 		<input id="tab-2" type="radio" name="tab" class="sign-up"><label for="tab-2" class="tab">Sign Up</label>
 
 		<div class="login-form">
-			<div class="sign-in-htm">
+			<form class="sign-in-htm" #loginForm ="ngForm" (ngSubmit)= "login(loginForm.value)">
 				<div class ="container">
 				<div class="group margin">
 					<label for="user" class="label marginleft">Usuario</label>
-					<input id="user" type="text" class="input">
+					<input id="user" type="text" class="input" name="username" ngModel>
 				</div>
 				<div class="group">
 					<label for="pass1" class="label">Contraseña</label>
-					<input id="pass1" type="password" class="input" data-type="password">
+					<input id="pass1" type="password" class="input" data-type="password" name="password" ngModel>
 				</div>
 				<div class="group">
 					<input id="check" type="checkbox" class="check" checked>
 					<label for="check"><span class="icon"></span> Recuerdame</label>
 				</div>
-				<div *ngIf="profesor == false" class="group">
-					<button type="button" class="button" (click) = "login()" routerLink ="/mainPadre">Entrar</button>
-				</div>
-				<div class="group" *ngIf="profesor == true">
-					<button type="button" class="button" (click) = "login()" routerLink ="/mainProfe">Entrar</button>
+				<div class="group">
+					<button type="submit" class="button">Entrar</button>
 				</div>
 				<div class="hr"></div>
 				<div class="foot-lnk">
 					<a href="#forgot">Olvide mi contraseña?</a>
 				</div>
 				</div>
-			</div>
+			</form>
 			<div class="sign-up-htm">
-				<div class="container">
+				<form #formRegister="ngForm" (ngSubmit)="registrarse(formRegister.value)" class="container">
 				<div class="group margin">
 					<label for="user2" class="label marginleft">Usuario</label>
-					<input id="user2" type="text" class="input">
+					<input id="user2" type="text" class="input" name="usuario" ngModel>
 				</div>
 				<div class="group">
 					<label for="pass" class="label">Contraseña</label>
-					<input id="pass" type="password" class="input" data-type="password">
+					<input id="pass" type="password" class="input" data-type="password" name="password1" ngModel>
 				</div>
 				<div class="group">
 					<label for="rpass" class="label">Repetir Contraseña</label>
-					<input id="rpass" type="password" class="input" data-type="password">
+					<input id="rpass" type="password" class="input" data-type="password" name="password2" ngModel>
 				</div>
 				<div class="group margin">
 					<label for="email" class="label marginleft">Correo Electronico</label>
-					<input id="email" type="text" class="input">
+					<input id="email" type="text" class="input" name="correo" ngModel>
 				</div>
 				<div class="margen">
 				<select #registro (change)="cambiar(registro.value)" id="selectRegister" name="tipoDeUsuario">
@@ -56,10 +53,10 @@
 				</select></div> 
 				<br>
 				<div class="group">
-					<div *ngIf="profesor == false"><button type="button" class="button" (click) = "registrarse()" routerLink ="/mainPadre">Registrate</button></div>
-					<div *ngIf="profesor == true"><button type="button" class="button" (click) = "registrarse()" routerLink ="/mainProfe">Registrate</button></div>
+					<div *ngIf="profesor == false"><button type="submit" class="button" routerLink ="/mainPadre">Registrate</button></div>
+					<div *ngIf="profesor == true"><button type="submit" class="button" routerLink ="/mainProfe">Registrate</button></div>
 				</div>
-				</div>
+				</form>
 				<div class="hr"></div>
 			</div>
 		</div>

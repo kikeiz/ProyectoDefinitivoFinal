@@ -184,3 +184,9 @@ select{
 	position: relative;
 	bottom: 70px;
 }
+
+.click{
+	width: 100px;
+	height: 200px;
+	background-color: white;
+}

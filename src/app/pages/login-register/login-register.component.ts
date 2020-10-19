@@ -1,4 +1,7 @@
 import { Component,ViewChild,TemplateRef, OnInit } from '@angular/core';
+import { User } from 'src/app/models/user';
+import { AñadirAlumnoService } from 'src/app/shared/añadir-alumno.service';
+import { AñadirClaseService } from 'src/app/shared/añadir-clase.service';
 import { LoginService } from 'src/app/shared/login.service';
 
 @Component({
@@ -8,7 +11,7 @@ import { LoginService } from 'src/app/shared/login.service';
 })
 export class LoginRegisterComponent implements OnInit {
   public profesor:boolean
-  constructor(public service:LoginService) {
+  constructor(public service:LoginService, public serviceAñadirClase:AñadirClaseService, public serviceAñadirAlumno:AñadirAlumnoService)  {
     this.profesor = true
    }
 
@@ -16,14 +19,59 @@ export class LoginRegisterComponent implements OnInit {
 
   }
 
-  login(){
-    this.service.entrar()
+  login(data:any){
+    let usuario = new User(data.username, data.password)
+    this.service.loginPadre(usuario).subscribe((datapadre:any)=>{
+      if(datapadre.status == "padreexiste"){
+          this.serviceAñadirClase.id(datapadre.id_padre)
+          this.service.home(true)
+          this.service.navbar('padres')
+          this.service.entrar()
+      }else{
+          console.log("El padre no existe");
+          this.service.loginProfesor(usuario).subscribe((dataprofe:any)=>{
+            if(dataprofe.status == "profeexiste"){
+              this.serviceAñadirAlumno.id(dataprofe.id_profesor)
+              console.log(dataprofe.id_profesor);
+              this.service.home(false)
+              this.service.navbar('profes')
+              this.service.entrar()
+            }else{
+              console.log("El profesor no existe");
+            }
+          })
+      }
+    })
   }
 
-  registrarse(){
-    this.service.entrar()
- 
+  registrarse(data:any){
+    if(data.password1 == data.password2){
+      if(this.profesor==false){
+        let usuario = new User(data.usuario, data.password1, data.correo)
+        this.service.postPadre(usuario).subscribe((datapadre:any)=>{
+          this.serviceAñadirClase.id(datapadre.id_padre)
+          if(datapadre.status != "existe"){
+            this.service.entrar()
+          }else{
+            console.log("El usuario ya existe");
+          }
+      })
+      }else{
+        let usuario = new User(data.usuario, data.password1, data.correo)
+        this.service.postProfe(usuario).subscribe((dataprofe:any)=>{
+          this.serviceAñadirAlumno.id(dataprofe.id_profesor)
+          if(dataprofe.status != "existe"){
+            this.service.entrar()
+          }else{
+            console.log("El usuario ya existe");
+          }
+        })
+      }
+    }else{
+      console.log("Las contraseñas no coinciden");
+    }
   }
+
 
   cambiar(data:string){
     if(data == 'padres'){
@@ -33,5 +81,6 @@ export class LoginRegisterComponent implements OnInit {
     }
     this.service.navbar(data)
   }
+
 
 }
