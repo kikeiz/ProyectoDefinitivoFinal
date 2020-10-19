@@ -2,12 +2,13 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Colegios } from '../models/colegios';
 import { Cursos } from '../models/cursos';
+import { Alumno } from '../models/alumno';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AñadirAlumnoService {
-  public id_alumno:number
+  public id_padre:number
   public colegios:Colegios[]
   public cursos: Cursos[]
   private url:string = "http://localhost:3019"
@@ -17,8 +18,8 @@ export class AñadirAlumnoService {
    }
 
   id(id:number){
-    this.id_alumno = id
-    console.log(this.id_alumno);
+    this.id_padre = id
+    console.log(this.id_padre);
   }
 
   obtenerColegios(){
@@ -27,6 +28,9 @@ export class AñadirAlumnoService {
   
   obtenerCursos(){
     return  this.http.get(this.url + "/cursos")
-   
+  }
+
+  añadirAlumno(alumno:Alumno){
+    return this.http.post(this.url + "/aniadiralumno", alumno)
   }
 }

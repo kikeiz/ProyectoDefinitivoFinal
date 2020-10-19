@@ -140,8 +140,7 @@ app.get("/cursos",
         if (err){
             console.log(err);
         } else {
-            console.log(result);
-        res.send(result) 
+            res.send(result) 
          }
     });
 });     
@@ -149,6 +148,18 @@ app.get("/cursos",
 app.post('/aniadirclase', (req,rep)=>{
     let params = new Array (req.body.id_clase, req.body.nombre_clase, req.body.id_asignatura,req.body.id_curso)
     sql = "INSERT INTO clases (id_clase, nombre_clase, id_profesor, id_asignatura, id_curso) VALUE (?,?,?,?,?)"
+    connection.query(sql, params, function(err,res){
+        if(err){
+            console.log(err)
+        }else{ 
+            rep.send(res)
+         }
+    });
+});
+
+app.post('/aniadiralumno', (req,rep)=>{
+    let params = new Array (req.body.nombre, req.body.apellidos, req.body.id_padre, req.body.id_colegio,req.body.id_curso)
+    sql = "INSERT INTO alumnos (nombre, apellidos, id_padre, id_curso, id_colegio) VALUE (?,?,?,?,?)"
     connection.query(sql, params, function(err,res){
         if(err){
             console.log(err)

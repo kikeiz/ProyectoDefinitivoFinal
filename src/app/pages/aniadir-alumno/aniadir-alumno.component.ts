@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Alumno } from 'src/app/models/alumno';
 import { Colegios } from 'src/app/models/colegios';
 import { Cursos } from 'src/app/models/cursos';
 import { AñadirAlumnoService } from 'src/app/shared/añadir-alumno.service';
@@ -21,9 +22,10 @@ export class AniadirAlumnoComponent implements OnInit {
 
   aniadirAlumno(data:any){
     console.log(data);
-    console.log(this.colegios);
-    console.log(this.cursos);
-    
+    let alumno = new Alumno(data.nombre, data.apellidos, data.colegio, Number(this.service.id_padre), Number(data.curso))
+    this.service.añadirAlumno(alumno).subscribe((data=>{
+      console.log(data);
+    }))
     
   }
  
