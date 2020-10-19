@@ -107,48 +107,45 @@ app.post('/register/padre', (req,rep)=>{
 });
 
 
-app.get("aniadir/asignaturas",
+app.get("/asignaturas",
    function (req,res) {
     let sql="SELECT *FROM asignaturas";
     connection.query(sql,function(err,result) {
         if (err){
             console.log(err);
         } else {
-            console.log(result);
-        res.send(result)       
+            res.send(result)       
         }
     });
 });
 
-app.get("aniadir/colegio",
+app.get("/colegio",
    function (req,res) {
     let sql="SELECT *FROM colegio";
     connection.query(sql,function(err,result) {
         if (err){
             console.log(err);
         } else {
-            console.log(result);
-        res.send(result)       
+            res.send(result)       
         }
     });
 });
 
-app.get("aniadir/cursos",
+app.get("/cursos",
    function (req,res) {
     let sql="SELECT *FROM cursos";
     connection.query(sql,function(err,result) {
         if (err){
             console.log(err);
         } else {
-            console.log(result);
-        res.send(result) 
+            res.send(result) 
          }
     });
 });     
           
 app.post('/aniadirclase', (req,rep)=>{
-    let params = new Array (req.body.id_clase, req.body.nombre_clase, req.body.id_asignatura,req.body.id_curso)
-    sql = "INSERT INTO clases (id_clase, nombre_clase, id_profesor, id_asignatura, id_curso) VALUE (?,?,?,?,?)"
+    let params = new Array (req.body.nombre_clase, req.body.id_profesor, req.body.id_asignatura,req.body.id_curso)
+    sql = "INSERT INTO clases (nombre_clase, id_profesor, id_asignatura, id_curso) VALUE (?,?,?,?)"
     connection.query(sql, params, function(err,res){
         if(err){
             console.log(err)
