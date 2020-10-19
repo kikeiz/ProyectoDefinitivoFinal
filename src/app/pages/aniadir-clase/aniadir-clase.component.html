@@ -23,58 +23,39 @@
 
     <form #formInsert="ngForm" (ngSubmit)="crearClase(formInsert.value)"  class="container" id="añadir">
         <div *ngIf="insertar == false" class="form-group">
-            <label for="asignatura"><b>Asignatura</b></label><br>
-            <select class="form-control" id="asignatura" name="asignatura" required ngModel>
+            <label for="nombre"><b>Nombre de la clase</b></label><br>
+            <input type="text" id="nombre" class="form-control" name="nombre" required ngModel>
+        </div>
+        <div *ngIf="insertar == false" class="form-group">
+            <label for="colegio"><b>Colegios</b></label><br>
+            <select class="form-control" id="colegio" name="colegio" required ngModel>
                 <option value="">Ninguno</option>
-                <option value="Montserrat">Biologia</option>
-                <option value="Brains">Matematicas</option>
+                <option *ngFor="let colegio of colegios" value="{{colegio.id_colegio}}">{{colegio.nombre}}</option>
             </select>
         </div>
         <div *ngIf="insertar == false" class="form-group">
-            <label for="colegio"><b>Seleccione escuela</b></label><br>
-            <select class="form-control" id="colegio" name="colegio" required ngModel>
+            <label for="asignatura"><b>Asignaturas</b></label><br>
+            <select class="form-control" id="asignatura" name="asignatura" required ngModel>
                 <option value="">Ninguno</option>
-                <option value="Montserrat">Montserrat</option>
-                <option value="Brains">Brains</option>
+                <option *ngFor="let asignatura of asignaturas" value="{{asignatura.id_asignatura}}">{{asignatura.nombre}}</option>
             </select>
         </div>
         <div *ngIf="insertar == false" class="form-group">
             <label for="curso"><b>Seleccione curso</b></label><br>
             <select class="form-control" id="curso" name="curso" required ngModel>
                 <option value="">Ninguno</option>
-                <option value="1p">1ºPrimaria</option>
-                <option value="2p">2ºPrimaria</option>
-                <option value="3p">3ºPrimaria</option>
-                <option value="4p">4ºPrimaria</option>
-                <option value="5p">5ºPrimaria</option>
-                <option value="6p">6ºPrimaria</option>
-                <option value="1e">1ºE.S.O</option>
-                <option value="2e">2ºE.S.O</option>
-                <option value="3e">3ºE.S.O</option>
-                <option value="4e">4ºE.S.O</option>
+                <option *ngFor="let curso of cursos" value="{{curso.id_curso}}">{{curso.nombre}}</option>
             </select>
-        </div>
-        <div *ngIf="insertar == false" class="form-group">
-            <label for="letra"><b>Seleccione escuela</b></label><br>
-            <select class="form-control" id="letra" name="colegio" required ngModel>
-                <option value="">Ninguno</option>
-                <option value="Montserrat">A</option>
-                <option value="Brains">B</option>
-                <option value="Montserrat">C</option>
-                <option value="Brains">D</option>
-                <option value="Montserrat">E</option>
-                <option value="Brains">F</option>
-            </select>
-        </div>
-        <div *ngIf="insertar == false" class="row">
-            <div class="col-2"></div>
-            <div class="col-8">
-                <i (click)="insertarAlumnos()" class="fas fa-user-plus cursor"><b><i>Añadir Alumnos</i></b></i>
-            </div>
-            <div class="col-2"></div>
         </div>
         <div class="row">
             <div class="container"><button [disabled]="!formInsert.valid" type="submit"  class="btn btn-dark">Añadir</button></div>
         </div>
     </form>
+    <div *ngIf="insertar == false" class="row">
+        <div class="col-2"></div>
+        <div class="col-8">
+            <i (click)="insertarAlumnos()" class="fas fa-user-plus cursor"><b><i>Añadir Alumnos</i></b></i>
+        </div>
+        <div class="col-2"></div>
+    </div>
 </div>

@@ -15,7 +15,6 @@ export class LoginService {
     this.navPadres = false
     this.homePadre = null
   }
-
   entrar(){
     this.login = true
     console.log(this.login)
