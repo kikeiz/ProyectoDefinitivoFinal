@@ -1,4 +1,6 @@
 import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { User } from '../models/user';
 
 @Injectable({
   providedIn: 'root'
@@ -6,9 +8,12 @@ import { Injectable } from '@angular/core';
 export class LoginService {
   public login: boolean
   public navPadres: boolean
-  constructor() { 
+  public homePadre:boolean
+  private url:string = "http://localhost:3019"
+  constructor(private http: HttpClient) { 
     this.login = false
     this.navPadres = false
+    this.homePadre = null
   }
 
   entrar(){
@@ -23,4 +28,34 @@ export class LoginService {
       this.navPadres = false
     }
   }
+
+  home(valor:boolean){
+    if(valor == true){
+      this.homePadre = true
+    }else if(valor==false){
+      this.homePadre = false
+    }else{
+      this.homePadre = null
+    }
+  }
+
+  postPadre(user:User){
+    return this.http.post(this.url +"/register/padre", user)
+
+  }
+
+  postProfe(user:User){
+    return this.http.post(this.url +"/register/profesor", user)
+  }
+
+  loginPadre(user:User){
+    return this.http.post(this.url + "/login/padre", user)
+  }
+
+  loginProfesor(user:User){
+    return this.http.post(this.url + "/login/profesor", user)
+  }
+
+
+
 }

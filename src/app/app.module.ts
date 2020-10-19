@@ -21,7 +21,8 @@ import { FormsModule } from '@angular/forms';
 import { HomePadreComponent } from './pages/home-padre/home-padre.component';
 import { HomeProfesorComponent } from './pages/home-profesor/home-profesor.component';
 import { PerfilComponent } from './pages/perfil/perfil.component';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap'
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import {HttpClientModule} from '@angular/common/http';
 
 
 @NgModule({
@@ -51,6 +52,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap'
     ChartsModule, 
     FormsModule,
     NgbModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

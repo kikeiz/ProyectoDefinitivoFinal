@@ -20,5 +20,9 @@ export class HeaderComponent implements OnInit {
     this.isCollapsed = false
   }
 
+  removeMain(){
+    this.service.home(null)
+  }
+
 }
 

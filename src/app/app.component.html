@@ -7,7 +7,10 @@
 <!-- <app-aniadir-alumno></app-aniadir-alumno> -->
 <!-- <app-aniadir-clase></app-aniadir-clase> -->
 <!-- <app-notas-padre></app-notas-padre> -->
+<app-home-padre *ngIf = "service.login == true && service.homePadre == true"></app-home-padre>
+<app-home-profesor *ngIf = "service.login == true && service.homePadre == false"></app-home-profesor>
 <app-login-register *ngIf = "service.login == false"></app-login-register>
-<router-outlet *ngIf = "service.login == true"></router-outlet>
+<router-outlet *ngIf = "service.login == true && service.homePadre == null"></router-outlet>
 <app-footer *ngIf = "service.login == true"></app-footer>
+
 
