@@ -49,10 +49,12 @@ export class LoginService {
   }
 
   loginPadre(user:User){
+    console.log(user);
     return this.http.post(this.url + "/login/padre", user)
   }
 
   loginProfesor(user:User){
+    console.log(user);
     return this.http.post(this.url + "/login/profesor", user)
   }
 
