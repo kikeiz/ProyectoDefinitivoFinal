@@ -53,6 +53,7 @@ app.post('/login/padre', (req,rep)=>{
             }
         }
     })
+
 });
 
 app.post('/register/profesor', (req,rep)=>{
