@@ -56,8 +56,6 @@ app.post('/login/padre', (req,rep)=>{
     })
 })
 
-
-
 app.post('/register/profesor', (req,rep)=>{
     let username = req.body.username
     sql = "SELECT * FROM profesor WHERE username = ?"
