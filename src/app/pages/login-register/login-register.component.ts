@@ -1,5 +1,7 @@
 import { Component,ViewChild,TemplateRef, OnInit } from '@angular/core';
 import { User } from 'src/app/models/user';
+import { AñadirAlumnoService } from 'src/app/shared/añadir-alumno.service';
+import { AñadirClaseService } from 'src/app/shared/añadir-clase.service';
 import { LoginService } from 'src/app/shared/login.service';
 
 @Component({
@@ -9,7 +11,7 @@ import { LoginService } from 'src/app/shared/login.service';
 })
 export class LoginRegisterComponent implements OnInit {
   public profesor:boolean
-  constructor(public service:LoginService) {
+  constructor(public service:LoginService, public serviceAñadirClase:AñadirClaseService, public serviceAñadirAlumno:AñadirAlumnoService)  {
     this.profesor = true
    }
 
@@ -21,7 +23,7 @@ export class LoginRegisterComponent implements OnInit {
     let usuario = new User(data.username, data.password)
     this.service.loginPadre(usuario).subscribe((datapadre:any)=>{
       if(datapadre.status == "padreexiste"){
-          console.log(datapadre);
+          this.serviceAñadirClase.id(datapadre.id_padre)
           this.service.home(true)
           this.service.navbar('padres')
           this.service.entrar()
@@ -29,7 +31,8 @@ export class LoginRegisterComponent implements OnInit {
           console.log("El padre no existe");
           this.service.loginProfesor(usuario).subscribe((dataprofe:any)=>{
             if(dataprofe.status == "profeexiste"){
-              console.log(dataprofe);
+              this.serviceAñadirAlumno.id(dataprofe.id_profesor)
+              console.log(dataprofe.id_profesor);
               this.service.home(false)
               this.service.navbar('profes')
               this.service.entrar()
@@ -46,7 +49,7 @@ export class LoginRegisterComponent implements OnInit {
       if(this.profesor==false){
         let usuario = new User(data.usuario, data.password1, data.correo)
         this.service.postPadre(usuario).subscribe((datapadre:any)=>{
-          console.log(datapadre);
+          this.serviceAñadirClase.id(datapadre.id_padre)
           if(datapadre.status != "existe"){
             this.service.entrar()
           }else{
@@ -56,7 +59,7 @@ export class LoginRegisterComponent implements OnInit {
       }else{
         let usuario = new User(data.usuario, data.password1, data.correo)
         this.service.postProfe(usuario).subscribe((dataprofe:any)=>{
-          console.log(dataprofe);
+          this.serviceAñadirAlumno.id(dataprofe.id_profesor)
           if(dataprofe.status != "existe"){
             this.service.entrar()
           }else{
