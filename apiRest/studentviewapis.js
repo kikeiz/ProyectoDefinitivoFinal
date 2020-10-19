@@ -23,6 +23,9 @@ app.use(bodyparser.json());
 let cors = require('cors')
 app.use(cors())
 
+
+// LOGIN Y REGISTER
+
 app.post('/login/profesor', (req,rep)=>{
     let params = [req.body.username, req.body.password]
     sql = "SELECT * FROM profesor WHERE username = ? AND password = ?"
@@ -105,34 +108,32 @@ app.post('/register/padre', (req,rep)=>{
     })
 });
 
+// AÑADIR CLASE Y ALUMNO
 
-app.get("aniadir/asignaturas",
-   function (req,res) {
-    let sql="SELECT *FROM asignaturas";
+
+app.get("/asignaturas",function (req,res) {
+    let sql="SELECT * FROM asignaturas";
     connection.query(sql,function(err,result) {
         if (err){
             console.log(err);
         } else {
-            console.log(result);
+            res.send(result)       
+        }
+    });
+});
+
+app.get("/colegio", function (req,res) {
+    let sql="SELECT * FROM colegio";
+    connection.query(sql,function(err,result) {
+        if (err){
+            console.log(err);
+        } else {
         res.send(result)       
         }
     });
 });
 
-app.get("aniadir/colegio",
-   function (req,res) {
-    let sql="SELECT *FROM colegio";
-    connection.query(sql,function(err,result) {
-        if (err){
-            console.log(err);
-        } else {
-            console.log(result);
-        res.send(result)       
-        }
-    });
-});
-
-app.get("aniadir/cursos",
+app.get("/cursos",
    function (req,res) {
     let sql="SELECT *FROM cursos";
     connection.query(sql,function(err,result) {
@@ -156,5 +157,10 @@ app.post('/aniadirclase', (req,rep)=>{
          }
     });
 });
+
+
+
+
+
           
 app.listen(3019);

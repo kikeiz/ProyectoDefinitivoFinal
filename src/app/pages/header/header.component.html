@@ -8,13 +8,13 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent" [ngbCollapse]="isCollapsed">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item active">
-            <a class="nav-link" (click) ="removeMain()" routerLink="/mainNotasPadre">Calificaciones<span class="sr-only">(current)</span></a>
+            <a class="nav-link" (click) ="removeMain(true)" routerLink="/mainNotasPadre">Calificaciones<span class="sr-only">(current)</span></a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" (click) ="removeMain()" routerLink="/asistenciaPadre">Asistencia</a>
+            <a class="nav-link" (click) ="removeMain(true)" routerLink="/asistenciaPadre">Asistencia</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" (click) ="removeMain()" routerLink="/comportamientoPadre">Comportamiento</a>
+            <a class="nav-link" (click) ="removeMain(true)" routerLink="/comportamientoPadre">Comportamiento</a>
           </li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -23,14 +23,14 @@
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
               <a class="dropdown-item" href="#">Pedro Martinez</a>
               <a class="dropdown-item" href="#">Paula Gomez</a>
-              <a class="dropdown-item" (click) ="removeMain()" routerLink="/aniadirAlumno"><i class="fas fa-user-plus">Añadir Alumno</i></a>
+              <a class="dropdown-item" (click) ="removeMain(false)" routerLink="/aniadirAlumno"><i class="fas fa-user-plus">Añadir Alumno</i></a>
             </div>
           </li>
         </ul>
       </div>
       <div *ngIf="isCollapsed == false" class="form-inline my-2 my-lg-0">
-        <i (click) ="removeMain()" routerLink="/mensajesPadre" class="far fa-envelope fa-3x cursor margenes"></i>
-        <i (click) ="removeMain()" routerLink="/perfil" class="far fa-user-circle fa-3x cursor"></i>
+        <i (click) ="removeMain(true)" routerLink="/mensajesPadre" class="far fa-envelope fa-3x cursor margenes"></i>
+        <i (click) ="removeMain(true)" routerLink="/perfil" class="far fa-user-circle fa-3x cursor"></i>
       </div>
     </nav>
     </div>
@@ -44,13 +44,13 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent" [ngbCollapse]="isCollapsed">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-              <a class="nav-link" (click) ="removeMain()" routerLink="/mainNotasProfesor">Calificaciones<span class="sr-only">(current)</span></a>
+              <a class="nav-link" (click) ="removeMain(true)" routerLink="/mainNotasProfesor">Calificaciones<span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" (click) ="removeMain()" routerLink="/asistenciaProfesor">Asistencia</a>
+              <a class="nav-link" (click) ="removeMain(true)" routerLink="/asistenciaProfesor">Asistencia</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" (click) ="removeMain()" routerLink="/comportamientoProfesor">Comportamiento</a>
+              <a class="nav-link" (click) ="removeMain(true)" routerLink="/comportamientoProfesor">Comportamiento</a>
             </li>
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -59,14 +59,14 @@
               <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                 <a class="dropdown-item" href="#">4ºC - Primaria</a>
                 <a class="dropdown-item" href="#">4ºE - ESO</a>
-                <a class="dropdown-item" (click) ="removeMain()" routerLink="/aniadirClase"><i class="fas fa-plus-circle">Añadir Clase</i></a>
+                <a class="dropdown-item" (click) ="removeMain(false)" routerLink="/aniadirClase"><i class="fas fa-plus-circle">Añadir Clase</i></a>
               </div>
             </li>
           </ul>
         </div>
         <div *ngIf="isCollapsed == false" class="form-inline my-2 my-lg-0">
-          <i (click) ="removeMain()" routerLink="/mensajesProfe" class="far fa-envelope fa-3x cursor margenes"></i>
-          <i (click) ="removeMain()" routerLink="/perfil" class="far fa-user-circle fa-3x cursor"></i>
+          <i (click) ="removeMain(true)" routerLink="/mensajesProfe" class="far fa-envelope fa-3x cursor margenes"></i>
+          <i (click) ="removeMain(true)" routerLink="/perfil" class="far fa-user-circle fa-3x cursor"></i>
         </div>
       </nav>
       </div>
