@@ -21,73 +21,53 @@ const app = express()
 app.use(bodyparser.urlencoded({extended: false}));
 app.use(bodyparser.json());
 
-app.get('/login/profesor', (req,rep)=>{
-    let id = req.params.ID
-    sql = "SELECT profesor.username, profesor.password FROM profesor"
-    connection.query(sql, id, function(err,res){
-        if(err){
-            console.log(err)
-        }else{
-            rep.send(res)
-        }
-    })
-})
 
-app.get('/login/padre', (req,rep)=>{
-    let id = req.params.ID
-    sql = "SELECT padres.username, padres.password FROM padres"
-    connection.query(sql, id, function(err,res){
-        if(err){
-            console.log(err)
-        }else{
-            rep.send(res)
+app.get("aniadir/asignaturas",
+   function (req,res) {
+    let sql="SELECT *FROM asignaturas";
+    connection.query(sql,function(err,result) {
+        if (err){
+            console.log(err);
+        } else {
+            console.log(result);
+        res.send(result)       
         }
-    })
-})
+    });
+});
 
-app.post('/signup/padre', (req,rep)=>{
-    let params = new Array (req.body.username, req.body.password, req.body.email)
-    sql = "INSERT INTO padres (username, password, email) VALUE (?,?,?)"
+app.get("aniadir/colegio",
+   function (req,res) {
+    let sql="SELECT *FROM colegio";
+    connection.query(sql,function(err,result) {
+        if (err){
+            console.log(err);
+        } else {
+            console.log(result);
+        res.send(result)       
+        }
+    });
+});
+
+app.get("aniadir/cursos",
+   function (req,res) {
+    let sql="SELECT *FROM cursos";
+    connection.query(sql,function(err,result) {
+        if (err){
+            console.log(err);
+        } else {
+            console.log(result);
+        res.send(result)       
+        }
+    });
+});
+
+app.post('/aniadirclase', (req,rep)=>{
+    let params = new Array (req.body.id_clase, req.body.nombre_clase, req.body.id_asignatura,req.body.id_curso)
+    sql = "INSERT INTO clases (id_clase, nombre_clase, id_profesor, id_asignatura, id_curso) VALUE (?,?,?,?,?)"
     connection.query(sql, params, function(err,res){
         if(err){
             console.log(err)
         }else{ 
-            rep.send(res)
-        }
-    })
-})
-
-app.post('/signup/profesor', (req,rep)=>{
-    let params = new Array (req.body.username, req.body.password, req.body.email)
-    sql = "INSERT INTO profesor (username, password, email) VALUE (?,?,?)"
-    connection.query(sql, params, function(err,res){
-        if(err){
-            console.log(err)
-        }else{ 
-            rep.send(res)
-        }
-    })
-})
-
-app.put('/peliculas', (req,rep)=>{
-    let params = new Array (req.body.tittle, req.body.releaseYear, req.body.nationality, req.body.language, req.body.platform, req.body.isMCU, req.body.mainCharacterName, req.body.producer, req.body.distributor, req.body.genre, req.body.id)    
-    sql = "UPDATE pelicula SET tittle = ?, releaseYear = ?, nationality = ?, language = ?, platform = ?, isMCU = ?, mainCharacterName = ?, producer = ?, distributor = ?, genre = ? WHERE movie_id = ?"
-    connection.query(sql, params, function(err,res){
-        if(err){
-            console.log(err)
-        }else{
-            rep.send(res)
-        }
-    })
-})
-
-app.delete('/pelicula/actor', (req,rep)=>{
-    let params = new Array (req.body.profid, req.body.movieid)
-    sql = "DELETE  FROM  pelicula_profesionales WHERE profesionales_id = ? AND pelicula_id = ?"
-    connection.query(sql, params, function(err,res){
-        if(err){
-            console.log(err)
-        }else{
             rep.send(res)
         }
     })
