@@ -12,10 +12,10 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let alumno of alumnos">
+                <tr *ngFor="let alumno of alumnos; let i = index">
                     <td>{{alumno.nombre}}</td>
                     <td>{{alumno.apellido}}</td>
-                    <td><input type="checkbox"></td>
+                    <td><input (change)="chequeado(alumno.id_hijo, $event.target.checked)" type="checkbox"></td>
                 </tr>
             </tbody>
         </table>

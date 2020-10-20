@@ -17,6 +17,7 @@ export class AniadirClaseComponent implements OnInit {
   public colegios: Colegios[]
   public asignaturas: Asignaturas[]
   public alumnos:Hijos[]
+  public ids:number[]
 
   constructor(public createClase: AñadirClaseService) {
     this.insertar = false
@@ -24,13 +25,27 @@ export class AniadirClaseComponent implements OnInit {
     this.colegios = this.createClase.colegio
     this.asignaturas = this.createClase.asignaturas
     this.alumnos = []
+    this.ids = []
    }
 
   ngOnInit(): void {
   }
 
+  chequeado(index:number, isChecked:boolean){
+    if(isChecked){
+      this.ids.push(index)
+      console.log(this.ids);
+    }else{
+      let valor = this.ids.indexOf(index)
+      this.ids.splice(valor, 1)
+      console.log(this.ids);
+    }
+    
+  }
+
   insertarAlumnos(){
     this.insertar = false
+    
   }
 
   public crearClase(data:any){
@@ -47,7 +62,7 @@ export class AniadirClaseComponent implements OnInit {
           console.log(data);
           let datos:any = data
           for(let i=0; i<datos.length; i++){
-            this.alumnos.push(new Hijos(datos[i].nombre, datos[i].apellidos))
+            this.alumnos.push(new Hijos(datos[i].id_alumno,datos[i].nombre, datos[i].apellidos))
           }
           console.log(this.alumnos);
           
