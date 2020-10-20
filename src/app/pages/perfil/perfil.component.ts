@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { PerfilPadre } from 'src/app/models/perfil-padre';
+import { PerfilProfesor } from 'src/app/models/perfil-profesor';
 import { LoginService } from 'src/app/shared/login.service';
 
 @Component({
@@ -21,8 +23,13 @@ export class PerfilComponent implements OnInit {
     this.mostrar = true
   }
 
-  editar(){
+  editar(id_Padre:number,nombre:string,apellidos:string,descripcion:string,username:string,password:string,email:string){
       this.mostrar = true
+      let perfilPadre = new PerfilPadre(id_Padre,nombre,apellidos,descripcion,username,password,email)
+      this.service.editarPerfilPadre(perfilPadre).subscribe((data =>{
+        console.log(data);
+        console.log("Actualizado!");  
+      }))
   }
 
   ocultar(){
