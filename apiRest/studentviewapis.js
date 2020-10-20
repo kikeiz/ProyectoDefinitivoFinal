@@ -147,8 +147,8 @@ app.get("/cursos",
 });     
           
 app.post('/aniadirclase', (req,rep)=>{
-    let params = new Array (req.body.nombre_clase, req.body.id_profesor, req.body.id_asignatura,req.body.id_curso)
-    sql = "INSERT INTO clases (nombre_clase, id_profesor, id_asignatura, id_curso) VALUE (?,?,?,?)"
+    let params = new Array (req.body.nombre_clase, req.body.id_profesor, req.body.id_asignatura,req.body.id_curso, req.body.id_colegio)
+    sql = "INSERT INTO clases (nombre_clase, id_profesor, id_asignatura, id_curso, id_colegio) VALUE (?,?,?,?,?)"
     connection.query(sql, params, function(err,res){
         if(err){
             console.log(err)
@@ -170,9 +170,44 @@ app.post('/aniadiralumno', (req,rep)=>{
     });
 });
 
-
-
-
-
+app.get('/alumnos/:id/:Id', (req,rep)=>{
+    let params = [req.params.id, req.params.Id]
+    sql = "SELECT alumnos.id_alumno, alumnos.nombre, alumnos.apellidos FROM alumnos WHERE id_curso = ? AND id_colegio = ?"
+    connection.query(sql, params, function(err,res){
+        if(err){
+            console.log(err)
+        }else{ 
+            rep.send(res)
+         }
+    });
+})
           
+
+// MIS CLASES
+
+app.get('/misclases/:id',(req,rep)=>{
+    let id = req.params.id
+    sql = "SELECT nombre_clase, id_colegio, id_asignatura, id_curso, id_clase FROM clases WHERE id_profesor = ?"
+    connection.query(sql, id, function(err,res){
+        if(err){
+            console.log(err)
+        }else{ 
+            rep.send(res)
+         }
+    });
+});
+
+app.get('/clases/:id', (req,rep)=>{
+    let id = req.params.id
+    sql = "SELECT * FROM clases WHERE id_clase = ?"
+    connection.query(sql, id, function(err,res){
+        if(err){
+            console.log(err)
+        }else{ 
+            rep.send(res)
+         }
+    });
+})
+
+
 app.listen(3019);

@@ -14,10 +14,11 @@ import { Asignaturas } from 'src/app/models/asignaturas';
 })
 export class HeaderComponent implements OnInit {
   public isCollapsed:boolean
-  public clase:Clase[] =[];
+  public clases:Clase[];
 
   constructor(public service: LoginService, public serviceAñadirAlumno:AñadirAlumnoService, public serviceAñadirClase:AñadirClaseService) { 
     this.isCollapsed = true
+    this.clases = this.serviceAñadirClase.misClases
   }
 
   ngOnInit(): void {
@@ -28,12 +29,11 @@ export class HeaderComponent implements OnInit {
   }
 
   removeMain(){
-    this.service.home = null
+    this.service.home(null)
   }
 
   aniadirClase(){
-      this.service.home = null
-
+      this.service.home(null)
       this.serviceAñadirClase.obtenerColegio().subscribe((data => {
       console.log(data);
       let array:any=data
@@ -74,8 +74,11 @@ export class HeaderComponent implements OnInit {
         for(let i=0; i<array.length;i++){
           this.serviceAñadirAlumno.cursos.push(new Cursos(array[i].id_curso,array[i].nombre))
         }
-      }))
-    
+      })) 
+  }
+
+  seleccionarClase(i:number){
+    this.serviceAñadirClase.idClase(this.clases[i].id_clase, this.clases[i].id_colegio, this.clases[i].id_curso)
   }
 }
 

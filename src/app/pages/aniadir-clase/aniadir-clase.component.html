@@ -12,19 +12,20 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>Marcos</td>
-                    <td>Alonso Martinez</td>
+                <tr *ngFor="let alumno of alumnos">
+                    <td>{{alumno.nombre}}</td>
+                    <td>{{alumno.apellido}}</td>
                     <td><input type="checkbox"></td>
                 </tr>
             </tbody>
         </table>
+        <button (click)="insertarAlumnos()" class="btn btn-warning container">Añadir Alumnos</button>
     </div>
 
-    <form #formInsert="ngForm" (ngSubmit)="crearClase(formInsert.value)"  class="container" id="añadir">
+    <form *ngIf = "insertar == false" #formInsert="ngForm" (ngSubmit)="crearClase(formInsert.value)"  class="container" id="añadir">
         <div *ngIf="insertar == false" class="form-group">
             <label for="nombre"><b>Nombre de la clase</b></label><br>
-            <input type="text" id="nombre" class="form-control" name="nombre" required ngModel>
+            <input type="text" id="nombre" class="form-control" name="nombre" placeholder="Introduzca asignatura - curso"equired ngModel>
         </div>
         <div *ngIf="insertar == false" class="form-group">
             <label for="colegio"><b>Colegios</b></label><br>
@@ -48,14 +49,7 @@
             </select>
         </div>
         <div class="row">
-            <div class="container"><button [disabled]="!formInsert.valid" type="submit"  class="btn btn-dark">Añadir</button></div>
+            <div class="container"><button [disabled]="!formInsert.valid" type="submit"  class="btn btn-dark">Crear clase</button></div>
         </div>
     </form>
-    <div *ngIf="insertar == false" class="row">
-        <div class="col-2"></div>
-        <div class="col-8">
-            <i (click)="insertarAlumnos()" class="fas fa-user-plus cursor"><b><i>Añadir Alumnos</i></b></i>
-        </div>
-        <div class="col-2"></div>
-    </div>
 </div>
