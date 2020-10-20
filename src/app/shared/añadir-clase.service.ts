@@ -6,6 +6,7 @@ import {Colegios} from 'src/app/models/colegios'
 import {Asignaturas} from 'src/app/models/asignaturas'
 
 import { from } from 'rxjs';
+import { Hijos } from '../models/hijos';
 @Injectable({
   providedIn: 'root'
 })
@@ -72,6 +73,12 @@ export class AñadirClaseService {
 
  getAlumnos(id:number, Id:number){
   return this.http.get(this.url + '/alumnos/' + id + '/' + Id)
+ }
+
+ alumnosClase(id_alumno:number[], id_clase:number){
+  for(let i=0; i<id_alumno.length; i++){
+    return this.http.post(this.url + "/alumnos", {"id_clases":id_clase, "id_alumnos":id_alumno[i]})
+  }
  }
 
 
