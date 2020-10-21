@@ -96,8 +96,6 @@ export class HeaderComponent implements OnInit {
   }
 
   traerAlumnos(){
-    console.log("hola");
-    
     this.alumnos = this.serviceAñadirAlumno.alumnos
   }
 }

@@ -45,15 +45,10 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <td>Pedro</td>
-                    <td>García Agudo</td>
-                    <td><input type="number" min="0" max="10" id="nota" step="0.1"></td>
-                </tr>
-                <tr>
-                    <td>Jaime</td>
-                    <td>Lorenzo Vasco</td>
-                    <td><input type="number" min="0" max="10" id="nota" step="0.1"></td>
+                <tr *ngFor="let alumno of alumnos; let i = index">
+                    <td>{{alumno.nombre}}</td>
+                    <td>{{alumno.apellidos}}</td>
+                    <td><input type="number" min="0" max="10" id="nota" step="0.1" [(ngModel)]="notas[i].nota"></td>
                 </tr>
                 </tbody>
             </table>
@@ -99,9 +94,6 @@
     </div>
 </div>
 <div id="5" *ngIf="mostrarF1 == false && mostrarF2 == false && mostrarF3 == false">
-    <!-- <div class="row">
-        <div class="col-1"></div>
-        <div class="col-10"> -->
             <table class="table table-hover">
                 <thead class="thead-dark">
                 <tr>

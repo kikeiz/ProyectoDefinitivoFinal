@@ -233,5 +233,17 @@ app.get('/clases/:id', (req,rep)=>{
     });
 })
 
+// NOTAS
 
+app.get('/notasalumnos/:id', (req,rep)=>{
+    let id = req.params.id
+    sql = "SELECT * FROM clases_alumnos JOIN alumnos ON alumnos.id_alumno = clases_alumnos.id_alumnos WHERE clases_alumnos.id_clases = ?"
+    connection.query(sql, id, function(err,res){
+        if(err){
+            console.log(err)
+        }else{ 
+            rep.send(res)
+         }
+    });
+})
 app.listen(3019);

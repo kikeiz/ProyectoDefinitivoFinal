@@ -13,11 +13,13 @@ export class AñadirAlumnoService {
   public colegios:Colegios[]
   public cursos: Cursos[]
   public alumnos:Alumno[]
+ 
   private url:string = "http://localhost:3019"
   constructor(private http:HttpClient) {
     this.colegios = []
     this.cursos = []
     this.alumnos = []
+  
    }
 
   id(id:number){
@@ -28,7 +30,6 @@ export class AñadirAlumnoService {
   idAlumno(id:number){
     this.id_alumno = id
     console.log(this.id_alumno);
-    
   }
 
   obtenerColegios(){

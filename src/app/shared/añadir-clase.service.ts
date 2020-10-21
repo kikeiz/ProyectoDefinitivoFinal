@@ -69,7 +69,6 @@ export class AñadirClaseService {
      for(let i=0; i<array.length; i++){
       this.misClases.push(new Clase(array[i].nombre_clase, array[i].id_colegio, idd, array[i].id_asignatura, array[i].id_curso, array[i].id_clase))
      }
-     this.id_clase = this.misClases[0].id_clase
    }))
  }
 
