@@ -45,10 +45,13 @@ export class AniadirClaseComponent implements OnInit {
   }
 
   insertarAlumnos(){
-    this.insertar = false    
-    this.createClase.alumnosClase(this.ids,this.createClase.id_clase).subscribe((data=>{
-      console.log(data);
-    }))
+    this.insertar = false
+    for(let i=0; i<this.ids.length; i++){
+      this.createClase.alumnosClase(this.ids[i],this.createClase.id_clase).subscribe((data=>{
+        console.log(data);
+      }))
+    }    
+    
   }
 
   public crearClase(data:any){
