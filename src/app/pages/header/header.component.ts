@@ -6,6 +6,7 @@ import { LoginService } from 'src/app/shared/login.service';
 import { AñadirClaseService } from 'src/app/shared/añadir-clase.service'; 
 import { Clase} from 'src/app/models/clase'
 import { Asignaturas } from 'src/app/models/asignaturas';
+import { Alumno } from 'src/app/models/alumno';
 
 @Component({
   selector: 'app-header',
@@ -15,10 +16,16 @@ import { Asignaturas } from 'src/app/models/asignaturas';
 export class HeaderComponent implements OnInit {
   public isCollapsed:boolean
   public clases:Clase[];
+  public alumnos:Alumno[]
+  public nombre_clase:string
+  public nombre_alumno:string
 
   constructor(public service: LoginService, public serviceAñadirAlumno:AñadirAlumnoService, public serviceAñadirClase:AñadirClaseService) { 
     this.isCollapsed = true
     this.clases = this.serviceAñadirClase.misClases
+    this.alumnos = null
+    this.nombre_clase = "Ninguna Seleccionada"
+    this.nombre_alumno = "Ninguno Seleccionado"
   }
 
   ngOnInit(): void {
@@ -77,8 +84,21 @@ export class HeaderComponent implements OnInit {
       })) 
   }
 
+
   seleccionarClase(i:number){
     this.serviceAñadirClase.idClase(this.clases[i].id_clase, this.clases[i].id_colegio, this.clases[i].id_curso)
+    this.nombre_clase = this.clases[i].nombre_clase.toUpperCase()
+  }
+
+  seleccionarAlumno(i:number){
+    this.serviceAñadirAlumno.idAlumno(this.alumnos[i].id_alumno)
+    this.nombre_alumno = (this.alumnos[i].nombre + " " + this.alumnos[i].apellidos).toUpperCase()
+  }
+
+  traerAlumnos(){
+    console.log("hola");
+    
+    this.alumnos = this.serviceAñadirAlumno.alumnos
   }
 }
 

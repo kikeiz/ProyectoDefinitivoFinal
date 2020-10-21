@@ -25,6 +25,7 @@ export class AniadirAlumnoComponent implements OnInit {
     let alumno = new Alumno(data.nombre, data.apellidos, Number(data.colegio), Number(this.service.id_padre), Number(data.curso))
     this.service.añadirAlumno(alumno).subscribe((data=>{
       console.log(data);
+      this.service.obtenerAlumnos(this.service.id_padre)
     }))
     
   }

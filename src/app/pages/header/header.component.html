@@ -17,17 +17,19 @@
             <a class="nav-link" (click) ="removeMain()" routerLink="/comportamientoPadre">Comportamiento</a>
           </li>
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Pedro Martinez
+            <a (click)="traerAlumnos()" class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Elegir alumno
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="#">Pedro Martinez</a>
-              <a class="dropdown-item" href="#">Paula Gomez</a>
+              <a *ngFor="let alumno of alumnos; let i = index" class="dropdown-item" (click)="seleccionarAlumno(i)">{{alumno.nombre}}</a>
               <a class="dropdown-item" (click) ="aniadirAlumno()" routerLink="/aniadirAlumno"><i class="fas fa-user-plus">Añadir Alumno</i></a>
             </div>
           </li>
         </ul>
       </div>
+      <li id="nombre" class="nav-item">
+        <p>Alumno: <b>{{nombre_alumno}}</b></p>
+      </li>
       <div *ngIf="isCollapsed == false" class="form-inline my-2 my-lg-0">
         <i (click) ="removeMain()" routerLink="/mensajesPadre" class="far fa-envelope fa-3x cursor margenes"></i>
         <i (click) ="removeMain()" routerLink="/perfil" class="far fa-user-circle fa-3x cursor"></i>
@@ -63,6 +65,9 @@
             </li>
           </ul>
         </div>
+        <li id="nombre" class="nav-item">
+          <p>Clase: <b>{{nombre_clase}}</b></p>
+        </li>
         <div *ngIf="isCollapsed == false" class="form-inline my-2 my-lg-0">
           <i (click) ="removeMain()" routerLink="/mensajesProfe" class="far fa-envelope fa-3x cursor margenes"></i>
           <i (click) ="removeMain()" routerLink="/perfil" class="far fa-user-circle fa-3x cursor"></i>

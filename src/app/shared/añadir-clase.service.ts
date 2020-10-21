@@ -4,9 +4,9 @@ import {Cursos} from 'src/app/models/cursos'
 import {Clase} from 'src/app/models/clase'
 import {Colegios} from 'src/app/models/colegios'
 import {Asignaturas} from 'src/app/models/asignaturas'
-
 import { from } from 'rxjs';
 import { Hijos } from '../models/hijos';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -19,6 +19,7 @@ export class AñadirClaseService {
   public id_clase:number
   public id_colegio:number
   public id_curso:number
+  public nombre_clase:string
   private url:string = "http://localhost:3019"
 
   constructor(private http: HttpClient) {
@@ -30,6 +31,7 @@ export class AñadirClaseService {
     this.cursos = [] 
     this.colegio = []
     this.misClases = []
+    this.nombre_clase = "Ninguna Seleccionada"
   }
 
   id(id_profesor:number){
@@ -41,6 +43,10 @@ export class AñadirClaseService {
     this.id_clase = id_clase
     this.id_colegio = id_colegio
     this.id_curso = id_curso
+  }
+
+  cambiarNombre(nombre:string){
+    this.nombre_clase = nombre
   }
   obtenerColegio(){
      return this.http.get(this.url+ "/colegio")

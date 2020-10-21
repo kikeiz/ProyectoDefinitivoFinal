@@ -182,6 +182,18 @@ app.get('/alumnos/:id/:Id', (req,rep)=>{
     });
 })
 
+app.get('/alumnos/:id',(req,rep)=>{
+    let id = req.params.id
+    sql = "SELECT * FROM alumnos WHERE id_padre = ?"
+    connection.query(sql, id, function(err,res){
+        if(err){
+            console.log(err)
+        }else{ 
+            rep.send(res)
+         }
+    });
+})
+
 app.post('/alumnos', (req,rep)=>{
     let params = [req.body.id_clase, req.body.id_alumno]
     sql = "INSERT INTO clases_alumnos (id_clases, id_alumnos) VALUE (?,?)"

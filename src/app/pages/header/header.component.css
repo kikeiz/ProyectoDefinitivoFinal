@@ -31,3 +31,13 @@ li a:hover{
     position: static;
     position: -webkit-sticky;
 }
+
+li{
+    list-style: none;
+}
+
+#nombre{
+    position: relative;
+    top: 7px;
+    margin-right: 20px;
+}
