@@ -246,4 +246,40 @@ app.get('/notasalumnos/:id', (req,rep)=>{
          }
     });
 })
+
+app.post('/notas', (req,rep)=>{
+    let params = [req.body.nota, req.body.fecha, req.body.id_profesor, req.body.id_alumno, req.body.tipo, req.body.id_clase]
+    sql = "INSERT INTO notas (nota, fecha, id_profesor, id_alumno, tipo_calificacion, id_clase) VALUE (?,?,?,?,?,?)"
+    connection.query(sql, params, function(err,res){
+        if(err){
+            console.log(err)
+        }else{ 
+            rep.send(res)
+         }
+    });
+})
+
+app.get('/notas/:id', (req,rep)=>{
+    let id = req.params.id
+    sql = "SELECT AVG(nota) AS media, fecha, tipo_calificacion FROM notas WHERE id_clase = 3 GROUP BY tipo_calificacion, fecha"
+    connection.query(sql, id, function(err,res){
+        if(err){
+            console.log(err)
+        }else{ 
+            rep.send(res)
+         }
+    });
+})
+
+app.post('/alumnos/examen', (req,rep)=>{
+    let params = [req.body.fecha, req.body.tipo]
+    sql = "SELECT alumnos.nombre, alumnos.apellidos, notas.nota FROM notas JOIN alumnos ON notas.id_alumno = alumnos.id_alumno WHERE notas.fecha = ? AND tipo_calificacion = ?"
+    connection.query(sql, params, function(err,res){
+        if(err){
+            console.log(err)
+        }else{ 
+            rep.send(res)
+         }
+    });
+})
 app.listen(3019);

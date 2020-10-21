@@ -103,16 +103,14 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr id="fila" (click)="editar()">
-                    <td>Examen</td>
-                    <td>09/05/1996</td>
-                    <td>7,6</td>
+                <tr *ngFor="let notamedia of notasmedias; let i = index" id="fila" (click)="editar(i)">
+                    <td style="text-transform: uppercase;"><b>{{notamedia.tipo}}</b></td>
+                    <td><b>{{notamedia.fecha}}</b></td>
+                    <td><b>{{notamedia.nota}}</b></td>
                 </tr>
                 </tbody>
             </table>
-        <!-- </div>
-        <div class="col-1"></div>
-    </div> -->
+
 </div>
 <div id="6" *ngIf="mostrarF3 == true">
     <div class="row">

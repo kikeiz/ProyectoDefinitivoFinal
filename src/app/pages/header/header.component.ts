@@ -7,6 +7,7 @@ import { AñadirClaseService } from 'src/app/shared/añadir-clase.service';
 import { Clase} from 'src/app/models/clase'
 import { Asignaturas } from 'src/app/models/asignaturas';
 import { Alumno } from 'src/app/models/alumno';
+import { NotasService } from 'src/app/shared/notas.service';
 
 @Component({
   selector: 'app-header',
@@ -20,7 +21,7 @@ export class HeaderComponent implements OnInit {
   public nombre_clase:string
   public nombre_alumno:string
 
-  constructor(public service: LoginService, public serviceAñadirAlumno:AñadirAlumnoService, public serviceAñadirClase:AñadirClaseService) { 
+  constructor(public service: LoginService, public serviceAñadirAlumno:AñadirAlumnoService, public serviceAñadirClase:AñadirClaseService, public serviceNotas:NotasService) { 
     this.isCollapsed = true
     this.clases = this.serviceAñadirClase.misClases
     this.alumnos = null
@@ -33,6 +34,11 @@ export class HeaderComponent implements OnInit {
 
   colapsar(){
     this.isCollapsed = false
+  }
+
+  obtenerNotas(){
+    this.service.home(null)
+    this.serviceNotas.obtenerNotas(this.serviceAñadirClase.id_clase)
   }
 
   removeMain(){

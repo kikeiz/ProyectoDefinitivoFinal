@@ -13,7 +13,7 @@ export class NotasPadreComponent implements OnInit {
   public notas: Nota []
   constructor() { 
     this.options = false
-    this.notas = [new Nota(5, new Date(), Tipo.examen, 2, 1, 1)] 
+    this.notas = [new Nota(new Date(), 5, Tipo.examen, 2, 5, 2)] 
   }
 
   ngOnInit(): void {
