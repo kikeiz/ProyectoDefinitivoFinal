@@ -39,8 +39,12 @@ export class NotasService {
     }))
   }
 
-  editarNotas(fecha:Date, tipo:Tipo){
-    return this.http.post(this.url + "/alumnos/examen", {"fecha":fecha, "tipo":tipo})
+  editarNotas(fecha:string, tipo:Tipo, id_clase:number){
+    return this.http.post(this.url + "/alumnos/examen", {"fecha":fecha, "tipo":tipo, "id_clase":id_clase})
+  }
+
+  cambiarNota(nota:number, id_nota:number){
+    return this.http.put(this.url+"/notas", {"nota":nota, "id_nota":id_nota})
   }
 }
 

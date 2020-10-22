@@ -272,8 +272,20 @@ app.get('/notas/:id', (req,rep)=>{
 })
 
 app.post('/alumnos/examen', (req,rep)=>{
-    let params = [req.body.fecha, req.body.tipo]
-    sql = "SELECT alumnos.nombre, alumnos.apellidos, notas.nota FROM notas JOIN alumnos ON notas.id_alumno = alumnos.id_alumno WHERE notas.fecha = ? AND tipo_calificacion = ?"
+    let params = [req.body.fecha, req.body.tipo, req.body.id_clase]
+    sql = "SELECT alumnos.nombre, alumnos.apellidos, alumnos.id_alumno, notas.id_nota, notas.nota FROM notas JOIN alumnos ON notas.id_alumno = alumnos.id_alumno WHERE notas.fecha = ? AND tipo_calificacion = ? AND id_clase = ?"
+    connection.query(sql, params, function(err,res){
+        if(err){
+            console.log(err)
+        }else{ 
+            rep.send(res)
+         }
+    });
+})
+
+app.put('/notas', (req,rep)=>{
+    let params = [req.body.nota, req.body.id_nota]
+    sql = "UPDATE notas SET notas.nota = ? WHERE notas.id_nota = ?"
     connection.query(sql, params, function(err,res){
         if(err){
             console.log(err)
