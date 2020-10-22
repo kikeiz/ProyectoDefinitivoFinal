@@ -46,5 +46,9 @@ export class NotasService {
   cambiarNota(nota:number, id_nota:number){
     return this.http.put(this.url+"/notas", {"nota":nota, "id_nota":id_nota})
   }
+
+  filtrar(id_clase:number, notamin:number, notamax:number, tipo:Tipo){
+    return this.http.get(this.url + "/filtrar/" + id_clase + "/" + notamin + "/" + notamax + "/" + tipo)
+  }
 }
 

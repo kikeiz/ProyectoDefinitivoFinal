@@ -294,4 +294,28 @@ app.put('/notas', (req,rep)=>{
          }
     });
 })
+
+app.get('/filtrar/:id_clase/:notamin/:notamax/:tipo', (req,rep)=>{
+    let params = [req.params.id_clase, req.params.notamin, req.params.notamax, req.params.tipo]
+    if(req.params.tipo != "todos"){
+        sql = "SELECT * FROM (SELECT AVG(notas.nota) AS media, notas.fecha AS fecha1, notas.tipo_calificacion AS tipo FROM notas WHERE id_clase = ? GROUP BY notas.fecha, notas.tipo_calificacion) AS notitas WHERE notitas.media >= ? AND notitas.media <= ? AND tipo = ?"
+        connection.query(sql, params, function(err,res){
+            if(err){
+                console.log(err)
+            }else{ 
+                rep.send(res)
+             }
+        });
+    }else{
+        let param = [req.params.id_clase, req.params.notamin, req.params.notamax]
+        sql = "SELECT * FROM (SELECT AVG(notas.nota) AS media, notas.fecha AS fecha1, notas.tipo_calificacion AS tipo FROM notas WHERE id_clase = ? GROUP BY notas.fecha, notas.tipo_calificacion) AS notitas WHERE notitas.media >= ? AND notitas.media <= ?"
+        connection.query(sql, param, function(err,res){
+            if(err){
+                console.log(err)
+            }else{ 
+                rep.send(res)
+             }
+        });
+    }
+})
 app.listen(3019);

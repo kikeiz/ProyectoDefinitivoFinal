@@ -148,13 +148,46 @@ export class NotasProfesorComponent implements OnInit {
   }
 
   filter(datos:any){
+    this.notasmedias = []
+    if(datos.estadoNota == "suspenso"){
+      this.notaservice.filtrar(this.anadirClaseService.id_clase, 0.1, 4.9, datos.tipoDeCalificacion).subscribe((data=>{
+        let array:any = data
+        console.log(array);
+        for(let i=0; i<array.length; i++){
+          if(array[i].tipo == "trabajo"){
+            this.notasmedias.push(new Notas(new Date(array[i].fecha).toDateString(), array[i].media, Tipo.trabajo))
+          }else{
+            this.notasmedias.push(new Notas(new Date(array[i].fecha).toDateString(), array[i].media, Tipo.examen))
+          }
+        }
+      }))
+    }else if(datos.estadoNota == "aprobado"){
+      this.notaservice.filtrar(this.anadirClaseService.id_clase, 5, 10, datos.tipoDeCalificacion).subscribe((data=>{
+        let array:any = data
+        for(let i=0; i<array.length; i++){
+          if(array[i].tipo == "trabajo"){
+            this.notasmedias.push(new Notas(new Date(array[i].fecha).toDateString(), array[i].media, Tipo.trabajo))
+          }else{
+            this.notasmedias.push(new Notas(new Date(array[i].fecha).toDateString(), array[i].media, Tipo.examen))
+          }
+        }
+      }))
+    }else{
+      this.notaservice.filtrar(this.anadirClaseService.id_clase, 0.1, 10, datos.tipoDeCalificacion).subscribe((data=>{
+        let array:any = data
+        for(let i=0; i<array.length; i++){
+          if(array[i].tipo == "trabajo"){
+            this.notasmedias.push(new Notas(new Date(array[i].fecha).toDateString(), array[i].media, Tipo.trabajo))
+          }else{
+            this.notasmedias.push(new Notas(new Date(array[i].fecha).toDateString(), array[i].media, Tipo.examen))
+          }
+        }
+      }))
+    }
     this.mostrarF5 = false
-    //como comparar fechas
-    let fecha = new Date()   
-    // let fecha2 = new Date(datos.fecha) 
-    // console.log(fecha2);
-    console.log(datos.estadoNota);
+    console.log(datos);
   }
+
 
   
 }
