@@ -36,6 +36,8 @@ export class NotasService {
           this.notas1.push(new Notas(new Date(datos[i].fecha).toDateString(), datos[i].media, Tipo.trabajo))
         }
       }
+      console.log(this.notas1);
+      
     }))
   }
 

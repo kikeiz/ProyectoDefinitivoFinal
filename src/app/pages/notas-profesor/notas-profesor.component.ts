@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { stringify } from 'querystring';
 import { Alumno } from 'src/app/models/alumno';
+import { Comunications, Envia, TipoMensaje, Valor } from 'src/app/models/comunications';
 import { Hijos } from 'src/app/models/hijos';
 import { Nota, Tipo } from 'src/app/models/nota';
 import { Notas } from 'src/app/models/notas';
 import { AñadirClaseService } from 'src/app/shared/añadir-clase.service';
+import { MensajesService } from 'src/app/shared/mensajes.service';
 import { NotasService } from 'src/app/shared/notas.service';
 
 
@@ -26,7 +28,7 @@ export class NotasProfesorComponent implements OnInit {
   public cambioAlumnos:Hijos[]
   public media:number
  
-  constructor(public notaservice:NotasService, public anadirClaseService:AñadirClaseService) { 
+  constructor(public notaservice:NotasService, public anadirClaseService:AñadirClaseService, public serviceMensaje:MensajesService) { 
     this.mostrarF1 = false
     this.mostrarF2 = false
     this.mostrarF3 = false
@@ -83,13 +85,25 @@ export class NotasProfesorComponent implements OnInit {
     this.mostrarF1 = false
     this.mostrarF2 = false
     console.log(this.notas);
+    this.notasmedias.push(new Notas(new Date(this.notas[0].fecha).toDateString(), this.media/this.notas.length, this.notas[0].tipo))
     for(let i=0; i<this.notas.length; i++){
       this.media += this.notas[i].nota
       this.notaservice.publicarNotas(this.notas[i]).subscribe((data=>{
         console.log(data);
       }))
     }
-    this.notasmedias.push(new Notas(this.notas[0].fecha.toDateString(), this.media/this.notas.length, this.notas[0].tipo))
+    for(let i=0; i<this.notas.length; i++){
+      if(this.notas[i].nota>=5){
+        this.serviceMensaje.enviarMensaje((new Comunications("Su hijo ha obtenido una calificación de" + this.notas[i].nota + "en el" + this.notas[i].tipo + "realizado en fecha: " + this.notas[i].fecha, TipoMensaje.calificacion, this.notas[i].fecha, Valor.positivo, this.notas[i].id_clase, this.notas[i].id_alumno, Envia.profesor))).subscribe((data=>{
+          console.log(data);
+        }))
+      }else{
+        this.serviceMensaje.enviarMensaje((new Comunications("Su hijo ha obtenido una calificación de" + this.notas[i].nota + "en el" + this.notas[i].tipo + "realizado en fecha: " + this.notas[i].fecha, TipoMensaje.calificacion, this.notas[i].fecha, Valor.negativo, this.notas[i].id_clase, this.notas[i].id_alumno, Envia.profesor))).subscribe((data=>{
+          console.log(data);
+        }))
+      }
+    }
+    
   }
 
   formatDate(date:string) {
@@ -155,9 +169,9 @@ export class NotasProfesorComponent implements OnInit {
         console.log(array);
         for(let i=0; i<array.length; i++){
           if(array[i].tipo == "trabajo"){
-            this.notasmedias.push(new Notas(new Date(array[i].fecha).toDateString(), array[i].media, Tipo.trabajo))
+            this.notasmedias.push(new Notas(new Date(array[i].fecha1).toDateString(), array[i].media, Tipo.trabajo))
           }else{
-            this.notasmedias.push(new Notas(new Date(array[i].fecha).toDateString(), array[i].media, Tipo.examen))
+            this.notasmedias.push(new Notas(new Date(array[i].fecha1).toDateString(), array[i].media, Tipo.examen))
           }
         }
       }))
@@ -166,9 +180,9 @@ export class NotasProfesorComponent implements OnInit {
         let array:any = data
         for(let i=0; i<array.length; i++){
           if(array[i].tipo == "trabajo"){
-            this.notasmedias.push(new Notas(new Date(array[i].fecha).toDateString(), array[i].media, Tipo.trabajo))
+            this.notasmedias.push(new Notas(new Date(array[i].fecha1).toDateString(), array[i].media, Tipo.trabajo))
           }else{
-            this.notasmedias.push(new Notas(new Date(array[i].fecha).toDateString(), array[i].media, Tipo.examen))
+            this.notasmedias.push(new Notas(new Date(array[i].fecha1).toDateString(), array[i].media, Tipo.examen))
           }
         }
       }))
@@ -177,9 +191,9 @@ export class NotasProfesorComponent implements OnInit {
         let array:any = data
         for(let i=0; i<array.length; i++){
           if(array[i].tipo == "trabajo"){
-            this.notasmedias.push(new Notas(new Date(array[i].fecha).toDateString(), array[i].media, Tipo.trabajo))
+            this.notasmedias.push(new Notas(new Date(array[i].fecha1).toDateString(), array[i].media, Tipo.trabajo))
           }else{
-            this.notasmedias.push(new Notas(new Date(array[i].fecha).toDateString(), array[i].media, Tipo.examen))
+            this.notasmedias.push(new Notas(new Date(array[i].fecha1).toDateString(), array[i].media, Tipo.examen))
           }
         }
       }))

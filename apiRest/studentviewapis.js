@@ -261,7 +261,7 @@ app.post('/notas', (req,rep)=>{
 
 app.get('/notas/:id', (req,rep)=>{
     let id = req.params.id
-    sql = "SELECT AVG(nota) AS media, fecha, tipo_calificacion FROM notas WHERE id_clase = 3 GROUP BY tipo_calificacion, fecha"
+    sql = "SELECT AVG(nota) AS media, fecha, tipo_calificacion FROM notas WHERE id_clase = ? GROUP BY tipo_calificacion, fecha"
     connection.query(sql, id, function(err,res){
         if(err){
             console.log(err)
@@ -317,5 +317,19 @@ app.get('/filtrar/:id_clase/:notamin/:notamax/:tipo', (req,rep)=>{
              }
         });
     }
+})
+
+//MENSAJES
+
+app.post('/mensaje', (req,rep)=>{
+    let params = [req.body.tipo, req.body.contenido, req.body.valor, req.body.id_padre, req.body.id_profesor, req.body.envia, req.body.fecha, req.body.id_clase, req.body.id_alumno]
+    sql = "INSERT INTO mensajes (tipo, contenido, valor, id_padre, id_profesor, quienenvia, fecha, id_clase, id_alumno) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)"
+    connection.query(sql, params, function(err,res){
+        if(err){
+            console.log(err)
+        }else{ 
+            rep.send(res)
+         }
+    });
 })
 app.listen(3019);

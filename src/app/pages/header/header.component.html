@@ -59,7 +59,7 @@
                 Clase
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a *ngFor="let clase of clases; let i = index" (click)="seleccionarClase(i)" class="dropdown-item" href="#">{{clase.nombre_clase}}</a>
+                <a *ngFor="let clase of clases; let i = index" (click)="seleccionarClase(i)" class="dropdown-item cursor">{{clase.nombre_clase}}</a>
                 <a class="dropdown-item" (click) ="aniadirClase()" routerLink="/aniadirClase"><i class="fas fa-plus-circle">Añadir Clase</i></a>
               </div>
             </li>

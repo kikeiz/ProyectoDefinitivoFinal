@@ -38,8 +38,11 @@ export class HeaderComponent implements OnInit {
 
   obtenerNotas(){
     this.service.home(null)
-    this.serviceNotas.obtenerNotas(this.serviceAñadirClase.id_clase)
+    // console.log(this.serviceAñadirClase.id_clase);
+    // this.serviceNotas.obtenerNotas(this.serviceAñadirClase.id_clase)
   }
+
+  
 
   removeMain(){
     this.service.home(null)
@@ -94,6 +97,7 @@ export class HeaderComponent implements OnInit {
   seleccionarClase(i:number){
     this.serviceAñadirClase.idClase(this.clases[i].id_clase, this.clases[i].id_colegio, this.clases[i].id_curso)
     this.nombre_clase = this.clases[i].nombre_clase.toUpperCase()
+    this.serviceNotas.obtenerNotas(this.clases[i].id_clase)
   }
 
   seleccionarAlumno(i:number){
