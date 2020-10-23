@@ -11,6 +11,7 @@ export class MensajesService {
   constructor(private http:HttpClient) { }
 
   enviarMensaje(mensaje:Comunications){
+    console.log(mensaje);
     return this.http.post(this.url + "/mensaje", mensaje)
   }
 }

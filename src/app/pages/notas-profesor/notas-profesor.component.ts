@@ -43,6 +43,7 @@ export class NotasProfesorComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.notasmedias = this.notaservice.notas1
   }
   anadirNota(){
     this.alumnos = []

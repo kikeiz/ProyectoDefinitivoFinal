@@ -322,8 +322,8 @@ app.get('/filtrar/:id_clase/:notamin/:notamax/:tipo', (req,rep)=>{
 //MENSAJES
 
 app.post('/mensaje', (req,rep)=>{
-    let params = [req.body.tipo, req.body.contenido, req.body.valor, req.body.id_padre, req.body.id_profesor, req.body.envia, req.body.fecha, req.body.id_clase, req.body.id_alumno]
-    sql = "INSERT INTO mensajes (tipo, contenido, valor, id_padre, id_profesor, quienenvia, fecha, id_clase, id_alumno) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)"
+    let params = [req.body.tipo, req.body.contenido, req.body.valor, req.body.envia, req.body.fecha, req.body.id_clase, req.body.id_alumno]
+    sql = "INSERT INTO mensajes (tipo, contenido, valor, quienenvia, fecha, id_clase, id_alumno) VALUES (?, ?, ?, ?, ?, ?, ?)"
     connection.query(sql, params, function(err,res){
         if(err){
             console.log(err)
