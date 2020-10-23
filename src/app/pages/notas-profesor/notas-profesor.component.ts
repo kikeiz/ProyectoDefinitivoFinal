@@ -27,6 +27,7 @@ export class NotasProfesorComponent implements OnInit {
   public alumnos:Alumno[]
   public cambioAlumnos:Hijos[]
   public media:number
+  
  
   constructor(public notaservice:NotasService, public anadirClaseService:AñadirClaseService, public serviceMensaje:MensajesService) { 
     this.mostrarF1 = false

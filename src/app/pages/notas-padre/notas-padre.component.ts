@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { TickOptions } from 'chart.js';
+import { Hijos } from 'src/app/models/hijos';
 import { Nota } from 'src/app/models/nota';
 import {Tipo} from 'src/app/models/nota'
+import { NotasService } from 'src/app/shared/notas.service';
 
 @Component({
   selector: 'app-notas-padre',
@@ -11,9 +13,11 @@ import {Tipo} from 'src/app/models/nota'
 export class NotasPadreComponent implements OnInit {
   public options: boolean
   public notas: Nota []
-  constructor() { 
+  public nota:Hijos[]
+  constructor(public notaService:NotasService) { 
     this.options = false
     this.notas = [new Nota(new Date(), 5, Tipo.examen, 2, 5, 2)] 
+    this.nota = this.notaService.nota
   }
 
   ngOnInit(): void {
@@ -27,7 +31,13 @@ export class NotasPadreComponent implements OnInit {
     }
   }
 
-  filter(){
-    this.options = false
-  }
+  // filter(data:any){
+  //   this.options = false
+  //   if(data.estadoNota == "suspenso"){
+
+  //   }else{
+
+  //   }
+    
+  // }
 }

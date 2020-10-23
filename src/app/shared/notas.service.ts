@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Nota, Tipo } from '../models/nota';
 import { Notas } from '../models/notas';
+import { Hijos } from '../models/hijos';
 
 
 @Injectable({
@@ -11,9 +12,11 @@ export class NotasService {
   private url:string = "http://localhost:3019"
   public notas:Nota[]
   public notas1:Notas[]
+  public nota: Hijos[]
   constructor(private http:HttpClient) { 
     this.notas = []
     this.notas1 = []
+    this.nota = []
   }
 
   obtenerAlummnos(id:number){
@@ -51,6 +54,17 @@ export class NotasService {
 
   filtrar(id_clase:number, notamin:number, notamax:number, tipo:Tipo){
     return this.http.get(this.url + "/filtrar/" + id_clase + "/" + notamin + "/" + notamax + "/" + tipo)
+  }
+
+  obtenerNotasAlumnos(id_alumno:number){
+    return this.http.get(this.url + "/notas/alumnos/" + id_alumno).subscribe((data=>{
+      console.log(data);
+      let array:any = data
+      for(let i=0; i<array.length; i++){
+        this.nota.push(new Hijos(array[i].id_alumno, array[i].nombre, array[i].apellidos, array[i].nota, array[i].id_nota, new Date(array[i].fecha).toDateString(), array[i].nombre))
+      }
+      console.log(this.nota);
+    }))
   }
 }
 

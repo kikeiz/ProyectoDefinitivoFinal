@@ -104,6 +104,7 @@ export class HeaderComponent implements OnInit {
   seleccionarAlumno(i:number){
     this.serviceAñadirAlumno.idAlumno(this.alumnos[i].id_alumno)
     this.nombre_alumno = (this.alumnos[i].nombre + " " + this.alumnos[i].apellidos).toUpperCase()
+    this.serviceNotas.obtenerNotasAlumnos(this.alumnos[i].id_alumno)
   }
 
   traerAlumnos(){

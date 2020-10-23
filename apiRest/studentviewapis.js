@@ -247,6 +247,18 @@ app.get('/notasalumnos/:id', (req,rep)=>{
     });
 })
 
+app.get('/notas/alumnos/:id', (req,rep)=>{
+    let id = req.params.id
+    sql = "SELECT notas.nota, notas.fecha, notas.id_nota, alumnos.nombre, alumnos.apellidos, notas.id_alumno, asignaturas.nombre FROM notas JOIN alumnos ON notas.id_alumno = alumnos.id_alumno JOIN clases ON notas.id_clase = clases.id_clase JOIN asignaturas ON clases.id_asignatura = asignaturas.id_asignatura WHERE alumnos.id_alumno = ?"
+    connection.query(sql, id, function(err,res){
+        if(err){
+            console.log(err)
+        }else{ 
+            rep.send(res)
+         }
+    });
+})
+
 app.post('/notas', (req,rep)=>{
     let params = [req.body.nota, req.body.fecha, req.body.id_profesor, req.body.id_alumno, req.body.tipo, req.body.id_clase]
     sql = "INSERT INTO notas (nota, fecha, id_profesor, id_alumno, tipo_calificacion, id_clase) VALUE (?,?,?,?,?,?)"
@@ -318,6 +330,8 @@ app.get('/filtrar/:id_clase/:notamin/:notamax/:tipo', (req,rep)=>{
         });
     }
 })
+
+// app.get('/filtrar/notas/alumnos/:notamin/:notamax/:asignatura/:')
 
 //MENSAJES
 
