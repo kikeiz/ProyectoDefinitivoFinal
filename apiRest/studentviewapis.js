@@ -182,6 +182,18 @@ app.get('/alumnos/:id/:Id', (req,rep)=>{
     });
 })
 
+app.get('/alumno/clase/:id',(req,rep)=>{
+    let id = req.params.id
+    sql = "SELECT clases_alumnos.id_clases, alumnos.id_alumno, alumnos.nombre, alumnos.apellidos FROM clases_alumnos JOIN alumnos ON clases_alumnos.id_alumnos = alumnos.id_alumno WHERE clases_alumnos.id_clases = ?"
+    connection.query(sql, id, function(err,res){
+        if(err){
+            console.log(err)
+        }else{ 
+            rep.send(res)
+         }
+    });
+})
+
 app.get('/alumnos/:id',(req,rep)=>{
     let id = req.params.id
     sql = "SELECT * FROM alumnos WHERE id_padre = ?"

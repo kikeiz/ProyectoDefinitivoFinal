@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ChartDataSets, ChartOptions, ChartType } from 'chart.js';
 import { Label } from 'ng2-charts';
+import { Alumno } from 'src/app/models/alumno';
+import { ComportamientoService } from 'src/app/shared/comportamiento.service';
 
 @Component({
   selector: 'app-comportamiento-profesor',
@@ -18,6 +20,8 @@ export class ComportamientoProfesorComponent implements OnInit {
   public nombre:string
   public mostrarF4:boolean
   public mensaje:boolean
+  public alumnos: Alumno[]
+  public nombreAlumno: string
   public barChartOptions: ChartOptions = {
     responsive: true,
     scales: { 
@@ -42,7 +46,7 @@ export class ComportamientoProfesorComponent implements OnInit {
     { data: [7, 8, 9, 6], label: 'Enrique Izquierdo' },
     { data: [5, 9, 5, 10], label: 'Clase' }
   ];
-  constructor(){
+  constructor(public comportamientoService:ComportamientoService){
     this.puntualidad = false
     this.deberes = false
     this.atencion = false
@@ -52,6 +56,8 @@ export class ComportamientoProfesorComponent implements OnInit {
     this.tablaResumen = false
     this.mostrarF4 = false
     this.mensaje = false
+    this.alumnos = this.comportamientoService.alumnos
+    this.nombreAlumno = ""
    }
 
   ngOnInit(): void {
@@ -88,6 +94,23 @@ export class ComportamientoProfesorComponent implements OnInit {
     }else{
       this.verde = true
       this.rojo = false
+    }
+  }
+
+  alumno(id:any){
+    console.log(id);
+    
+    let i= 0
+    let condicion = false
+    while (i<this.alumnos.length && condicion == false){
+      if(id = this.alumnos[i].id_alumno){
+        this.nombreAlumno = this.alumnos[i].nombre + " " + this.alumnos[i].apellidos
+        console.log(this.nombreAlumno);
+        
+        condicion = true
+      }else{
+        i++
+      }
     }
   }
 

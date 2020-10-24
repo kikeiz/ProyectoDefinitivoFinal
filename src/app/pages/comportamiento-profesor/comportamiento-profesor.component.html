@@ -9,8 +9,8 @@
         <div class="col-8">
             <div class="form-group">
                 <label for="exampleSelect2"><b>Alumno</b></label>
-                <select class="form-control" id="exampleSelect2">
-                    <option value="">Pedro</option>
+                <select #alumno (change)="alumno(alumno.value)" class="form-control" id="exampleSelect2">
+                    <option *ngFor="let alumno of alumnos; let i = index" value="{{alumno.id_alumno}}">{{alumno.apellidos}}, {{alumno.nombre}}</option>
                 </select>
             </div>
             <div class="form-group">
@@ -86,7 +86,7 @@
     <div *ngIf="tablaResumen==false" class="row">
         <!-- <div class="col-1"></div>
         <div class="col-10"> -->
-            <h3 id="titulo" class="container">Enrique Izquierdo</h3>
+            <h3 id="titulo" class="container">{{nombreAlumno}}</h3>
             <table id="valor" class="table">
                 <thead class="thead-dark">
                   <tr>
