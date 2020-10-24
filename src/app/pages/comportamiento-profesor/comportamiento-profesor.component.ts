@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ChartDataSets, ChartOptions, ChartType } from 'chart.js';
 import { Label } from 'ng2-charts';
 import { Alumno } from 'src/app/models/alumno';
+import { Comportamiento, TipoComportamiento } from 'src/app/models/comportamiento';
+import { AñadirClaseService } from 'src/app/shared/añadir-clase.service';
 import { ComportamientoService } from 'src/app/shared/comportamiento.service';
 
 @Component({
@@ -22,6 +24,8 @@ export class ComportamientoProfesorComponent implements OnInit {
   public mensaje:boolean
   public alumnos: Alumno[]
   public nombreAlumno: string
+  public comportamientosAlumno: Comportamiento[]
+  public mediaComportamiento: Comportamiento[]
   public barChartOptions: ChartOptions = {
     responsive: true,
     scales: { 
@@ -43,10 +47,10 @@ export class ComportamientoProfesorComponent implements OnInit {
  
 
   public barChartData: ChartDataSets[] = [
-    { data: [7, 8, 9, 6], label: 'Enrique Izquierdo' },
-    { data: [5, 9, 5, 10], label: 'Clase' }
+    { data: [0, 0, 0, 0], label: "" },
+    { data: [0, 0, 0, 0], label: 'Clase' }
   ];
-  constructor(public comportamientoService:ComportamientoService){
+  constructor(public comportamientoService:ComportamientoService, public añadirClaseService:AñadirClaseService){
     this.puntualidad = false
     this.deberes = false
     this.atencion = false
@@ -57,7 +61,10 @@ export class ComportamientoProfesorComponent implements OnInit {
     this.mostrarF4 = false
     this.mensaje = false
     this.alumnos = this.comportamientoService.alumnos
-    this.nombreAlumno = ""
+    this.nombreAlumno = this.alumnos[0].nombre + " " + this.alumnos[0].apellidos
+    this.comportamientosAlumno = []
+    this.mediaComportamiento = []
+    this.barChartData[0].label = this.alumnos[0].nombre + " " + this.alumnos[0].apellidos
    }
 
   ngOnInit(): void {
@@ -97,16 +104,33 @@ export class ComportamientoProfesorComponent implements OnInit {
     }
   }
 
-  alumno(id:any){
-    console.log(id);
-    
+  cambioAlumno(id:any){
+    this.comportamientosAlumno = []
     let i= 0
     let condicion = false
     while (i<this.alumnos.length && condicion == false){
-      if(id = this.alumnos[i].id_alumno){
+      if(id == this.alumnos[i].id_alumno){
         this.nombreAlumno = this.alumnos[i].nombre + " " + this.alumnos[i].apellidos
-        console.log(this.nombreAlumno);
-        
+        this.barChartData[0].label = this.nombreAlumno
+        this.comportamientoService.comportamientosAlumno(this.alumnos[i].id_alumno, this.añadirClaseService.id_clase).subscribe((data=>{
+          let array:any = data
+          console.log(array);
+          for(let j=0; j<array.length; j++){
+            if(array[j].tipo_comportamiento == "atencion"){
+              this.comportamientosAlumno.push(new Comportamiento(TipoComportamiento.atencion, array[j].nota, array[j].id_alumno, array[j].id_clase))
+              this.barChartData[0].data[1] = this.comportamientosAlumno[j].nota
+            }else if(array[j].tipo_comportamiento == "deberes"){
+              this.comportamientosAlumno.push(new Comportamiento(TipoComportamiento.deberes, array[j].nota, array[j].id_alumno, array[j].id_clase))
+              this.barChartData[0].data[2] = this.comportamientosAlumno[j].nota
+            }else if(array[j].tipo_comportamiento == "participacion"){
+              this.comportamientosAlumno.push(new Comportamiento(TipoComportamiento.participacion, array[j].nota, array[j].id_alumno, array[j].id_clase))
+              this.barChartData[0].data[0] = this.comportamientosAlumno[j].nota
+            }else{
+              this.comportamientosAlumno.push(new Comportamiento(TipoComportamiento.puntualidad, array[j].nota, array[j].id_alumno, array[j].id_clase))
+              this.barChartData[0].data[3] = this.comportamientosAlumno[j].nota
+            }
+          }
+        }))
         condicion = true
       }else{
         i++
@@ -125,9 +149,32 @@ export class ComportamientoProfesorComponent implements OnInit {
     
   }
 
+
   mostrar(){
     this.tablaResumen = true
+    this.comportamientoService.mediaClase(this.añadirClaseService.id_clase).subscribe((data=>{
+      let array:any = data
+      console.log(array);
+      for(let i=0; i<array.length; i++){
+        if(array[i].tipo_comportamiento == "puntualidad"){
+          this.mediaComportamiento.push(new Comportamiento(TipoComportamiento.puntualidad, array[i].nota_media))
+          this.barChartData[1].data[3] = array[i].nota_media
+        }else if(array[i].tipo_comportamiento == "atencion"){
+          this.mediaComportamiento.push(new Comportamiento(TipoComportamiento.atencion, array[i].nota_media))
+          this.barChartData[1].data[1] = array[i].nota_media
+        }else if(array[i].tipo_comportamiento == "participacion"){
+          this.mediaComportamiento.push(new Comportamiento(TipoComportamiento.participacion, array[i].nota_media))
+          this.barChartData[1].data[0] = array[i].nota_media
+        }else{
+          this.mediaComportamiento.push(new Comportamiento(TipoComportamiento.deberes, array[i].nota_media))
+          this.barChartData[1].data[2] = array[i].nota_media
+        }
+      }
+      console.log(this.barChartData[1]);
+      console.log(this.mediaComportamiento);
+    }))
   }
+
   cambiar(){
     this.mostrarF4 = true
    }

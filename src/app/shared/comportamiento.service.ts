@@ -39,4 +39,12 @@ export class ComportamientoService {
   modificarComportamiento(id_comportamiento:number, nota:number){
     return this.http.put(this.url + "/modificar/comportamiento", {"id_comportamiento":id_comportamiento, "nota":nota})
   }
+
+  mediaClase(id_clase:number){
+      return this.http.get(this.url + "/behaviour/class/" + id_clase)
+  }
+
+  comportamientosAlumno(id_alumno:number, id_clase:number){
+    return this.http.get(this.url + "/comportamientos/alumno/" + id_alumno + "/" + id_clase)
+  }
 }

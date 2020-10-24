@@ -9,7 +9,7 @@
         <div class="col-8">
             <div class="form-group">
                 <label for="exampleSelect2"><b>Alumno</b></label>
-                <select #alumno (change)="alumno(alumno.value)" class="form-control" id="exampleSelect2">
+                <select #alumno (change)="cambioAlumno(alumno.value)" class="form-control" id="exampleSelect2">
                     <option *ngFor="let alumno of alumnos; let i = index" value="{{alumno.id_alumno}}">{{alumno.apellidos}}, {{alumno.nombre}}</option>
                 </select>
             </div>
@@ -84,8 +84,6 @@
     
 
     <div *ngIf="tablaResumen==false" class="row">
-        <!-- <div class="col-1"></div>
-        <div class="col-10"> -->
             <h3 id="titulo" class="container">{{nombreAlumno}}</h3>
             <table id="valor" class="table">
                 <thead class="thead-dark">
@@ -95,29 +93,15 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td>Deberes</td>
-                    <td>7.5</td>
-                  </tr>
-                  <tr>
-                    <td>Comportamiento</td>
-                    <td>6.4</td>
-                  </tr>
-                  <tr>
-                    <td>Atencion</td>
-                    <td>5.9</td>
-                  </tr>
-                  <tr>
-                    <td>Puntualidad</td>
-                    <td>9</td>
+                  <tr *ngFor="let comportamientoAlumno of comportamientosAlumno; let i = index">
+                    <td style="text-transform: capitalize;"><b>{{comportamientoAlumno.tipo_comportamiento}}</b></td>
+                    <td><b>{{comportamientoAlumno.nota}}</b></td>
                   </tr>
                 </tbody>
               </table>
-        <!-- </div> -->
         <div class="container">
             <button type="button" class="btn btn-dark" (click)="mostrar()">Comparar con la media</button>
         </div>
-        <!-- <div class="col-1"></div> -->
     </div>
 
   <div *ngIf="tablaResumen == true" class="row">

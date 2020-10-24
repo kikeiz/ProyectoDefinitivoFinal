@@ -420,7 +420,7 @@ app.post('/comportamiento', (req,rep)=>{
 
 app.get('/comportamiento/:id_alumno/:tipo_comportamiento', (req,rep)=>{
     let params = [req.params.id_alumno, req.params.tipo_comportamiento]
-    sql = "SELECT * FROM comportamiento WHERE id_alumno = ? AND tipo_comportmiento = ?"
+    sql = "SELECT * FROM comportamiento WHERE id_alumno = ? AND tipo_comportamiento = ?"
     connection.query(sql, params, function(err,res){
         if(err){
             console.log(err)
@@ -434,6 +434,31 @@ app.put('/modificar/comportamiento', (req,rep)=>{
     let params = [req.body.nota, req.body.id_comportamiento]
     sql = "UPDATE comportamiento SET comportamiento.nota = ? WHERE id_comportamiento = ?"
     connection.query(sql, params, function(err,res){
+        if(err){
+            console.log(err)
+        }else{ 
+            rep.send(res)
+         }
+    });
+})
+
+app.get('/comportamientos/alumno/:id/:id_clase', (req,rep)=>{
+    let params = [req.params.id, req.params.id_clase]
+    sql = "SELECT * FROM comportamiento WHERE id_alumno = ? AND comportamiento.id_clase = ?"
+    connection.query(sql, params, function(err,res){
+        if(err){
+            console.log(err)
+        }else{ 
+            rep.send(res)
+         }
+    });
+})
+
+
+app.get('/behaviour/class/:id', (req,rep)=>{
+    let idd = req.params.id
+    sql = "SELECT AVG(nota) AS nota_media, comportamiento.tipo_comportamiento FROM comportamiento WHERE comportamiento.id_clase = ? GROUP BY tipo_comportamiento"
+    connection.query(sql, idd, function(err,res){
         if(err){
             console.log(err)
         }else{ 

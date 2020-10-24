@@ -12,7 +12,7 @@ export class Comportamiento {
     public id_alumno: number;
     public id_clase: number;
 
-    constructor(tipo_comportamiento: TipoComportamiento, nota:number, id_alumno:number, id_clase:number){
+    constructor(tipo_comportamiento: TipoComportamiento, nota:number, id_alumno?:number, id_clase?:number){
         this.tipo_comportamiento = tipo_comportamiento
         this.nota = nota
         this.id_alumno = id_alumno
