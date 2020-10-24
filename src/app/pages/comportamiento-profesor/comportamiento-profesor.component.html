@@ -15,7 +15,7 @@
             </div>
             <div class="form-group">
                 <label for="example-date-input"><b>Fecha</b></label>
-                <input class="form-control" type="date" id="example-date-input">
+                <input [(ngModel)]="date" class="form-control" type="date" id="example-date-input">
             </div>
         </div>
         <div class="col-2"></div>
@@ -59,23 +59,17 @@
     <div *ngIf="tablaResumen==false" class="row">
         <div class="col-2"></div>
         <div class="col-8">
-            <form>
-                <div class="container" id="valor"><input class ="form-control" id="nota" type="number" required name="price" min="0" placeholder="Introduce valor" step="0.1"></div>
+            <form #enviarNota="ngForm" (ngSubmit)="actualizar(enviarNota.value)">
+                <div class="container" id="valor"><input class ="form-control" id="nota" type="number" required name="price" min="0" placeholder="Introduce valor" step="0.1" name="nota" ngModel required></div>
                 <div><i (click)="envimes()" class="far fa-envelope fila"><b><i> Añadir mensaje ?</i></b></i></div>
                 <!-- mensaje -->
                 <div *ngIf="mensaje == true">
-                            <label for="selemens"><b>Mensaje Predeterminado: </b></label><br>
-                            <select class="form-control" id="selemens">
-                                <option value="ninguno">Ninguno</option>
-                                <option value="asistencia">Asistencia</option>
-                                <option value="atencion">Atencion</option>
-                            </select>
                             <div>
-                                <label for="msg"><b>Editar mensaje: </b></label><br>
-                                <input class="form-control"  id="msg" type="text">
+                                <label for="msg"><b>Mensaje: </b></label><br>
+                                <input class="form-control" id="msg" type="text" name="mensaje" ngModel>
                             </div>
                 </div>
-                <div class="container" id="valor"><button (click)="actualizar()" type="reset" class="btn btn-outline-primary">Actualizar</button></div>
+                <div class="container" id="valor"><button [disabled] = "!enviarNota.valid" type="submit" class="btn btn-outline-primary">Actualizar</button></div>
             </form>
         </div>
         <div class="col-2"></div>

@@ -418,9 +418,10 @@ app.post('/comportamiento', (req,rep)=>{
     });
 })
 
-app.get('/comportamiento/:id_alumno/:tipo_comportamiento', (req,rep)=>{
-    let params = [req.params.id_alumno, req.params.tipo_comportamiento]
-    sql = "SELECT * FROM comportamiento WHERE id_alumno = ? AND tipo_comportamiento = ?"
+
+app.get('/bhviour/:id_clase/:tipo/:id_alumno', (req,rep)=>{
+    let params = [req.params.id_clase, req.params.id_alumno, req.params.tipo]
+    sql = "SELECT * FROM comportamiento WHERE  comportamiento.id_clase = ? AND comportamiento.id_alumno = ? AND comportamiento.tipo_comportamiento = ?"
     connection.query(sql, params, function(err,res){
         if(err){
             console.log(err)
@@ -429,6 +430,7 @@ app.get('/comportamiento/:id_alumno/:tipo_comportamiento', (req,rep)=>{
          }
     });
 })
+
 
 app.put('/modificar/comportamiento', (req,rep)=>{
     let params = [req.body.nota, req.body.id_comportamiento]

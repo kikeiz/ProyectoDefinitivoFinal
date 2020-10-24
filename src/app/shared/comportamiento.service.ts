@@ -32,8 +32,8 @@ export class ComportamientoService {
     return this.http.post(this.url + "/comportamiento", comportamiento)
   }
 
-  seleccionarComportamiento(id_alumno:number, tipo_comportamiento:TipoComportamiento){
-    return this.http.get(this.url + "/comportamiento/" + id_alumno + "/" + tipo_comportamiento)
+  seleccionarComportamiento(id_alumno:number, tipo_comportamiento:TipoComportamiento, id_clase:number){
+    return this.http.get(this.url + "/bhviour/" + id_clase + "/" + tipo_comportamiento + "/" + id_alumno)
   }
 
   modificarComportamiento(id_comportamiento:number, nota:number){
