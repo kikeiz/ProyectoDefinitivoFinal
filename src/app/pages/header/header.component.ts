@@ -43,7 +43,10 @@ export class HeaderComponent implements OnInit {
     this.serviceNotas.obtenerNotas(this.serviceAñadirClase.id_clase)
   }
 
-  
+  mostrarCalificaciones(){
+    this.service.home(null)
+    this.serviceAñadirClase.obtenerasignaturas()
+  }
 
   removeMain(){
     this.service.home(null)

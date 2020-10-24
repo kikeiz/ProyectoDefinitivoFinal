@@ -5,6 +5,9 @@ import { Cursos } from 'src/app/models/cursos';
 import { Colegios } from 'src/app/models/colegios';
 import { Asignaturas } from 'src/app/models/asignaturas';
 import { Hijos } from 'src/app/models/hijos';
+import { Comportamiento, TipoComportamiento } from 'src/app/models/comportamiento';
+import { Tipo } from 'src/app/models/nota';
+import { ComportamientoService } from 'src/app/shared/comportamiento.service';
 
 @Component({
   selector: 'app-aniadir-clase',
@@ -20,7 +23,7 @@ export class AniadirClaseComponent implements OnInit {
   public alumnos:Hijos[]
   public ids:number[]
 
-  constructor(public createClase: AñadirClaseService) {
+  constructor(public createClase: AñadirClaseService, public comportamientoService:ComportamientoService) {
     this.insertar = false
     this.cursos = this.createClase.cursos
     this.colegios = this.createClase.colegio
@@ -47,10 +50,18 @@ export class AniadirClaseComponent implements OnInit {
   insertarAlumnos(){
     this.insertar = false
     for(let i=0; i<this.ids.length; i++){
-      this.createClase.alumnosClase(this.ids[i],this.createClase.id_clase).subscribe((data=>{
+      this.createClase.alumnosClase(this.ids[i],this.createClase.id_clase_insertada).subscribe((data=>{
         console.log(data);
       }))
-    }    
+    }
+    let TipoComp:TipoComportamiento[] = [TipoComportamiento.atencion, TipoComportamiento.deberes, TipoComportamiento.participacion, TipoComportamiento.puntualidad]
+    for(let i=0; i<this.ids.length; i++){
+      for(let j=0; j<TipoComp.length; j++){
+        this.comportamientoService.insertarComportamientos(new Comportamiento(TipoComp[j], 10, this.ids[i], this.createClase.id_clase_insertada)).subscribe((data=>{
+          console.log(data);
+        }))
+      }
+    }
     
   }
 
@@ -60,6 +71,7 @@ export class AniadirClaseComponent implements OnInit {
     
     this.createClase.aniadirClases(clase).subscribe((data=>{
       let datos:any = data
+      this.createClase.id_clase_insertada = datos.insertId
       this.createClase.getClase(datos.insertId).subscribe((dataa=>{
         let array:any = dataa
         this.createClase.getAlumnos(array[0].id_curso, array[0].id_colegio).subscribe((data=>{

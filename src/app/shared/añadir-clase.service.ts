@@ -17,6 +17,7 @@ export class AñadirClaseService {
   public colegio:Colegios[]
   public misClases:Clase[]
   public id_clase:number
+  public id_clase_insertada:number
   public id_colegio:number
   public id_curso:number
   public nombre_clase:string
@@ -32,6 +33,7 @@ export class AñadirClaseService {
     this.colegio = []
     this.misClases = []
     this.nombre_clase = "Ninguna Seleccionada"
+    this.id_clase_insertada = 0
   }
 
   id(id_profesor:number){
@@ -54,6 +56,17 @@ export class AñadirClaseService {
   obtenerAsignaturas(){
      return this.http.get(this.url+ "/asignaturas")
  }
+
+  obtenerasignaturas(){
+  return this.http.get(this.url+ "/asignaturas").subscribe((data=>{
+    let array:any = data
+    for(let i =0; i<array.length; i++){
+      this.asignaturas.push(new Asignaturas(array[i].id_asignatura, array[i].nombre))
+    }
+    console.log(this.asignaturas);
+    
+  }))
+  }
 
   obtenerCursos(){
    return this.http.get(this.url+ "/cursos")
