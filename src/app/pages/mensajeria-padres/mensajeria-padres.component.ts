@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Comunications } from 'src/app/models/comunications';
+import { MensajesService } from 'src/app/shared/mensajes.service';
 
 @Component({
   selector: 'app-mensajeria-padres',
@@ -7,13 +8,13 @@ import { Comunications } from 'src/app/models/comunications';
   styleUrls: ['./mensajeria-padres.component.css']
 })
 export class MensajeriaPadresComponent implements OnInit {
-  public mensaje:Comunications
   public mensajes:Comunications[]
+  public mensaje: Comunications
   public mostrar:boolean
-  public mensajeFinal:string
-  constructor() { 
-    this.mensajes = []
+  constructor(public mensajeService:MensajesService) { 
+    this.mensajes = this.mensajeService.mensajesPadres
     this.mostrar = false
+    this.mensaje = null
   }
 
   ngOnInit(): void {
@@ -21,7 +22,7 @@ export class MensajeriaPadresComponent implements OnInit {
 
   mostrarMensaje(index:number){
     this.mostrar = true
-    this.mensajeFinal = this.mensajes[index].contenido
+    this.mensaje = this.mensajes[index]
   }
 
   cerrar(){

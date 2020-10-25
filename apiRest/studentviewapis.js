@@ -405,7 +405,19 @@ app.post('/mensaje', (req,rep)=>{
 
 app.get('/mensajes/:id_alumno', (req,rep)=>{
     let id = req.params.id_alumno
-    sql = "SELECT * FROM mensajes WHERE id_alumno = ?"
+    sql = "SELECT asignaturas.nombre, mensajes.id_mensaje, mensajes.tipo, mensajes.contenido, mensajes.valor, mensajes.quienenvia, mensajes.fecha, mensajes.id_clase, mensajes.id_alumno FROM mensajes JOIN clases ON mensajes.id_clase = clases.id_clase JOIN asignaturas ON clases.id_asignatura = asignaturas.id_asignatura WHERE mensajes.id_alumno = ? AND mensajes.quienenvia = 'profesor'"
+    connection.query(sql, id, function(err,res){
+        if(err){
+            console.log(err)
+        }else{ 
+            rep.send(res)
+         }
+    });
+})
+
+app.get('/mensajes/clase/:id_clase', (req,rep)=>{
+    let id = req.params.id_clase
+    sql = "SELECT asignaturas.nombre, mensajes.id_mensaje, mensajes.tipo, mensajes.contenido, mensajes.valor, mensajes.quienenvia, mensajes.fecha, mensajes.id_clase, mensajes.id_alumno, alumnos.nombre AS nombre_alumno, alumnos.apellidos FROM mensajes JOIN clases ON mensajes.id_clase = clases.id_clase JOIN asignaturas ON clases.id_asignatura = asignaturas.id_asignatura JOIN alumnos ON mensajes.id_alumno = alumnos.id_alumno WHERE mensajes.id_clase = ? AND mensajes.quienenvia = 'padre'"
     connection.query(sql, id, function(err,res){
         if(err){
             console.log(err)

@@ -16,6 +16,11 @@
     border-width: 1px;
 }
 
+#boton{
+    margin-left: auto;
+    margin-right: auto;
+}
+
 #tamaño{
     height: 80px;
     width: 200px;

@@ -11,20 +11,22 @@
 <div class="row">
     <div class="col-12">
         <table class="table">
-            <tbody></tbody>
+            <tbody>
             <!-- <tr *ngFor="let mensaje of mensajes" [ngStyle]="(mensaje.tipo) == 'Puntualidad' ? {'background-color': '#ff000'} : (mensaje.tipo) == 'Atencion' ? {'background-color': '#FFFF99'} :(mensaje.tipo) == 'Asistencia' ? {'background-color': '#C0C0C0'}:(mensaje.tipo) == 'Participacion' ? {'background-color': '#FFCC99'} :(mensaje.tipo) == 'Nota' ? {'background-color': '#99FFFF'} : {'background-color': '#FFCCCC'}"> -->
-            <tr *ngFor="let mensaje of mensajes; let i = index" (click)="mostrarMensaje(i)" [ngStyle]="(mensaje.positivo) == true ? {'background-color': '#99FF99'} : {'background-color': '#FF9999'}" >
-                <td *ngIf="mostrar==false"><img src="{{mensaje.icono}}"></td>
+            <tr *ngFor="let mensaje of mensajes; let i = index" (click)="mostrarMensaje(i)" [ngStyle]="(mensaje.valor) == positivo ? {'background-color': '#99FF99'} : {'background-color': '#FF9999'}" >
+                <td *ngIf="mostrar==false">{{mensaje.asignatura}}</td>
                 <td *ngIf="mostrar==false"><b>{{mensaje.tipo}}</b></td>
-                <td *ngIf="mostrar==false"><b>{{mensaje.fecha}}</b></td>
+                <td *ngIf="mostrar==false"><b>{{mensaje.fecha1 | fechas}}</b></td>
             </tr>
             <tr *ngIf="mostrar == true">
-                <td><b>{{mensajeFinal}}</b></td>
+                <td><b>{{mensaje.contenido}}</b></td>
             </tr>
             <tr *ngIf="mostrar == true">
-                <td class="container"><button class="container" (click)="cerrar()" class="btn btn-dark">Cerrar</button></td>
+                <td></td>
+                <td id="boton" ><button (click)="cerrar()" class="btn btn-dark">Cerrar</button></td>
+                <td></td>
             </tr>
-            <tbody></tbody>
+            </tbody>
         </table>
     </div>
 </div>

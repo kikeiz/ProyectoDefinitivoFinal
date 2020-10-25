@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
 import { ComportamientoService } from 'src/app/shared/comportamiento.service';
 import { Asistencia } from 'src/app/models/asistencia';
 import { AsistenciaService } from 'src/app/shared/asistencia.service';
+import { MensajesService } from 'src/app/shared/mensajes.service';
 
 @Component({
   selector: 'app-header',
@@ -25,7 +26,7 @@ export class HeaderComponent implements OnInit {
   public nombre_clase:string
   public nombre_alumno:string
 
-  constructor(public service: LoginService, public serviceAñadirAlumno:AñadirAlumnoService, public serviceAñadirClase:AñadirClaseService, public serviceNotas:NotasService, private router: Router, public comportamientoService:ComportamientoService, public asistenciaService:AsistenciaService) { 
+  constructor(public service: LoginService, public serviceAñadirAlumno:AñadirAlumnoService, public serviceAñadirClase:AñadirClaseService, public serviceNotas:NotasService, private router: Router, public comportamientoService:ComportamientoService, public asistenciaService:AsistenciaService, public mensajeService:MensajesService) { 
     this.isCollapsed = true
     this.clases = this.serviceAñadirClase.misClases
     this.alumnos = null
@@ -107,6 +108,7 @@ export class HeaderComponent implements OnInit {
     this.serviceNotas.obtenerNotas(this.clases[i].id_clase)   
     this.comportamientoService.alumnosClase(this.clases[i].id_clase)
     this.asistenciaService.porcentaje(this.clases[i].id_clase)
+    this.mensajeService.obtenerMensajes(null, this.clases[i].id_clase)
     
   }
 
@@ -115,6 +117,7 @@ export class HeaderComponent implements OnInit {
     this.nombre_alumno = (this.alumnos[i].nombre + " " + this.alumnos[i].apellidos).toUpperCase()
     this.serviceNotas.obtenerNotasAlumnos(this.alumnos[i].id_alumno)
     this.asistenciaService.faltasAlumno(this.alumnos[i].id_alumno)
+    this.mensajeService.obtenerMensajes(this.alumnos[i].id_alumno, null)
   }
 
   traerAlumnos(){
