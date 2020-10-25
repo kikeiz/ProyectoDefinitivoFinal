@@ -27,7 +27,7 @@ export class HeaderComponent implements OnInit {
   public nombre_alumno:string
 
   constructor(public service: LoginService, public serviceAñadirAlumno:AñadirAlumnoService, public serviceAñadirClase:AñadirClaseService, public serviceNotas:NotasService, private router: Router, public comportamientoService:ComportamientoService, public asistenciaService:AsistenciaService, public mensajeService:MensajesService) { 
-    this.isCollapsed = true
+    this.isCollapsed = false
     this.clases = this.serviceAñadirClase.misClases
     this.alumnos = null
     this.nombre_clase = "Ninguna Seleccionada"

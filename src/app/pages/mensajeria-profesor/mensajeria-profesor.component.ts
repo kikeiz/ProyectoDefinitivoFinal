@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Comunications } from 'src/app/models/comunications';
+import { MensajesService } from 'src/app/shared/mensajes.service';
 
 @Component({
   selector: 'app-mensajeria-profesor',
@@ -8,13 +9,12 @@ import { Comunications } from 'src/app/models/comunications';
 })
 export class MensajeriaProfesorComponent implements OnInit {
   public mensaje: Comunications
-  public mensajes:Comunications[] = [
-  
-  ]
+  public mensajes:Comunications[]
   public mostrar:boolean
   public mensajeFinal:string
-  constructor() { 
+  constructor(public mensajeService:MensajesService) { 
     this.mostrar = false
+    this.mensajes = this.mensajeService.mensajesProfes
   }
 
   ngOnInit(): void {
@@ -22,7 +22,7 @@ export class MensajeriaProfesorComponent implements OnInit {
 
   mostrarMensaje(index:number){
     this.mostrar = true
-    this.mensajeFinal = this.mensajes[index].contenido
+    this.mensaje = this.mensajes[index]
   }
 
   cerrar(){

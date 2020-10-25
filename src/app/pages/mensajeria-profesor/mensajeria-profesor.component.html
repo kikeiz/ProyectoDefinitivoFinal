@@ -12,13 +12,12 @@
     <div class="col-12">
         <table class="table">
             <tbody></tbody>
-            <tr *ngFor="let mensaje of mensajes; let i = index" (click)="mostrarMensaje(i)" [ngStyle]="(mensaje.asignatura) == 'Biologia' ? {'background-color': '#99FFFF'} : (mensaje.asignatura) == 'Matematicas' ? {'background-color': '#FFFF99'} :{'background-color': '#C0C0C0'}">
-                <td *ngIf="mostrar==false"><b>{{mensaje.asignatura}}</b></td>
-                <td *ngIf="mostrar==false"><b>{{mensaje.fecha}}</b></td>
-                <td *ngIf="mostrar==false"><b>{{mensaje.alumno}}</b></td>
+            <tr *ngFor="let mensaje of mensajes; let i = index" (click)="mostrarMensaje(i)">
+                <td *ngIf="mostrar==false"><b>{{mensaje.fecha | fechas}}</b></td>
+                <td *ngIf="mostrar==false"><b>{{mensaje.nombre_alumno}} {{mensaje.apellidos}}</b></td>
             </tr>
             <tr *ngIf="mostrar == true">
-                <td id="final"><b>{{mensajeFinal}}</b></td>
+                <td id="final"><b>{{mensaje.contenido}}</b></td>
             </tr>
             <tr *ngIf="mostrar == true">
                 <!-- <td></td> -->

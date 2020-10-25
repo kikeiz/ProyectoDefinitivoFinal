@@ -83,7 +83,7 @@ export class MensajesService {
       let array:any = data
       this.numeroProfes = array.length
       for(let i=0; i<array.length; i++){
-        this.mensajesProfes.push(new Comunications(array[i].contenido, TipoMensaje.asistencia, null, Valor.positivo, array[i].id_clase, array[i].id_alumno, Envia.padre, array[i].id_mensaje, array[i].nombre, array[i].nombre_alumno, array[i].apellidos, new Date(Array[i].fecha).toDateString()))
+        this.mensajesProfes.push(new Comunications(array[i].contenido, TipoMensaje.asistencia, null, Valor.positivo, array[i].id_clase, array[i].id_alumno, Envia.padre, array[i].id_mensaje, array[i].nombre, array[i].nombre_alumno, array[i].apellidos, new Date(array[i].fecha).toDateString()))
       }
       console.log(this.mensajesProfes);
     }))

@@ -1,14 +1,16 @@
 
   <div class="hola" *ngIf ="service.navPadres == true" class="sticky">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <button class="navbar-toggler" type="button" data-toggle="collapse" (click)="isCollapsed = !isCollapsed" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <button class="navbar-toggler" type="button" data-toggle="collapse" (click)="!isCollapsed = isCollapsed" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <a class="navbar-brand" routerLink="/mainPadre">StudentView</a>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent" [ngbCollapse]="isCollapsed">
+      <div class="collapse navbar-collapse" id="navbarSupportedContent" [ngbCollapse]="!isCollapsed">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item active">
-            <a class="nav-link" (click) ="mostrarCalificaciones()" routerLink="/mainNotasPadre">Calificaciones<span class="sr-only">(current)</span></a>
+            <a class="nav-link" routerLink="/mainPadre">Home</a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" (click) ="mostrarCalificaciones()" routerLink="/mainNotasPadre">Calificaciones</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" (click) ="removeMain()" routerLink="/asistenciaPadre">Asistencia</a>
@@ -39,14 +41,16 @@
   
     <div class="hola" *ngIf ="service.navPadres == false" class="sticky">
       <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <button class="navbar-toggler" type="button" data-toggle="collapse" (click)="isCollapsed = !isCollapsed" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" (click)="!isCollapsed = isCollapsed" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
-        <a class="navbar-brand" routerLink="/mainProfe">StudentView</a>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent" [ngbCollapse]="isCollapsed">
+        <div class="collapse navbar-collapse" id="navbarSupportedContent" [ngbCollapse]="!isCollapsed">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-              <a class="nav-link" (click) ="obtenerNotas()" routerLink="/mainNotasProfesor">Calificaciones<span class="sr-only">(current)</span></a>
+              <a class="nav-link" routerLink="/mainProfe">Home</a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" (click) ="obtenerNotas()" routerLink="/mainNotasProfesor">Calificaciones</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" (click) ="removeMain()" routerLink="/asistenciaProfesor">Asistencia</a>
