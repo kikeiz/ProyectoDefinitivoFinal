@@ -52,4 +52,12 @@ export class AsistenciaService {
       console.log(this.faltas);
     }))
   }
+
+  justificar(id_asistencia:number){
+    return this.http.put(this.url + "/justificar", {"id_asistencia": id_asistencia})
+  }
+
+  datosFalta(id_asistencia:number){
+    return this.http.get(this.url + "/datos/falta/" + id_asistencia)
+  }
 }

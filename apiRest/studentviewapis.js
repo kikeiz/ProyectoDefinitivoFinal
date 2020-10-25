@@ -403,6 +403,18 @@ app.post('/mensaje', (req,rep)=>{
     });
 })
 
+app.get('/mensajes/:id_alumno', (req,rep)=>{
+    let id = req.params.id_alumno
+    sql = "SELECT * FROM mensajes WHERE id_alumno = ?"
+    connection.query(sql, id, function(err,res){
+        if(err){
+            console.log(err)
+        }else{ 
+            rep.send(res)
+         }
+    });
+})
+
 
 // COMPORTAMIENTO
 
@@ -511,6 +523,30 @@ app.get('/faltasAlumno/:id_alumno', (req,rep)=>{
     let params = [req.params.id_alumno]
     sql = "SELECT asignaturas.nombre, asistencia.id_clase, asistencia.fecha, asistencia.id_asistencia FROM asistencia JOIN clases ON asistencia.id_clase = clases.id_clase JOIN asignaturas ON clases.id_asignatura = asignaturas.id_asignatura WHERE asistencia.id_alumno = ? AND asistencia.asiste = false AND asistencia.justificada = false"
     connection.query(sql, params, function(err,res){
+        if(err){
+            console.log(err)
+        }else{ 
+            rep.send(res)
+         }
+    });
+})
+
+app.put('/justificar', (req,rep)=>{
+    let id = req.body.id_asistencia
+    sql = "UPDATE asistencia SET asistencia.justificada = true WHERE id_asistencia = ?"
+    connection.query(sql, id, function(err,res){
+        if(err){
+            console.log(err)
+        }else{ 
+            rep.send(res)
+         }
+    });
+})
+
+app.get('/datos/falta/:id_asistencia', (req,rep)=>{
+    let id = req.params.id_asistencia
+    sql = "SELECT alumnos.nombre, alumnos.apellidos, asistencia.fecha, asistencia.id_alumno, asistencia.id_clase FROM asistencia JOIN alumnos ON asistencia.id_alumno = alumnos.id_alumno WHERE asistencia.id_asistencia = ?"
+    connection.query(sql, id, function(err,res){
         if(err){
             console.log(err)
         }else{ 
