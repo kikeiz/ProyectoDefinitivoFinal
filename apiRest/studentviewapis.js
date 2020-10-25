@@ -74,8 +74,8 @@ app.post('/register/profesor', (req,rep)=>{
             if(res.length > 0){
                 rep.send({"status":"existe"})
             }else{
-                let params = new Array (req.body.username, req.body.password, req.body.email)
-                sql = "INSERT INTO profesor (username, password, email) VALUE (?,?,?)"
+                let params = new Array (req.body.username, req.body.password, req.body.email, req.body.foto)
+                sql = "INSERT INTO profesor (username, password, email, foto) VALUE (?,?,?,?)"
                 connection.query(sql, params, function(err,rer){
                     if(err){
                         console.log(err)

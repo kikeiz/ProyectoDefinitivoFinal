@@ -24,10 +24,10 @@
   </ul>
 </div> -->
 
+<!--INFO USUARIO PROFE-->
 <div *ngIf="service.navPadres == false && mostrar == false" class="view-profile-card">
-  <img class="image-profile" src="http://blogs.itpro.es/octaviordz/files/2012/10/perfiles-de-usuario.png" alt="image-profile" />
- 
-  <div class="container-info"> 
+  <img class="image-profile" src="{{profesor.foto}}" alt="User profile"/>
+ <div class="container-info"> 
     <h5 class="title">{{profesor.username}}</h5>
     <p class="name"><b>Nombre:</b> {{profesor.nombre}}</p>
     <p class="lastname"><b>Apellidos:</b> {{profesor.apellidos}}</p>
@@ -35,11 +35,10 @@
     <p class="email"><b>Email:</b> {{profesor.email}}</p>
     <br/>
     <div class="button-edit"><i (click)="editar()" class="fas fa-user-edit "> <span style="font-family: Arial, Helvetica, sans-serif;"></span>Editar perfil</i></div>
-  </div>  
-
+</div>
 </div>
 
-<div *ngIf="service.navPadres == true && mostrar == true" class="card container" style="width: 18rem;">
+<!-- <div *ngIf="service.navPadres == true && mostrar == true" class="card container" style="width: 18rem;">
   <img class="card-img-top" src="https://www.bing.com/images/search?view=detailV2&ccid=TFgpo9r5&id=9F6EC748AA1F80B45B116356195634E2AD3FDA10&thid=OIP.TFgpo9r5PpFEUjamk2sLCwAAAA&mediaurl=http%3a%2f%2fblogs.itpro.es%2foctaviordz%2ffiles%2f2012%2f10%2fperfiles-de-usuario.png&exph=209&expw=228&q=foto+perfil+usuario&simid=608019214424801922&ck=16E4AD14F8709C375ABC47BDC970CC45&selectedIndex=28&FORM=IRPRST&ajaxhist=0" alt="Card image cap">
   <div class="card-body">
       <form>
@@ -64,14 +63,26 @@
               <input type="email" class="form-control" id="exampleInputPassword1" placeholder="Email">
           </div>
         </form>
-  </div>
-  <div>
+  </div> -->
+  <!-- <div>
       <button type="button" (click)="ocultar()" class="btn btn-warning container">Terminar</button>
   </div>
+</div> -->
+
+<!--EDITAR USUARIO PROFE-->
+<div *ngIf="service.navPadres == false && mostrar == true" class="edit-profile">
+
+  <div class="contenedor-imagen">
+  <img  alt="User profile" src={{profesor.foto}} id="avatar" class="image-profile-edit"/> 
+  <label>
+    <input class="foto-seleccionada"
+           type="file"
+           accept="image/*"
+           id="fotosubida"
+           (change)="actualizarFoto()"/>
+  </label> 
 </div>
 
-<div *ngIf="service.navPadres == false && mostrar == true" class="card container" style="width: 18rem;">
-  <img class="card-img-top" src="http://1.bp.blogspot.com/-Rxx95yskmYs/UXSXhRNGppI/AAAAAAAABpY/7zyCGao7cxg/s1600/fotos+de+mujeres+eslovacas+zuzana+1.jpg" alt="Card image cap">  
   <div class="card-body">
       <form>
           <div class="form-group">
@@ -90,10 +101,7 @@
           <label for="password">Password</label>
           <input type="password" class="form-control" name="password" id="password" placeholder="Password" [(ngModel)]="profesor.password">
       </div>
-      <div class="form-group">
-        <label for="photo">Foto</label>
-        <input type="text" class="form-control" name="photo" id="photo" placeholder="Foto" [(ngModel)]="profesor.foto">
-    </div>
+
           <div class="form-group">
               <label for="description">Descripcion</label>
               <input type="text" class="form-control" name="description" id="description" placeholder="Descripcion" [(ngModel)]="profesor.descripcion">
@@ -106,18 +114,14 @@
         </form>
   </div>
   <div>
-      <button type="button" (click)="actualizar()" class="btn btn-warning container">Terminar</button>
+      <button type="button" (click)="actualizar()" class="btn btn-warning button-actualizar">Actualizar</button>
   </div>
 </div>
 
  <!-- El atributo Accept define los archivos aceptados para la entrada.  -->
     <!-- Image/* especifica que podemos elegir imágenes de cualquier tipo por esta entrada. 
     #imageInput es una referencia de entrada en la que podemos acceder a los archivos cargados// -->
-  <!-- <label class="image-upload-container btn btn-bwm">
-    <span>Select Image</span>
-    <input #imageInput
-           type="file"
-           accept="image/*"
-           (change)="subirFoto(imageInput)"/>
-  </label>
-   -->
+
+  
+
+  

@@ -28,6 +28,7 @@ export class PerfilService {
       this.profesor.email = data[0].email
       this.profesor.username = data[0].username
       this.profesor.password = data[0].password
+      this.profesor.foto = data[0].foto
            // this.profesor=new PerfilProfesor(data[0].nombre,data[0].apellidos,data[0].descripcion,data[0].email,data[0].username,data[0].password,data[0].foto)
       console.log(this.profesor)
     }))
