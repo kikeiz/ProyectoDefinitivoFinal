@@ -15,9 +15,9 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr (click)="mostrarAsistencia()" class="fila">
-                        <td>19-08-1996</td>
-                        <td>79%</td>
+                    <tr *ngFor="let porcentaje of porcentajes; let i = index" (click)="mostrarAsistencia(i)" class="fila">
+                        <td><b>{{porcentaje.fecha1 | fechas}}</b></td>
+                        <td><b>{{porcentaje.asistencias | porcentaje}}</b></td>
                     </tr>
                     </tbody>
                 </table>
@@ -29,7 +29,7 @@
             <div class="col-10">
                 <div class="form-group">
                     <label for="example-date-input"><b>Fecha</b></label>
-                    <input class="form-control" type="date" id="example-date-input">
+                    <input class="form-control" type="date" id="example-date-input" [(ngModel)] = "fecha">
                 </div>
             </div>
             <div class="col-1"></div>
@@ -41,14 +41,14 @@
                     <tr>
                         <th scope="col">Nombre</th>
                         <th scope="col">Apellidos</th>
-                        <th scope="col">Asistencia</th>
+                        <th scope="col">Justificada</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td>Enrique</td>
-                        <td>Izquierdo</td>
-                        <td><input type="checkbox"></td>
+                    <tr *ngFor = "let alumno of alumnos; let i = index">
+                        <td>{{alumno.nombre}}</td>
+                        <td>{{alumno.apellidos}}</td>
+                        <td><input (change)="chequeado(alumno.id_alumno, $event.target.checked)" type="checkbox" checked></td>
                     </tr>
                     </tbody>
                 </table>
@@ -69,10 +69,10 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <tr *ngFor="let asistencia of asistencias">
-                        <td>{{asistencia.nombre}}</td>
-                        <td>{{asistencia.apellido}}</td>
-                        <td id="size"><div class="tamaño container border"[ngStyle]="(asistencia.asistencia == true) ? {'background-color': '#99FF99'} : {'background-color': '#FF9999'}"><i *ngIf="asistencia.asistencia == true" class="fas fa-check margin"></i><i *ngIf="asistencia.asistencia == false" class="fas fa-times margin"></i></div></td>
+                      <tr *ngFor="let falta of faltaAsistencia">
+                        <td>{{falta.nombre}}</td>
+                        <td>{{falta.apellidos}}</td>
+                        <td id="size"><div class="tamaño container border"[ngStyle]="(falta.justificada == true) ? {'background-color': '#99FF99'} : {'background-color': '#FF9999'}"><i *ngIf="falta.justificada == true" class="fas fa-check margin"></i><i *ngIf="falta.justificada == false" class="fas fa-times margin"></i></div></td>
                       </tr>
                     </tbody>
                   </table>

@@ -97,7 +97,7 @@
                 <tbody>
                 <tr *ngFor="let notamedia of notasmedias; let i = index" id="fila" (click)="editar(i)">
                     <td style="text-transform: uppercase;"><b>{{notamedia.tipo}}</b></td>
-                    <td><b>{{notamedia.fecha}}</b></td>
+                    <td><b>{{notamedia.fecha | fechas}}</b></td>
                     <td><b>{{notamedia.nota}}</b></td>
                 </tr>
                 </tbody>

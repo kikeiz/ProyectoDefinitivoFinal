@@ -60,7 +60,7 @@
         <tbody>
             <tr id="fila" *ngFor="let not of nota" [ngStyle]="(not.nota) >= 5 ? {'background-color': '#99FF99'} : {'background-color': '#FF9999'}">
                 <td><b>{{not.asignatura}}</b></td>
-                <td><b>{{not.fecha}}</b></td>
+                <td><b>{{not.fecha | fechas}}</b></td>
                 <td><b>{{not.nota}}</b></td>
             </tr>
         </tbody>

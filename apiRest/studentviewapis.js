@@ -468,4 +468,42 @@ app.get('/behaviour/class/:id', (req,rep)=>{
          }
     });
 })
+
+// ASISTENCIA
+
+app.post('/asistencia', (req,rep)=>{
+    let params = [req.body.fecha, req.body.id_alumno, req.body.id_clase, req.body.asiste, req.body.justificada]
+    sql = "INSERT INTO asistencia (fecha, id_alumno, id_clase, asiste, justificada) VALUES (?, ?, ?, ?, ?)"
+    connection.query(sql, params, function(err,res){
+        if(err){
+            console.log(err)
+        }else{ 
+            rep.send(res)
+         }
+    });
+})
+
+app.get('/porcentaje/:id', (req,rep)=>{
+    let id = req.params.id
+    sql = "SELECT (COUNT(CASE WHEN asiste = true THEN 1 END)*100)/ COUNT(asiste) AS asistencias, fecha FROM asistencia WHERE id_clase = ? GROUP BY fecha"
+    connection.query(sql, id, function(err,res){
+        if(err){
+            console.log(err)
+        }else{ 
+            rep.send(res)
+         }
+    });
+})
+
+app.get('/faltas/:id_clase/:fecha', (req,rep)=>{
+    let params = [req.params.id_clase, req.params.fecha]
+    sql = "SELECT alumnos.nombre, alumnos.apellidos, asistencia.id_alumno, asistencia.justificada FROM asistencia JOIN alumnos ON asistencia.id_alumno = alumnos.id_alumno WHERE id_clase = ? AND asistencia.fecha = ? AND asistencia.asiste = false"
+    connection.query(sql, params, function(err,res){
+        if(err){
+            console.log(err)
+        }else{ 
+            rep.send(res)
+         }
+    });
+})
 app.listen(3019);
