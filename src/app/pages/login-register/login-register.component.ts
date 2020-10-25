@@ -83,6 +83,10 @@ export class LoginRegisterComponent implements OnInit {
     }
     this.service.navbar(data)
   }
-
-
+// usuarioActualizado(data:string){
+// this.service.putUsuario(this.login).subscribe((data) =>{
+// console.log(data);
+// this.service.putUsuario('/perfil')
 }
+
+
