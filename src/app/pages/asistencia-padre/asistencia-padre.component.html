@@ -12,9 +12,9 @@
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>Matematicas</td>
-              <td>25/06</td>
+            <tr *ngFor="let falta of faltas; let i = index">
+              <td><b>{{falta.asignatura}}</b></td>
+              <td><b>{{falta.fecha1 | fechas}}</b></td>
               <td><input type="checkbox"></td>
             </tr>
           </tbody>

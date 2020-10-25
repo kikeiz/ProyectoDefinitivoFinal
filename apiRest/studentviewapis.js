@@ -506,4 +506,16 @@ app.get('/faltas/:id_clase/:fecha', (req,rep)=>{
          }
     });
 })
+
+app.get('/faltasAlumno/:id_alumno', (req,rep)=>{
+    let params = [req.params.id_alumno]
+    sql = "SELECT asignaturas.nombre, asistencia.id_clase, asistencia.fecha, asistencia.id_asistencia FROM asistencia JOIN clases ON asistencia.id_clase = clases.id_clase JOIN asignaturas ON clases.id_asignatura = asignaturas.id_asignatura WHERE asistencia.id_alumno = ? AND asistencia.asiste = false AND asistencia.justificada = false"
+    connection.query(sql, params, function(err,res){
+        if(err){
+            console.log(err)
+        }else{ 
+            rep.send(res)
+         }
+    });
+})
 app.listen(3019);
