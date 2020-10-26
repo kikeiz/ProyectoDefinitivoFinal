@@ -428,7 +428,7 @@ app.get('/mensajes/clase/:id_clase', (req,rep)=>{
 })
 
 
-// COMPORTAMIENTO
+// COMPORTAMIENTO PROFESOR
 
 app.post('/comportamiento', (req,rep)=>{
     let params = [req.body.tipo_comportamiento, req.body.id_alumno, req.body.id_clase]
@@ -470,7 +470,7 @@ app.put('/modificar/comportamiento', (req,rep)=>{
 
 app.get('/comportamientos/alumno/:id/:id_clase', (req,rep)=>{
     let params = [req.params.id, req.params.id_clase]
-    sql = "SELECT * FROM comportamiento WHERE id_alumno = ? AND comportamiento.id_clase = ?"
+    sql = "SELECT comportamiento.id_comportamiento, comportamiento.tipo_comportamiento, comportamiento.nota, comportamiento.id_alumno, comportamiento.id_clase, alumnos.nombre, alumnos.apellidos FROM comportamiento JOIN alumnos ON comportamiento.id_alumno = alumnos.id_alumno WHERE comportamiento.id_alumno = ? AND comportamiento.id_clase = ?"
     connection.query(sql, params, function(err,res){
         if(err){
             console.log(err)
@@ -485,6 +485,20 @@ app.get('/behaviour/class/:id', (req,rep)=>{
     let idd = req.params.id
     sql = "SELECT AVG(nota) AS nota_media, comportamiento.tipo_comportamiento FROM comportamiento WHERE comportamiento.id_clase = ? GROUP BY tipo_comportamiento"
     connection.query(sql, idd, function(err,res){
+        if(err){
+            console.log(err)
+        }else{ 
+            rep.send(res)
+         }
+    });
+})
+
+//COMPORTAMIENTO PADRE
+
+app.get('/clases/alumno/:id_alumno', (req,rep)=>{
+    let id = req.params.id_alumno
+    sql = "SELECT asignaturas.nombre, clases_alumnos.id_clases FROM clases_alumnos JOIN clases ON clases_alumnos.id_clases = clases.id_clase JOIN asignaturas ON clases.id_asignatura = asignaturas.id_asignatura WHERE id_alumnos = ?"
+    connection.query(sql, id, function(err,res){
         if(err){
             console.log(err)
         }else{ 

@@ -1,40 +1,15 @@
 <nav class="title">
   <h1>Comportamiento</h1>
 </nav>
-<body class="body">
-    <div class="flex">
-        <div *ngIf="semana == false"><div class="flex-item">
-          <div class="height">
-          <canvas id="graf" baseChart width="400px" height="200px"
-                      [datasets]="lineChartData"
-                      [labels]="lineChartLabels"
-                      [options]="lineChartOptions"
-                      [colors]="lineChartColors"
-                      [legend]="lineChartLegend"
-                      [chartType]="lineChartType"
-                      (chartHover)="chartHovered($event)"
-                      (chartClick)="chartClicked($event)"></canvas>
-          </div>
-        </div>
-        <div class="flex-item container">
-          <table class="table table-responsive table-condensed center">
-            <tr>
-              <th>Tipo de conducta</th>
-              <th *ngFor="let label of lineChartLabels">{{label}}</th>
-            </tr>
-            <tr *ngFor="let d of lineChartData; let i=index" [class]="'line-'+i">
-              <td>{{d.label}}</td>
-              <td *ngFor="let label of lineChartLabels; let j=index">{{d && d.data[j]}}</td>
-            </tr>
-          </table>
-          <button type="button" class="btn btn-dark" (click)="cambiar('semana')">10 Días</button>
-        </div></div>
 
-        <div *ngIf="semana == true"><div class="flex-item">
+<div class="body">
+    <div class="flex">
+      <div>
+          <div class="flex-item">
             <div class="height">
             <canvas id="graf" baseChart width="400px" height="200px"
                         [datasets]="lineChartData"
-                        [labels]="lineChartLabelsW"
+                        [labels]="lineChartLabels"
                         [options]="lineChartOptions"
                         [colors]="lineChartColors"
                         [legend]="lineChartLegend"
@@ -43,20 +18,22 @@
                         (chartClick)="chartClicked($event)">
             </canvas>
             </div>
-        </div>
+          </div>
+      
           <div class="flex-item container">
             <table class="table table-responsive table-condensed center">
               <tr>
                 <th>Tipo de conducta</th>
-                <th *ngFor="let label of lineChartLabelsW">{{label}}</th>
+                <th *ngFor="let label of lineChartLabels">{{label}}</th>
               </tr>
               <tr *ngFor="let d of lineChartData; let i=index" [class]="'line-'+i">
                 <td>{{d.label}}</td>
-                <td *ngFor="let label of lineChartLabelsW; let j=index">{{d && d.data[j]}}</td>
+                <td *ngFor="let label of lineChartLabels; let j=index">{{d && d.data[j]}}</td>
               </tr>
             </table>
-                <button type="button" class="btn btn-dark" (click)="cambiar('mes')">Mes</button>
-          </div></div>
+            <button type="button" class="btn btn-primary" routerLink="/comportamientoGlobal">Global</button>
+          </div>
+      </div>
     </div>
-</body>
+</div>
 

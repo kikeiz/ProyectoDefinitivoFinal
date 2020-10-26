@@ -13,12 +13,14 @@ export class AñadirAlumnoService {
   public colegios:Colegios[]
   public cursos: Cursos[]
   public alumnos:Alumno[]
+  public nombre_alumno:string[]
  
   private url:string = "http://localhost:3019"
   constructor(private http:HttpClient) {
     this.colegios = []
     this.cursos = []
     this.alumnos = []
+    this.nombre_alumno = []
   
    }
 

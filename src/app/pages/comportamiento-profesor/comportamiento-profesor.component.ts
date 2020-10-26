@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ChartDataSets, ChartOptions, ChartType } from 'chart.js';
-import { Label } from 'ng2-charts';
+import { BaseChartDirective, Label } from 'ng2-charts';
 import { Alumno } from 'src/app/models/alumno';
 import { Comportamiento, TipoComportamiento } from 'src/app/models/comportamiento';
 import { Comunications, Envia, TipoMensaje, Valor } from 'src/app/models/comunications';
@@ -67,13 +67,16 @@ export class ComportamientoProfesorComponent implements OnInit {
     this.mostrarF4 = false
     this.mensaje = false
     this.alumnos = this.comportamientoService.alumnos
-    this.nombreAlumno = this.alumnos[0].nombre + " " + this.alumnos[0].apellidos
+    // this.nombreAlumno = this.alumnos[0].nombre + " " + this.alumnos[0].apellidos
     this.comportamientosAlumno = []
     this.mediaComportamiento = []
     this.barChartData[0].label = this.alumnos[0].nombre + " " + this.alumnos[0].apellidos
     this.id_alumno = 0
     this.splice = 0
    }
+
+   @ViewChild(BaseChartDirective, { static: true }) chart: BaseChartDirective
+
 
   ngOnInit(): void {
   }
@@ -133,6 +136,7 @@ export class ComportamientoProfesorComponent implements OnInit {
           this.barChartData[0].data[3] = this.comportamientosAlumno[j].nota
         }
       }
+      this.chart.chart.update()
     }))
   }
 

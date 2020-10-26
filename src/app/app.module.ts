@@ -25,6 +25,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {HttpClientModule} from '@angular/common/http';
 import { FechasPipe } from './pipes/fechas.pipe';
 import { PorcentajePipe } from './pipes/porcentaje.pipe';
+import { ComportamientoPadreGlobalComponent } from './pages/comportamiento-padre-global/comportamiento-padre-global.component';
 
 
 @NgModule({
@@ -48,6 +49,7 @@ import { PorcentajePipe } from './pipes/porcentaje.pipe';
     PerfilComponent,
     FechasPipe,
     PorcentajePipe,
+    ComportamientoPadreGlobalComponent,
     
   ],
   imports: [

@@ -1,0 +1,33 @@
+<nav class="title">
+  <h1>Comportamiento</h1>
+</nav>
+<div class="container">
+  <select #clase (change)="cambioClase(clase.value)" class="form-control" id="exampleSelect2">
+      <option value="ninguno">Elige la clase</option>
+      <option *ngFor="let clase of clases; let i = index" value="{{clase.id_clase}}">{{clase.asignatura}}</option>
+  </select>
+</div>
+<div class="body"> 
+<div id="imagenes" class="container">
+  <div class="row">
+    <div class="container">
+      <div style="display: block">
+        <canvas baseChart
+          [datasets]="barChartData"
+          [labels]="barChartLabels"
+          [options]="barChartOptions"
+          [legend]="barChartLegend"
+          [chartType]="barChartType"
+          (chartHover)="chartHovered($event)"
+          (chartClick)="chartClicked($event)"
+          >
+          
+        </canvas>
+      </div>
+      <button type="button" class="btn btn-primary" routerLink="/comportamientoPadre">Progreso</button>
+    </div>
+  </div>
+  </div>    
+
+
+
