@@ -109,6 +109,7 @@ export class HeaderComponent implements OnInit {
     this.comportamientoService.alumnosClase(this.clases[i].id_clase)
     this.asistenciaService.porcentaje(this.clases[i].id_clase)
     this.mensajeService.obtenerMensajes(null, this.clases[i].id_clase)
+    this.asistenciaService.detalleAsistencia(this.clases[i].id_clase)
     
   }
 

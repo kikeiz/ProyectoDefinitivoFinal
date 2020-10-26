@@ -15,6 +15,7 @@ import { MensajesService } from 'src/app/shared/mensajes.service';
   styleUrls: ['./comportamiento-profesor.component.css']
 })
 export class ComportamientoProfesorComponent implements OnInit {
+  public splice:number
   public date:Date
   public id_alumno:number
   public puntualidad: boolean
@@ -71,6 +72,7 @@ export class ComportamientoProfesorComponent implements OnInit {
     this.mediaComportamiento = []
     this.barChartData[0].label = this.alumnos[0].nombre + " " + this.alumnos[0].apellidos
     this.id_alumno = 0
+    this.splice = 0
    }
 
   ngOnInit(): void {
@@ -110,34 +112,39 @@ export class ComportamientoProfesorComponent implements OnInit {
     }
   }
 
+  comportamientosAlum(id_alumno:number, id_clase:number){
+    this.comportamientosAlumno.splice(0, this.splice)
+    this.comportamientoService.comportamientosAlumno(id_alumno, id_clase).subscribe((data=>{
+      let array:any = data
+      this.splice = array.length
+      console.log(array);
+      for(let j=0; j<array.length; j++){
+        if(array[j].tipo_comportamiento == "atencion"){
+          this.comportamientosAlumno.push(new Comportamiento(TipoComportamiento.atencion, array[j].nota, array[j].id_alumno, array[j].id_clase))
+          this.barChartData[0].data[1] = this.comportamientosAlumno[j].nota
+        }else if(array[j].tipo_comportamiento == "deberes"){
+          this.comportamientosAlumno.push(new Comportamiento(TipoComportamiento.deberes, array[j].nota, array[j].id_alumno, array[j].id_clase))
+          this.barChartData[0].data[2] = this.comportamientosAlumno[j].nota
+        }else if(array[j].tipo_comportamiento == "participacion"){
+          this.comportamientosAlumno.push(new Comportamiento(TipoComportamiento.participacion, array[j].nota, array[j].id_alumno, array[j].id_clase))
+          this.barChartData[0].data[0] = this.comportamientosAlumno[j].nota
+        }else{
+          this.comportamientosAlumno.push(new Comportamiento(TipoComportamiento.puntualidad, array[j].nota, array[j].id_alumno, array[j].id_clase))
+          this.barChartData[0].data[3] = this.comportamientosAlumno[j].nota
+        }
+      }
+    }))
+  }
+
   cambioAlumno(id:any){
     this.id_alumno = id
-    this.comportamientosAlumno = []
     let i= 0
     let condicion = false
     while (i<this.alumnos.length && condicion == false){
       if(id == this.alumnos[i].id_alumno){
         this.nombreAlumno = this.alumnos[i].nombre + " " + this.alumnos[i].apellidos
         this.barChartData[0].label = this.nombreAlumno
-        this.comportamientoService.comportamientosAlumno(this.alumnos[i].id_alumno, this.añadirClaseService.id_clase).subscribe((data=>{
-          let array:any = data
-          console.log(array);
-          for(let j=0; j<array.length; j++){
-            if(array[j].tipo_comportamiento == "atencion"){
-              this.comportamientosAlumno.push(new Comportamiento(TipoComportamiento.atencion, array[j].nota, array[j].id_alumno, array[j].id_clase))
-              this.barChartData[0].data[1] = this.comportamientosAlumno[j].nota
-            }else if(array[j].tipo_comportamiento == "deberes"){
-              this.comportamientosAlumno.push(new Comportamiento(TipoComportamiento.deberes, array[j].nota, array[j].id_alumno, array[j].id_clase))
-              this.barChartData[0].data[2] = this.comportamientosAlumno[j].nota
-            }else if(array[j].tipo_comportamiento == "participacion"){
-              this.comportamientosAlumno.push(new Comportamiento(TipoComportamiento.participacion, array[j].nota, array[j].id_alumno, array[j].id_clase))
-              this.barChartData[0].data[0] = this.comportamientosAlumno[j].nota
-            }else{
-              this.comportamientosAlumno.push(new Comportamiento(TipoComportamiento.puntualidad, array[j].nota, array[j].id_alumno, array[j].id_clase))
-              this.barChartData[0].data[3] = this.comportamientosAlumno[j].nota
-            }
-          }
-        }))
+        this.comportamientosAlum(this.alumnos[i].id_alumno, this.añadirClaseService.id_clase)
         condicion = true
       }else{
         i++
@@ -153,6 +160,7 @@ export class ComportamientoProfesorComponent implements OnInit {
       let array:any = data
       console.log(array);
       this.comportamientoService.modificarComportamiento(array[0].id_comportamiento, (array[0].nota + dati.nota)).subscribe((data1=>{
+        this.comportamientosAlum(this.id_alumno, this.añadirClaseService.id_clase)
         console.log(data1);
       }))
     }))
@@ -163,6 +171,7 @@ export class ComportamientoProfesorComponent implements OnInit {
       let array:any = data
       console.log(array);
       this.comportamientoService.modificarComportamiento(array[0].id_comportamiento, (array[0].nota-dati.nota)).subscribe((data1=>{
+        this.comportamientosAlum(this.id_alumno, this.añadirClaseService.id_clase)
         console.log(data1);
       }))
     }))
@@ -242,6 +251,7 @@ export class ComportamientoProfesorComponent implements OnInit {
         console.log("Es necesario seleccionar un comportamiento y asociarle un valor para poder continuar!");
       }
     }
+    
     this.rojo = false
     this.verde = false
     this.comportamiento = false

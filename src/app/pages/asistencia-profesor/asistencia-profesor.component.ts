@@ -23,14 +23,18 @@ export class AsistenciaProfesorComponent implements OnInit {
   public fecha:Date
   public porcentajes:Asistencia[]
   public faltaAsistencia: Asistencia[]
+  public detalle:boolean
+  public details:Asistencia[]
   constructor(public comportamientoService:ComportamientoService, public asistenciaService:AsistenciaService, public añadirClaseService:AñadirClaseService, public mensajeService:MensajesService) {
     this.asiste = false
     this.mostrar = false
+    this.detalle = false
     this.alumnos = this.comportamientoService.alumnos
     this.faltan = []
     this.asisten = []
     this.porcentajes = this.asistenciaService.porcentajes
     this.faltaAsistencia = []
+    this.details = this.asistenciaService.detalle
    }
 
   ngOnInit(): void {
@@ -80,6 +84,7 @@ export class AsistenciaProfesorComponent implements OnInit {
         console.log(data);
       }))
     }
+    this.asistenciaService.porcentaje(this.añadirClaseService.id_clase)
   }
 
   formatDate(date:string) {
@@ -109,8 +114,17 @@ export class AsistenciaProfesorComponent implements OnInit {
     }))
   }
 
+  detalles(){
+    this.detalle = true
+
+  }
+
   cerrar(){
     this.mostrar = false
+  }
+
+  close(){
+    this.detalle = false
   }
   
 

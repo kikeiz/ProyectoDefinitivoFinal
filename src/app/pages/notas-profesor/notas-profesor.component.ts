@@ -87,7 +87,6 @@ export class NotasProfesorComponent implements OnInit {
     this.mostrarF1 = false
     this.mostrarF2 = false
     console.log(this.notas);
-    this.notasmedias.push(new Notas(new Date(this.notas[0].fecha).toDateString(), this.media/this.notas.length, this.notas[0].tipo))
     for(let i=0; i<this.notas.length; i++){
       this.media += this.notas[i].nota
       this.notaservice.publicarNotas(this.notas[i]).subscribe((data=>{
@@ -96,15 +95,18 @@ export class NotasProfesorComponent implements OnInit {
     }
     for(let i=0; i<this.notas.length; i++){
       if(this.notas[i].nota>=5){
-        this.serviceMensaje.enviarMensaje((new Comunications("Su hijo ha obtenido una calificación de" + this.notas[i].nota + "en el" + this.notas[i].tipo + "realizado en fecha: " + this.notas[i].fecha, TipoMensaje.calificacion, this.notas[i].fecha, Valor.positivo, this.notas[i].id_clase, this.notas[i].id_alumno, Envia.profesor))).subscribe((data=>{
-          console.log(data);
+        this.serviceMensaje.enviarMensaje(new Comunications("Su hijo ha obtenido una calificación de" + this.notas[i].nota + "en el" + this.notas[i].tipo + "realizado en fecha: " + this.notas[i].fecha, TipoMensaje.calificacion, this.notas[i].fecha, Valor.positivo, this.notas[i].id_clase, this.notas[i].id_alumno, Envia.profesor)).subscribe((data=>{
+          console.log(data)
         }))
+      
       }else{
-        this.serviceMensaje.enviarMensaje((new Comunications("Su hijo ha obtenido una calificación de" + this.notas[i].nota + "en el" + this.notas[i].tipo + "realizado en fecha: " + this.notas[i].fecha, TipoMensaje.calificacion, this.notas[i].fecha, Valor.negativo, this.notas[i].id_clase, this.notas[i].id_alumno, Envia.profesor))).subscribe((data=>{
-          console.log(data);
+        this.serviceMensaje.enviarMensaje(new Comunications("Su hijo ha obtenido una calificación de" + this.notas[i].nota + "en el" + this.notas[i].tipo + "realizado en fecha: " + this.notas[i].fecha, TipoMensaje.calificacion, this.notas[i].fecha, Valor.negativo, this.notas[i].id_clase, this.notas[i].id_alumno, Envia.profesor)).subscribe((data=>{
+          console.log(data)
         }))
       }
     }
+
+    this.notaservice.obtenerNotas(this.anadirClaseService.id_clase)
     
   }
 
@@ -153,6 +155,8 @@ export class NotasProfesorComponent implements OnInit {
     this.notaservice.cambiarNota(this.cambioAlumnos[i].nota, this.cambioAlumnos[i].id_nota).subscribe((data=>{
       console.log(data);
     }))
+    this.notaservice.obtenerNotas(this.anadirClaseService.id_clase)
+
   }
 
   opciones(){

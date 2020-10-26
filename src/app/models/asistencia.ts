@@ -12,8 +12,11 @@ export class Asistencia {
     public apellidos:string
     public id_asistencia:number
     public asignatura:string
+    public totales: number
+    public no_justificadas: number
+    public justificadas:number
 
-    constructor(asiste?:boolean, fecha?:Date, id_alumno?:number, id_clase?:number, justificada?:boolean, asistencias?:number, fecha1?:string, nombre?:string, apellidos?:string, id_asistencia?:number, asignatura?:string){
+    constructor(asiste?:boolean, fecha?:Date, id_alumno?:number, id_clase?:number, justificada?:boolean, asistencias?:number, fecha1?:string, nombre?:string, apellidos?:string, id_asistencia?:number, asignatura?:string, totales?:number, justificadas?: number, no_justificadas?:number){
         this.asiste = asiste
         this.fecha = fecha
         this.id_alumno = id_alumno
@@ -25,5 +28,8 @@ export class Asistencia {
         this.apellidos = apellidos
         this.id_asistencia = id_asistencia
         this.asignatura = asignatura
+        this.totales = totales
+        this.justificadas = justificadas
+        this.no_justificadas = no_justificadas
     }
 }

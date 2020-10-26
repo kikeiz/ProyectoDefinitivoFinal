@@ -507,6 +507,18 @@ app.post('/asistencia', (req,rep)=>{
     });
 })
 
+app.get('/detalle/:id_clase', (req,rep)=>{
+    let id = req.params.id_clase
+    sql = "SELECT COUNT(CASE WHEN asistencia.asiste = false AND asistencia.justificada = false THEN 1 END) AS no_justificadas, COUNT(CASE WHEN asistencia.asiste = false AND asistencia.justificada = true THEN 1 END) AS justificada, COUNT(CASE WHEN asistencia.asiste = true OR asistencia.asiste = false THEN 1 END) AS total, COUNT(CASE WHEN asistencia.asiste = true THEN 1 END) AS asistencias, alumnos.nombre, alumnos.apellidos, asistencia.id_alumno FROM asistencia JOIN alumnos ON asistencia.id_alumno = alumnos.id_alumno WHERE asistencia.id_clase = ? GROUP BY asistencia.id_alumno"
+    connection.query(sql, id, function(err,res){
+        if(err){
+            console.log(err)
+        }else{ 
+            rep.send(res)
+         }
+    });
+})
+
 app.get('/porcentaje/:id', (req,rep)=>{
     let id = req.params.id
     sql = "SELECT (COUNT(CASE WHEN asiste = true THEN 1 END)*100)/ COUNT(asiste) AS asistencias, fecha FROM asistencia WHERE id_clase = ? GROUP BY fecha"

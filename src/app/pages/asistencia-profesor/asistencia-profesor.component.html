@@ -3,10 +3,11 @@
     <h1>Asistencia</h1>
 </nav>
 <div class="body">
-    <div *ngIf="asiste == false && mostrar == false" class="container margen">
+    <div *ngIf="asiste == false && mostrar == false && detalle == false" class="container margen">
             <button type="button" class="btn btn-success" (click)="pasarLista()"><b>Pasar lista</b></button>
+            <button id="detalle" type="button" class="btn btn-warning" (click) = "detalles()">Detalle Alumno</button>
     </div>
-    <div *ngIf="asiste == false && mostrar == false" class="margen1">
+    <div *ngIf="asiste == false && mostrar == false && detalle == false" class="margen1">
                 <table class="table table-hover">
                     <thead class="thead-dark">
                     <tr>
@@ -21,6 +22,28 @@
                     </tr>
                     </tbody>
                 </table>
+    </div>
+    <div *ngIf="detalle == true">
+        <table class="table table-hover">
+            <thead class="thead-dark">
+            <tr>
+                <th scope="col">Alumno</th>
+                <th scope="col">Asiste</th>
+                <th scope="col">FJ</th>
+                <th scope="col">FNJ</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr class="fila" *ngFor="let detail of details; let i = index">
+                <td><b>{{detail.apellidos}}, {{detail.nombre}}</b></td>
+                <td><b>{{detail.totales}}</b></td>
+                <td><b>{{detail.justificadas}}</b></td>
+                <td><b>{{detail.no_justificadas}}</b></td>
+            </tr>
+            </tbody>
+        </table>
+        
+        <div class="container"><button type="button" class="btn btn-dark" (click)="close()">Cerrar</button></div>
     </div>
 
     <div *ngIf="asiste == true" class="container margen">
@@ -65,7 +88,7 @@
                       <tr>
                         <th scope="col">Nombre</th>
                         <th scope="col">Apellidos</th>
-                        <th scope="col">Asistencia</th>
+                        <th scope="col">Justificante</th>
                       </tr>
                     </thead>
                     <tbody>

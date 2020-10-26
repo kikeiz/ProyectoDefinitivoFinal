@@ -1,6 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Asistencia } from '../models/asistencia';
+import { AssertNotNull } from '@angular/compiler';
+import { AñadirAlumnoService } from './añadir-alumno.service';
+import { AñadirClaseService } from './añadir-clase.service';
 
 
 @Injectable({
@@ -11,12 +14,16 @@ export class AsistenciaService {
   public porcentajes:Asistencia[]
   public number:number
   public numero:number
+  public numerodetalle:number
   public faltas:Asistencia[]
-  constructor(private http: HttpClient) { 
+  public detalle:Asistencia[]
+  constructor(private http: HttpClient, public añadirClaseService:AñadirClaseService) { 
     this.porcentajes = []
     this.faltas = []
     this.number = 0
     this.numero = 0
+    this.detalle = []
+    this.numerodetalle = 0
   }
 
   pasarLista(asistencia:Asistencia){
@@ -59,5 +66,18 @@ export class AsistenciaService {
 
   datosFalta(id_asistencia:number){
     return this.http.get(this.url + "/datos/falta/" + id_asistencia)
+  }
+
+  detalleAsistencia(id_clase:number){
+    return this.http.get(this.url + "/detalle/" + id_clase).subscribe((data=>{
+      this.detalle.splice(0, this.numerodetalle)
+      let array:any = data
+      console.log(array);
+      this.numerodetalle = array.length
+      for(let i=0; i<array.length; i++){
+        this.detalle.push(new Asistencia(null, null, array[i].id_alumno, this.añadirClaseService.id_clase, null, null, null, array[i].nombre, array[i].apellidos, null, null, array[i].asistencias, array[i].justificada, array[i].no_justificadas))
+      }
+      console.log(this.detalle);
+    }))
   }
 }
