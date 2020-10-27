@@ -127,5 +127,7 @@ export class HeaderComponent implements OnInit {
   traerAlumnos(){
     this.alumnos = this.serviceAñadirAlumno.alumnos
   }
+
+  
 }
 

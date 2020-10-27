@@ -70,7 +70,7 @@ export class ComportamientoProfesorComponent implements OnInit {
     // this.nombreAlumno = this.alumnos[0].nombre + " " + this.alumnos[0].apellidos
     this.comportamientosAlumno = []
     this.mediaComportamiento = []
-    this.barChartData[0].label = this.alumnos[0].nombre + " " + this.alumnos[0].apellidos
+    // this.barChartData[0].label = this.alumnos[0].nombre + " " + this.alumnos[0].apellidos
     this.id_alumno = 0
     this.splice = 0
    }
@@ -136,7 +136,6 @@ export class ComportamientoProfesorComponent implements OnInit {
           this.barChartData[0].data[3] = this.comportamientosAlumno[j].nota
         }
       }
-      this.chart.chart.update()
     }))
   }
 

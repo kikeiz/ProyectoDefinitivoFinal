@@ -23,7 +23,7 @@
                     </tbody>
                 </table>
     </div>
-    <div *ngIf="detalle == true">
+    <div *ngIf="detalle == true && chart1 == false">
         <table class="table table-hover">
             <thead class="thead-dark">
             <tr>
@@ -34,7 +34,7 @@
             </tr>
             </thead>
             <tbody>
-            <tr class="fila" *ngFor="let detail of details; let i = index">
+            <tr class="fila" *ngFor="let detail of details; let i = index" (click)="piechart(i)">
                 <td><b>{{detail.apellidos}}, {{detail.nombre}}</b></td>
                 <td><b>{{detail.totales}}</b></td>
                 <td><b>{{detail.justificadas}}</b></td>
@@ -104,3 +104,21 @@
         </div>
     </div>
 </div>
+
+<div *ngIf="chart1 == true">
+    <div>
+      <div class="chart">
+        <canvas baseChart
+          [data]="pieChartData"
+          [labels]="pieChartLabels"
+          [chartType]="pieChartType"
+          [options]="pieChartOptions"
+          [colors]="pieChartColors"
+          [legend]="pieChartLegend">
+        </canvas>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="chart1 == true">
+    <button class="btn btn-dark" (click)="cerrarChart()">Cerrar</button>
+  </div>

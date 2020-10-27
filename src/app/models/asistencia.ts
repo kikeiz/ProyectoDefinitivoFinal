@@ -15,8 +15,11 @@ export class Asistencia {
     public totales: number
     public no_justificadas: number
     public justificadas:number
+    public porcentaje_asistencia:number
+    public porcentaje_justificadas:number
+    public porcentaje_nojustificadas:number
 
-    constructor(asiste?:boolean, fecha?:Date, id_alumno?:number, id_clase?:number, justificada?:boolean, asistencias?:number, fecha1?:string, nombre?:string, apellidos?:string, id_asistencia?:number, asignatura?:string, totales?:number, justificadas?: number, no_justificadas?:number){
+    constructor(asiste?:boolean, fecha?:Date, id_alumno?:number, id_clase?:number, justificada?:boolean, asistencias?:number, fecha1?:string, nombre?:string, apellidos?:string, id_asistencia?:number, asignatura?:string, totales?:number, justificadas?: number, no_justificadas?:number, porcentaje_asistencia?:number, porcentaje_justificadas?:number, porcentaje_nojustificadas?:number){
         this.asiste = asiste
         this.fecha = fecha
         this.id_alumno = id_alumno
@@ -31,5 +34,8 @@ export class Asistencia {
         this.totales = totales
         this.justificadas = justificadas
         this.no_justificadas = no_justificadas
+        this.porcentaje_asistencia = porcentaje_asistencia
+        this.porcentaje_justificadas = porcentaje_justificadas
+        this.porcentaje_nojustificadas = porcentaje_nojustificadas
     }
 }

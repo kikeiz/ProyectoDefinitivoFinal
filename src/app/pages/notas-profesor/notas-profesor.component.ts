@@ -8,6 +8,7 @@ import { Notas } from 'src/app/models/notas';
 import { AñadirClaseService } from 'src/app/shared/añadir-clase.service';
 import { MensajesService } from 'src/app/shared/mensajes.service';
 import { NotasService } from 'src/app/shared/notas.service';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap'
 
 
 @Component({
@@ -16,6 +17,7 @@ import { NotasService } from 'src/app/shared/notas.service';
   styleUrls: ['./notas-profesor.component.css']
 })
 export class NotasProfesorComponent implements OnInit {
+  public rojo:boolean
   public mostrarF1: boolean
   public mostrarF2: boolean
   public mostrarF3: boolean
@@ -29,7 +31,8 @@ export class NotasProfesorComponent implements OnInit {
   public media:number
   
  
-  constructor(public notaservice:NotasService, public anadirClaseService:AñadirClaseService, public serviceMensaje:MensajesService) { 
+  constructor(public notaservice:NotasService, public anadirClaseService:AñadirClaseService, public serviceMensaje:MensajesService, private modal:NgbModal) { 
+    this.rojo = false
     this.mostrarF1 = false
     this.mostrarF2 = false
     this.mostrarF3 = false
@@ -83,7 +86,7 @@ export class NotasProfesorComponent implements OnInit {
     
   }
 
-  actualizar(){
+  actualizar(contenido){
     this.mostrarF1 = false
     this.mostrarF2 = false
     console.log(this.notas);
@@ -93,6 +96,12 @@ export class NotasProfesorComponent implements OnInit {
         console.log(data);
       }))
     }
+    this.notaservice.obtenerNotas(this.anadirClaseService.id_clase)
+    this.modal.open(contenido, {size: "sm"})
+    setTimeout(()=>{
+      this.modal.dismissAll()
+    }, 2000)
+
     for(let i=0; i<this.notas.length; i++){
       if(this.notas[i].nota>=5){
         this.serviceMensaje.enviarMensaje(new Comunications("Su hijo ha obtenido una calificación de" + this.notas[i].nota + "en el" + this.notas[i].tipo + "realizado en fecha: " + this.notas[i].fecha, TipoMensaje.calificacion, this.notas[i].fecha, Valor.positivo, this.notas[i].id_clase, this.notas[i].id_alumno, Envia.profesor)).subscribe((data=>{
@@ -106,7 +115,6 @@ export class NotasProfesorComponent implements OnInit {
       }
     }
 
-    this.notaservice.obtenerNotas(this.anadirClaseService.id_clase)
     
   }
 
@@ -168,6 +176,11 @@ export class NotasProfesorComponent implements OnInit {
   }
 
   filter(datos:any){
+    if(datos.estadoNota == "todos" && datos.tipoDeCalificacion == "todos"){
+      this.rojo = false
+    }else{
+      this.rojo = true
+    }
     this.notasmedias = []
     if(datos.estadoNota == "suspenso"){
       this.notaservice.filtrar(this.anadirClaseService.id_clase, 0.1, 4.9, datos.tipoDeCalificacion).subscribe((data=>{

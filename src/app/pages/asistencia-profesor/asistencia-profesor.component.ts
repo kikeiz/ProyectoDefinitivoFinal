@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { fakeAsync } from '@angular/core/testing';
 import { Alumno } from 'src/app/models/alumno';
 import { Asistencia } from 'src/app/models/asistencia';
@@ -8,6 +8,8 @@ import { AsistenciaService } from 'src/app/shared/asistencia.service';
 import { AñadirClaseService } from 'src/app/shared/añadir-clase.service';
 import { ComportamientoService } from 'src/app/shared/comportamiento.service';
 import { MensajesService } from 'src/app/shared/mensajes.service';
+import { ChartType, ChartOptions } from 'chart.js';
+import { Label, BaseChartDirective } from 'ng2-charts';
 
 @Component({
   selector: 'app-asistencia-profesor',
@@ -15,6 +17,29 @@ import { MensajesService } from 'src/app/shared/mensajes.service';
   styleUrls: ['./asistencia-profesor.component.css']
 })
 export class AsistenciaProfesorComponent implements OnInit {
+  public pieChartOptions: ChartOptions = {
+    responsive: true,
+    legend: {
+      position: 'top',
+    },
+    plugins: {
+      datalabels: {
+        formatter: (value, ctx) => {
+          const label = ctx.chart.data.labels[ctx.dataIndex];
+          return label;
+        },
+      },
+    }
+  };
+  public pieChartLabels: Label[] = ["Faltas No Justificadas", "Asistencias", "Faltas Justificadas"];
+  public pieChartData: number[] = [0, 0, 0];
+  public pieChartType: ChartType = 'pie';
+  public pieChartLegend = true;
+  public pieChartColors = [
+    {
+      backgroundColor: ['rgba(255,0,0,0.7)', 'rgba(0,255,0,0.7)', 'rgba(0,0,255,0.7)'],
+    },
+  ];
   public asiste: boolean
   public mostrar: boolean
   public alumnos: Alumno[]
@@ -25,10 +50,12 @@ export class AsistenciaProfesorComponent implements OnInit {
   public faltaAsistencia: Asistencia[]
   public detalle:boolean
   public details:Asistencia[]
+  public chart1:boolean
   constructor(public comportamientoService:ComportamientoService, public asistenciaService:AsistenciaService, public añadirClaseService:AñadirClaseService, public mensajeService:MensajesService) {
     this.asiste = false
     this.mostrar = false
     this.detalle = false
+    this.chart1 = false
     this.alumnos = this.comportamientoService.alumnos
     this.faltan = []
     this.asisten = []
@@ -37,6 +64,8 @@ export class AsistenciaProfesorComponent implements OnInit {
     this.details = this.asistenciaService.detalle
    }
 
+  @ViewChild(BaseChartDirective, { static: true }) public chart: BaseChartDirective
+
   ngOnInit(): void {
   }
 
@@ -44,6 +73,16 @@ export class AsistenciaProfesorComponent implements OnInit {
     this.asiste = true
   }
 
+  cerrarChart(){
+    this.chart1 = false
+  }
+
+  piechart(index:number){
+    this.chart1 = true
+    this.pieChartData = [this.details[index].porcentaje_nojustificadas, this.details[index].porcentaje_asistencia, this.details[index].porcentaje_justificadas]
+    console.log(this.chart1);
+    
+  }
   chequeado(index:number, isChecked:boolean){
     if(!isChecked){
       this.faltan.push(index)
@@ -125,6 +164,14 @@ export class AsistenciaProfesorComponent implements OnInit {
 
   close(){
     this.detalle = false
+  }
+
+  public chartClicked({ event, active }: { event: MouseEvent, active: {}[] }): void {
+    console.log(event, active);
+  }
+
+  public chartHovered({ event, active }: { event: MouseEvent, active: {}[] }): void {
+    console.log(event, active);
   }
   
 

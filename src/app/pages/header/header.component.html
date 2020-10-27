@@ -6,16 +6,16 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent" [ngbCollapse]="!isCollapsed">
         <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
+          <li class="nav-item" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
             <a class="nav-link" routerLink="/mainPadre">Home</a>
           </li>
-          <li class="nav-item active">
+          <li class="nav-item" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
             <a class="nav-link" (click) ="mostrarCalificaciones()" routerLink="/mainNotasPadre">Calificaciones</a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
             <a class="nav-link" (click) ="removeMain()" routerLink="/asistenciaPadre">Asistencia</a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
             <a class="nav-link" (click) ="removeMain()" routerLink="/comportamientoGlobal">Comportamiento</a>
           </li>
           <li class="nav-item dropdown">
@@ -46,16 +46,16 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent" [ngbCollapse]="!isCollapsed">
           <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
+            <li class="nav-item" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
               <a class="nav-link" routerLink="/mainProfe">Home</a>
             </li>
-            <li class="nav-item active">
+            <li class="nav-item" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
               <a class="nav-link" (click) ="obtenerNotas()" routerLink="/mainNotasProfesor">Calificaciones</a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
               <a class="nav-link" (click) ="removeMain()" routerLink="/asistenciaProfesor">Asistencia</a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
               <a class="nav-link" (click) ="removeMain()" routerLink="/comportamientoProfesor">Comportamiento</a>
             </li>
             <li class="nav-item dropdown">

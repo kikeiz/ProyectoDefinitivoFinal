@@ -36,6 +36,12 @@ li{
     list-style: none;
 }
 
+a:hover{
+    color: black !important;
+    size: 20px;
+
+}
+
 #nombre{
     position: relative;
     top: 7px;

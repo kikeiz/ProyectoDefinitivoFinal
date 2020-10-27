@@ -75,7 +75,7 @@ export class AsistenciaService {
       console.log(array);
       this.numerodetalle = array.length
       for(let i=0; i<array.length; i++){
-        this.detalle.push(new Asistencia(null, null, array[i].id_alumno, this.añadirClaseService.id_clase, null, null, null, array[i].nombre, array[i].apellidos, null, null, array[i].asistencias, array[i].justificada, array[i].no_justificadas))
+        this.detalle.push(new Asistencia(null, null, array[i].id_alumno, this.añadirClaseService.id_clase, null, null, null, array[i].nombre, array[i].apellidos, null, null, array[i].asistencias, array[i].justificada, array[i].no_justificadas, array[i].porcentaje_asiste, array[i].porcentaje_justificada, array[i].porcentaje_nojustificada))
       }
       console.log(this.detalle);
     }))

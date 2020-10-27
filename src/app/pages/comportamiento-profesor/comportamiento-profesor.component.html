@@ -10,6 +10,7 @@
             <div class="form-group">
                 <label for="exampleSelect2"><b>Alumno</b></label>
                 <select #alumno (change)="cambioAlumno(alumno.value)" class="form-control" id="exampleSelect2">
+                    <option value="ninguno">Elige el alumno</option>
                     <option *ngFor="let alumno of alumnos; let i = index" value="{{alumno.id_alumno}}">{{alumno.apellidos}}, {{alumno.nombre}}</option>
                 </select>
             </div>
