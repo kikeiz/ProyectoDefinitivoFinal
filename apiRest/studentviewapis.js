@@ -204,7 +204,37 @@ app.get("/obtenerProfesor/:id",
     })
 });
 
-//subirFoto//
+//ACTUALIZAR DATOS PADRE//
+
+app.put("/editarPadre",
+   function (req,res) {
+        let params = [req.body.nombre, req.body.apellidos, req.body.descripcion, req.body.username, req.body.password, req.body.email, req.body.contacto, req.body.foto, req.body.id_padre]
+        let sql = 'UPDATE padres SET nombre = ?, apellidos = ?, descripcion= ?, username = ?, password= ?, email = ?, contacto = ?, foto= ? WHERE id_padre = ?'
+            console.log(sql);
+        connection.query(sql,params,function(err,result) {
+        if (err){
+            console.log(err);
+        } else {
+            console.log(result);
+        res.send(result)       
+        }
+    })
+});
+app.get("/obtenerPadre/:id",
+   function (req,res) {
+    let paramId = req.params.id
+    // console.log(params)
+    let sql=`SELECT * FROM padres WHERE id_padre= ?`;
+    connection.query(sql, paramId ,function(err,result) {
+        if (err){
+            console.log(err);
+        } else {
+            console.log(result);
+        res.send(result)       
+        }
+    })
+});
+
 
 
 

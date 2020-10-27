@@ -1,28 +1,72 @@
-<!-- <div *ngIf="service.navPadres == true && mostrar == false" class="card container" style="width: 18rem;">
-  <img class="card-img-top" src="https://www.okchicas.com/wp-content/uploads/2017/05/17127092_262868214166082_5502871855238742016_n.jpg" alt="Card image cap">
-  <div class="card-body">
-    <div class="container pointer"><i (click)="editar()" class="fas fa-user-edit"></i></div>
-    <h5 class="card-title">Julian Muñoz Medina</h5>
-    <p class="card-text">Trabajo en la construccion desde hace 18 años. Mis aficiones son el surf y la vela.</p>
-  </div>
-      <ul class="list-group list-group-flush margin" >
-      <li class="list-group-item color"><b>Telefono:</b> 6589996574</li>
-      <li class="list-group-item color"><b>Email:</b> juanito@gmail.com</li>
-      <li class="list-group-item color margin">Contactar a partir de las 17:00 horas</li>
-      </ul>
-</div> -->
+<!-- //INFO USUARIO PADRE// -->
+<div *ngIf="service.navPadres == true && mostrar == false" class="view-profile-card-padre">
+  <img class="image-profile-padre" src="{{padre.foto}}" alt="User profile"/>
+  <div class="container-info-padre"> 
+    <h5 class="title">{{padre.username}}</h5>
+    <p class="name"><b>Nombre:</b> {{padre.nombre}}</p>
+    <p class="lastname"><b>Apellidos:</b> {{padre.apellidos}}</p>
+    <p class="description"><b>Descripción:</b> {{padre.descripcion}}</p>
+    <p class="email"><b>Email:</b> {{padre.email}}</p>
+    <p class="contacto"><b>Contacto:</b> {{padre.contacto}}</p>
+   
 
-<!-- <div *ngIf="service.navPadres == false && mostrar == false" class="card container" style="width: 18rem;">
-  <img class="card-img-top" src="http://blogs.itpro.es/octaviordz/files/2012/10/perfiles-de-usuario.png" alt="Card image cap"/>
-  <div class="card-body">
-    <div class="container pointer"><i (click)="editar()" class="fas fa-user-edit"></i></div>
-    <h5 class="card-title">{{profesor.nombre}}</h5>
-    <p class="card-text">{{profesor.descripcion}}</p>
+    <div class="button-edit-padre"><i (click)="editar()" class="fas fa-user-edit "> <span style="font-family: Arial, Helvetica, sans-serif;"></span>Editar perfil</i></div>
   </div>
-  <ul class="list-group list-group-flush margin">
-    <li class="list-group-item color margin"><b>Email:</b>{{profesor.email}}</li>
-  </ul>
-</div> -->
+</div>
+
+<!--EDITAR USUARIO PADRE-->
+<div *ngIf="service.navPadres == true && mostrar == true" class="edit-profile-padre">
+
+  <div class="contenedor-imagen-padre">
+  <img  alt="User profile" src={{padre.foto}} id="avatarPadre" class="image-profile-edit-padre"/> 
+  <label>
+    <input class="foto-seleccionada"
+           type="file"
+           accept="image/*"
+           id="fotosubidaPadre"
+           (change)="actualizarFotoPadre()"/>
+  </label> 
+</div>
+
+<div class="card-body">
+  <form>
+      <div class="form-group">
+        <label for="name">Nombre</label>
+        <input type="text" class="form-control" name="name" id="name" aria-describedby="emailHelp" placeholder="Nombre" [(ngModel)]="padre.nombre">
+      </div>
+      <div class="form-group">
+        <label for="lastname">Apellidos</label>
+        <input type="text" class="form-control" name="lastname" id="lastname" placeholder="Apellidos" [(ngModel)]="padre.apellidos">
+      </div>
+      <div class="form-group">
+        <label for="description">Descripcion</label>
+        <input type="text" class="form-control" name="description" id="description" placeholder="Descripcion" [(ngModel)]="padre.descripcion">
+    </div>
+      <div class="form-group">
+        <label for="username">Usarname</label>
+        <input type="text" class="form-control" name="username" id="username" placeholder="Usarname" [(ngModel)]="padre.username">
+    </div>
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input type="password" class="form-control" name="password" id="password" placeholder="Password" [(ngModel)]="padre.password">
+  </div>
+
+      <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" class="form-control" name="email" id="email" placeholder="Email" [(ngModel)]="padre.email">
+      </div>
+      <div class="form-group">
+        <label for="contacto">Contacto</label>
+        <input type="contacto" class="form-control" name="contacto" id="contacto" placeholder="Contacto" [(ngModel)]="padre.contacto">
+    </div>
+    </form>
+</div>
+<div>
+  <button type="button" (click)="actualizarPadre()" class="btn btn-warning button-actualizar">Actualizar</button>
+</div>
+</div>
+
+
 
 <!--INFO USUARIO PROFE-->
 <div *ngIf="service.navPadres == false && mostrar == false" class="view-profile-card">
@@ -37,37 +81,6 @@
     <div class="button-edit"><i (click)="editar()" class="fas fa-user-edit "> <span style="font-family: Arial, Helvetica, sans-serif;"></span>Editar perfil</i></div>
 </div>
 </div>
-
-<!-- <div *ngIf="service.navPadres == true && mostrar == true" class="card container" style="width: 18rem;">
-  <img class="card-img-top" src="https://www.bing.com/images/search?view=detailV2&ccid=TFgpo9r5&id=9F6EC748AA1F80B45B116356195634E2AD3FDA10&thid=OIP.TFgpo9r5PpFEUjamk2sLCwAAAA&mediaurl=http%3a%2f%2fblogs.itpro.es%2foctaviordz%2ffiles%2f2012%2f10%2fperfiles-de-usuario.png&exph=209&expw=228&q=foto+perfil+usuario&simid=608019214424801922&ck=16E4AD14F8709C375ABC47BDC970CC45&selectedIndex=28&FORM=IRPRST&ajaxhist=0" alt="Card image cap">
-  <div class="card-body">
-      <form>
-          <div class="form-group">
-            <label for="exampleInputEmail1">Nombre</label>
-            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Nombre">
-          </div>
-          <div class="form-group">
-            <label for="exampleInputPassword1">Apellidos</label>
-            <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Apellidos">
-          </div>
-          <div class="form-group">
-              <label for="exampleInputPassword1">Descripcion</label>
-              <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Descripcion">
-          </div>
-          <div class="form-group">
-              <label for="exampleInputPassword1">Telefono</label>
-              <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Telefono">
-          </div>
-          <div class="form-group">
-              <label for="exampleInputPassword1">Email</label>
-              <input type="email" class="form-control" id="exampleInputPassword1" placeholder="Email">
-          </div>
-        </form>
-  </div> -->
-  <!-- <div>
-      <button type="button" (click)="ocultar()" class="btn btn-warning container">Terminar</button>
-  </div>
-</div> -->
 
 <!--EDITAR USUARIO PROFE-->
 <div *ngIf="service.navPadres == false && mostrar == true" class="edit-profile">

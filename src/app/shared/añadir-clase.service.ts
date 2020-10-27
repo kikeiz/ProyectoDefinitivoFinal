@@ -27,6 +27,7 @@ export class AñadirClaseService {
     this.id_profesor = id
     console.log(this.id_profesor); 
   }
+
   obtenerColegio(){
      return this.http.get(this.url+ "/colegio")
   }

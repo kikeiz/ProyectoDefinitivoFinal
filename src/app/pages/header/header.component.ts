@@ -27,10 +27,20 @@ export class HeaderComponent implements OnInit {
   colapsar(){
     this.isCollapsed = false
   }
-  perfil(){
+  
+  perfil(es_padre: boolean){
     this.service.home(null)
-    this.perfilService.getProfesor(this.serviceAñadirClase.id_profesor)
+    console.log(es_padre)
+    if(es_padre == true){
+      this.perfilService.getPadre(this.serviceAñadirAlumno.id_padre)
+
+    } else {
+      this.perfilService.getProfesor(this.serviceAñadirClase.id_profesor)
+
+    }
+    
   }
+
 
 
   removeMain(){

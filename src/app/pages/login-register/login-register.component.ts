@@ -20,7 +20,7 @@ export class LoginRegisterComponent implements OnInit {
   }
 
   login(data:any){
-    let usuario = new User(data.username, data.password,"../../../assets/822711_user_512x512.png")
+    let usuario = new User(data.username, data.password)
     this.service.loginPadre(usuario).subscribe((datapadre:any)=>{
       console.log(datapadre);
       if(datapadre.status == "padreexiste"){
