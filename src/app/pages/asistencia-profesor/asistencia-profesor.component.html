@@ -3,10 +3,11 @@
     <h1>Asistencia</h1>
 </nav>
 <div class="body">
-    <div *ngIf="asiste == false && mostrar == false" class="container margen">
+    <div *ngIf="asiste == false && mostrar == false && detalle == false" class="container margen">
             <button type="button" class="btn btn-success" (click)="pasarLista()"><b>Pasar lista</b></button>
+            <button id="detalle" type="button" class="btn btn-warning" (click) = "detalles()">Detalle Alumno</button>
     </div>
-    <div *ngIf="asiste == false && mostrar == false" class="margen1">
+    <div *ngIf="asiste == false && mostrar == false && detalle == false" class="margen1">
                 <table class="table table-hover">
                     <thead class="thead-dark">
                     <tr>
@@ -15,12 +16,34 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr (click)="mostrarAsistencia()" class="fila">
-                        <td>19-08-1996</td>
-                        <td>79%</td>
+                    <tr *ngFor="let porcentaje of porcentajes; let i = index" (click)="mostrarAsistencia(i)" class="fila">
+                        <td><b>{{porcentaje.fecha1 | fechas}}</b></td>
+                        <td><b>{{porcentaje.asistencias | porcentaje}}</b></td>
                     </tr>
                     </tbody>
                 </table>
+    </div>
+    <div *ngIf="detalle == true && chart1 == false">
+        <table class="table table-hover">
+            <thead class="thead-dark">
+            <tr>
+                <th scope="col">Alumno</th>
+                <th scope="col">Asiste</th>
+                <th scope="col">FJ</th>
+                <th scope="col">FNJ</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr class="fila" *ngFor="let detail of details; let i = index" (click)="piechart(i)">
+                <td><b>{{detail.apellidos}}, {{detail.nombre}}</b></td>
+                <td><b>{{detail.totales}}</b></td>
+                <td><b>{{detail.justificadas}}</b></td>
+                <td><b>{{detail.no_justificadas}}</b></td>
+            </tr>
+            </tbody>
+        </table>
+        
+        <div class="container"><button type="button" class="btn btn-dark" (click)="close()">Cerrar</button></div>
     </div>
 
     <div *ngIf="asiste == true" class="container margen">
@@ -29,7 +52,7 @@
             <div class="col-10">
                 <div class="form-group">
                     <label for="example-date-input"><b>Fecha</b></label>
-                    <input class="form-control" type="date" id="example-date-input">
+                    <input class="form-control" type="date" id="example-date-input" [(ngModel)] = "fecha">
                 </div>
             </div>
             <div class="col-1"></div>
@@ -41,14 +64,14 @@
                     <tr>
                         <th scope="col">Nombre</th>
                         <th scope="col">Apellidos</th>
-                        <th scope="col">Asistencia</th>
+                        <th scope="col">Justificada</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td>Enrique</td>
-                        <td>Izquierdo</td>
-                        <td><input type="checkbox"></td>
+                    <tr *ngFor = "let alumno of alumnos; let i = index">
+                        <td>{{alumno.nombre}}</td>
+                        <td>{{alumno.apellidos}}</td>
+                        <td><input (change)="chequeado(alumno.id_alumno, $event.target.checked)" type="checkbox" checked></td>
                     </tr>
                     </tbody>
                 </table>
@@ -65,14 +88,14 @@
                       <tr>
                         <th scope="col">Nombre</th>
                         <th scope="col">Apellidos</th>
-                        <th scope="col">Asistencia</th>
+                        <th scope="col">Justificante</th>
                       </tr>
                     </thead>
                     <tbody>
-                      <tr *ngFor="let asistencia of asistencias">
-                        <td>{{asistencia.nombre}}</td>
-                        <td>{{asistencia.apellido}}</td>
-                        <td id="size"><div class="tamaño container border"[ngStyle]="(asistencia.asistencia == true) ? {'background-color': '#99FF99'} : {'background-color': '#FF9999'}"><i *ngIf="asistencia.asistencia == true" class="fas fa-check margin"></i><i *ngIf="asistencia.asistencia == false" class="fas fa-times margin"></i></div></td>
+                      <tr *ngFor="let falta of faltaAsistencia">
+                        <td>{{falta.nombre}}</td>
+                        <td>{{falta.apellidos}}</td>
+                        <td id="size"><div class="tamaño container border"[ngStyle]="(falta.justificada == true) ? {'background-color': '#99FF99'} : {'background-color': '#FF9999'}"><i *ngIf="falta.justificada == true" class="fas fa-check margin"></i><i *ngIf="falta.justificada == false" class="fas fa-times margin"></i></div></td>
                       </tr>
                     </tbody>
                   </table>
@@ -81,3 +104,21 @@
         </div>
     </div>
 </div>
+
+<div *ngIf="chart1 == true">
+    <div>
+      <div class="chart">
+        <canvas baseChart
+          [data]="pieChartData"
+          [labels]="pieChartLabels"
+          [chartType]="pieChartType"
+          [options]="pieChartOptions"
+          [colors]="pieChartColors"
+          [legend]="pieChartLegend">
+        </canvas>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="chart1 == true">
+    <button class="btn btn-dark" (click)="cerrarChart()">Cerrar</button>
+  </div>

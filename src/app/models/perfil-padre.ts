@@ -9,7 +9,8 @@ export class PerfilPadre {
     public email: string
     public contacto: number
     public foto: string
-    constructor(nombre?:string,apellidos?:string,descripcion?:string,username?:string,password?:string,email?:string,contacto?:number,foto?:string){
+    constructor(id_padre?:number,nombre?:string,apellidos?:string,descripcion?:string,username?:string,password?:string,email?:string,contacto?:number,foto?:string){
+        this.id_padre = id_padre
         this.nombre=nombre
         this.apellidos=apellidos
         this.descripcion=descripcion

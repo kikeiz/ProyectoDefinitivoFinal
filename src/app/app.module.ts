@@ -23,6 +23,9 @@ import { HomeProfesorComponent } from './pages/home-profesor/home-profesor.compo
 import { PerfilComponent } from './pages/perfil/perfil.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {HttpClientModule} from '@angular/common/http';
+import { FechasPipe } from './pipes/fechas.pipe';
+import { PorcentajePipe } from './pipes/porcentaje.pipe';
+import { ComportamientoPadreGlobalComponent } from './pages/comportamiento-padre-global/comportamiento-padre-global.component';
 
 
 @NgModule({
@@ -44,6 +47,9 @@ import {HttpClientModule} from '@angular/common/http';
     HomePadreComponent,
     HomeProfesorComponent,
     PerfilComponent,
+    FechasPipe,
+    PorcentajePipe,
+    ComportamientoPadreGlobalComponent,
     
   ],
   imports: [

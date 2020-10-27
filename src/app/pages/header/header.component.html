@@ -1,34 +1,38 @@
 
   <div class="hola" *ngIf ="service.navPadres == true" class="sticky">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <button class="navbar-toggler" type="button" data-toggle="collapse" (click)="isCollapsed = !isCollapsed" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <button class="navbar-toggler" type="button" data-toggle="collapse" (click)="!isCollapsed = isCollapsed" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <a class="navbar-brand" routerLink="/mainPadre">StudentView</a>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent" [ngbCollapse]="isCollapsed">
+      <div class="collapse navbar-collapse" id="navbarSupportedContent" [ngbCollapse]="!isCollapsed">
         <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-            <a class="nav-link" (click) ="removeMain()" routerLink="/mainNotasPadre">Calificaciones<span class="sr-only">(current)</span></a>
+          <li class="nav-item" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
+            <a class="nav-link" routerLink="/mainPadre">Home</a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
+            <a class="nav-link" (click) ="mostrarCalificaciones()" routerLink="/mainNotasPadre">Calificaciones</a>
+          </li>
+          <li class="nav-item" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
             <a class="nav-link" (click) ="removeMain()" routerLink="/asistenciaPadre">Asistencia</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" (click) ="removeMain()" routerLink="/comportamientoPadre">Comportamiento</a>
+          <li class="nav-item" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
+            <a class="nav-link" (click) ="removeMain()" routerLink="/comportamientoGlobal">Comportamiento</a>
           </li>
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Pedro Martinez
+            <a (click)="traerAlumnos()" class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Elegir alumno
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="#">Pedro Martinez</a>
-              <a class="dropdown-item" href="#">Paula Gomez</a>
+              <a *ngFor="let alumno of alumnos; let i = index" class="dropdown-item" (click)="seleccionarAlumno(i)">{{alumno.nombre}}</a>
               <a class="dropdown-item" (click) ="aniadirAlumno()" routerLink="/aniadirAlumno"><i class="fas fa-user-plus">Añadir Alumno</i></a>
             </div>
           </li>
         </ul>
       </div>
-      <div *ngIf="isCollapsed == true" class="form-inline my-2 my-lg-0">
+      <li id="nombre" class="nav-item">
+        <p>Alumno: <b>{{nombre_alumno}}</b></p>
+      </li>
+      <div *ngIf="isCollapsed == false" class="form-inline my-2 my-lg-0">
         <i (click) ="removeMain()" routerLink="/mensajesPadre" class="far fa-envelope fa-3x cursor margenes"></i>
         <i (click) ="perfil(service.navPadres)" routerLink="/perfil" class="far fa-user-circle fa-3x cursor"></i>
       </div>
@@ -37,19 +41,21 @@
   
     <div class="hola" *ngIf ="service.navPadres == false" class="sticky">
       <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <button class="navbar-toggler" type="button" data-toggle="collapse" (click)="isCollapsed = !isCollapsed" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" (click)="!isCollapsed = isCollapsed" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
-        <a class="navbar-brand" routerLink="/mainProfe">StudentView</a>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent" [ngbCollapse]="isCollapsed">
+        <div class="collapse navbar-collapse" id="navbarSupportedContent" [ngbCollapse]="!isCollapsed">
           <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-              <a class="nav-link" (click) ="removeMain()" routerLink="/mainNotasProfesor">Calificaciones<span class="sr-only">(current)</span></a>
+            <li class="nav-item" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
+              <a class="nav-link" routerLink="/mainProfe">Home</a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
+              <a class="nav-link" (click) ="obtenerNotas()" routerLink="/mainNotasProfesor">Calificaciones</a>
+            </li>
+            <li class="nav-item" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
               <a class="nav-link" (click) ="removeMain()" routerLink="/asistenciaProfesor">Asistencia</a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
               <a class="nav-link" (click) ="removeMain()" routerLink="/comportamientoProfesor">Comportamiento</a>
             </li>
             <li class="nav-item dropdown">
@@ -57,13 +63,15 @@
                 Clase
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="#">4ºC - Primaria</a>
-                <a class="dropdown-item" href="#">4ºE - ESO</a>
+                <a *ngFor="let clase of clases; let i = index" (click)="seleccionarClase(i)" class="dropdown-item cursor">{{clase.nombre_clase}}</a>
                 <a class="dropdown-item" (click) ="aniadirClase()" routerLink="/aniadirClase"><i class="fas fa-plus-circle">Añadir Clase</i></a>
               </div>
             </li>
           </ul>
         </div>
+        <li id="nombre" class="nav-item">
+          <p>Clase: <b>{{nombre_clase}}</b></p>
+        </li>
         <div *ngIf="isCollapsed == false" class="form-inline my-2 my-lg-0">
           <i (click) ="removeMain()" routerLink="/mensajesProfe" class="far fa-envelope fa-3x cursor margenes"></i>
           <i (click) ="perfil(service.navPadres)" routerLink="/perfil" class="far fa-user-circle fa-3x cursor"></i>

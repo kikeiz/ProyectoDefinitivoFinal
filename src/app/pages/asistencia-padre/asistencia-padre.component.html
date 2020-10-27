@@ -12,15 +12,15 @@
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>Matematicas</td>
-              <td>25/06</td>
-              <td><input type="checkbox"></td>
+            <tr *ngFor="let falta of faltas; let i = index">
+              <td><b>{{falta.asignatura}}</b></td>
+              <td><b>{{falta.fecha1 | fechas}}</b></td>
+              <td><input (change)="chequeado(falta.id_asistencia, $event.target.checked)" type="checkbox"></td>
             </tr>
           </tbody>
         </table>
     </div>
     <div id="boton" class="container">
-        <button type="button" class="btn btn-success">Justificar</button>
+        <button type="button" (click)="justificar()" class="btn btn-success">Justificar</button>
     </div>
 </div>

@@ -151,8 +151,8 @@ app.get("/cursos",
 });     
           
 app.post('/aniadirclase', (req,rep)=>{
-    let params = new Array (req.body.nombre_clase, req.body.id_profesor, req.body.id_asignatura,req.body.id_curso)
-    sql = "INSERT INTO clases (nombre_clase, id_profesor, id_asignatura, id_curso) VALUE (?,?,?,?)"
+    let params = new Array (req.body.nombre_clase, req.body.id_profesor, req.body.id_asignatura,req.body.id_curso, req.body.id_colegio)
+    sql = "INSERT INTO clases (nombre_clase, id_profesor, id_asignatura, id_curso, id_colegio) VALUE (?,?,?,?,?)"
     connection.query(sql, params, function(err,res){
         if(err){
             console.log(err)
@@ -270,4 +270,426 @@ app.put("/editarPadre",
 });
 
 
+app.get('/alumnos/:id/:Id', (req,rep)=>{
+    let params = [req.params.id, req.params.Id]
+    sql = "SELECT alumnos.id_alumno, alumnos.nombre, alumnos.apellidos FROM alumnos WHERE id_curso = ? AND id_colegio = ?"
+    connection.query(sql, params, function(err,res){
+        if(err){
+            console.log(err)
+        }else{ 
+            rep.send(res)
+         }
+    });
+})
+
+app.get('/alumno/clase/:id',(req,rep)=>{
+    let id = req.params.id
+    sql = "SELECT clases_alumnos.id_clases, alumnos.id_alumno, alumnos.nombre, alumnos.apellidos FROM clases_alumnos JOIN alumnos ON clases_alumnos.id_alumnos = alumnos.id_alumno WHERE clases_alumnos.id_clases = ?"
+    connection.query(sql, id, function(err,res){
+        if(err){
+            console.log(err)
+        }else{ 
+            rep.send(res)
+         }
+    });
+})
+
+app.get('/alumnos/:id',(req,rep)=>{
+    let id = req.params.id
+    sql = "SELECT * FROM alumnos WHERE id_padre = ?"
+    connection.query(sql, id, function(err,res){
+        if(err){
+            console.log(err)
+        }else{ 
+            rep.send(res)
+         }
+    });
+})
+
+app.post('/alumnos', (req,rep)=>{
+    let params = [req.body.id_clase, req.body.id_alumno]
+    sql = "INSERT INTO clases_alumnos (id_clases, id_alumnos) VALUE (?,?)"
+    connection.query(sql, params, function(err,res){
+        if(err){
+            console.log(err)
+        }else{ 
+            rep.send(res)
+         }
+    });
+})
+          
+
+// MIS CLASES
+
+app.get('/misclases/:id',(req,rep)=>{
+    let id = req.params.id
+    sql = "SELECT nombre_clase, id_colegio, id_asignatura, id_curso, id_clase FROM clases WHERE id_profesor = ?"
+    connection.query(sql, id, function(err,res){
+        if(err){
+            console.log(err)
+        }else{ 
+            rep.send(res)
+         }
+    });
+});
+
+app.get('/clases/:id', (req,rep)=>{
+    let id = req.params.id
+    sql = "SELECT * FROM clases WHERE id_clase = ?"
+    connection.query(sql, id, function(err,res){
+        if(err){
+            console.log(err)
+        }else{ 
+            rep.send(res)
+         }
+    });
+})
+
+// NOTAS
+
+app.get('/notasalumnos/:id', (req,rep)=>{
+    let id = req.params.id
+    sql = "SELECT * FROM clases_alumnos JOIN alumnos ON alumnos.id_alumno = clases_alumnos.id_alumnos WHERE clases_alumnos.id_clases = ?"
+    connection.query(sql, id, function(err,res){
+        if(err){
+            console.log(err)
+        }else{ 
+            rep.send(res)
+         }
+    });
+})
+
+app.get('/notas/alumnos/:id', (req,rep)=>{
+    let id = req.params.id
+    sql = "SELECT notas.nota, notas.fecha, notas.tipo_calificacion, notas.id_nota, alumnos.nombre, alumnos.apellidos, notas.id_alumno, asignaturas.nombre, asignaturas.id_asignatura FROM notas JOIN alumnos ON notas.id_alumno = alumnos.id_alumno JOIN clases ON notas.id_clase = clases.id_clase JOIN asignaturas ON clases.id_asignatura = asignaturas.id_asignatura WHERE alumnos.id_alumno = ?"
+    connection.query(sql, id, function(err,res){
+        if(err){
+            console.log(err)
+        }else{ 
+            rep.send(res)
+         }
+    });
+})
+
+app.post('/notas', (req,rep)=>{
+    let params = [req.body.nota, req.body.fecha, req.body.id_profesor, req.body.id_alumno, req.body.tipo, req.body.id_clase]
+    sql = "INSERT INTO notas (nota, fecha, id_profesor, id_alumno, tipo_calificacion, id_clase) VALUE (?,?,?,?,?,?)"
+    connection.query(sql, params, function(err,res){
+        if(err){
+            console.log(err)
+        }else{ 
+            rep.send(res)
+         }
+    });
+})
+
+app.get('/notas/:id', (req,rep)=>{
+    let id = req.params.id
+    sql = "SELECT AVG(nota) AS media, fecha, tipo_calificacion FROM notas WHERE id_clase = ? GROUP BY tipo_calificacion, fecha"
+    connection.query(sql, id, function(err,res){
+        if(err){
+            console.log(err)
+        }else{ 
+            rep.send(res)
+         }
+    });
+})
+
+app.post('/alumnos/examen', (req,rep)=>{
+    let params = [req.body.fecha, req.body.tipo, req.body.id_clase]
+    sql = "SELECT alumnos.nombre, alumnos.apellidos, alumnos.id_alumno, notas.id_nota, notas.nota FROM notas JOIN alumnos ON notas.id_alumno = alumnos.id_alumno WHERE notas.fecha = ? AND tipo_calificacion = ? AND id_clase = ?"
+    connection.query(sql, params, function(err,res){
+        if(err){
+            console.log(err)
+        }else{ 
+            rep.send(res)
+         }
+    });
+})
+
+app.put('/notas', (req,rep)=>{
+    let params = [req.body.nota, req.body.id_nota]
+    sql = "UPDATE notas SET notas.nota = ? WHERE notas.id_nota = ?"
+    connection.query(sql, params, function(err,res){
+        if(err){
+            console.log(err)
+        }else{ 
+            rep.send(res)
+         }
+    });
+})
+
+app.get('/filtrar/:id_clase/:notamin/:notamax/:tipo', (req,rep)=>{
+    let params = [req.params.id_clase, req.params.notamin, req.params.notamax, req.params.tipo]
+    if(req.params.tipo != "todos"){
+        sql = "SELECT * FROM (SELECT AVG(notas.nota) AS media, notas.fecha AS fecha1, notas.tipo_calificacion AS tipo FROM notas WHERE id_clase = ? GROUP BY notas.fecha, notas.tipo_calificacion) AS notitas WHERE notitas.media >= ? AND notitas.media <= ? AND tipo = ?"
+        connection.query(sql, params, function(err,res){
+            if(err){
+                console.log(err)
+            }else{ 
+                rep.send(res)
+             }
+        });
+    }else{
+        let param = [req.params.id_clase, req.params.notamin, req.params.notamax]
+        sql = "SELECT * FROM (SELECT AVG(notas.nota) AS media, notas.fecha AS fecha1, notas.tipo_calificacion AS tipo FROM notas WHERE id_clase = ? GROUP BY notas.fecha, notas.tipo_calificacion) AS notitas WHERE notitas.media >= ? AND notitas.media <= ?"
+        connection.query(sql, param, function(err,res){
+            if(err){
+                console.log(err)
+            }else{ 
+                rep.send(res)
+             }
+        });
+    }
+})
+
+app.get('/filtrar/notas/alumnos/:idalumno/:notamax/:notamin/:tipo/:id_asignatura', (req,rep)=>{
+    let params = [req.params.idalumno, req.params.notamin, req.params.notamax, req.params.tipo, req.params.id_asignatura]
+    if(req.params.tipo != "todos" && req.params.id_asignatura != "todos"){
+        sql ="SELECT * FROM (SELECT notas.nota AS calificacion, notas.fecha, notas.tipo_calificacion, notas.id_nota, alumnos.nombre AS alumno, alumnos.apellidos, notas.id_alumno, asignaturas.nombre AS asignatura, asignaturas.id_asignatura AS id_asignaturas FROM notas JOIN alumnos ON notas.id_alumno = alumnos.id_alumno JOIN clases ON notas.id_clase = clases.id_clase JOIN asignaturas ON clases.id_asignatura = asignaturas.id_asignatura WHERE alumnos.id_alumno = ?) AS tabla1 WHERE calificacion >= ? AND calificacion <= ? AND tipo_calificacion = ? AND id_asignaturas = ?"
+        connection.query(sql, params, function(err,res){
+            if(err){
+                console.log(err)
+            }else{ 
+                rep.send(res)
+             }
+        });
+    }else if(req.params.tipo != "todos"){
+        let param = [req.params.idalumno, req.params.notamin, req.params.notamax, req.params.tipo]
+        sql = "SELECT * FROM (SELECT notas.nota AS calificacion, notas.fecha, notas.tipo_calificacion, notas.id_nota, alumnos.nombre AS alumno, alumnos.apellidos, notas.id_alumno, asignaturas.nombre AS asignatura, asignaturas.id_asignatura AS id_asignaturas FROM notas JOIN alumnos ON notas.id_alumno = alumnos.id_alumno JOIN clases ON notas.id_clase = clases.id_clase JOIN asignaturas ON clases.id_asignatura = asignaturas.id_asignatura WHERE alumnos.id_alumno = ?) AS tabla1 WHERE calificacion >= ? AND calificacion <= ? AND tipo_calificacion = ?"
+        connection.query(sql, param, function(err,res){
+            if(err){
+                console.log(err)
+            }else{ 
+                rep.send(res)
+             }
+        });
+    }else if(req.params.id_asignatura != "todos"){
+        let par = [req.params.idalumno, req.params.notamin, req.params.notamax, req.params.id_asignatura]
+        sql = "SELECT * FROM (SELECT notas.nota AS calificacion, notas.fecha, notas.tipo_calificacion, notas.id_nota, alumnos.nombre AS alumno, alumnos.apellidos, notas.id_alumno, asignaturas.nombre AS asignatura, asignaturas.id_asignatura AS id_asignaturas FROM notas JOIN alumnos ON notas.id_alumno = alumnos.id_alumno JOIN clases ON notas.id_clase = clases.id_clase JOIN asignaturas ON clases.id_asignatura = asignaturas.id_asignatura WHERE alumnos.id_alumno = ?) AS tabla1 WHERE calificacion >= ? AND calificacion <= ? AND id_asignaturas = ?"
+        connection.query(sql, par, function(err,res){
+            if(err){
+                console.log(err)
+            }else{ 
+                rep.send(res)
+             }
+        });
+    }else{
+        let p = [req.params.idalumno, req.params.notamin, req.params.notamax]
+        sql = "SELECT * FROM (SELECT notas.nota AS calificacion, notas.fecha, notas.tipo_calificacion, notas.id_nota, alumnos.nombre AS alumno, alumnos.apellidos, notas.id_alumno, asignaturas.nombre AS asignatura, asignaturas.id_asignatura AS id_asignaturas FROM notas JOIN alumnos ON notas.id_alumno = alumnos.id_alumno JOIN clases ON notas.id_clase = clases.id_clase JOIN asignaturas ON clases.id_asignatura = asignaturas.id_asignatura WHERE alumnos.id_alumno = ?) AS tabla1 WHERE calificacion >= ? AND calificacion <= ?"
+        connection.query(sql, p, function(err,res){
+            if(err){
+                console.log(err)
+            }else{ 
+                rep.send(res)
+             }
+        });
+    }
+})
+
+// app.get('/filtrar/notas/alumnos/:notamin/:notamax/:asignatura/:')
+
+//MENSAJES
+
+app.post('/mensaje', (req,rep)=>{
+    let params = [req.body.tipo, req.body.contenido, req.body.valor, req.body.envia, req.body.fecha, req.body.id_clase, req.body.id_alumno]
+    sql = "INSERT INTO mensajes (tipo, contenido, valor, quienenvia, fecha, id_clase, id_alumno) VALUES (?, ?, ?, ?, ?, ?, ?)"
+    connection.query(sql, params, function(err,res){
+        if(err){
+            console.log(err)
+        }else{ 
+            rep.send(res)
+         }
+    });
+})
+
+app.get('/mensajes/:id_alumno', (req,rep)=>{
+    let id = req.params.id_alumno
+    sql = "SELECT asignaturas.nombre, mensajes.id_mensaje, mensajes.tipo, mensajes.contenido, mensajes.valor, mensajes.quienenvia, mensajes.fecha, mensajes.id_clase, mensajes.id_alumno FROM mensajes JOIN clases ON mensajes.id_clase = clases.id_clase JOIN asignaturas ON clases.id_asignatura = asignaturas.id_asignatura WHERE mensajes.id_alumno = ? AND mensajes.quienenvia = 'profesor'"
+    connection.query(sql, id, function(err,res){
+        if(err){
+            console.log(err)
+        }else{ 
+            rep.send(res)
+         }
+    });
+})
+
+app.get('/mensajes/clase/:id_clase', (req,rep)=>{
+    let id = req.params.id_clase
+    sql = "SELECT asignaturas.nombre, mensajes.id_mensaje, mensajes.tipo, mensajes.contenido, mensajes.valor, mensajes.quienenvia, mensajes.fecha, mensajes.id_clase, mensajes.id_alumno, alumnos.nombre AS nombre_alumno, alumnos.apellidos FROM mensajes JOIN clases ON mensajes.id_clase = clases.id_clase JOIN asignaturas ON clases.id_asignatura = asignaturas.id_asignatura JOIN alumnos ON mensajes.id_alumno = alumnos.id_alumno WHERE mensajes.id_clase = ? AND mensajes.quienenvia = 'padre'"
+    connection.query(sql, id, function(err,res){
+        if(err){
+            console.log(err)
+        }else{ 
+            rep.send(res)
+         }
+    });
+})
+
+
+// COMPORTAMIENTO PROFESOR
+
+app.post('/comportamiento', (req,rep)=>{
+    let params = [req.body.tipo_comportamiento, req.body.id_alumno, req.body.id_clase]
+    sql = "INSERT INTO comportamiento (tipo_comportamiento, nota, id_alumno, id_clase) VALUES (?, 10, ?, ?)"
+    connection.query(sql, params, function(err,res){
+        if(err){
+            console.log(err)
+        }else{ 
+            rep.send(res)
+         }
+    });
+})
+
+
+app.get('/bhviour/:id_clase/:tipo/:id_alumno', (req,rep)=>{
+    let params = [req.params.id_clase, req.params.id_alumno, req.params.tipo]
+    sql = "SELECT * FROM comportamiento WHERE  comportamiento.id_clase = ? AND comportamiento.id_alumno = ? AND comportamiento.tipo_comportamiento = ?"
+    connection.query(sql, params, function(err,res){
+        if(err){
+            console.log(err)
+        }else{ 
+            rep.send(res)
+         }
+    });
+})
+
+
+app.put('/modificar/comportamiento', (req,rep)=>{
+    let params = [req.body.nota, req.body.id_comportamiento]
+    sql = "UPDATE comportamiento SET comportamiento.nota = ? WHERE id_comportamiento = ?"
+    connection.query(sql, params, function(err,res){
+        if(err){
+            console.log(err)
+        }else{ 
+            rep.send(res)
+         }
+    });
+})
+
+app.get('/comportamientos/alumno/:id/:id_clase', (req,rep)=>{
+    let params = [req.params.id, req.params.id_clase]
+    sql = "SELECT comportamiento.id_comportamiento, comportamiento.tipo_comportamiento, comportamiento.nota, comportamiento.id_alumno, comportamiento.id_clase, alumnos.nombre, alumnos.apellidos FROM comportamiento JOIN alumnos ON comportamiento.id_alumno = alumnos.id_alumno WHERE comportamiento.id_alumno = ? AND comportamiento.id_clase = ?"
+    connection.query(sql, params, function(err,res){
+        if(err){
+            console.log(err)
+        }else{ 
+            rep.send(res)
+         }
+    });
+})
+
+
+app.get('/behaviour/class/:id', (req,rep)=>{
+    let idd = req.params.id
+    sql = "SELECT AVG(nota) AS nota_media, comportamiento.tipo_comportamiento FROM comportamiento WHERE comportamiento.id_clase = ? GROUP BY tipo_comportamiento"
+    connection.query(sql, idd, function(err,res){
+        if(err){
+            console.log(err)
+        }else{ 
+            rep.send(res)
+         }
+    });
+})
+
+//COMPORTAMIENTO PADRE
+
+app.get('/clases/alumno/:id_alumno', (req,rep)=>{
+    let id = req.params.id_alumno
+    sql = "SELECT asignaturas.nombre, clases_alumnos.id_clases FROM clases_alumnos JOIN clases ON clases_alumnos.id_clases = clases.id_clase JOIN asignaturas ON clases.id_asignatura = asignaturas.id_asignatura WHERE id_alumnos = ?"
+    connection.query(sql, id, function(err,res){
+        if(err){
+            console.log(err)
+        }else{ 
+            rep.send(res)
+         }
+    });
+})
+
+// ASISTENCIA
+
+app.post('/asistencia', (req,rep)=>{
+    let params = [req.body.fecha, req.body.id_alumno, req.body.id_clase, req.body.asiste, req.body.justificada]
+    sql = "INSERT INTO asistencia (fecha, id_alumno, id_clase, asiste, justificada) VALUES (?, ?, ?, ?, ?)"
+    connection.query(sql, params, function(err,res){
+        if(err){
+            console.log(err)
+        }else{ 
+            rep.send(res)
+         }
+    });
+})
+
+app.get('/detalle/:id_clase', (req,rep)=>{
+    let id = req.params.id_clase
+    sql = "SELECT COUNT(CASE WHEN asistencia.asiste = false AND asistencia.justificada = false THEN 1 END) AS no_justificadas, COUNT(CASE WHEN asistencia.asiste = false AND asistencia.justificada = true THEN 1 END) AS justificada, COUNT(CASE WHEN asistencia.asiste = true OR asistencia.asiste = false THEN 1 END) AS total, COUNT(CASE WHEN asistencia.asiste = true THEN 1 END) AS asistencias, alumnos.nombre, alumnos.apellidos, asistencia.id_alumno, (COUNT(CASE WHEN asistencia.asiste = true THEN 1 END)*100)/ COUNT(CASE WHEN asistencia.asiste = true OR asistencia.asiste = false THEN 1 END) AS porcentaje_asiste, (COUNT(CASE WHEN asistencia.asiste = false AND asistencia.justificada = true THEN 1 END)*100)/COUNT(CASE WHEN asistencia.asiste = true OR asistencia.asiste = false THEN 1 END) AS porcentaje_justificada, (COUNT(CASE WHEN asistencia.asiste = false AND asistencia.justificada = false THEN 1 END)*100)/COUNT(CASE WHEN asistencia.asiste = true OR asistencia.asiste = false THEN 1 END) AS porcentaje_nojustificada FROM asistencia JOIN alumnos ON asistencia.id_alumno = alumnos.id_alumno WHERE asistencia.id_clase = ? GROUP BY asistencia.id_alumno"
+    connection.query(sql, id, function(err,res){
+        if(err){
+            console.log(err)
+        }else{ 
+            rep.send(res)
+         }
+    });
+})
+
+app.get('/porcentaje/:id', (req,rep)=>{
+    let id = req.params.id
+    sql = "SELECT (COUNT(CASE WHEN asiste = true THEN 1 END)*100)/ COUNT(asiste) AS asistencias, fecha FROM asistencia WHERE id_clase = ? GROUP BY fecha"
+    connection.query(sql, id, function(err,res){
+        if(err){
+            console.log(err)
+        }else{ 
+            rep.send(res)
+         }
+    });
+})
+
+app.get('/faltas/:id_clase/:fecha', (req,rep)=>{
+    let params = [req.params.id_clase, req.params.fecha]
+    sql = "SELECT alumnos.nombre, alumnos.apellidos, asistencia.id_alumno, asistencia.justificada FROM asistencia JOIN alumnos ON asistencia.id_alumno = alumnos.id_alumno WHERE id_clase = ? AND asistencia.fecha = ? AND asistencia.asiste = false"
+    connection.query(sql, params, function(err,res){
+        if(err){
+            console.log(err)
+        }else{ 
+            rep.send(res)
+         }
+    });
+})
+
+app.get('/faltasAlumno/:id_alumno', (req,rep)=>{
+    let params = [req.params.id_alumno]
+    sql = "SELECT asignaturas.nombre, asistencia.id_clase, asistencia.fecha, asistencia.id_asistencia FROM asistencia JOIN clases ON asistencia.id_clase = clases.id_clase JOIN asignaturas ON clases.id_asignatura = asignaturas.id_asignatura WHERE asistencia.id_alumno = ? AND asistencia.asiste = false AND asistencia.justificada = false"
+    connection.query(sql, params, function(err,res){
+        if(err){
+            console.log(err)
+        }else{ 
+            rep.send(res)
+         }
+    });
+})
+
+app.put('/justificar', (req,rep)=>{
+    let id = req.body.id_asistencia
+    sql = "UPDATE asistencia SET asistencia.justificada = true WHERE id_asistencia = ?"
+    connection.query(sql, id, function(err,res){
+        if(err){
+            console.log(err)
+        }else{ 
+            rep.send(res)
+         }
+    });
+})
+
+app.get('/datos/falta/:id_asistencia', (req,rep)=>{
+    let id = req.params.id_asistencia
+    sql = "SELECT alumnos.nombre, alumnos.apellidos, asistencia.fecha, asistencia.id_alumno, asistencia.id_clase FROM asistencia JOIN alumnos ON asistencia.id_alumno = alumnos.id_alumno WHERE asistencia.id_asistencia = ?"
+    connection.query(sql, id, function(err,res){
+        if(err){
+            console.log(err)
+        }else{ 
+            rep.send(res)
+         }
+    });
+})
 app.listen(3019);

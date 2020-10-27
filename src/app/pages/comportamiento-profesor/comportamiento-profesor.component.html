@@ -9,13 +9,14 @@
         <div class="col-8">
             <div class="form-group">
                 <label for="exampleSelect2"><b>Alumno</b></label>
-                <select class="form-control" id="exampleSelect2">
-                    <option value="">Pedro</option>
+                <select #alumno (change)="cambioAlumno(alumno.value)" class="form-control" id="exampleSelect2">
+                    <option value="ninguno">Elige el alumno</option>
+                    <option *ngFor="let alumno of alumnos; let i = index" value="{{alumno.id_alumno}}">{{alumno.apellidos}}, {{alumno.nombre}}</option>
                 </select>
             </div>
             <div class="form-group">
                 <label for="example-date-input"><b>Fecha</b></label>
-                <input class="form-control" type="date" id="example-date-input">
+                <input [(ngModel)]="date" class="form-control" type="date" id="example-date-input">
             </div>
         </div>
         <div class="col-2"></div>
@@ -59,23 +60,17 @@
     <div *ngIf="tablaResumen==false" class="row">
         <div class="col-2"></div>
         <div class="col-8">
-            <form>
-                <div class="container" id="valor"><input class ="form-control" id="nota" type="number" required name="price" min="0" placeholder="Introduce valor" step="0.1"></div>
+            <form #enviarNota="ngForm" (ngSubmit)="actualizar(enviarNota.value)">
+                <div class="container" id="valor"><input class ="form-control" id="nota" type="number" required name="price" min="0" placeholder="Introduce valor" step="0.1" name="nota" ngModel required></div>
                 <div><i (click)="envimes()" class="far fa-envelope fila"><b><i> Añadir mensaje ?</i></b></i></div>
                 <!-- mensaje -->
                 <div *ngIf="mensaje == true">
-                            <label for="selemens"><b>Mensaje Predeterminado: </b></label><br>
-                            <select class="form-control" id="selemens">
-                                <option value="ninguno">Ninguno</option>
-                                <option value="asistencia">Asistencia</option>
-                                <option value="atencion">Atencion</option>
-                            </select>
                             <div>
-                                <label for="msg"><b>Editar mensaje: </b></label><br>
-                                <input class="form-control"  id="msg" type="text">
+                                <label for="msg"><b>Mensaje: </b></label><br>
+                                <input class="form-control" id="msg" type="text" name="mensaje" ngModel>
                             </div>
                 </div>
-                <div class="container" id="valor"><button (click)="actualizar()" type="reset" class="btn btn-outline-primary">Actualizar</button></div>
+                <div class="container" id="valor"><button [disabled] = "!enviarNota.valid" type="submit" class="btn btn-outline-primary">Actualizar</button></div>
             </form>
         </div>
         <div class="col-2"></div>
@@ -84,9 +79,7 @@
     
 
     <div *ngIf="tablaResumen==false" class="row">
-        <!-- <div class="col-1"></div>
-        <div class="col-10"> -->
-            <h3 id="titulo" class="container">Enrique Izquierdo</h3>
+            <h3 id="titulo" class="container">{{nombreAlumno}}</h3>
             <table id="valor" class="table">
                 <thead class="thead-dark">
                   <tr>
@@ -95,29 +88,15 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td>Deberes</td>
-                    <td>7.5</td>
-                  </tr>
-                  <tr>
-                    <td>Comportamiento</td>
-                    <td>6.4</td>
-                  </tr>
-                  <tr>
-                    <td>Atencion</td>
-                    <td>5.9</td>
-                  </tr>
-                  <tr>
-                    <td>Puntualidad</td>
-                    <td>9</td>
+                  <tr *ngFor="let comportamientoAlumno of comportamientosAlumno; let i = index">
+                    <td style="text-transform: capitalize;"><b>{{comportamientoAlumno.tipo_comportamiento}}</b></td>
+                    <td><b>{{comportamientoAlumno.nota}}</b></td>
                   </tr>
                 </tbody>
               </table>
-        <!-- </div> -->
         <div class="container">
             <button type="button" class="btn btn-dark" (click)="mostrar()">Comparar con la media</button>
         </div>
-        <!-- <div class="col-1"></div> -->
     </div>
 
   <div *ngIf="tablaResumen == true" class="row">
@@ -129,7 +108,10 @@
         [options]="barChartOptions"
         [plugins]="barChartPlugins"
         [legend]="barChartLegend"
-        [chartType]="barChartType">
+        [chartType]="barChartType"
+        (chartHover)="chartHovered($event)"
+        (chartClick)="chartClicked($event)"
+        >
       </canvas>
     </div>
     <button type="button" class="btn btn-primary" (click)="terminar()">Cerrar</button>

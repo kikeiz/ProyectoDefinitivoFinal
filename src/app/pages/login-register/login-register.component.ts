@@ -28,6 +28,7 @@ export class LoginRegisterComponent implements OnInit {
           this.service.home(true)
           this.service.navbar('padres')
           this.service.entrar()
+          this.serviceAñadirAlumno.obtenerAlumnos(datapadre.id_padre)
       }else{
           console.log("El padre no existe");
           this.service.loginProfesor(usuario).subscribe((dataprofe:any)=>{
@@ -38,6 +39,7 @@ export class LoginRegisterComponent implements OnInit {
               this.service.home(false)
               this.service.navbar('profes')
               this.service.entrar()
+              this.serviceAñadirClase.obtenerClases(dataprofe.id_profesor)
             }else{
               console.log("El profesor no existe");
             }
@@ -54,6 +56,7 @@ export class LoginRegisterComponent implements OnInit {
           this.serviceAñadirClase.id(datapadre.id_padre)
           if(datapadre.status != "existe"){
             this.service.entrar()
+            this.serviceAñadirAlumno.obtenerAlumnos(datapadre.id_padre)
           }else{
             console.log("El usuario ya existe");
           }
@@ -64,6 +67,7 @@ export class LoginRegisterComponent implements OnInit {
           this.serviceAñadirAlumno.id(dataprofe.id_profesor)
           if(dataprofe.status != "existe"){
             this.service.entrar()
+            this.serviceAñadirClase.obtenerClases(dataprofe.id_profesor)
           }else{
             console.log("El usuario ya existe");
           }

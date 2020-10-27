@@ -9,7 +9,7 @@ import { Color, BaseChartDirective, Label } from 'ng2-charts';
 })
 export class ComportamientoPadreComponent implements OnInit {
   //Gráfico de lineas
-  public semana:boolean
+  public progreso:boolean
   public lineChartData: ChartDataSets[] = [
     { data: [6.5, 5.9, 8, 8.1, 5.6, 5.5, 4, 5, 8, 10], label: 'Participacion' },
     { data: [2.8, 4.8, 4, 1.9, 8.6, 2.7, 9, 5, 1.5, 10], label: 'Deberes' },
@@ -17,7 +17,6 @@ export class ComportamientoPadreComponent implements OnInit {
     { data: [1.8, 6.8, 7, 9.9, 5.6, 4.7, 5, 2.7, 9, 8], label: 'Puntualidad'}
   ]
   public lineChartLabels: Label[] = ['Septiembre', 'Octubre', 'Noviembre', 'Diciembre', 'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio'];
-  public lineChartLabelsW: Label[] = ['Día 1', 'Día 2', 'Día 3', 'Día 4', 'Día 5', 'Día 6', 'Día 7', 'Día 8', 'Día 9', 'Día 10']
   public lineChartOptions: (ChartOptions & { annotation: any }) = {
     responsive: true,
     scales: {
@@ -94,9 +93,12 @@ export class ComportamientoPadreComponent implements OnInit {
   public lineChartLegend = true;
   public lineChartType: ChartType = 'line';
 
+  // GRAFICO DE BARRAS
+
+
   @ViewChild(BaseChartDirective, { static: true }) chart: BaseChartDirective
   constructor() {
-    this.semana = false
+    this.progreso = false
   }
 
   ngOnInit(): void {
@@ -109,31 +111,8 @@ export class ComportamientoPadreComponent implements OnInit {
   public chartHovered({ event, active }: { event: MouseEvent, active: {}[] }): void {
     console.log(event, active);
   }
+  
 
-  private generateNumber(i: number): number {
-    return Math.floor((Math.random() * 10) + 1);
-  }
-
-  public cambiar(periodo:string): void {
-    if(periodo == 'semana'){
-      this.semana = true
-      for (let i = 0; i < this.lineChartData.length; i++) {
-        for (let j = 0; j < this.lineChartData[i].data.length; j++) {
-          this.lineChartData[i].data[j] = this.generateNumber(i);
-        }
-      }
-      this.chart.update();
-    }else{
-      this.semana = false
-      for (let i = 0; i < this.lineChartData.length; i++) {
-        for (let j = 0; j < this.lineChartData[i].data.length; j++) {
-          this.lineChartData[i].data[j] = this.generateNumber(i);
-        }
-      }
-      this.chart.update();
-    }
-    }
-    
 
   
 

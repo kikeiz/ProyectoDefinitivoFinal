@@ -45,24 +45,19 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <td>Pedro</td>
-                    <td>García Agudo</td>
-                    <td><input type="number" min="0" max="10" id="nota" step="0.1"></td>
-                </tr>
-                <tr>
-                    <td>Jaime</td>
-                    <td>Lorenzo Vasco</td>
-                    <td><input type="number" min="0" max="10" id="nota" step="0.1"></td>
+                <tr *ngFor="let alumno of alumnos; let i = index">
+                    <td>{{alumno.nombre}}</td>
+                    <td>{{alumno.apellidos}}</td>
+                    <td><input type="number" min="0" max="10" id="nota" step="0.1" [(ngModel)]="notas[i].nota"></td>
                 </tr>
                 </tbody>
             </table>
-        <div class="container"><button (click)="actualizar()" type="button" class="btn btn-outline-primary">Actualizar</button></div>
+        <div class="container"><button (click)="actualizar(contenido)" type="button" class="btn btn-outline-primary">Actualizar</button></div>
 </div>
 
 <div id="4" *ngIf="mostrarF1 == false && mostrarF2 == false && mostrarF3 == false">
     <div class="row">
-        <div class="container margin"><i id="fila" (click)="opciones()" class="fas fa-filter fa-3x"></i></div>
+        <div class="container margin"><i *ngIf="rojo == true" id="fila" (click)="opciones()" class="fas fa-filter fa-3x" style="color:red"></i><i *ngIf="rojo == false" id="fila" (click)="opciones()" class="fas fa-filter fa-3x"></i></div>
     </div>
     <div class="row">
         <div class="col-2"></div>
@@ -74,14 +69,6 @@
                         <option value="todos">Todos</option>
                         <option value="trabajo">Trabajo</option>
                         <option value="examen">Examen</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="prevision"><b>Estado</b></label><br>
-                    <select class="form-control container" id="prevision" name="prevision" ngModel>
-                        <option value="todos">Todos</option>
-                        <option value="previsto">Previsto</option>
-                        <option value="realizado">Realizado</option>
                     </select>
                 </div>
                 <div class="form-group">
@@ -99,9 +86,6 @@
     </div>
 </div>
 <div id="5" *ngIf="mostrarF1 == false && mostrarF2 == false && mostrarF3 == false">
-    <!-- <div class="row">
-        <div class="col-1"></div>
-        <div class="col-10"> -->
             <table class="table table-hover">
                 <thead class="thead-dark">
                 <tr>
@@ -111,21 +95,16 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr id="fila" (click)="editar()">
-                    <td>Examen</td>
-                    <td>09/05/1996</td>
-                    <td>7,6</td>
+                <tr *ngFor="let notamedia of notasmedias; let i = index" id="fila" (click)="editar(i)">
+                    <td style="text-transform: uppercase;"><b>{{notamedia.tipo}}</b></td>
+                    <td><b>{{notamedia.fecha | fechas}}</b></td>
+                    <td><b>{{notamedia.nota}}</b></td>
                 </tr>
                 </tbody>
             </table>
-        <!-- </div>
-        <div class="col-1"></div>
-    </div> -->
+
 </div>
 <div id="6" *ngIf="mostrarF3 == true">
-    <div class="row">
-        <div class="col-1"></div>
-        <div class="col-10">
             <table class="table">
                 <thead class="thead-dark">
                 <tr id="titulo">
@@ -135,18 +114,20 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <td>García Agudo</td>
-                    <td *ngIf="mostrarF4 == false" id="nota">7.4</td>
-                    <td *ngIf="mostrarF4 == true"><input id="insertar" type="number" step="0.1"></td>
-                    <td *ngIf="mostrarF4 == false" id="boton4"><button (click)="cambiar()" id="boton3" type="button" class="btn btn-warning">Editar</button></td>
-                    <td *ngIf="mostrarF4 == true" id="boton5"><button (click)="modificar()" id="boton3" type="button" class="btn btn-success">Cambiar</button></td>
+                <tr *ngFor="let cambioAlumno of cambioAlumnos; let i = index">
+                    <td>{{cambioAlumno.apellido}}</td>
+                    <td *ngIf="mostrarF4[i] == false" id="nota">{{cambioAlumno.nota}}</td>
+                    <td *ngIf="mostrarF4[i] == true"><input id="insertar" type="number" step="0.1" [(ngModel)]="cambioAlumno.nota"></td>
+                    <td *ngIf="mostrarF4[i] == false" id="boton4"><button (click)="cambiar(i)" id="boton3" type="button" class="btn btn-warning">Editar</button></td>
+                    <td *ngIf="mostrarF4[i] == true" id="boton5"><button (click)="modificar(i)" id="boton3" type="button" class="btn btn-success">Cambiar</button></td>
                 </tr>
                 </tbody>
             </table>
-        </div>
-        <div class="col-1"></div>
         <div class="container"><button (click)="cerrar()" type="button" class="btn btn-outline-primary">Cerrar</button></div>
-    </div>    
   </div>
- </div>
+<ng-template #contenido let-modal>
+    <div id="modal" class="modal-body" style="background-color: #99FF99 ;">
+        <h1 id="nota" class="container"><b>¡Nota Actualizada con Éxito!</b></h1>
+    </div>
+</ng-template>
+</div>

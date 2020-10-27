@@ -18,14 +18,14 @@
     border-width: 1px;
 }
 
-button{
+/* button{
     margin-bottom: 15px;
     width: 100%;
     display:block;
     position:relative;
     text-align: center;
     height: auto;
-}
+} */
 
 #filtro{
     width: 30%;

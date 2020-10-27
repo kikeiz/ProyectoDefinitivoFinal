@@ -19,14 +19,6 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="prevision"><b>Estado</b></label><br>
-                        <select class="form-control" id="prevision" name="prevision" ngModel>
-                            <option value="todos">Todos</option>
-                            <option value="previsto">Previsto</option>
-                            <option value="realizado">Realizado</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
                         <label for="tipo"><b>Nota</b></label><br>
                         <select class="form-control" id="tipo" name="estadoNota" ngModel>
                             <option value="todos">Todos</option>
@@ -36,10 +28,9 @@
                     </div>
                     <div class="form-group">
                         <label for="asignatura"><b>Asignatura</b></label><br>
-                        <select class="form-control" id="asignatura" name="estadoNota" ngModel>
+                        <select class="form-control" id="asignatura" name="asignatura" ngModel>
                             <option value="todos">Todos</option>
-                            <option value="biologia">Biologia</option>
-                            <option value="matematicas">Matematicas</option>
+                            <option *ngFor="let asignatura of asignaturas; let i = index" value="{{asignatura.id_asignatura}}">{{asignatura.nombre}}</option>
                         </select>
                     </div>
                     <button type="submit" class="btn btn-danger">Filtrar</button>
@@ -47,6 +38,17 @@
             </div>
             <div class="col-2"></div>
     </div>
+    <ng-template #contenido let-modal>
+        <div class="modal-header container">
+            <h4><b>Nota Media: </b></h4>
+        </div>
+        <div class="modal-body" [ngStyle]="(notamedia) >= 5 ? {'background-color': '#99FF99'} : {'background-color': '#FF9999'} ">
+            <h1 id="nota" class="container">{{notamedia1}}</h1>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-dark container" (click)="modal.close()">Cerrar</button>
+        </div>
+    </ng-template>
     <table class="table margin">
         <thead class="thead-dark">
             <tr>
@@ -56,16 +58,17 @@
             </tr>
         </thead>
         <tbody>
-            <tr id="fila" *ngFor="let nota of notas" [ngStyle]="(nota.nota) >= 5 ? {'background-color': '#99FF99'} : {'background-color': '#FF9999'}">
-                <td><b>{{nota.asignatura}}</b></td>
-                <td><b>{{nota.fecha}}</b></td>
-                <td><b>{{nota.nota}}</b></td>
+            <tr id="fila" *ngFor="let not of nota" [ngStyle]="(not.nota) >= 5 ? {'background-color': '#99FF99'} : {'background-color': '#FF9999'}">
+                <td><b>{{not.asignatura}}</b></td>
+                <td><b>{{not.fecha | fechas}}</b></td>
+                <td><b>{{not.nota}}</b></td>
             </tr>
         </tbody>
     </table>
     <div class="row">
         <div class="container margin marginbottom">
-            <button type="button" class="btn btn-outline-primary">Calcular Media</button>
+            <button type="button" class="btn btn-outline-primary" (click)="calcularMedia(contenido)">Calcular Media</button>
         </div>
     </div>
 </div>
+

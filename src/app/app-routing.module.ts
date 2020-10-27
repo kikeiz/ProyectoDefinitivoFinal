@@ -4,6 +4,7 @@ import { AniadirAlumnoComponent } from './pages/aniadir-alumno/aniadir-alumno.co
 import { AniadirClaseComponent } from './pages/aniadir-clase/aniadir-clase.component';
 import { AsistenciaPadreComponent } from './pages/asistencia-padre/asistencia-padre.component';
 import { AsistenciaProfesorComponent } from './pages/asistencia-profesor/asistencia-profesor.component';
+import { ComportamientoPadreGlobalComponent } from './pages/comportamiento-padre-global/comportamiento-padre-global.component';
 import { ComportamientoPadreComponent } from './pages/comportamiento-padre/comportamiento-padre.component';
 import { ComportamientoProfesorComponent } from './pages/comportamiento-profesor/comportamiento-profesor.component';
 import { HomePadreComponent } from './pages/home-padre/home-padre.component';
@@ -27,7 +28,8 @@ const routes: Routes = [
   {path:"asistenciaProfesor", component:AsistenciaProfesorComponent},
   {path:"perfil", component:PerfilComponent},
   {path:"aniadirClase", component:AniadirClaseComponent},
-  {path:"aniadirAlumno", component:AniadirAlumnoComponent}
+  {path:"aniadirAlumno", component:AniadirAlumnoComponent},
+  {path:"comportamientoGlobal", component:ComportamientoPadreGlobalComponent}
 ];
 
 @NgModule({
