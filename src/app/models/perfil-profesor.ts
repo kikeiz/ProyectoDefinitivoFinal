@@ -1,5 +1,6 @@
 export class PerfilProfesor {
 
+
     public id_profesor:number
     public nombre: string
     public apellidos: string

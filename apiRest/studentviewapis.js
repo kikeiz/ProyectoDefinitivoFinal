@@ -237,6 +237,37 @@ app.get("/obtenerPadre/:id",
 
 
 
+app.put("/editarProfesor",
+   function (req,res) {
+
+        console.log(req.body)
+        let sql = `UPDATE profesor SET nombre='${req.body.nombre}' , apellidos= '${ req.body.apellidos}', descripcion=' ${req.body.descripcion}',email=' ${req.body.email}',username=' ${req.body.username}', password=' ${req.body.password}',foto=' ${req.body.foto}' WHERE id_profesor= '${req.body.id_Profesor}' `;
+            console.log(sql);
+        connection.query(sql,function(err,result) {
+        if (err){
+            console.log(err);
+        } else {
+            console.log(result);
+        res.send(result)       
+        }
+    })
+});
+
+app.put("/editarPadre",
+   function (req,res) {
+
+        console.log(req.body)
+        let sql = `UPDATE padres SET nombre='${req.body.nombre}' , apellidos= '${ req.body.apellidos}', descripcion=' ${req.body.descripcion}',username=' ${req.body.username}', password=' ${req.body.password}',email=' ${req.body.email}' WHERE id_padre= '${req.body.id_Padre}' `;
+            console.log(sql);
+        connection.query(sql,function(err,result) {
+        if (err){
+            console.log(err);
+        } else {
+            console.log(result);
+        res.send(result)       
+        }
+    })
+});
 
 
 app.listen(3019);

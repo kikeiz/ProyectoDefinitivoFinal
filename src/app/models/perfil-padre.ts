@@ -1,4 +1,5 @@
 export class PerfilPadre {
+
     public id_padre:number
     public nombre: string
     public apellidos: string
@@ -19,4 +20,5 @@ export class PerfilPadre {
         this.foto=foto
     }
 }
+
 

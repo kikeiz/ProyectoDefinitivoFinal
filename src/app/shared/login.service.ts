@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { User } from '../models/user';
-import {PerfilProfesor} from'../models/perfil-profesor';
+import {PerfilProfesor}  from 'src/app/models/perfil-profesor'
+import {PerfilPadre} from 'src/app/models/perfil-padre'
 
 @Injectable({
   providedIn: 'root'
@@ -61,4 +62,10 @@ export class LoginService {
     console.log(user);
     return this.http.post(this.url + "/login/profesor", user)
   }
+
+
+  editarPerfilPadre(newpadre:PerfilPadre){
+    return this.http.put(this.url + "/editarPadre" ,newpadre)
+  }
+
 }
