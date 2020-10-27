@@ -49,7 +49,7 @@ export class LoginRegisterComponent implements OnInit {
   registrarse(data:any){
     if(data.password1 == data.password2){
       if(this.profesor==false){
-        let usuario = new User(data.usuario, data.password1, data.correo)
+        let usuario = new User(data.usuario, data.password1, data.correo, "../../../assets/822711_user_512x512.png")
         this.service.postPadre(usuario).subscribe((datapadre:any)=>{
           this.serviceAñadirClase.id(datapadre.id_padre)
           if(datapadre.status != "existe"){
@@ -59,7 +59,7 @@ export class LoginRegisterComponent implements OnInit {
           }
       })
       }else{
-        let usuario = new User(data.usuario, data.password1, data.correo)
+        let usuario = new User(data.usuario, data.password1, data.correo, "../../../assets/822711_user_512x512.png")
         this.service.postProfe(usuario).subscribe((dataprofe:any)=>{
           this.serviceAñadirAlumno.id(dataprofe.id_profesor)
           if(dataprofe.status != "existe"){
@@ -83,6 +83,10 @@ export class LoginRegisterComponent implements OnInit {
     }
     this.service.navbar(data)
   }
-
-
+// usuarioActualizado(data:string){
+// this.service.putUsuario(this.login).subscribe((data) =>{
+// console.log(data);
+// this.service.putUsuario('/perfil')
 }
+
+

@@ -12,6 +12,8 @@ export class LoginService {
   public navPadres: boolean
   public homePadre:boolean
   private url:string = "http://localhost:3019"
+  apellidos: any;
+  nombre: string;
   constructor(private http: HttpClient) { 
     this.login = false
     this.navPadres = false
@@ -21,10 +23,12 @@ export class LoginService {
     this.login = true
     console.log(this.login)
   }
+  
 
   navbar(data:string){
     if(data == 'padres'){
       this.navPadres = true
+
     }else{
       this.navPadres = false
     }
@@ -58,6 +62,7 @@ export class LoginService {
     console.log(user);
     return this.http.post(this.url + "/login/profesor", user)
   }
+
 
   editarPerfilPadre(newpadre:PerfilPadre){
     return this.http.put(this.url + "/editarPadre" ,newpadre)

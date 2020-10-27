@@ -6,6 +6,7 @@ import { LoginService } from 'src/app/shared/login.service';
 import { AñadirClaseService } from 'src/app/shared/añadir-clase.service'; 
 import { Clase} from 'src/app/models/clase'
 import { Asignaturas } from 'src/app/models/asignaturas';
+import { PerfilService } from 'src/app/shared/perfil.service';
 
 @Component({
   selector: 'app-header',
@@ -16,7 +17,7 @@ export class HeaderComponent implements OnInit {
   public isCollapsed:boolean
   public clase:Clase[] =[];
 
-  constructor(public service: LoginService, public serviceAñadirAlumno:AñadirAlumnoService, public serviceAñadirClase:AñadirClaseService) { 
+  constructor(public service: LoginService, public serviceAñadirAlumno:AñadirAlumnoService, public serviceAñadirClase:AñadirClaseService,public perfilService:PerfilService) { 
     this.isCollapsed = true
   }
 
@@ -26,13 +27,28 @@ export class HeaderComponent implements OnInit {
   colapsar(){
     this.isCollapsed = false
   }
+  
+  perfil(es_padre: boolean){
+    this.service.home(null)
+    console.log(es_padre)
+    if(es_padre == true){
+      this.perfilService.getPadre(this.serviceAñadirAlumno.id_padre)
+
+    } else {
+      this.perfilService.getProfesor(this.serviceAñadirClase.id_profesor)
+
+    }
+    
+  }
+
+
 
   removeMain(){
-    this.service.home = null
+    this.service.home(null)
   }
 
   aniadirClase(){
-      this.service.home = null
+      this.service.home(null)
 
       this.serviceAñadirClase.obtenerColegio().subscribe((data => {
       console.log(data);

@@ -46,9 +46,13 @@ app.post('/login/padre', (req,rep)=>{
     let params = [req.body.username, req.body.password]
     sql = "SELECT * FROM padres WHERE username = ? AND password = ?"
     connection.query(sql, params, function(err,res){
+        console.log(sql,params)
+
         if(err){
             console.log(err)
         }else{
+            console.log(res)
+
             if(res.length > 0){
                 rep.send({"status":"padreexiste", "id_padre":res[0].id_padre})
             }else{
@@ -70,8 +74,8 @@ app.post('/register/profesor', (req,rep)=>{
             if(res.length > 0){
                 rep.send({"status":"existe"})
             }else{
-                let params = new Array (req.body.username, req.body.password, req.body.email)
-                sql = "INSERT INTO profesor (username, password, email) VALUE (?,?,?)"
+                let params = new Array (req.body.username, req.body.password, req.body.email, req.body.foto)
+                sql = "INSERT INTO profesor (username, password, email, foto) VALUE (?,?,?,?)"
                 connection.query(sql, params, function(err,rer){
                     if(err){
                         console.log(err)
@@ -169,6 +173,67 @@ app.post('/aniadiralumno', (req,rep)=>{
          }
     });
 });
+//ACTUALIZAR DATOS PROFESOR//
+app.put("/editarProfesor",
+   function (req,res) {
+        console.log(req.body)
+        let sql = `UPDATE profesor SET nombre='${req.body.nombre}', apellidos= '${req.body.apellidos}', descripcion='${req.body.descripcion}',email='${req.body.email}',username='${req.body.username}', password='${req.body.password}',foto='${req.body.foto}' WHERE id_profesor='${req.body.id_profesor}'`;
+            console.log(sql);
+        connection.query(sql,function(err,result) {
+        if (err){
+            console.log(err);
+        } else {
+            console.log(result);
+        res.send(result)       
+        }
+    })
+});
+
+app.get("/obtenerProfesor/:id",
+   function (req,res) {
+    let paramId = req.params.id
+    // console.log(params)
+    let sql=`SELECT * FROM profesor WHERE id_profesor= ?`;
+    connection.query(sql, paramId ,function(err,result) {
+        if (err){
+            console.log(err);
+        } else {
+            console.log(result);
+        res.send(result)       
+        }
+    })
+});
+
+//ACTUALIZAR DATOS PADRE//
+
+app.put("/editarPadre",
+   function (req,res) {
+        let params = [req.body.nombre, req.body.apellidos, req.body.descripcion, req.body.username, req.body.password, req.body.email, req.body.contacto, req.body.foto, req.body.id_padre]
+        let sql = 'UPDATE padres SET nombre = ?, apellidos = ?, descripcion= ?, username = ?, password= ?, email = ?, contacto = ?, foto= ? WHERE id_padre = ?'
+            console.log(sql);
+        connection.query(sql,params,function(err,result) {
+        if (err){
+            console.log(err);
+        } else {
+            console.log(result);
+        res.send(result)       
+        }
+    })
+});
+app.get("/obtenerPadre/:id",
+   function (req,res) {
+    let paramId = req.params.id
+    // console.log(params)
+    let sql=`SELECT * FROM padres WHERE id_padre= ?`;
+    connection.query(sql, paramId ,function(err,result) {
+        if (err){
+            console.log(err);
+        } else {
+            console.log(result);
+        res.send(result)       
+        }
+    })
+});
 
 
 
@@ -205,5 +270,4 @@ app.put("/editarPadre",
 });
 
 
-          
 app.listen(3019);
