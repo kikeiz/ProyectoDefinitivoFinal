@@ -26,11 +26,6 @@ li a:hover{
     margin-right: 10px;
 }
 
-.sticky{
-    position: fixed;
-    position: static;
-    position: -webkit-sticky;
-}
 
 li{
     list-style: none;
@@ -46,4 +41,20 @@ a:hover{
     position: relative;
     top: 7px;
     margin-right: 20px;
+}
+
+.position{
+    position: relative;
+}
+
+.navbar.navbar-expand-lg.navbar-light.bg-light.sticky-nav{
+   width: 100%;
+   padding-right: 14%;
+   z-index: 1;
+}
+
+.sticky{
+    display: flex;
+    justify-content: center;
+    width: 100%;
 }

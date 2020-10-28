@@ -25,6 +25,11 @@ export class MensajeriaProfesorComponent implements OnInit {
     this.mensaje = this.mensajes[index]
   }
 
+  borrar(index:number){
+    this.mensajeService.borrarMensaje(this.mensajes[index].id_mensaje)
+    this.mensajes.splice(index, 1)
+
+  }
   cerrar(){
     this.mostrar = false
   }

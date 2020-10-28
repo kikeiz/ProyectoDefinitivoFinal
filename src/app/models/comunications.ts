@@ -5,7 +5,7 @@ export enum TipoMensaje{
     asistencia = "asistencia",
     puntualidad = "puntualidad",
     atencion = "atencion",
-    calificacion = "calificacion",
+    calificacion = "calificaciones",
     participacion = "participacion",
     deberes = "deberes"
 }

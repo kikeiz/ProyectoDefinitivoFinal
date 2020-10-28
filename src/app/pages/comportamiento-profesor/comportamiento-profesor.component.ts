@@ -8,6 +8,8 @@ import { Tipo } from 'src/app/models/nota';
 import { AñadirClaseService } from 'src/app/shared/añadir-clase.service';
 import { ComportamientoService } from 'src/app/shared/comportamiento.service';
 import { MensajesService } from 'src/app/shared/mensajes.service';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap'
+
 
 @Component({
   selector: 'app-comportamiento-profesor',
@@ -56,7 +58,7 @@ export class ComportamientoProfesorComponent implements OnInit {
     { data: [0, 0, 0, 0], label: "" },
     { data: [0, 0, 0, 0], label: 'Clase' }
   ];
-  constructor(public comportamientoService:ComportamientoService, public añadirClaseService:AñadirClaseService, public mensajeService:MensajesService){
+  constructor(public comportamientoService:ComportamientoService, public añadirClaseService:AñadirClaseService, public mensajeService:MensajesService, private modal:NgbModal){
     this.puntualidad = false
     this.deberes = false
     this.atencion = false
@@ -187,32 +189,46 @@ export class ComportamientoProfesorComponent implements OnInit {
     }))
   }
 
+  mostrarModal(content){
+    this.modal.open(content, {size: "sm"})
+    setTimeout(()=>{
+      this.modal.dismissAll()
+    }, 2000)
+  }
 
-  actualizar(datos:any){
+
+  actualizar(datos:any, contenido){
     if(!datos.mensaje || datos.mensaje == ""){
       if(this.comportamiento == true && this.rojo == true){
         this.restarComportamiento(TipoComportamiento.participacion, datos)
-
+        this.mostrarModal(contenido)
       }else if(this.comportamiento == true && this.verde == true){
         this.sumarComportamiento(TipoComportamiento.participacion, datos)
+        this.mostrarModal(contenido)
 
       }else if(this.deberes == true && this.rojo == true){
         this.restarComportamiento(TipoComportamiento.deberes, datos)
+        this.mostrarModal(contenido)
 
       }else if(this.deberes == true && this.verde == true){
         this.sumarComportamiento(TipoComportamiento.deberes, datos)
+        this.mostrarModal(contenido)
 
       }else if(this.puntualidad == true && this.rojo == true){
         this.restarComportamiento(TipoComportamiento.puntualidad, datos)
+        this.mostrarModal(contenido)
 
       }else if(this.puntualidad == true && this.verde == true){
         this.sumarComportamiento(TipoComportamiento.puntualidad, datos)
+        this.mostrarModal(contenido)
 
       }else if(this.atencion == true && this.rojo == true){
         this.restarComportamiento(TipoComportamiento.atencion, datos)
+        this.mostrarModal(contenido)
 
       }else if(this.atencion == true && this.verde == true){
         this.sumarComportamiento(TipoComportamiento.atencion, datos)
+        this.mostrarModal(contenido)
 
       }else{
         console.log("Es necesario seleccionar un comportamiento y asociarle un valor para poder continuar!");
@@ -221,34 +237,42 @@ export class ComportamientoProfesorComponent implements OnInit {
       if(this.comportamiento == true && this.rojo == true){
         this.restarComportamiento(TipoComportamiento.participacion, datos)
         this.enviarMensaje(datos.mensaje, TipoMensaje.participacion, this.date, Valor.negativo, this.añadirClaseService.id_clase, this.id_alumno, Envia.profesor)
+        this.mostrarModal(contenido)
 
       }else if(this.comportamiento == true && this.verde == true){
         this.sumarComportamiento(TipoComportamiento.participacion, datos)
         this.enviarMensaje(datos.mensaje, TipoMensaje.participacion, this.date, Valor.positivo, this.añadirClaseService.id_clase, this.id_alumno, Envia.profesor)
+        this.mostrarModal(contenido)
 
       }else if(this.deberes == true && this.rojo == true){
         this.restarComportamiento(TipoComportamiento.deberes, datos)
         this.enviarMensaje(datos.mensaje, TipoMensaje.deberes, this.date, Valor.negativo, this.añadirClaseService.id_clase, this.id_alumno, Envia.profesor)
+        this.mostrarModal(contenido)
 
       }else if(this.deberes == true && this.verde == true){
         this.sumarComportamiento(TipoComportamiento.deberes, datos)
         this.enviarMensaje(datos.mensaje, TipoMensaje.deberes, this.date, Valor.positivo, this.añadirClaseService.id_clase, this.id_alumno, Envia.profesor)
+        this.mostrarModal(contenido)
 
       }else if(this.puntualidad == true && this.rojo == true){
         this.restarComportamiento(TipoComportamiento.puntualidad, datos)
         this.enviarMensaje(datos.mensaje, TipoMensaje.puntualidad, this.date, Valor.negativo, this.añadirClaseService.id_clase, this.id_alumno, Envia.profesor)
+        this.mostrarModal(contenido)
 
       }else if(this.puntualidad == true && this.verde == true){
         this.sumarComportamiento(TipoComportamiento.puntualidad, datos)
         this.enviarMensaje(datos.mensaje, TipoMensaje.puntualidad, this.date, Valor.positivo, this.añadirClaseService.id_clase, this.id_alumno, Envia.profesor)
+        this.mostrarModal(contenido)
 
       }else if(this.atencion == true && this.rojo == true){
         this.restarComportamiento(TipoComportamiento.atencion, datos)
         this.enviarMensaje(datos.mensaje, TipoMensaje.atencion, this.date, Valor.negativo, this.añadirClaseService.id_clase, this.id_alumno, Envia.profesor)
+        this.mostrarModal(contenido)
 
       }else if(this.atencion == true && this.verde == true){
         this.sumarComportamiento(TipoComportamiento.atencion, datos)
         this.enviarMensaje(datos.mensaje, TipoMensaje.atencion, this.date, Valor.positivo, this.añadirClaseService.id_clase, this.id_alumno, Envia.profesor)
+        this.mostrarModal(contenido)
 
       }else{
         console.log("Es necesario seleccionar un comportamiento y asociarle un valor para poder continuar!");

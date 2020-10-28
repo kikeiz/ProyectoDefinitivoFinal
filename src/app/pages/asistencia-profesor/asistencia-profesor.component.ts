@@ -10,6 +10,8 @@ import { ComportamientoService } from 'src/app/shared/comportamiento.service';
 import { MensajesService } from 'src/app/shared/mensajes.service';
 import { ChartType, ChartOptions } from 'chart.js';
 import { Label, BaseChartDirective } from 'ng2-charts';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap'
+
 
 @Component({
   selector: 'app-asistencia-profesor',
@@ -51,7 +53,7 @@ export class AsistenciaProfesorComponent implements OnInit {
   public detalle:boolean
   public details:Asistencia[]
   public chart1:boolean
-  constructor(public comportamientoService:ComportamientoService, public asistenciaService:AsistenciaService, public añadirClaseService:AñadirClaseService, public mensajeService:MensajesService) {
+  constructor(public comportamientoService:ComportamientoService, public asistenciaService:AsistenciaService, public añadirClaseService:AñadirClaseService, public mensajeService:MensajesService, private modal:NgbModal) {
     this.asiste = false
     this.mostrar = false
     this.detalle = false
@@ -67,6 +69,13 @@ export class AsistenciaProfesorComponent implements OnInit {
   @ViewChild(BaseChartDirective, { static: true }) public chart: BaseChartDirective
 
   ngOnInit(): void {
+  }
+
+  mostrarModal(content){
+    this.modal.open(content, {size: "sm"})
+    setTimeout(()=>{
+      this.modal.dismissAll()
+    }, 2000)
   }
 
   pasarLista(){
@@ -107,16 +116,17 @@ export class AsistenciaProfesorComponent implements OnInit {
   }
   
 
-  enviar(){
+  enviar(contenido){
+    console.log(this.fecha);
     this.asiste = false
     this.hanido()
     for(let i = 0; i<this.asisten.length; i++){
-      this.asistenciaService.pasarLista(new Asistencia(true, this.fecha, this.asisten[i], this.añadirClaseService.id_clase, true)).subscribe((data=>{
+      this.asistenciaService.pasarLista(new Asistencia(true, new Date(this.fecha), this.asisten[i], this.añadirClaseService.id_clase, true)).subscribe((data=>{
         console.log(data);
       }))
     }
     for(let j=0; j<this.faltan.length; j++){
-      this.asistenciaService.pasarLista(new Asistencia(false, this.fecha, this.faltan[j], this.añadirClaseService.id_clase, false)).subscribe((data=>{
+      this.asistenciaService.pasarLista(new Asistencia(false, new Date(this.fecha), this.faltan[j], this.añadirClaseService.id_clase, false)).subscribe((data=>{
         console.log(data);
       }))
       this.mensajeService.enviarMensaje(new Comunications("Su hijo no ha acudido a clase el día" + " " + this.fecha, TipoMensaje.asistencia, this.fecha, Valor.negativo, this.añadirClaseService.id_clase, this.faltan[j], Envia.profesor)).subscribe((data=>{
@@ -124,6 +134,8 @@ export class AsistenciaProfesorComponent implements OnInit {
       }))
     }
     this.asistenciaService.porcentaje(this.añadirClaseService.id_clase)
+    this.mostrarModal(contenido)
+
   }
 
   formatDate(date:string) {

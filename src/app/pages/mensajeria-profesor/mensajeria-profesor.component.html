@@ -15,6 +15,7 @@
             <tr *ngFor="let mensaje of mensajes; let i = index" (click)="mostrarMensaje(i)">
                 <td *ngIf="mostrar==false"><b>{{mensaje.fecha1 | fechas}}</b></td>
                 <td *ngIf="mostrar==false"><b>{{mensaje.nombre_alumno}} {{mensaje.apellidos}}</b></td>
+                <td *ngIf="mostrar==false"><i (click)="borrar(i)" class="fas fa-trash-alt"></i></td>
             </tr>
             <tr *ngIf="mostrar == true">
                 <td id="final"><b>{{mensaje.contenido}}</b></td>
