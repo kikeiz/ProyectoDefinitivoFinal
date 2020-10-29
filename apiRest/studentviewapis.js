@@ -692,4 +692,17 @@ app.get('/datos/falta/:id_asistencia', (req,rep)=>{
          }
     });
 })
+
+// HOME
+app.get('/todos/:id_padre', (req,rep)=>{
+    let id = req.params.id_padre
+    sql = "SELECT asignaturas.nombre, alumnos.nombre, alumnos.id_alumno, alumnos.apellidos, colegio.nombre, cursos.nombre FROM alumnos JOIN clases_alumnos ON alumnos.id_alumno = clases_alumnos.id_alumnos JOIN clases ON clases_alumnos.id_clases = clases.id_clase JOIN colegio ON clases.id_colegio = colegio.id_colegio JOIN asignaturas ON clases.id_asignatura = asignaturas.id_asignatura JOIN cursos ON clases.id_curso = cursos.id_curso WHERE alumnos.id_padre = ? GROUP BY alumnos.id_alumno"
+    connection.query(sql, id, function(err,res){
+        if(err){
+            console.log(err)
+        }else{ 
+            rep.send(res)
+         }
+    });
+})
 app.listen(3019);

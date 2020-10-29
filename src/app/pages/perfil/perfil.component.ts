@@ -74,9 +74,7 @@ export class PerfilComponent implements OnInit {
          dataUrl = reader.result;
 
          this.avatarElegido = document.getElementById("avatar") as HTMLElement
-          this.avatarElegido.src = dataUrl
-
-        
+          this.avatarElegido.src = dataUrl        
       };
 
     }
