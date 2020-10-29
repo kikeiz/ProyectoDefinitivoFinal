@@ -4,6 +4,7 @@ import { Colegios } from 'src/app/models/colegios';
 import { Cursos } from 'src/app/models/cursos';
 import { AñadirAlumnoService } from 'src/app/shared/añadir-alumno.service';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap'
+import { HomeService } from 'src/app/shared/home.service';
 
 
 @Component({
@@ -14,7 +15,7 @@ import {NgbModal} from '@ng-bootstrap/ng-bootstrap'
 export class AniadirAlumnoComponent implements OnInit {
   public colegios:Colegios[]
   public cursos:Cursos[]
-  constructor(public service:AñadirAlumnoService, private modal:NgbModal) {
+  constructor(public service:AñadirAlumnoService, private modal:NgbModal, public homeService: HomeService) {
     this.colegios = this.service.colegios
     this.cursos = this.service.cursos
   }
@@ -37,6 +38,7 @@ export class AniadirAlumnoComponent implements OnInit {
       this.service.obtenerAlumnos(this.service.id_padre)
     }))
     this.mostrarModal(contenido)
+    this.homeService.getPerfilAlumno(this.service.id_padre)
     
   }
  

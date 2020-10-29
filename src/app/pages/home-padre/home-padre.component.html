@@ -1,30 +1,23 @@
 
- <div class="cards">
+<div class="cards">
+
   <h1> StudentView</h1>
+
 <div class="services">
-    <div class="content content-1">
-      <div class="fas fa-smile-beam">
-</div>
-  <h2> Tania Perez</h2>
-  <p>1º Primaria</p>
-  <p> KindarGarden</p>
-<a href="#">Asignaturas</a>
+    <div *ngFor="let alumno of alumnos; let i = index"  class="content content-1">
+      <!-- <i class="far fa-user"></i> -->
+      <h2>{{alumno.nombre}}</h2>
+      <p>{{alumno.colegio}}</p>
+      <p>{{alumno.curso}}</p>
+      <a class="cursor" (click)="mostrarAsignaturas(i)">Asignaturas</a>
+      <div *ngIf="alumno.mostrar == true">
+        <ul class="lista" *ngFor="let asignatura of alumno.asignaturas">
+          <li>{{asignatura}}</li>
+        </ul>
+      </div>
     </div>
-<div class="content content-2">
-  <div class="fas fa-smile-beam">
-</div>
-  <h2> Enrique Perez</h2>
-  <p> 1º ESO</p>
-  <p> Monserrat</p>
-  <a href="#">Asignaturas</a>
-</div>
-<div class="content content-3">
-      <div class="fas fa-smile-beam">
-</div>
-  <h2> Desire Perez</h2>
-  <p> 2º ESO</p>
-  <p> Las Rosas</p>
-  <a href="#">Asignaturas</a>
-    </div>
+    
+
 </div>
 </div>
+

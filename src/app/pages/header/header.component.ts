@@ -14,6 +14,7 @@ import { ComportamientoService } from 'src/app/shared/comportamiento.service';
 import { Asistencia } from 'src/app/models/asistencia';
 import { AsistenciaService } from 'src/app/shared/asistencia.service';
 import { MensajesService } from 'src/app/shared/mensajes.service';
+import { HomeService } from 'src/app/shared/home.service';
 
 @Component({
   selector: 'app-header',
@@ -27,12 +28,12 @@ export class HeaderComponent implements OnInit {
   public nombre_clase:string
   public nombre_alumno:string
 
-  constructor(public service: LoginService, public serviceAñadirAlumno:AñadirAlumnoService, public serviceAñadirClase:AñadirClaseService, public serviceNotas:NotasService, private router: Router, public comportamientoService:ComportamientoService, public asistenciaService:AsistenciaService, public mensajeService:MensajesService, public perfilService:PerfilService, public LoginService:LoginService) { 
+  constructor(public service: LoginService, public serviceAñadirAlumno:AñadirAlumnoService, public serviceAñadirClase:AñadirClaseService, public serviceNotas:NotasService, private router: Router, public comportamientoService:ComportamientoService, public asistenciaService:AsistenciaService, public mensajeService:MensajesService, public perfilService:PerfilService, public LoginService:LoginService, public HomeService:HomeService) { 
     this.isCollapsed = false
     this.clases = this.serviceAñadirClase.misClases
     this.alumnos = null
     this.nombre_clase = "Ninguna Seleccionada"
-    this.nombre_alumno = "Ninguno Seleccionado"
+    this.nombre_alumno = "Ninguna Seleccionada"
   }
 
   ngOnInit(): void {

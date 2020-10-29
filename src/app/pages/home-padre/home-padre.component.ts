@@ -6,6 +6,8 @@ import {Alumno} from'src/app/models/alumno';
 import { PerfilService } from 'src/app/shared/perfil.service';
 
   import { from } from 'rxjs';
+import { HomeService } from 'src/app/shared/home.service';
+import { Asignaturas } from 'src/app/models/asignaturas';
 @Component({
   selector: 'app-home-padre',
   templateUrl: './home-padre.component.html',
@@ -14,13 +16,23 @@ import { PerfilService } from 'src/app/shared/perfil.service';
 })
 export class HomePadreComponent implements OnInit {
  
-  public porcentage
-  public alumno:Alumno[]
+  public alumnos:any[]
+  public asignaturas:string[]
+  
+  
+  constructor(public servicePerfil:PerfilService,public serviceAñadirClase:AñadirClaseService, public service:HomeService) {
+      this.alumnos =this.service.alumnos
+  }
+
+  mostrarAsignaturas(index:number){
+    if(this.alumnos[index].mostrar == true){
+      this.alumnos[index].mostrar = false
+    }else{
+      this.alumnos[index].mostrar = true
+    }
+  }
+
   ngOnInit(): void {
   }
-  constructor(public servicePerfil:PerfilService,public serviceAñadirClase:AñadirClaseService) {
-      // this.alumno =this.serviceAñadirClase.alumno
-  }
-  
 
 }

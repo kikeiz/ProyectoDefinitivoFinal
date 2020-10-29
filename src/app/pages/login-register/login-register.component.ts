@@ -42,6 +42,7 @@ export class LoginRegisterComponent implements OnInit {
               this.service.navbar('profes')
               this.service.entrar()
               this.serviceAñadirClase.obtenerClases(dataprofe.id_profesor)
+              this.serviceHome.obtenerClases(dataprofe.id_profesor)
             }else{
               console.log("El profesor no existe");
             }
@@ -89,10 +90,7 @@ export class LoginRegisterComponent implements OnInit {
     }
     this.service.navbar(data)
   }
-// usuarioActualizado(data:string){
-// this.service.putUsuario(this.login).subscribe((data) =>{
-// console.log(data);
-// this.service.putUsuario('/perfil')
+
 }
 
 

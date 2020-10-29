@@ -5,6 +5,7 @@ export class Alumno {
     public id_padre:number;
     public id_curso:number;
     public id_alumno:number;
+  
 
     constructor(nombre:string, apellidos:string, id_colegio:number, id_padre:number, id_curso:number,id_alumno?:number){
         this.nombre = nombre
@@ -13,5 +14,7 @@ export class Alumno {
         this.id_padre = id_padre
         this.id_curso = id_curso
         this.id_alumno = id_alumno
+       
+
     }
 }

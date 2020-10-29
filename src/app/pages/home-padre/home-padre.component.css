@@ -30,7 +30,10 @@
   border: 2px solid black;
   border-radius: 4px;
   transition: all .3s ease;
+  background-color: white;
 }
+
+
 .content .fab{
   font-size: 70px;
   margin: 16px 0;
@@ -97,4 +100,11 @@
   }
 }
 
+.cursor{
+  cursor: pointer;
+}
+
+.lista{
+  list-style: none;
+}
 
