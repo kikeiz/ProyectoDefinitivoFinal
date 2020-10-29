@@ -2,8 +2,8 @@
 <div class="cards">
   <h1>StudentView</h1>
 
-<div class="services">
-  <div *ngFor="let clase of clases; let i = index" class="content content-1">
+<div class="services" *ngFor="let clase of clases; let i = index" >
+  <div class="content content-1">
       <h2>{{clase.nombre_clase}}</h2>
       <p><b>Curso:</b> {{clase.curso}}</p>
       <p><b>Colegio:</b> {{clase.colegio}}</p>

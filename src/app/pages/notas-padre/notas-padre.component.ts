@@ -61,8 +61,16 @@ export class NotasPadreComponent implements OnInit {
         }
         console.log(this.nota);
       }))
-    }else{
+    }else if(data.estadoNota == "aprobado"){
       this.notaService.filtrarNotasAlumno(this.añadirAlumnoService.id_alumno, 10, 5, data.tipoDeCalificacion, data.asignatura).subscribe((data=>{
+        let array:any = data
+        for(let i=0; i<array.length; i++){
+        this.nota.push(new Hijos(array[i].id_alumno, array[i].alumno, array[i].apellidos, array[i].calificacion, array[i].id_nota, new Date(array[i].fecha).toDateString(), array[i].asignatura, array[i].id_asignaturas))
+        }
+        console.log(this.nota);
+      }))
+    }else{
+      this.notaService.filtrarNotasAlumno(this.añadirAlumnoService.id_alumno, 10, 0.1, data.tipoDeCalificacion, data.asignatura).subscribe((data=>{
         let array:any = data
         for(let i=0; i<array.length; i++){
         this.nota.push(new Hijos(array[i].id_alumno, array[i].alumno, array[i].apellidos, array[i].calificacion, array[i].id_nota, new Date(array[i].fecha).toDateString(), array[i].asignatura, array[i].id_asignaturas))

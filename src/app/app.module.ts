@@ -60,7 +60,7 @@ import { StickyNavModule } from 'ng2-sticky-nav';
     FormsModule,
     NgbModule,
     HttpClientModule,
-    StickyNavModule
+    StickyNavModule, 
   ],
   providers: [],
   bootstrap: [AppComponent]

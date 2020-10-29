@@ -3,8 +3,8 @@
 
   <h1> StudentView</h1>
 
-<div class="services">
-    <div *ngFor="let alumno of alumnos; let i = index"  class="content content-1">
+<div class="services" *ngFor="let alumno of alumnos; let i = index" >
+    <div  class="content content-1">
       <!-- <i class="far fa-user"></i> -->
       <h2>{{alumno.nombre}}</h2>
       <p>{{alumno.colegio}}</p>

@@ -9,6 +9,7 @@ import { Comportamiento, TipoComportamiento } from 'src/app/models/comportamient
 import { Tipo } from 'src/app/models/nota';
 import { ComportamientoService } from 'src/app/shared/comportamiento.service';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap'
+import { HomeService } from 'src/app/shared/home.service';
 
 
 @Component({
@@ -25,7 +26,7 @@ export class AniadirClaseComponent implements OnInit {
   public alumnos:Hijos[]
   public ids:number[]
 
-  constructor(public createClase: AñadirClaseService, public comportamientoService:ComportamientoService, private modal:NgbModal) {
+  constructor(public createClase: AñadirClaseService, public comportamientoService:ComportamientoService, private modal:NgbModal, public homeService:HomeService) {
     this.insertar = false
     this.cursos = this.createClase.cursos
     this.colegios = this.createClase.colegio
@@ -63,6 +64,7 @@ export class AniadirClaseComponent implements OnInit {
         console.log(data);
       }))
     }
+    this.homeService.obtenerClases(this.createClase.id_profesor)
     this.mostrarModal(contenido)
     let TipoComp:TipoComportamiento[] = [TipoComportamiento.atencion, TipoComportamiento.deberes, TipoComportamiento.participacion, TipoComportamiento.puntualidad]
     for(let i=0; i<this.ids.length; i++){

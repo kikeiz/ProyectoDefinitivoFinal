@@ -111,9 +111,9 @@ export class NotasProfesorComponent implements OnInit {
         console.log(data);
       }))
     }
-    this.notaservice.obtenerNotas(this.anadirClaseService.id_clase)
     this.modal.open(contenido, {size: "sm"})
     setTimeout(()=>{
+      this.notaservice.obtenerNotas(this.anadirClaseService.id_clase)
       this.modal.dismissAll()
     }, 2000)
 

@@ -134,6 +134,7 @@ export class AsistenciaProfesorComponent implements OnInit {
       }))
     }
     this.asistenciaService.porcentaje(this.añadirClaseService.id_clase)
+    this.asistenciaService.detalleAsistencia(this.añadirClaseService.id_clase)
     this.mostrarModal(contenido)
 
   }

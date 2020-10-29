@@ -54,7 +54,10 @@ export class AsistenciaPadreComponent implements OnInit {
         }))
       }))
     }
-    this.serviceAsistencia.faltasAlumno(this.añadirAlumnoService.id_alumno)
+    setTimeout(()=>{
+      this.serviceAsistencia.faltasAlumno(this.añadirAlumnoService.id_alumno)
+    },2000)
+    
     this.mostrarModal(contenido)
   }
 }
