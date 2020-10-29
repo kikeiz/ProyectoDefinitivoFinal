@@ -5,7 +5,17 @@
 <nav class="navbar navbar-light bg-light justify-content-between">
     <a class="navbar-brand">Mensajes</a>
     <form class="form-inline">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
+      <select #filtro *ngIf="filtro == true" (change)="filtrar(filtro.value)" class="form-control" id="elige">
+          <option value="todos">Todos</option>
+          <option value="asistencia">Asistencia</option>
+          <option value="puntualidad">Puntualidad</option>
+          <option value="participacion">Participacion</option>
+          <option value="deberes">Deberes</option>
+          <option value="atencion">Atencion</option>
+          <option value="calificaciones">Calificaciones</option>
+      </select>
+      <button *ngIf="filtro == false" (click)="desfiltrar()" class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
+      <button *ngIf="filtro == true" (click)="desfiltrar()" class="btn btn-outline-danger my-2 my-sm-0" type="submit">Cerrar</button>
     </form>
   </nav>
 <div class="row">
@@ -17,6 +27,7 @@
                 <td *ngIf="mostrar==false">{{mensaje.asignatura}}</td>
                 <td *ngIf="mostrar==false"><b>{{mensaje.tipo}}</b></td>
                 <td *ngIf="mostrar==false"><b>{{mensaje.fecha1 | fechas}}</b></td>
+                <td *ngIf="mostrar==false"><i (click)="borrar(i)" class="fas fa-trash-alt"></i></td>
             </tr>
             <tr *ngIf="mostrar == true">
                 <td><b>{{mensaje.contenido}}</b></td>

@@ -26,6 +26,18 @@ body{
     margin-right: auto;
 }
 
+#volver{
+    position: relative;
+    bottom: 700px;
+    margin-left: 40px;
+}
+
+#modal{
+    border-width: 2px;
+    border-color: black;
+    border-style: solid;
+}
+
 .container{
     width: 100%;
     display:block;

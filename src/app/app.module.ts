@@ -26,6 +26,7 @@ import {HttpClientModule} from '@angular/common/http';
 import { FechasPipe } from './pipes/fechas.pipe';
 import { PorcentajePipe } from './pipes/porcentaje.pipe';
 import { ComportamientoPadreGlobalComponent } from './pages/comportamiento-padre-global/comportamiento-padre-global.component';
+import { StickyNavModule } from 'ng2-sticky-nav';
 
 
 @NgModule({
@@ -58,7 +59,8 @@ import { ComportamientoPadreGlobalComponent } from './pages/comportamiento-padre
     ChartsModule, 
     FormsModule,
     NgbModule,
-    HttpClientModule
+    HttpClientModule,
+    StickyNavModule
   ],
   providers: [],
   bootstrap: [AppComponent]

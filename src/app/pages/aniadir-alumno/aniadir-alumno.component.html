@@ -1,8 +1,14 @@
 <nav class="title">
     <h1>Añadir Alumno</h1>
-  </nav>
+</nav>
+<ng-template #contenido let-modal>
+    <div id="modal" class="modal-body" style="background-color: #99FF99 ;">
+        <h3 id="nota" class="container"><b>¡Alumno Añadido!</b></h3>
+    </div>
+  </ng-template>
+  
 <div class="body container">
-    <form #formAniadir="ngForm" (ngSubmit)="aniadirAlumno(formAniadir.value)">
+    <form #formAniadir="ngForm" (ngSubmit)="aniadirAlumno(formAniadir.value, contenido)">
         <div class="texto1">
             <label for="nombre"><b>Nombre</b></label><br>
             <input class="form-control" id="nombre" type="text" placeholder="Nombre" name="nombre" required ngModel>

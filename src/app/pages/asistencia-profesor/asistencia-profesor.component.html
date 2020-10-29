@@ -64,7 +64,7 @@
                     <tr>
                         <th scope="col">Nombre</th>
                         <th scope="col">Apellidos</th>
-                        <th scope="col">Justificada</th>
+                        <th scope="col">Asistencia</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -77,8 +77,14 @@
                 </table>
     </div>
 
+    <ng-template #contenido let-modal>
+        <div id="modal" class="modal-body" style="background-color: #99FF99 ;">
+            <h3 id="nota" class="container"><b>¡Asistencia Registrada!</b></h3>
+        </div>
+    </ng-template>
+
     <div *ngIf="asiste == true" class="container margen1" id="boton">
-        <button type="button" class="btn btn-danger" (click)="enviar()"><b>Terminar</b></button>
+        <button type="button" class="btn btn-danger" (click)="enviar(contenido)"><b>Terminar</b></button>
     </div>
     
 
@@ -120,5 +126,5 @@
     </div>
   </div>
   <div *ngIf="chart1 == true">
-    <button class="btn btn-dark" (click)="cerrarChart()">Cerrar</button>
-  </div>
+    <div id="volver" class="fila"><i (click)="cerrarChart()" class="fas fa-arrow-circle-left fa-2x"></i></div>
+</div>

@@ -60,7 +60,7 @@
     <div *ngIf="tablaResumen==false" class="row">
         <div class="col-2"></div>
         <div class="col-8">
-            <form #enviarNota="ngForm" (ngSubmit)="actualizar(enviarNota.value)">
+            <form #enviarNota="ngForm" (ngSubmit)="actualizar(enviarNota.value, contenido)">
                 <div class="container" id="valor"><input class ="form-control" id="nota" type="number" required name="price" min="0" placeholder="Introduce valor" step="0.1" name="nota" ngModel required></div>
                 <div><i (click)="envimes()" class="far fa-envelope fila"><b><i> Añadir mensaje ?</i></b></i></div>
                 <!-- mensaje -->
@@ -117,6 +117,13 @@
     <button type="button" class="btn btn-primary" (click)="terminar()">Cerrar</button>
   </div>
 </div>
+
+<ng-template #contenido let-modal>
+  <div id="modal" class="modal-body" style="background-color: #99FF99 ;">
+      <h3 id="nota" class="container"><b>¡Actualizado con Éxito!</b></h3>
+  </div>
+</ng-template>
+
 </div>    
 
 

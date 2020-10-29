@@ -75,7 +75,12 @@ export class MensajesService {
     }))
   }
 
-  
+  borrarMensaje(id_mensaje:number){
+    const httpOptions = {headers: new HttpHeaders({'Content-Type': 'application/json'}), body: {id:id_mensaje}};
+    this.http.delete(this.url + "/mensaje", httpOptions).subscribe((data=>{
+      console.log(data);
+    }))
+  }
 
   mensajeProfes(id_clas:number){
     this.mensajesProfes.splice(0, this.numeroProfes)
@@ -97,5 +102,13 @@ export class MensajesService {
       this.mensajePadres(id_alumno)
       
     }
+  }
+
+  filtrarPadres(id_alumno:number, tipo:string){
+    return this.http.get(this.url + "/filtro/mensajes/" + id_alumno + "/" + tipo)
+  }
+
+  filtrarProfes(id_clase:number, id_alumno:number){
+    return this.http.get(this.url + "/mensaprofe/" + id_clase + "/" + id_alumno)
   }
 }

@@ -42,6 +42,7 @@ export class PerfilComponent implements OnInit {
     this.mostrar = false
     this.profesor.id_profesor=this.serviceId.id_profesor
     this.profesor.foto = this.avatarElegido.src
+    console.log(this.profesor);
     this.servicePerfil.putUsuario(this.profesor).subscribe((data) =>
     {
       console.log(data);

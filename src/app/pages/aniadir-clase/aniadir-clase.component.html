@@ -19,7 +19,12 @@
                 </tr>
             </tbody>
         </table>
-        <button (click)="insertarAlumnos()" class="btn btn-warning container">Añadir Alumnos</button>
+        <ng-template #contenido let-modal>
+            <div id="modal" class="modal-body" style="background-color: #99FF99 ;">
+                <h3 id="nota" class="container"><b>¡Clase Añadida!</b></h3>
+            </div>
+        </ng-template>
+        <button (click)="insertarAlumnos(contenido)" class="btn btn-warning container">Añadir Alumnos</button>
     </div>
 
     <form *ngIf = "insertar == false" #formInsert="ngForm" (ngSubmit)="crearClase(formInsert.value)"  class="container" id="añadir">
