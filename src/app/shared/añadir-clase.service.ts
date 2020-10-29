@@ -7,10 +7,12 @@ import {Asignaturas} from 'src/app/models/asignaturas'
 import { from } from 'rxjs';
 import { Hijos } from '../models/hijos';
 
+
 @Injectable({
   providedIn: 'root'
 })
 export class AñadirClaseService {
+
   public id_profesor:number
   public asignaturas:Asignaturas[]
   public cursos:Cursos[]
@@ -25,6 +27,7 @@ export class AñadirClaseService {
   private url:string = "http://localhost:3019"
 
   constructor(private http: HttpClient) {
+ 
     this.id_profesor = null
     this.id_clase = null
     this.id_colegio = null

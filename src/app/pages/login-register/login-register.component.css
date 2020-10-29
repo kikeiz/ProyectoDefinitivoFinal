@@ -5,7 +5,7 @@
 	flex-wrap: wrap;
 } */
 :host .my-app-class {
-	background-image:url(http://il2.picdn.net/shutterstock/videos/17464699/thumb/6.jpg);
+
 	background-repeat: no-repeat;
     background-size: 100%;
     background-attachment: fixed;
@@ -25,7 +25,7 @@ a{color:inherit;text-decoration:none}
     background-image: url(https://www.kindpng.com/picc/m/415-4154122_nios-manos-pintadas-hd-png-download.png); 
 	box-shadow:0 12px 15px 0 rgba(0,0,0,.24),0 17px 50px 0 rgba(0,0,0,.19);
 	min-width: 200px;
-	background:rgba(40,57,101,.9);
+	background:rgba(175,149,120,.9)
 }
 .login-html{
 	width:100%;
@@ -65,7 +65,7 @@ a{color:inherit;text-decoration:none}
 .login-html .sign-in:checked + .tab,
 .login-html .sign-up:checked + .tab{
 	color:#fff;
-	border-color:#1161ee;
+	border-color:rgb(6, 127, 137);
 }
 .login-form{
 	min-height:345px;
@@ -95,11 +95,11 @@ a{color:inherit;text-decoration:none}
 	-webkit-text-security:circle;
 }
 .login-form .group .label{
-	color:#aaa;
+	color:black;
 	font-size:12px;
 }
 .login-form .group .button{
-	background:#1161ee;
+	background:rgb(6, 127, 137);
 }
 .login-form .group label .icon{
 	width:15px;
@@ -107,7 +107,7 @@ a{color:inherit;text-decoration:none}
 	border-radius:2px;
 	position:relative;
 	display:inline-block;
-	background:rgba(255,255,255,.1);
+	background:black;
 }
 .login-form .group label .icon:before,
 .login-form .group label .icon:after{

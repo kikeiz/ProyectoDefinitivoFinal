@@ -1,13 +1,14 @@
+/** poner el header fixed*/
 .azul{
     background-color:  #3e4870;
 }
 
 .hola{
     margin-bottom: 20px;
+
 }
 
 .margen{
-    position: relative;
     top: 2px;
     float: right;
     position: relative;
@@ -26,11 +27,7 @@ li a:hover{
     margin-right: 10px;
 }
 
-.sticky{
-    position: fixed;
-    position: static;
-    position: -webkit-sticky;
-}
+
 
 li{
     list-style: none;

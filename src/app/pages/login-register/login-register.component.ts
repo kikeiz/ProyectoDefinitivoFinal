@@ -2,6 +2,7 @@ import { Component,ViewChild,TemplateRef, OnInit } from '@angular/core';
 import { User } from 'src/app/models/user';
 import { AñadirAlumnoService } from 'src/app/shared/añadir-alumno.service';
 import { AñadirClaseService } from 'src/app/shared/añadir-clase.service';
+import { HomeService } from 'src/app/shared/home.service';
 import { LoginService } from 'src/app/shared/login.service';
 
 @Component({
@@ -11,7 +12,7 @@ import { LoginService } from 'src/app/shared/login.service';
 })
 export class LoginRegisterComponent implements OnInit {
   public profesor:boolean
-  constructor(public service:LoginService, public serviceAñadirClase:AñadirClaseService, public serviceAñadirAlumno:AñadirAlumnoService)  {
+  constructor(public service:LoginService, public serviceAñadirClase:AñadirClaseService, public serviceAñadirAlumno:AñadirAlumnoService, public serviceHome: HomeService)  {
     this.profesor = true
    }
 
@@ -29,6 +30,7 @@ export class LoginRegisterComponent implements OnInit {
           this.service.navbar('padres')
           this.service.entrar()
           this.serviceAñadirAlumno.obtenerAlumnos(datapadre.id_padre)
+          this.serviceHome.getPerfilAlumno(datapadre.id_padre)
       }else{
           console.log("El padre no existe");
           this.service.loginProfesor(usuario).subscribe((dataprofe:any)=>{
