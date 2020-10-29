@@ -1,5 +1,5 @@
-  <div class="hola" *ngIf ="service.navPadres == true" class="sticky">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light" ngStickyNav>
+  <div *ngIf ="service.navPadres == true" class="sticky hola">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-nav" ngStickyNav>
       <button class="navbar-toggler" type="button" data-toggle="collapse" (click)="!isCollapsed = isCollapsed" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -22,7 +22,7 @@
               Elegir alumno
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a *ngFor="let alumno of alumnos; let i = index" class="dropdown-item" (click)="seleccionarAlumno(i)">{{alumno.nombre}}</a>
+              <a *ngFor="let alumno of alumnos; let i = index" class="dropdown-item cursor" (click)="seleccionarAlumno(i)">{{alumno.nombre}}</a>
               <a class="dropdown-item" (click) ="aniadirAlumno()" routerLink="/aniadirAlumno"><i class="fas fa-user-plus">Añadir Alumno</i></a>
             </div>
           </li>
@@ -34,17 +34,17 @@
       <div *ngIf="isCollapsed == false" class="form-inline my-2 my-lg-0">
         <i (click) ="removeMain()" routerLink="/mensajesPadre" class="far fa-envelope fa-2x cursor margenes"></i>
         <div class="dropdown">
-          <i  class="far fa-user-circle fa-2x cursor dropdown-toggle" data-toggle="dropdown"></i>
-          <div class="dropdown-menu position"> 
+          <i class="far fa-user-circle fa-2x cursor dropleft-toggle" dropdownToggle data-toggle="dropdown"></i>
+          <div class="dropdown-menu dropdown-menu-right"> 
             <a class="dropdown-item" (click) ="perfil(service.navPadres)" routerLink="/perfil">Perfil</a> 
-            <a class="dropdown-item">Cerrar Sesion</a>  
+            <a class="dropdown-item cursor" (click)="logout()">Cerrar Sesion</a>  
           </div> 
         </div>
       </div>
     </nav>
     </div>
   
-    <div class="hola" *ngIf ="service.navPadres == false" class="sticky">
+    <div *ngIf ="service.navPadres == false" class="sticky hola">
       <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-nav" ngStickyNav>
         <button class="navbar-toggler" type="button" data-toggle="collapse" (click)="!isCollapsed = isCollapsed" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -80,10 +80,10 @@
         <div *ngIf="isCollapsed == false" class="form-inline my-2 my-lg-0">
           <i (click) ="removeMain()" routerLink="/mensajesProfe" class="far fa-envelope fa-2x cursor margenes"></i>
           <div class="dropdown">
-            <i class="far fa-user-circle fa-2x cursor dropdown-toggle" data-toggle="dropdown"></i>
-            <div class="dropdown-menu"> 
+            <i class="far fa-user-circle fa-2x cursor dropleft-toggle" dropdownToggle data-toggle="dropdown"></i>
+            <div class="dropdown-menu dropdown-menu-right"> 
               <a class="dropdown-item" (click) ="perfil(service.navPadres)" routerLink="/perfil">Perfil</a> 
-              <a class="dropdown-item">Logout</a>  
+              <a class="dropdown-item cursor" (click)="logout()">Logout</a>  
             </div> 
           </div>
         </div>

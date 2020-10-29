@@ -26,6 +26,11 @@ label{
     top: 7px;
 }
 
+#modal{
+    border-width: 2px;
+    border-color: black;
+    border-style: solid;
+}
 .texto1{
     text-align: center;
 }

@@ -5,6 +5,8 @@ import { Comunications, Envia, TipoMensaje, Valor } from 'src/app/models/comunic
 import { AsistenciaService } from 'src/app/shared/asistencia.service';
 import { AñadirAlumnoService } from 'src/app/shared/añadir-alumno.service';
 import { MensajesService } from 'src/app/shared/mensajes.service';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap'
+
 
 @Component({
   selector: 'app-asistencia-padre',
@@ -14,7 +16,7 @@ import { MensajesService } from 'src/app/shared/mensajes.service';
 export class AsistenciaPadreComponent implements OnInit {
   public faltas: Asistencia[]
   public ids:number[]
-  constructor(public serviceAsistencia:AsistenciaService, public mensajeService:MensajesService, public añadirAlumnoService:AñadirAlumnoService) {
+  constructor(public serviceAsistencia:AsistenciaService, public mensajeService:MensajesService, public añadirAlumnoService:AñadirAlumnoService, private modal:NgbModal) {
     this.faltas = this.serviceAsistencia.faltas
     this.ids = []
    }
@@ -33,7 +35,14 @@ export class AsistenciaPadreComponent implements OnInit {
     }
   }
 
-  justificar(){
+  mostrarModal(content){
+    this.modal.open(content, {size: "sm"})
+    setTimeout(()=>{
+      this.modal.dismissAll()
+    }, 2000)
+  }
+
+  justificar(contenido){
     for(let i=0; i<this.ids.length; i++){
       this.serviceAsistencia.justificar(this.ids[i]).subscribe((data=>{
         console.log(data);
@@ -46,5 +55,6 @@ export class AsistenciaPadreComponent implements OnInit {
       }))
     }
     this.serviceAsistencia.faltasAlumno(this.añadirAlumnoService.id_alumno)
+    this.mostrarModal(contenido)
   }
 }

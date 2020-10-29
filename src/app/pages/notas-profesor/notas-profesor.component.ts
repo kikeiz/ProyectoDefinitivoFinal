@@ -86,6 +86,21 @@ export class NotasProfesorComponent implements OnInit {
     
   }
 
+  
+  formatDate(date:string) {
+    let d = new Date(date),
+        month = '' + (d.getMonth() + 1),
+        day = '' + d.getDate(),
+        year = d.getFullYear();
+
+    if (month.length < 2) 
+        month = '0' + month;
+    if (day.length < 2) 
+        day = '0' + day;
+
+    return [year, month, day].join('-');
+}
+
   actualizar(contenido){
     this.mostrarF1 = false
     this.mostrarF2 = false
@@ -104,12 +119,12 @@ export class NotasProfesorComponent implements OnInit {
 
     for(let i=0; i<this.notas.length; i++){
       if(this.notas[i].nota>=5){
-        this.serviceMensaje.enviarMensaje(new Comunications("Su hijo ha obtenido una calificación de" + this.notas[i].nota + "en el" + this.notas[i].tipo + "realizado en fecha: " + this.notas[i].fecha, TipoMensaje.calificacion, this.notas[i].fecha, Valor.positivo, this.notas[i].id_clase, this.notas[i].id_alumno, Envia.profesor)).subscribe((data=>{
+        this.serviceMensaje.enviarMensaje(new Comunications("Su hijo ha obtenido una calificación de " + this.notas[i].nota + " en el " + this.notas[i].tipo + " realizado en fecha: " + this.formatDate(new Date(this.notas[i].fecha).toDateString()), TipoMensaje.calificacion, this.notas[i].fecha, Valor.positivo, this.notas[i].id_clase, this.notas[i].id_alumno, Envia.profesor)).subscribe((data=>{
           console.log(data)
         }))
       
       }else{
-        this.serviceMensaje.enviarMensaje(new Comunications("Su hijo ha obtenido una calificación de" + this.notas[i].nota + "en el" + this.notas[i].tipo + "realizado en fecha: " + this.notas[i].fecha, TipoMensaje.calificacion, this.notas[i].fecha, Valor.negativo, this.notas[i].id_clase, this.notas[i].id_alumno, Envia.profesor)).subscribe((data=>{
+        this.serviceMensaje.enviarMensaje(new Comunications("Su hijo ha obtenido una calificación de " + this.notas[i].nota + " en el " + this.notas[i].tipo + " realizado en fecha: " + this.formatDate(new Date(this.notas[i].fecha).toDateString()), TipoMensaje.calificacion, this.notas[i].fecha, Valor.negativo, this.notas[i].id_clase, this.notas[i].id_alumno, Envia.profesor)).subscribe((data=>{
           console.log(data)
         }))
       }
@@ -118,19 +133,6 @@ export class NotasProfesorComponent implements OnInit {
     
   }
 
-  formatDate(date:string) {
-    let d = new Date(date),
-        month = '' + (d.getMonth() + 1),
-        day = '' + d.getDate(),
-        year = d.getFullYear();
-
-    if (month.length < 2) 
-        month = '0' + month;
-    if (day.length < 2) 
-        day = '0' + day;
-
-    return [year, month, day].join('-');
-}
 
   editar(i:number){
     this.mostrarF3 = true
@@ -162,8 +164,9 @@ export class NotasProfesorComponent implements OnInit {
     console.log(this.cambioAlumnos[i].id_nota);
     this.notaservice.cambiarNota(this.cambioAlumnos[i].nota, this.cambioAlumnos[i].id_nota).subscribe((data=>{
       console.log(data);
+      this.notaservice.obtenerNotas(this.anadirClaseService.id_clase)
     }))
-    this.notaservice.obtenerNotas(this.anadirClaseService.id_clase)
+    
 
   }
 

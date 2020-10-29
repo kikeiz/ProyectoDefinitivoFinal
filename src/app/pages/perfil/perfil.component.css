@@ -220,3 +220,8 @@ border-style: solid;
   
     }
   }
+
+  .container{
+    position: relative;
+    left: 100px;
+  }

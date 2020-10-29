@@ -23,6 +23,10 @@ export class LoginService {
     this.login = true
     console.log(this.login)
   }
+
+  salir(){
+    this.login = false
+  }
   
 
   navbar(data:string){

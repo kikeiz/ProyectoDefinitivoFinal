@@ -107,4 +107,8 @@ export class MensajesService {
   filtrarPadres(id_alumno:number, tipo:string){
     return this.http.get(this.url + "/filtro/mensajes/" + id_alumno + "/" + tipo)
   }
+
+  filtrarProfes(id_clase:number, id_alumno:number){
+    return this.http.get(this.url + "/mensaprofe/" + id_clase + "/" + id_alumno)
+  }
 }

@@ -15,6 +15,7 @@ import {NgbModal} from '@ng-bootstrap/ng-bootstrap'
   styleUrls: ['./notas-padre.component.css']
 })
 export class NotasPadreComponent implements OnInit {
+  public rojo:boolean
   public options: boolean
   public notas: Nota []
   public nota:Hijos[]
@@ -30,6 +31,7 @@ export class NotasPadreComponent implements OnInit {
     this.mostrarmodal = false
     this.notamedia = 0
     this.notamedia1 = ""
+    this.rojo = false
   }
 
   ngOnInit(): void {
@@ -44,6 +46,11 @@ export class NotasPadreComponent implements OnInit {
   }
 
   filter(data:any){
+    if(data.tipoDeCalificacion == "todos" && data.estadoNota == "todos" && data.asignatura == "todos"){
+      this.rojo = false
+    }else{
+      this.rojo = true
+    }
     this.nota = []
     this.options = false
     if(data.estadoNota == "suspenso"){

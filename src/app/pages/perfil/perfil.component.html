@@ -17,15 +17,15 @@
 <!--EDITAR USUARIO PADRE-->
 <div *ngIf="service.navPadres == true && mostrar == true" class="edit-profile-padre">
 
-  <div class="contenedor-imagen-padre">
+  <div class="contenedor-imagen-padre pointer">
   <img  alt="User profile" src={{padre.foto}} id="avatarPadre" class="image-profile-edit-padre"/> 
   <label>
-    <input class="foto-seleccionada"
+    <input class="foto-seleccionada container"
            type="file"
            accept="image/*"
            id="fotosubidaPadre"
            (change)="actualizarFotoPadre()"/>
-  </label> 
+    </label> 
 </div>
 
 <div class="card-body">
@@ -88,7 +88,7 @@
   <div class="contenedor-imagen">
   <img  alt="User profile" src={{profesor.foto}} id="avatar" class="image-profile-edit"/> 
   <label>
-    <input class="foto-seleccionada"
+    <input class="foto-seleccionada container"
            type="file"
            accept="image/*"
            id="fotosubida"

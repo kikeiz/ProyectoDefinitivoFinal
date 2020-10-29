@@ -27,7 +27,7 @@ export class HeaderComponent implements OnInit {
   public nombre_clase:string
   public nombre_alumno:string
 
-  constructor(public service: LoginService, public serviceAñadirAlumno:AñadirAlumnoService, public serviceAñadirClase:AñadirClaseService, public serviceNotas:NotasService, private router: Router, public comportamientoService:ComportamientoService, public asistenciaService:AsistenciaService, public mensajeService:MensajesService, public perfilService:PerfilService) { 
+  constructor(public service: LoginService, public serviceAñadirAlumno:AñadirAlumnoService, public serviceAñadirClase:AñadirClaseService, public serviceNotas:NotasService, private router: Router, public comportamientoService:ComportamientoService, public asistenciaService:AsistenciaService, public mensajeService:MensajesService, public perfilService:PerfilService, public LoginService:LoginService) { 
     this.isCollapsed = false
     this.clases = this.serviceAñadirClase.misClases
     this.alumnos = null
@@ -36,6 +36,11 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit(): void {
+  }
+
+  logout(){
+    this.LoginService.home(null)
+    this.LoginService.salir()
   }
 
   colapsar(){

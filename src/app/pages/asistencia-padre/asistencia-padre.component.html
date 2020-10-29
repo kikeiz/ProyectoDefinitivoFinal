@@ -20,7 +20,12 @@
           </tbody>
         </table>
     </div>
+    <ng-template #contenido let-modal>
+      <div id="modal" class="modal-body" style="background-color: #99FF99 ;">
+          <h3 id="nota" class="container"><b>¡Justificada!</b></h3>
+      </div>
+  </ng-template>
     <div id="boton" class="container">
-        <button type="button" (click)="justificar()" class="btn btn-success">Justificar</button>
+        <button type="button" (click)="justificar(contenido)" class="btn btn-success">Justificar</button>
     </div>
 </div>

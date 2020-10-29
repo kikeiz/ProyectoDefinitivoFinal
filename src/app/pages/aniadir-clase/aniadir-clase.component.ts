@@ -8,6 +8,8 @@ import { Hijos } from 'src/app/models/hijos';
 import { Comportamiento, TipoComportamiento } from 'src/app/models/comportamiento';
 import { Tipo } from 'src/app/models/nota';
 import { ComportamientoService } from 'src/app/shared/comportamiento.service';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap'
+
 
 @Component({
   selector: 'app-aniadir-clase',
@@ -23,7 +25,7 @@ export class AniadirClaseComponent implements OnInit {
   public alumnos:Hijos[]
   public ids:number[]
 
-  constructor(public createClase: AñadirClaseService, public comportamientoService:ComportamientoService) {
+  constructor(public createClase: AñadirClaseService, public comportamientoService:ComportamientoService, private modal:NgbModal) {
     this.insertar = false
     this.cursos = this.createClase.cursos
     this.colegios = this.createClase.colegio
@@ -47,13 +49,21 @@ export class AniadirClaseComponent implements OnInit {
     
   }
 
-  insertarAlumnos(){
+  mostrarModal(content){
+    this.modal.open(content, {size: "sm"})
+    setTimeout(()=>{
+      this.modal.dismissAll()
+    }, 2000)
+  }
+
+  insertarAlumnos(contenido){
     this.insertar = false
     for(let i=0; i<this.ids.length; i++){
       this.createClase.alumnosClase(this.ids[i],this.createClase.id_clase_insertada).subscribe((data=>{
         console.log(data);
       }))
     }
+    this.mostrarModal(contenido)
     let TipoComp:TipoComportamiento[] = [TipoComportamiento.atencion, TipoComportamiento.deberes, TipoComportamiento.participacion, TipoComportamiento.puntualidad]
     for(let i=0; i<this.ids.length; i++){
       for(let j=0; j<TipoComp.length; j++){
