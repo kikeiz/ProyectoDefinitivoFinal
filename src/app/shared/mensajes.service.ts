@@ -63,6 +63,8 @@ export class MensajesService {
         this.mensajesPadres.push(new Comunications(datos[i].contenido, TipoMensaje.calificacion, null, Valor.negativo, datos[i].id_clase, datos[i].id_alumno, Envia.profesor, datos[i].id_mensaje, datos[i].nombre, null, null, new Date(datos[i].fecha).toDateString()))
       }
     }
+    console.log(this.mensajesPadres);
+    
   }
 
   mensajePadres(id_al:number){
