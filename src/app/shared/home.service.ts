@@ -18,6 +18,8 @@ export class HomeService {
   public numero: number
   public numero1:number
   public clases:any[]
+  public nombre:string
+  public alumno:string
 
   constructor(private http: HttpClient) { 
     this.alumnos = []
@@ -25,9 +27,19 @@ export class HomeService {
     this.numero = 0
     this.numero1 = 0
     this.clases = []
+    this.nombre = ""
+    this.alumno = ""
   }
 
+  cambiarNombre(nombre:string){
+    this.nombre = nombre.toUpperCase()
+    console.log(this.nombre);
+  }
 
+  cambiarAlumno(nombre:string){
+    this.alumno = nombre.toUpperCase()
+    console.log(this.alumno);
+  }
 
   getPerfilAlumno(id_padre:number){  
     this.alumnos.splice(0, this.numero)  

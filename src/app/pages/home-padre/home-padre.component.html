@@ -3,12 +3,12 @@
 
   <h1> StudentView</h1>
 
-<div class="services" *ngFor="let alumno of alumnos; let i = index" >
+<div class="services cursor" *ngFor="let alumno of alumnos; let i = index" >
     <div  class="content content-1">
       <!-- <i class="far fa-user"></i> -->
-      <h2>{{alumno.nombre}}</h2>
-      <p>{{alumno.colegio}}</p>
-      <p>{{alumno.curso}}</p>
+      <h2 (click)="nombre(i)">{{alumno.nombre}}</h2>
+      <p (click)="nombre(i)">{{alumno.colegio}}</p>
+      <p (click)="nombre(i)">{{alumno.curso}}</p>
       <a class="cursor" (click)="mostrarAsignaturas(i)">Asignaturas</a>
       <div *ngIf="alumno.mostrar == true">
         <ul class="lista" *ngFor="let asignatura of alumno.asignaturas">

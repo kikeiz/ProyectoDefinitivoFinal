@@ -2,12 +2,12 @@
 <div class="cards">
   <h1>StudentView</h1>
 
-<div class="services" *ngFor="let clase of clases; let i = index" >
+<div class="services cursor" *ngFor="let clase of clases; let i = index">
   <div class="content content-1">
-      <h2>{{clase.nombre_clase}}</h2>
-      <p><b>Curso:</b> {{clase.curso}}</p>
-      <p><b>Colegio:</b> {{clase.colegio}}</p>
-      <p><b>Clase:</b> {{clase.asignatura}}</p>
+      <h2 (click) = "nombre(i)">{{clase.nombre_clase}}</h2>
+      <p (click) = "nombre(i)"><b>Curso:</b> {{clase.curso}}</p>
+      <p (click) = "nombre(i)"><b>Colegio:</b> {{clase.colegio}}</p>
+      <p (click) = "nombre(i)"><b>Clase:</b> {{clase.asignatura}}</p>
       <a class="cursor" (click)="mostrarAlumnos(i)">Alumnos</a>
       <div *ngIf="clase.mostrar == true">
         <ul class="lista" *ngFor="let alumno of clase.alumnos">

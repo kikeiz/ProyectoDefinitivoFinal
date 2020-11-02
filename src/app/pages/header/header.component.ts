@@ -25,19 +25,19 @@ export class HeaderComponent implements OnInit {
   public isCollapsed:boolean
   public clases:Clase[];
   public alumnos:Alumno[]
-  public nombre_clase:string
   public nombre_alumno:string
 
   constructor(public service: LoginService, public serviceAñadirAlumno:AñadirAlumnoService, public serviceAñadirClase:AñadirClaseService, public serviceNotas:NotasService, private router: Router, public comportamientoService:ComportamientoService, public asistenciaService:AsistenciaService, public mensajeService:MensajesService, public perfilService:PerfilService, public LoginService:LoginService, public HomeService:HomeService) { 
     this.isCollapsed = false
     this.clases = this.serviceAñadirClase.misClases
     this.alumnos = null
-    this.nombre_clase = "Ninguna Seleccionada"
     this.nombre_alumno = "Ninguna Seleccionada"
   }
 
   ngOnInit(): void {
   }
+
+
 
   logout(){
     this.LoginService.home(null)
@@ -72,11 +72,42 @@ export class HeaderComponent implements OnInit {
   mostrarCalificaciones(){
     this.service.home(null)
     this.serviceAñadirClase.obtenerasignaturas()
+    this.serviceNotas.obtenerNotasAlumnos(this.serviceAñadirAlumno.id_alumno)
   }
 
-  removeMain(){
+  asistenciaFather(){
     this.service.home(null)
+    this.asistenciaService.faltasAlumno(this.serviceAñadirAlumno.id_alumno)
   }
+
+  comPadre(){
+    this.service.home(null)
+    this.comportamientoService.clasesXalumno(this.serviceAñadirAlumno.id_alumno)
+  }
+
+  mensajePadre(){
+    this.service.home(null)
+    this.mensajeService.obtenerMensajes(this.serviceAñadirAlumno.id_alumno, null)
+  }
+
+  asistenciaProfe(){
+    this.service.home(null)
+    this.asistenciaService.porcentaje(this.serviceAñadirClase.id_clase)
+    this.asistenciaService.detalleAsistencia(this.serviceAñadirClase.id_clase)
+  }
+
+  comProfe(){
+    this.service.home(null)
+    this.comportamientoService.alumnosClase(this.serviceAñadirClase.id_clase)
+  }
+
+  mensajeProfe(){
+    this.service.home(null)
+    this.mensajeService.obtenerMensajes(null, this.serviceAñadirClase.id_clase)
+
+  }
+
+
 
   aniadirClase(){
       this.service.home(null)
@@ -126,7 +157,7 @@ export class HeaderComponent implements OnInit {
 
   seleccionarClase(i:number){
     this.serviceAñadirClase.idClase(this.clases[i].id_clase, this.clases[i].id_colegio, this.clases[i].id_curso)
-    this.nombre_clase = this.clases[i].nombre_clase.toUpperCase()
+    this.HomeService.cambiarNombre(this.clases[i].nombre_clase)
     this.serviceNotas.obtenerNotas(this.clases[i].id_clase)   
     this.comportamientoService.alumnosClase(this.clases[i].id_clase)
     this.asistenciaService.porcentaje(this.clases[i].id_clase)
@@ -137,9 +168,10 @@ export class HeaderComponent implements OnInit {
 
   seleccionarAlumno(i:number){
     this.serviceAñadirAlumno.idAlumno(this.alumnos[i].id_alumno)
-    this.nombre_alumno = (this.alumnos[i].nombre + " " + this.alumnos[i].apellidos).toUpperCase()
-    this.serviceAñadirAlumno.nombre_alumno.splice(0,1)
-    this.serviceAñadirAlumno.nombre_alumno.push((this.alumnos[i].nombre + " " + this.alumnos[i].apellidos).toUpperCase())
+    // this.nombre_alumno = (this.alumnos[i].nombre + " " + this.alumnos[i].apellidos).toUpperCase()
+    this.HomeService.cambiarAlumno(this.alumnos[i].nombre + " " + this.alumnos[i].apellidos)
+    // this.serviceAñadirAlumno.nombre_alumno.splice(0,1)
+    // this.serviceAñadirAlumno.nombre_alumno.push((this.alumnos[i].nombre + " " + this.alumnos[i].apellidos).toUpperCase())
     this.serviceNotas.obtenerNotasAlumnos(this.alumnos[i].id_alumno)
     this.asistenciaService.faltasAlumno(this.alumnos[i].id_alumno)
     this.mensajeService.obtenerMensajes(this.alumnos[i].id_alumno, null)

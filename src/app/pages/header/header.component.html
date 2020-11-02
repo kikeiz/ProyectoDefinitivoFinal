@@ -12,10 +12,10 @@
             <a class="nav-link" (click) ="mostrarCalificaciones()" routerLink="/mainNotasPadre">Calificaciones</a>
           </li>
           <li class="nav-item" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
-            <a class="nav-link" (click) ="removeMain()" routerLink="/asistenciaPadre">Asistencia</a>
+            <a class="nav-link" (click) ="asistenciaFather()" routerLink="/asistenciaPadre">Asistencia</a>
           </li>
           <li class="nav-item" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
-            <a class="nav-link" (click) ="removeMain()" routerLink="/comportamientoGlobal">Comportamiento</a>
+            <a class="nav-link" (click) ="comPadre()" routerLink="/comportamientoGlobal">Comportamiento</a>
           </li>
           <li class="nav-item dropdown">
             <a (click)="traerAlumnos()" class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -29,10 +29,10 @@
         </ul>
       </div>
       <li id="nombre" class="nav-item">
-        <p>Alumno: <b>{{nombre_alumno}}</b></p>
+        <p>Alumno: <b>{{HomeService.alumno}}</b></p>
       </li>
       <div *ngIf="isCollapsed == false" class="form-inline my-2 my-lg-0">
-        <i (click) ="removeMain()" routerLink="/mensajesPadre" class="far fa-envelope fa-2x cursor margenes"></i>
+        <i (click) ="mensajePadre()" routerLink="/mensajesPadre" class="far fa-envelope fa-2x cursor margenes"></i>
         <div class="dropdown">
           <i class="far fa-user-circle fa-2x cursor dropleft-toggle" dropdownToggle data-toggle="dropdown"></i>
           <div class="dropdown-menu dropdown-menu-right"> 
@@ -58,13 +58,13 @@
               <a class="nav-link" (click) ="obtenerNotas()" routerLink="/mainNotasProfesor">Calificaciones</a>
             </li>
             <li class="nav-item" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
-              <a class="nav-link" (click) ="removeMain()" routerLink="/asistenciaProfesor">Asistencia</a>
+              <a class="nav-link" (click) ="asistenciaProfe()" routerLink="/asistenciaProfesor">Asistencia</a>
             </li>
             <li class="nav-item" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
-              <a class="nav-link" (click) ="removeMain()" routerLink="/comportamientoProfesor">Comportamiento</a>
+              <a class="nav-link" (click) ="comProfe()" routerLink="/comportamientoProfesor">Comportamiento</a>
             </li>
             <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Clase
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -75,10 +75,10 @@
           </ul>
         </div>
         <li id="nombre" class="nav-item">
-          <p>Clase: <b>{{nombre_clase}}</b></p>
+          <p>Clase: <b>{{HomeService.nombre}}</b></p>
         </li>
         <div *ngIf="isCollapsed == false" class="form-inline my-2 my-lg-0">
-          <i (click) ="removeMain()" routerLink="/mensajesProfe" class="far fa-envelope fa-2x cursor margenes"></i>
+          <i (click) ="mensajeProfe()" routerLink="/mensajesProfe" class="far fa-envelope fa-2x cursor margenes"></i>
           <div class="dropdown">
             <i class="far fa-user-circle fa-2x cursor dropleft-toggle" dropdownToggle data-toggle="dropdown"></i>
             <div class="dropdown-menu dropdown-menu-right"> 
