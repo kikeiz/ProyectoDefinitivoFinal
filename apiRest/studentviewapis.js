@@ -732,10 +732,9 @@ app.get('/faltasAlumno/:id_alumno', (req,rep)=>{
 })
 
 app.put('/confirmar/justificante', (req,rep)=>{
-    let justificada = req.body.justificada
-    if(justificada == false){
+    if(req.body.justificada == false){
         let params = [req.body.id_clase, req.body.id_alumno, req.body.fecha]
-        sql = "UPDATE asistencia SET justificada = false WHERE asiste = false AND id_clase = ? AND id_alumno = ? AND fecha = ?"
+        sql = "UPDATE asistencia SET justificada = false WHERE asistencia.asiste = false AND id_clase = ? AND id_alumno = ? AND fecha = ?"
         connection.query(sql, params, function(err,res){
             if(err){
                 console.log(err)
@@ -745,7 +744,7 @@ app.put('/confirmar/justificante', (req,rep)=>{
         });
     }else{
         let params = [req.body.id_clase, req.body.id_alumno, req.body.fecha]
-        sql = "UPDATE asistencia SET justificada = true WHERE asiste = false AND id_clase = ? AND id_alumno = ? AND fecha = ?"
+        sql = "UPDATE asistencia SET justificada = true WHERE asistencia.asiste = false AND id_clase = ? AND id_alumno = ? AND fecha = ?"
         connection.query(sql, params, function(err,res){
             if(err){
                 console.log(err)

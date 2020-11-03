@@ -69,7 +69,7 @@ export class MensajeriaProfesorComponent implements OnInit {
   }
 
   aceptarJustificante(id_alumno:number, id_clase:number, fecha:string, justificada:boolean){
-    // console.log(id_alumno, id_clase, fecha, justificada);
+    console.log(id_alumno, id_clase, this.formatDate(fecha), justificada);
     this.asistenciaService.aceptarJustificante(id_clase, id_alumno, this.formatDate(fecha), justificada).subscribe((data=>{
       console.log(data);
     }))
