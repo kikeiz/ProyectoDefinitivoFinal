@@ -508,7 +508,7 @@ app.get('/mensaprofe/:id_clase/:id_alumno', (req, rep)=>{
     let params = [req.params.id_clase, req.params.id_alumno]
     if(req.params.id_alumno == "todos"){
         let id = req.params.id_clase
-        sql = "SELECT alumnos.nombre, alumnos.apellidos, mensajes.id_mensaje, mensajes.tipo, mensajes.contenido, mensajes.valor, mensajes.id_clase, mensajes.id_alumno FROM mensajes JOIN alumnos ON mensajes.id_alumno = alumnos.id_alumno WHERE mensajes.id_clase = ? AND mensajes.quienenvia = 'padre'"
+        sql = "SELECT alumnos.nombre, alumnos.apellidos, mensajes.id_mensaje, mensajes.tipo, mensajes.contenido, mensajes.valor, mensajes.id_clase, mensajes.id_alumno, mensajes.fecha FROM mensajes JOIN alumnos ON mensajes.id_alumno = alumnos.id_alumno WHERE mensajes.id_clase = ? AND mensajes.quienenvia = 'padre'"
         connection.query(sql, id, function(err,res){
             if(err){
                 console.log(err)
@@ -517,7 +517,7 @@ app.get('/mensaprofe/:id_clase/:id_alumno', (req, rep)=>{
              }
         });
     }else{
-        sql = "SELECT alumnos.nombre, alumnos.apellidos, mensajes.id_mensaje, mensajes.tipo, mensajes.contenido, mensajes.valor, mensajes.id_clase, mensajes.id_alumno FROM mensajes JOIN alumnos ON mensajes.id_alumno = alumnos.id_alumno WHERE mensajes.id_clase = ? AND mensajes.quienenvia = 'padre' AND mensajes.id_alumno = ?"
+        sql = "SELECT alumnos.nombre, alumnos.apellidos, mensajes.id_mensaje, mensajes.tipo, mensajes.contenido, mensajes.valor, mensajes.id_clase, mensajes.id_alumno, mensajes.fecha FROM mensajes JOIN alumnos ON mensajes.id_alumno = alumnos.id_alumno WHERE mensajes.id_clase = ? AND mensajes.quienenvia = 'padre' AND mensajes.id_alumno = ?"
         connection.query(sql, params, function(err,res){
             if(err){
                 console.log(err)
@@ -721,7 +721,7 @@ app.get('/faltas/:id_clase/:fecha', (req,rep)=>{
 
 app.get('/faltasAlumno/:id_alumno', (req,rep)=>{
     let params = [req.params.id_alumno]
-    sql = "SELECT asignaturas.nombre, asistencia.id_clase, asistencia.fecha, asistencia.id_asistencia FROM asistencia JOIN clases ON asistencia.id_clase = clases.id_clase JOIN asignaturas ON clases.id_asignatura = asignaturas.id_asignatura WHERE asistencia.id_alumno = ? AND asistencia.asiste = false AND asistencia.justificada = false"
+    sql = "SELECT asignaturas.nombre, asistencia.id_clase, asistencia.fecha, asistencia.id_asistencia FROM asistencia JOIN clases ON asistencia.id_clase = clases.id_clase JOIN asignaturas ON clases.id_asignatura = asignaturas.id_asignatura WHERE asistencia.id_alumno = ? AND asistencia.asiste = false AND asistencia.justi_enviado = false"
     connection.query(sql, params, function(err,res){
         if(err){
             console.log(err)
@@ -731,9 +731,35 @@ app.get('/faltasAlumno/:id_alumno', (req,rep)=>{
     });
 })
 
+app.put('/confirmar/justificante', (req,rep)=>{
+    let justificada = req.body.justificada
+    if(justificada == false){
+        let params = [req.body.id_clase, req.body.id_alumno, req.body.fecha]
+        sql = "UPDATE asistencia SET justificada = false WHERE asiste = false AND id_clase = ? AND id_alumno = ? AND fecha = ?"
+        connection.query(sql, params, function(err,res){
+            if(err){
+                console.log(err)
+            }else{ 
+                rep.send(res)
+             }
+        });
+    }else{
+        let params = [req.body.id_clase, req.body.id_alumno, req.body.fecha]
+        sql = "UPDATE asistencia SET justificada = true WHERE asiste = false AND id_clase = ? AND id_alumno = ? AND fecha = ?"
+        connection.query(sql, params, function(err,res){
+            if(err){
+                console.log(err)
+            }else{ 
+                rep.send(res)
+             }
+        });
+    }
+    
+})
+
 app.put('/justificar', (req,rep)=>{
     let id = req.body.id_asistencia
-    sql = "UPDATE asistencia SET asistencia.justificada = true WHERE id_asistencia = ?"
+    sql = "UPDATE asistencia SET asistencia.justi_enviado = true WHERE id_asistencia = ?"
     connection.query(sql, id, function(err,res){
         if(err){
             console.log(err)
@@ -782,8 +808,20 @@ app.get('/asignaturas/alumno/:id_alumno', (req,rep)=>{
 
 app.get('/clases/profesor/:id_profesor', (req,rep)=>{
     let id = req.params.id_profesor
-    sql = "SELECT asignaturas.nombre AS asignatura, cursos.nombre AS curso, colegio.nombre AS colegio, clases.id_clase, clases.nombre_clase FROM clases JOIN asignaturas ON clases.id_asignatura = asignaturas.id_asignatura JOIN cursos ON clases.id_curso = cursos.id_curso JOIN colegio ON clases.id_colegio = colegio.id_colegio WHERE clases.id_profesor = ? GROUP BY clases.id_clase"
+    sql = "SELECT asignaturas.nombre AS asignatura, cursos.nombre AS curso, colegio.nombre AS colegio, clases.id_clase, clases.nombre_clase, clases.id_asignatura, clases.id_curso, clases.id_colegio FROM clases JOIN asignaturas ON clases.id_asignatura = asignaturas.id_asignatura JOIN cursos ON clases.id_curso = cursos.id_curso JOIN colegio ON clases.id_colegio = colegio.id_colegio WHERE clases.id_profesor = ? GROUP BY clases.id_clase"
     connection.query(sql, id, function(err,res){
+        if(err){
+            console.log(err)
+        }else{ 
+            rep.send(res)
+         }
+    });
+})
+
+app.get('/masalumnos/:id_curso/:id_colegio/:id_clase', (req,rep)=>{
+    let params = [req.params.id_curso, req.params.id_colegio, req.params.id_clase]
+    sql = "SELECT * FROM alumnos WHERE id_alumno NOT IN (SELECT alumnos.id_alumno FROM alumnos JOIN clases_alumnos ON alumnos.id_alumno = clases_alumnos.id_alumnos WHERE alumnos.id_curso = ? AND alumnos.id_colegio = ? AND clases_alumnos.id_clases = ? GROUP BY alumnos.id_alumno)"
+    connection.query(sql, params, function(err,res){
         if(err){
             console.log(err)
         }else{ 

@@ -64,6 +64,10 @@ export class AsistenciaService {
     return this.http.put(this.url + "/justificar", {"id_asistencia": id_asistencia})
   }
 
+  aceptarJustificante(id_clase:number, id_alumno:number, fecha:string, justificada:boolean){
+    return this.http.put(this.url + "/confirmar/justificante", {"id_clase":id_clase, "id_alumno":id_alumno, "fecha":fecha, "justificada":justificada})
+  }
+
   datosFalta(id_asistencia:number){
     return this.http.get(this.url + "/datos/falta/" + id_asistencia)
   }

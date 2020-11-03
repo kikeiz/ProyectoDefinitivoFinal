@@ -16,15 +16,17 @@ import {NgbModal} from '@ng-bootstrap/ng-bootstrap'
 export class AsistenciaPadreComponent implements OnInit {
   public faltas: Asistencia[]
   public ids:number[]
+  public mensaje:boolean
   constructor(public serviceAsistencia:AsistenciaService, public mensajeService:MensajesService, public añadirAlumnoService:AñadirAlumnoService, private modal:NgbModal) {
     this.faltas = this.serviceAsistencia.faltas
     this.ids = []
+    this.mensaje = false
    }
 
   ngOnInit(): void {
   }
 
-  chequeado(index:number, isChecked:boolean){
+  chequeado(index:number, isChecked:boolean, i:number){
     if(isChecked){
       this.ids.push(index)
       console.log(this.ids);
@@ -35,6 +37,10 @@ export class AsistenciaPadreComponent implements OnInit {
     }
   }
 
+  enviarMensaje(){
+    this.mensaje = true
+  }
+
   mostrarModal(content){
     this.modal.open(content, {size: "sm"})
     setTimeout(()=>{
@@ -42,14 +48,16 @@ export class AsistenciaPadreComponent implements OnInit {
     }, 2000)
   }
 
-  justificar(contenido){
+  justificar(contenido, msn:string){
+    this.mensaje = false
     for(let i=0; i<this.ids.length; i++){
       this.serviceAsistencia.justificar(this.ids[i]).subscribe((data=>{
         console.log(data);
         this.serviceAsistencia.datosFalta(this.ids[i]).subscribe((datos=>{
           let array:any = datos
-          this.mensajeService.enviarMensaje(new Comunications("Justifico la falta de mi hijo " + array[0].nombre + " " + array[0].apellidos, TipoMensaje.asistencia, array[0].fecha, Valor.positivo, array[0].id_clase, array[0].id_alumno, Envia.padre)).subscribe((data=>{
+          this.mensajeService.enviarMensaje(new Comunications(msn, TipoMensaje.asistencia, array[0].fecha, Valor.positivo, array[0].id_clase, array[0].id_alumno, Envia.padre)).subscribe((data=>{
             console.log(data);
+            this.mensaje
           }))
         }))
       }))

@@ -54,3 +54,12 @@
 p{
 	color:hsl(219, 40%, 89%) ;
 }
+
+#msg{
+    height: 100px;
+}
+
+.padding{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}

@@ -46,3 +46,31 @@ tr{
 #blanco{
     margin-left: 50px;
 }
+
+.green{
+    color: green;
+}
+
+.red{
+    color: red;
+    margin-left: 15px;
+}
+
+.emojis{
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    align-items: center;
+    align-self: center;
+    align-content: center;
+    margin-top: 15px;
+    margin-left: 32%;
+}
+
+.cursor{
+    cursor: pointer;
+}
+
+.nonpointer{
+    cursor: auto;
+}

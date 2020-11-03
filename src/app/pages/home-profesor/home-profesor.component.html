@@ -1,9 +1,29 @@
+<ng-template #contenido let-modal class="modal">
+  <div *ngIf="content == false" class="modal-header container table">
+      <h4><b>Alumnos: </b></h4>
+  </div>
+  <div class="modal-body" [ngStyle]="(content == true) ? {'background-color': '#99FF99'} : {'background-color': '#FFF'} ">
+    <h3 *ngIf="content == true"><b>¡Alumnos añadidos con éxito</b>!</h3>
+    <table *ngIf="content == false" class="table">
+        <tbody class="table">
+          <tr *ngFor="let alumno of alumnos; let i = index">
+              <td>{{alumno.nombre}}</td>
+              <td>{{alumno.apellidos}}</td>
+              <td><input (change)="chequeado(alumno.id_alumno, $event.target.checked)" class="cursor" type="checkbox"></td>
+          </tr>
+      </tbody>
+  </table>
+  </div>
+  <div class="modal-footer" *ngIf="content == false">
+      <button class="btn btn-dark container" (click)="enviar()">Añadir</button>
+  </div>
+</ng-template>
 
 <div class="cards">
   <h1>StudentView</h1>
-
 <div class="services cursor" *ngFor="let clase of clases; let i = index">
   <div class="content content-1">
+    <i (click)="anadirAlumnos(i, contenido)" class="fas fa-user-plus cursor">Añadir alumnos</i>
       <h2 (click) = "nombre(i)">{{clase.nombre_clase}}</h2>
       <p (click) = "nombre(i)"><b>Curso:</b> {{clase.curso}}</p>
       <p (click) = "nombre(i)"><b>Colegio:</b> {{clase.colegio}}</p>

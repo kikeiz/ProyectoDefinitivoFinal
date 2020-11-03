@@ -15,17 +15,24 @@
             <tr *ngFor="let falta of faltas; let i = index">
               <td><b>{{falta.asignatura}}</b></td>
               <td><b>{{falta.fecha1 | fechas}}</b></td>
-              <td><input (change)="chequeado(falta.id_asistencia, $event.target.checked)" type="checkbox"></td>
+              <td><input (change)="chequeado(falta.id_asistencia, $event.target.checked, i)" type="checkbox"></td>
             </tr>
           </tbody>
         </table>
     </div>
     <ng-template #contenido let-modal>
       <div id="modal" class="modal-body" style="background-color: #99FF99 ;">
-          <h3 id="nota" class="container"><b>¡Justificada!</b></h3>
+          <h3 id="nota" class="container"><b>¡Justificante enviado!</b></h3>
       </div>
-  </ng-template>
-    <div id="boton" class="container">
-        <button type="button" (click)="justificar(contenido)" class="btn btn-success">Justificar</button>
+    </ng-template>
+    <div *ngIf="mensaje == false" id="boton" class="container">
+        <button type="button" (click)="enviarMensaje()"  class="btn btn-success">Justificar</button>
+    </div>
+    <div *ngIf="mensaje == true">
+      <div class="container">
+          <label for="msg"><b>Mensaje: </b></label><br>
+          <input #msn class="form-control" id="msg" type="text" name="mensaje">
+      </div>
+    <div class="container padding" id="valor"><button type="button" (click)="justificar(contenido, msn.value)" class="btn btn-outline-primary">Enviar Justificante</button></div>
     </div>
 </div>

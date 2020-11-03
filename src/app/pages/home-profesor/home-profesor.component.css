@@ -109,4 +109,23 @@
   list-style: none;
 }
 
+.table{
+  padding: 20px;
+}
+
+.modal{
+  border-style: solid;
+  border-color: black;
+  border-width: 5px;
+  background-color: rgb(226, 212, 212);
+}
+
+
+.container{
+  width: 100%;
+  display:block;
+  position:relative;
+  text-align: center;
+  height: auto;
+}
 

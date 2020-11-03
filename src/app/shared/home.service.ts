@@ -73,10 +73,14 @@ export class HomeService {
           for(let j=0; j<array2.length; j++){
             alumn.push(array2[j].apellidos + ", " + array2[j].nombre)
           }
-          this.clases.push({"id_clase": array[i].id_clase, "colegio": array[i].colegio, "curso": array[i].curso, "nombre_clase":array[i].nombre_clase, "alumnos":alumn, "asignatura":array[i].asignatura, "mostrar":false})
+          this.clases.push({"id_clase": array[i].id_clase, "colegio": array[i].colegio, "curso": array[i].curso, "nombre_clase":array[i].nombre_clase, "alumnos":alumn, "asignatura":array[i].asignatura, "id_asignatura":array[i].id_asignatura, "id_curso":array[i].id_curso, "id_colegio":array[i].id_colegio, "mostrar":false})
         }))
       }
     }))
+  }
+
+  alumnosExtra(id_curso:number, id_colegio:number, id_clase:number){
+    return this.http.get(this.url + "/masalumnos/" + id_curso + "/" + id_colegio + "/" + id_clase)
   }
 
   log(){
