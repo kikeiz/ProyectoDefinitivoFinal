@@ -1,3 +1,13 @@
+<ng-template #contenido let-modal>
+    <div id="modal" class="modal-body" style="background-color: #99FF99 ;">
+        <h3 id="nota" class="container"><b>¡Falta Justificada!</b></h3>
+    </div>
+</ng-template>
+<ng-template #contenido2 let-modal>
+    <div id="modal" class="modal-body" style="background-color: #e7796a ;">
+        <h3 id="nota" class="container"><b>¡Falta No Justificada!</b></h3>
+    </div>
+</ng-template>
 <nav class="title">
     <h1>Correos</h1>
 </nav>
@@ -17,7 +27,7 @@
 <div class="row">
     <div class="col-12">
         <table class="table">
-            <tr *ngFor="let mensaje of mensajes; let i = index" (click)="mostrarMensaje(i)" [ngStyle]="mensaje.justificada">
+            <tr *ngFor="let mensaje of mensajes; let i = index" (click)="mostrarMensaje(i)" [ngStyle]="(mensaje.justificada) == true ? {'background-color': '#99FF99'} : {'background-color': '#FFFFFF'}">
                 <td *ngIf="mostrar==false"><b>{{mensaje.fecha1 | fechas}}</b></td>
                 <td *ngIf="mostrar==false"><b>{{mensaje.nombre_alumno}} {{mensaje.apellidos}}</b></td>
                 <td *ngIf="mostrar==false"><i (click)="borrar(i)" class="fas fa-trash-alt"></i></td>
@@ -26,8 +36,8 @@
                 <td id="final">
                 <b>{{mensaje.contenido}}</b><br>
                 <div class="emojis">
-                    <div class="green"><i class="far fa-check-circle fa-2x cursor" (click)="aceptarJustificante(mensaje.id_alumno, mensaje.id_clase, mensaje.fecha1, true)">Justificar</i></div>
-                    <div class="red"><i class="far fa-times-circle fa-2x cursor" (click)="aceptarJustificante(mensaje.id_alumno, mensaje.id_clase, mensaje.fecha1, false)">No Justificar</i></div>
+                    <div class="green"><i class="far fa-check-circle fa-2x cursor" (click)="aceptarJustificante(mensaje.id_alumno, mensaje.id_clase, mensaje.fecha1, true, contenido)">Justificar</i></div>
+                    <div class="red"><i class="far fa-times-circle fa-2x cursor" (click)="aceptarJustificante(mensaje.id_alumno, mensaje.id_clase, mensaje.fecha1, false, contenido2)">No Justificar</i></div>
                 </div>
                 </td>
             </tr>

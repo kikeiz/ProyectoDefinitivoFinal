@@ -129,3 +129,16 @@
   height: auto;
 }
 
+#boton{
+  width: 50%;
+  margin-bottom: 20px;
+  margin-left: auto;
+  margin-right: auto;
+
+}
+
+#modal{
+  border-width: 2px;
+  border-color: black;
+  border-style: solid;
+}

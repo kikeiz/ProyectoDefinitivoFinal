@@ -492,15 +492,40 @@ app.get('/filtrar/notas/alumnos/:idalumno/:notamax/:notamin/:tipo/:id_asignatura
 //MENSAJES
 
 app.post('/mensaje', (req,rep)=>{
-    let params = [req.body.tipo, req.body.contenido, req.body.valor, req.body.envia, req.body.fecha, req.body.id_clase, req.body.id_alumno]
+        let params = [req.body.tipo, req.body.contenido, req.body.valor, req.body.envia, req.body.fecha, req.body.id_clase, req.body.id_alumno]
+        sql = "INSERT INTO mensajes (tipo, contenido, valor, quienenvia, fecha, id_clase, id_alumno) VALUES (?, ?, ?, ?, ?, ?, ?)"
+        connection.query(sql, params, function(err,res){
+            if(err){
+                console.log(err)
+            }else{ 
+                rep.send(res)
+             }
+        });
+    
+})
+
+app.post('/enviar/asistencia', (req,rep)=>{
+    let params = [req.body.tipo, req.body.contenido, req.body.valor, req.body.envia, req.body.fecha1, req.body.id_clase, req.body.id_alumno]
     sql = "INSERT INTO mensajes (tipo, contenido, valor, quienenvia, fecha, id_clase, id_alumno) VALUES (?, ?, ?, ?, ?, ?, ?)"
-    connection.query(sql, params, function(err,res){
-        if(err){
-            console.log(err)
-        }else{ 
-            rep.send(res)
-         }
-    });
+        connection.query(sql, params, function(err,res){
+            if(err){
+                console.log(err)
+            }else{ 
+                rep.send(res)
+             }
+        });
+})
+
+app.post('/mensaje/asistencia', (req,rep)=>{
+    let params = [req.body.id_asistencia, req.body.id_mensaje]
+    sql = "INSERT INTO asistencia_mensaje (id_asistencia, id_mensaje) VALUES (?, ?)"
+        connection.query(sql, params, function(err,res){
+            if(err){
+                console.log(err)
+            }else{ 
+                rep.send(res)
+             }
+        });
 })
 
 
@@ -567,7 +592,7 @@ app.get('/mensajes/:id_alumno', (req,rep)=>{
 
 app.get('/mensajes/clase/:id_clase', (req,rep)=>{
     let id = req.params.id_clase
-    sql = "SELECT asignaturas.nombre, mensajes.id_mensaje, mensajes.tipo, mensajes.contenido, mensajes.valor, mensajes.quienenvia, mensajes.fecha, mensajes.id_clase, mensajes.id_alumno, alumnos.nombre AS nombre_alumno, alumnos.apellidos FROM mensajes JOIN clases ON mensajes.id_clase = clases.id_clase JOIN asignaturas ON clases.id_asignatura = asignaturas.id_asignatura JOIN alumnos ON mensajes.id_alumno = alumnos.id_alumno WHERE mensajes.id_clase = ? AND mensajes.quienenvia = 'padre'"
+    sql = "SELECT asignaturas.nombre, mensajes.id_mensaje, mensajes.tipo, mensajes.contenido, mensajes.valor, mensajes.quienenvia, mensajes.fecha, mensajes.id_clase, mensajes.id_alumno, asistencia.justificada AS justificada, alumnos.nombre AS nombre_alumno, alumnos.apellidos FROM mensajes JOIN clases ON mensajes.id_clase = clases.id_clase JOIN asignaturas ON clases.id_asignatura = asignaturas.id_asignatura JOIN alumnos ON mensajes.id_alumno = alumnos.id_alumno JOIN asistencia_mensaje ON mensajes.id_mensaje = asistencia_mensaje.id_mensaje JOIN asistencia ON asistencia_mensaje.id_asistencia = asistencia.id_asistencia WHERE mensajes.id_clase = ? AND mensajes.quienenvia = 'padre'"
     connection.query(sql, id, function(err,res){
         if(err){
             console.log(err)
@@ -818,8 +843,8 @@ app.get('/clases/profesor/:id_profesor', (req,rep)=>{
 })
 
 app.get('/masalumnos/:id_curso/:id_colegio/:id_clase', (req,rep)=>{
-    let params = [req.params.id_curso, req.params.id_colegio, req.params.id_clase]
-    sql = "SELECT * FROM alumnos WHERE id_alumno NOT IN (SELECT alumnos.id_alumno FROM alumnos JOIN clases_alumnos ON alumnos.id_alumno = clases_alumnos.id_alumnos WHERE alumnos.id_curso = ? AND alumnos.id_colegio = ? AND clases_alumnos.id_clases = ? GROUP BY alumnos.id_alumno)"
+    let params = [req.params.id_clase, req.params.id_curso, req.params.id_colegio]
+    sql = "SELECT * FROM alumnos WHERE id_alumno NOT IN (SELECT alumnos.id_alumno FROM alumnos JOIN clases_alumnos ON alumnos.id_alumno = clases_alumnos.id_alumnos WHERE clases_alumnos.id_clases = ?) AND alumnos.id_curso = ? AND alumnos.id_colegio = ? GROUP BY alumnos.id_alumno"
     connection.query(sql, params, function(err,res){
         if(err){
             console.log(err)

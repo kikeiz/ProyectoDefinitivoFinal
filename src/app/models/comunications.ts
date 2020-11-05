@@ -32,8 +32,10 @@ export class Comunications {
     public nombre_alumno:string
     public apellidos:string
     public fecha1:string
+    public id_asistencia:number
+    public justificada:boolean
 
-    constructor(contenido?:string, tipo?:TipoMensaje, fecha?:Date, valor?:Valor, id_clase?:number, id_alumno?:number, envia?:Envia, id_mensaje?:number, asignatura?:string, nombre_alumno?:string, apellidos?:string, fecha1?:string){
+    constructor(contenido?:string, tipo?:TipoMensaje, fecha?:Date, valor?:Valor, id_clase?:number, id_alumno?:number, envia?:Envia, id_mensaje?:number, asignatura?:string, nombre_alumno?:string, apellidos?:string, fecha1?:string, id_asistencia?:number, justificada?:boolean){
         this.contenido = contenido
         this.tipo = tipo
         this.fecha = fecha
@@ -46,5 +48,7 @@ export class Comunications {
         this.nombre_alumno = nombre_alumno
         this.apellidos = apellidos
         this.fecha1 = fecha1
+        this.id_asistencia = id_asistencia
+        this.justificada = justificada
     }
 }

@@ -67,8 +67,8 @@ export class HomeService {
       let array:any = data
       this.numero1 = array.length
       for(let i=0; i<array.length; i++){
-        let alumn:string[] = []
         this.http.get(this.url + "/alumnosxclase/" + array[i].id_clase).subscribe((datos=>{
+          let alumn:string[] = []
           let array2:any = datos
           for(let j=0; j<array2.length; j++){
             alumn.push(array2[j].apellidos + ", " + array2[j].nombre)

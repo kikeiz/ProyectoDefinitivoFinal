@@ -26,6 +26,21 @@ export class AsistenciaPadreComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  formatDate(date:string) {
+    let d = new Date(date),
+        month = '' + (d.getMonth() + 1),
+        day = '' + d.getDate(),
+        year = d.getFullYear();
+
+    if (month.length < 2) 
+        month = '0' + month;
+    if (day.length < 2) 
+        day = '0' + day;
+
+    return [year, month, day].join('-');
+}
+
+
   chequeado(index:number, isChecked:boolean, i:number){
     if(isChecked){
       this.ids.push(index)
@@ -55,9 +70,13 @@ export class AsistenciaPadreComponent implements OnInit {
         console.log(data);
         this.serviceAsistencia.datosFalta(this.ids[i]).subscribe((datos=>{
           let array:any = datos
-          this.mensajeService.enviarMensaje(new Comunications(msn, TipoMensaje.asistencia, array[0].fecha, Valor.positivo, array[0].id_clase, array[0].id_alumno, Envia.padre)).subscribe((data=>{
+          console.log(this.formatDate(new Date(array[0].fecha).toDateString()));
+          this.mensajeService.enviarAsistencia(new Comunications(msn, TipoMensaje.asistencia, null, Valor.positivo, array[0].id_clase, array[0].id_alumno, Envia.padre, null, null, null, null, this.formatDate(new Date(array[0].fecha).toDateString()))).subscribe((data=>{
             console.log(data);
-            this.mensaje
+            let array:any = data
+            this.mensajeService.mensajeAsistencia(array.insertId, this.ids[i]).subscribe((data=>{
+              console.log(data);
+            }))
           }))
         }))
       }))

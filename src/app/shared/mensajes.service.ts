@@ -23,6 +23,13 @@ export class MensajesService {
     console.log(mensaje);
     return this.http.post(this.url + "/mensaje", mensaje)
   }
+  mensajeAsistencia(id_mensaje:number, id_asistencia:number){
+    return this.http.post(this.url + "/mensaje/asistencia", {"id_mensaje":id_mensaje, "id_asistencia":id_asistencia})
+  }
+
+  enviarAsistencia(mensaje:Comunications){
+    return this.http.post(this.url + "/enviar/asistencia", mensaje)
+  }
 
   comprobarMensajes(datos:any){
     for(let i=0; i<datos.length; i++){
@@ -90,7 +97,7 @@ export class MensajesService {
       let array:any = data
       this.numeroProfes = array.length
       for(let i=0; i<array.length; i++){
-        this.mensajesProfes.push(new Comunications(array[i].contenido, TipoMensaje.asistencia, null, Valor.positivo, array[i].id_clase, array[i].id_alumno, Envia.padre, array[i].id_mensaje, array[i].nombre, array[i].nombre_alumno, array[i].apellidos, new Date(array[i].fecha).toDateString()))
+        this.mensajesProfes.push(new Comunications(array[i].contenido, TipoMensaje.asistencia, null, Valor.positivo, array[i].id_clase, array[i].id_alumno, Envia.padre, array[i].id_mensaje, array[i].nombre, array[i].nombre_alumno, array[i].apellidos, new Date(array[i].fecha).toDateString(), null, array[i].justificada))
       }
       console.log(this.mensajesProfes);
     }))

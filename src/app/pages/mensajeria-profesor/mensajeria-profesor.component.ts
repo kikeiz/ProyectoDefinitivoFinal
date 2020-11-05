@@ -6,6 +6,8 @@ import { AsistenciaService } from 'src/app/shared/asistencia.service';
 import { AñadirClaseService } from 'src/app/shared/añadir-clase.service';
 import { ComportamientoService } from 'src/app/shared/comportamiento.service';
 import { MensajesService } from 'src/app/shared/mensajes.service';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap'
+
 
 @Component({
   selector: 'app-mensajeria-profesor',
@@ -19,7 +21,7 @@ export class MensajeriaProfesorComponent implements OnInit {
   public mensajeFinal:string
   public filtro:boolean
   public alumnos: Alumno[]
-  constructor(public mensajeService:MensajesService, public comportamientoService:ComportamientoService, public añadirClaseService: AñadirClaseService, public asistenciaService:AsistenciaService) { 
+  constructor(public mensajeService:MensajesService, public comportamientoService:ComportamientoService, public añadirClaseService: AñadirClaseService, public asistenciaService:AsistenciaService, private modal:NgbModal) { 
     this.mostrar = false
     this.mensajes = this.mensajeService.mensajesProfes
     this.filtro = false
@@ -68,11 +70,18 @@ export class MensajeriaProfesorComponent implements OnInit {
     this.mensaje = this.mensajes[index]
   }
 
-  aceptarJustificante(id_alumno:number, id_clase:number, fecha:string, justificada:boolean){
+  aceptarJustificante(id_alumno:number, id_clase:number, fecha:string, justificada:boolean, contenido){
     console.log(id_alumno, id_clase, this.formatDate(fecha), justificada);
     this.asistenciaService.aceptarJustificante(id_clase, id_alumno, this.formatDate(fecha), justificada).subscribe((data=>{
       console.log(data);
     }))
+    this.modal.open(contenido)
+    this.mensajeService.obtenerMensajes(null, this.añadirClaseService.id_clase)
+
+    setTimeout(()=>{
+      this.mostrar = false
+      this.modal.dismissAll()
+    },2000)
   }
 
   borrar(index:number){

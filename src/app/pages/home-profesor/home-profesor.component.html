@@ -1,9 +1,10 @@
 <ng-template #contenido let-modal class="modal">
-  <div *ngIf="content == false" class="modal-header container table">
+  <!-- <div *ngIf="content == false" class="modal-header container table">
       <h4><b>Alumnos: </b></h4>
-  </div>
+  </div> -->
+<div id="modal">
   <div class="modal-body" [ngStyle]="(content == true) ? {'background-color': '#99FF99'} : {'background-color': '#FFF'} ">
-    <h3 *ngIf="content == true"><b>¡Alumnos añadidos con éxito</b>!</h3>
+    <h3 *ngIf="content == true" class="container"><b>¡Alumnos añadidos con éxito!</b></h3>
     <table *ngIf="content == false" class="table">
         <tbody class="table">
           <tr *ngFor="let alumno of alumnos; let i = index">
@@ -15,8 +16,9 @@
   </table>
   </div>
   <div class="modal-footer" *ngIf="content == false">
-      <button class="btn btn-dark container" (click)="enviar()">Añadir</button>
+      <button id="boton" class="btn btn-dark" (click)="enviar()">Añadir</button>
   </div>
+</div>
 </ng-template>
 
 <div class="cards">

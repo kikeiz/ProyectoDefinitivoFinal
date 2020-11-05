@@ -69,6 +69,7 @@ export class AsistenciaProfesorComponent implements OnInit {
   @ViewChild(BaseChartDirective, { static: true }) public chart: BaseChartDirective
 
   ngOnInit(): void {
+    this.faltan = []
   }
 
   mostrarModal(content){
@@ -112,7 +113,6 @@ export class AsistenciaProfesorComponent implements OnInit {
       this.asisten.splice(this.asisten.indexOf(this.faltan[j]),1)
     }
     console.log(this.asisten);
-    
   }
   
 
@@ -128,9 +128,9 @@ export class AsistenciaProfesorComponent implements OnInit {
     for(let j=0; j<this.faltan.length; j++){
       this.asistenciaService.pasarLista(new Asistencia(false, new Date(this.fecha), this.faltan[j], this.añadirClaseService.id_clase, false)).subscribe((data=>{
         console.log(data);
-      }))
-      this.mensajeService.enviarMensaje(new Comunications("Su hijo no ha acudido a clase el día" + " " + this.fecha, TipoMensaje.asistencia, this.fecha, Valor.negativo, this.añadirClaseService.id_clase, this.faltan[j], Envia.profesor)).subscribe((data=>{
-        console.log(data);
+        this.mensajeService.enviarMensaje(new Comunications("Su hijo no ha acudido a clase el día" + " " + this.fecha, TipoMensaje.asistencia, this.fecha, Valor.negativo, this.añadirClaseService.id_clase, this.faltan[j], Envia.profesor)).subscribe((datos=>{
+          console.log(datos);
+        }))
       }))
     }
     this.asistenciaService.porcentaje(this.añadirClaseService.id_clase)

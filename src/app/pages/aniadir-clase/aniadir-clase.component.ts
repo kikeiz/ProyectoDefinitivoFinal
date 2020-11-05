@@ -74,10 +74,14 @@ export class AniadirClaseComponent implements OnInit {
         }))
       }
     }
-    
+    setTimeout(()=>{
+      this.ids = []
+    },1000)
+
   }
 
   public crearClase(data:any){
+    this.alumnos = []
     this.insertar = true
     let clase = new Clase(data.nombre, Number(data.colegio), this.createClase.id_profesor, Number(data.asignatura), Number(data.curso))
     

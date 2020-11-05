@@ -56,6 +56,12 @@ tr{
     margin-left: 15px;
 }
 
+#modal{
+    border-width: 2px;
+    border-color: black;
+    border-style: solid;
+}
+
 .emojis{
     margin-left: auto;
     margin-right: auto;
@@ -74,3 +80,5 @@ tr{
 .nonpointer{
     cursor: auto;
 }
+
+

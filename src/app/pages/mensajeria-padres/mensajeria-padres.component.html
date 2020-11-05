@@ -23,7 +23,7 @@
     <div class="col-12">
         <table class="table">
             <tr *ngFor="let mensaje of mensajes; let i = index" (click)="mostrarMensaje(i)" [ngStyle]="(mensaje.valor) == 'positivo' ? {'background-color': '#99FF99'} : {'background-color': '#FF9999'}" >
-                <td id="final" *ngIf="mostrar==false">{{mensaje.asignatura}}</td>
+                <td *ngIf="mostrar==false">{{mensaje.asignatura}}</td>
                 <td *ngIf="mostrar==false"><b>{{mensaje.tipo}}</b></td>
                 <td *ngIf="mostrar==false"><b>{{mensaje.fecha1 | fechas}}</b></td>
                 <td *ngIf="mostrar==false"><i (click)="borrar(i)" class="fas fa-trash-alt"></i></td>
