@@ -1,19 +1,21 @@
 <ng-template #contenido let-modal class="modal">
-  <!-- <div *ngIf="content == false" class="modal-header container table">
-      <h4><b>Alumnos: </b></h4>
-  </div> -->
-<div id="modal">
+<div *ngIf="existen == false"  id="modal">
+  <div class="container" *ngIf="existen == false">
+    <h3>!No quedan alumnos por añadir!</h3>
+  </div>
+</div>
+<div *ngIf="existen == true"  id="modal">
   <div class="modal-body" [ngStyle]="(content == true) ? {'background-color': '#99FF99'} : {'background-color': '#FFF'} ">
     <h3 *ngIf="content == true" class="container"><b>¡Alumnos añadidos con éxito!</b></h3>
     <table *ngIf="content == false" class="table">
-        <tbody class="table">
+      <tbody class="table">
           <tr *ngFor="let alumno of alumnos; let i = index">
               <td>{{alumno.nombre}}</td>
               <td>{{alumno.apellidos}}</td>
               <td><input (change)="chequeado(alumno.id_alumno, $event.target.checked)" class="cursor" type="checkbox"></td>
           </tr>
       </tbody>
-  </table>
+    </table>
   </div>
   <div class="modal-footer" *ngIf="content == false">
       <button id="boton" class="btn btn-dark" (click)="enviar()">Añadir</button>

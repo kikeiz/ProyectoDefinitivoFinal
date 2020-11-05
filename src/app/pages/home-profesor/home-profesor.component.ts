@@ -15,6 +15,7 @@ export class HomeProfesorComponent implements OnInit {
   public ids:number[]
   public content:boolean
   public indice:number
+  public existen:boolean
   constructor(public homeService:HomeService, public añadirClaseService: AñadirClaseService, private modal:NgbModal) {
     this.clases = this.homeService.clases
     this.ids = []
@@ -31,8 +32,16 @@ export class HomeProfesorComponent implements OnInit {
       let array:any = data
       this.alumnos = array
       console.log(this.alumnos);
-      
-      this.modal.open(contenido, {backdropClass: 'light-blue-backdrop'})
+      if(array.length >= 1){
+        this.existen = true
+        this.modal.open(contenido, {backdropClass: 'light-blue-backdrop'})
+      }else{
+        this.existen = false
+        this.modal.open(contenido, {backdropClass: 'light-blue-backdrop'})
+        setTimeout(()=>{
+          this.modal.dismissAll()
+        },2000)
+      }
     }))
   }
 
