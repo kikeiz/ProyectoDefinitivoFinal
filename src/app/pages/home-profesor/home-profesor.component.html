@@ -25,7 +25,7 @@
   <h1>StudentView</h1>
 <div class="services cursor" *ngFor="let clase of clases; let i = index">
   <div class="content content-1">
-    <i (click)="anadirAlumnos(i, contenido)" class="fas fa-user-plus cursor">Añadir alumnos</i>
+    <p (click)="anadirAlumnos(i, contenido)" class="cursor"><b>Añadir alumnos</b></p>
       <h2 (click) = "nombre(i)">{{clase.nombre_clase}}</h2>
       <p (click) = "nombre(i)"><b>Curso:</b> {{clase.curso}}</p>
       <p (click) = "nombre(i)"><b>Colegio:</b> {{clase.colegio}}</p>
