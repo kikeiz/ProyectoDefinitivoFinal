@@ -54,7 +54,7 @@ export class MensajeriaProfesorComponent implements OnInit {
   }
 
   filtrar(idd:number){
-    console.log(idd);
+    // console.log(idd);
     this.mensajes.splice(0, this.mensajes.length)
     this.mensajeService.filtrarProfes(this.añadirClaseService.id_clase, idd).subscribe((data=>{
       let array:any = data
