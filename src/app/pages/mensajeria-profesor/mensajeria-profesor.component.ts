@@ -55,12 +55,12 @@ export class MensajeriaProfesorComponent implements OnInit {
 
   filtrar(idd:number){
     console.log(idd);
-    this.mensajes = []
+    this.mensajes.splice(0, this.mensajes.length)
     this.mensajeService.filtrarProfes(this.añadirClaseService.id_clase, idd).subscribe((data=>{
       let array:any = data
       console.log(array);
       for(let i=0; i<array.length; i++){
-        this.mensajes.push(new Comunications(array[i].contenido, TipoMensaje.asistencia, null, null, null, array[i].id_alumno, Envia.profesor, array[i].id_mensaje, null, array[i].nombre, array[i].apellidos, new Date(array[i].fecha).toDateString()))
+        this.mensajes.push(new Comunications(array[i].contenido, TipoMensaje.asistencia, null, null, array[i].id_clase, array[i].id_alumno, Envia.profesor, array[i].id_mensaje, null, array[i].nombre, array[i].apellidos, new Date(array[i].fecha).toDateString(), array[i].id_asistencia, array[i].justificada))
       }
       console.log(this.mensajes);
     }))

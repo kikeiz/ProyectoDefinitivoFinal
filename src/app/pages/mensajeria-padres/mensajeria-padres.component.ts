@@ -29,7 +29,7 @@ export class MensajeriaPadresComponent implements OnInit {
   }
 
   filtrar(value:any){
-    this.mensajes = []
+    this.mensajes.splice(0, this.mensajes.length)
     console.log(value);
     this.mensajeService.filtrarPadres(this.añadirAlumnoService.id_alumno, value).subscribe((data=>{
       let array:any = data

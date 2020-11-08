@@ -533,7 +533,7 @@ app.get('/mensaprofe/:id_clase/:id_alumno', (req, rep)=>{
     let params = [req.params.id_clase, req.params.id_alumno]
     if(req.params.id_alumno == "todos"){
         let id = req.params.id_clase
-        sql = "SELECT alumnos.nombre, alumnos.apellidos, mensajes.id_mensaje, mensajes.tipo, mensajes.contenido, mensajes.valor, mensajes.id_clase, mensajes.id_alumno, mensajes.fecha FROM mensajes JOIN alumnos ON mensajes.id_alumno = alumnos.id_alumno WHERE mensajes.id_clase = ? AND mensajes.quienenvia = 'padre'"
+        sql = "SELECT alumnos.nombre, alumnos.apellidos, mensajes.id_mensaje, mensajes.tipo, mensajes.contenido, mensajes.valor, mensajes.id_clase, mensajes.id_alumno, mensajes.fecha, asistencia.justificada, asistencia.id_asistencia FROM mensajes JOIN alumnos ON mensajes.id_alumno = alumnos.id_alumno JOIN asistencia_mensaje ON mensajes.id_mensaje = asistencia_mensaje.id_mensaje JOIN asistencia ON asistencia_mensaje.id_asistencia = asistencia.id_asistencia WHERE mensajes.id_clase = ? AND mensajes.quienenvia = 'padre'"
         connection.query(sql, id, function(err,res){
             if(err){
                 console.log(err)
@@ -542,7 +542,7 @@ app.get('/mensaprofe/:id_clase/:id_alumno', (req, rep)=>{
              }
         });
     }else{
-        sql = "SELECT alumnos.nombre, alumnos.apellidos, mensajes.id_mensaje, mensajes.tipo, mensajes.contenido, mensajes.valor, mensajes.id_clase, mensajes.id_alumno, mensajes.fecha FROM mensajes JOIN alumnos ON mensajes.id_alumno = alumnos.id_alumno WHERE mensajes.id_clase = ? AND mensajes.quienenvia = 'padre' AND mensajes.id_alumno = ?"
+        sql = "SELECT alumnos.nombre, alumnos.apellidos, mensajes.id_mensaje, mensajes.tipo, mensajes.contenido, mensajes.valor, mensajes.id_clase, mensajes.id_alumno, mensajes.fecha, asistencia.justificada, asistencia.id_asistencia FROM mensajes JOIN alumnos ON mensajes.id_alumno = alumnos.id_alumno JOIN asistencia_mensaje ON mensajes.id_mensaje = asistencia_mensaje.id_mensaje JOIN asistencia ON asistencia_mensaje.id_asistencia = asistencia.id_asistencia WHERE mensajes.id_clase = ? AND mensajes.quienenvia = 'padre' AND mensajes.id_alumno = ?"
         connection.query(sql, params, function(err,res){
             if(err){
                 console.log(err)
